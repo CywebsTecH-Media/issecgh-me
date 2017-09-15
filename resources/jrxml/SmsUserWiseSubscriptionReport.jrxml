@@ -1,0 +1,1204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="NewDesignTest" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="0.8264462809917359"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<template><![CDATA[$P{styleTemplate}]]></template>
+	<style name="Title" forecolor="#FFFFFF" fontName="SansSerif" fontSize="20" isBold="false" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#CCCCCC" fontName="SansSerif" fontSize="10" isBold="false" pdfFontName="Times-Roman"/>
+	<style name="Column header" forecolor="#666666" fontName="SansSerif" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
+	<style name="Detail" mode="Transparent" fontName="SansSerif" pdfFontName="Times-Roman"/>
+	<style name="Row" mode="Transparent" fontName="SansSerif" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F0EFEF"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="title" class="java.lang.String"/>
+	<parameter name="logoPath" class="java.lang.String"/>
+	<parameter name="styleTemplate" class="java.lang.String"/>
+	<parameter name="reportGeneratedOn" class="java.lang.String"/>
+	<parameter name="generatedDate" class="java.lang.String"/>
+	<parameter name="page" class="java.lang.String"/>
+	<parameter name="GPLComment" class="java.lang.String"/>
+	<parameter name="lowTitleLabel" class="java.lang.String"/>
+	<parameter name="monthLabel" class="java.lang.String"/>
+	<parameter name="countLabel" class="java.lang.String"/>
+	<parameter name="exceededLabel" class="java.lang.String"/>
+	<parameter name="JasperSubReportLocation1" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="JasperSubReportLocation2" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="highTitleLabel" class="java.lang.String"/>
+	<parameter name="mediumTitleLabel" class="java.lang.String"/>
+	<parameter name="JasperSubReportLocation3" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="telephoneNo" class="java.lang.String"/>
+	<parameter name="nic" class="java.lang.String"/>
+	<parameter name="parentName" class="java.lang.String"/>
+	<parameter name="lowDataSourceJanuary" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="mediumDataSourceJanuary" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="highDataSourceJanuary" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="lowDataSourceFebruary" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="mediumDataSourceFebruary" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="highDataSourceFebruary" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="lowDataSourceMarch" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="mediumDataSourceMarch" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="highDataSourceMarch" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="lowDataSourceApril" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="mediumDataSourceApril" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="highDataSourceApril" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="lowDataSourceMay" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="mediumDataSourceMay" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="highDataSourceMay" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="lowDataSourceJune" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="mediumDataSourceJune" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="highDataSourceJune" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="lowDataSourceJuly" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="mediumDataSourceJuly" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="highDataSourceJuly" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="lowDataSourceAugust" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="mediumDataSourceAugust" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="highDataSourceAugust" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="lowDataSourceSeptember" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="mediumDataSourceSeptember" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="highDataSourceSeptember" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="lowDataSourceOctober" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="mediumDataSourceOctober" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="highDataSourceOctober" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="lowDataSourceNovember" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="mediumDataSourceNovember" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="highDataSourceNovember" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="lowDataSourceDecember" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="mediumDataSourceDecember" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="highDataSourceDecember" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<queryString language="SQL">
+		<![CDATA[]]>
+	</queryString>
+	<field name="monthDuration" class="java.lang.String"/>
+	<field name="exceedCount" class="java.lang.String"/>
+	<title>
+		<band height="79">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="-20" width="87" height="99" backcolor="#E6E6E6"/>
+				<image>
+					<reportElement x="0" y="0" width="87" height="99"/>
+					<imageExpression class="java.lang.String"><![CDATA[$P{logoPath}]]></imageExpression>
+				</image>
+			</frame>
+			<frame>
+				<reportElement style="Frame_color" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="66" y="-20" width="509" height="67"/>
+				<textField>
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="40" y="0" width="424" height="35" forecolor="#FFFFFF"/>
+					<textElement>
+						<font size="18" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{title}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement style="Frame_color" mode="Opaque" x="66" y="47" width="509" height="32" forecolor="#000000"/>
+				<textField>
+					<reportElement x="40" y="12" width="148" height="20" forecolor="#FFFFFF"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{reportGeneratedOn}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="188" y="12" width="171" height="20" forecolor="#FFFFFF"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{generatedDate}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<line>
+				<reportElement x="67" y="47" width="508" height="1" forecolor="#FFFFFF"/>
+			</line>
+			<textField>
+				<reportElement x="106" y="25" width="424" height="34" forecolor="#FFFFFF"/>
+				<textElement>
+					<font size="15" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{monthDuration}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="537" splitType="Stretch">
+			<frame>
+				<reportElement style="Row" mode="Opaque" x="0" y="0" width="555" height="18"/>
+			</frame>
+			<subreport>
+				<reportElement x="0" y="-1" width="555" height="11" isRemoveLineWhenBlank="true"/>
+				<subreportParameter name="telephoneNo">
+					<subreportParameterExpression><![CDATA[$P{telephoneNo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="STYLE_TEMPLATE">
+					<subreportParameterExpression><![CDATA[$P{styleTemplate}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="countLabel">
+					<subreportParameterExpression><![CDATA[$P{countLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nic">
+					<subreportParameterExpression><![CDATA[$P{nic}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="monthLabel">
+					<subreportParameterExpression><![CDATA[$P{monthLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="exceededLabel">
+					<subreportParameterExpression><![CDATA[$P{exceededLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lowTitleLabel">
+					<subreportParameterExpression><![CDATA[$P{lowTitleLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="parentName">
+					<subreportParameterExpression><![CDATA[$P{parentName}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{lowDataSourceJanuary}.getData())]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{JasperSubReportLocation1}]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="10" width="555" height="10" isRemoveLineWhenBlank="true"/>
+				<subreportParameter name="telephoneNo">
+					<subreportParameterExpression><![CDATA[$P{telephoneNo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="STYLE_TEMPLATE">
+					<subreportParameterExpression><![CDATA[$P{styleTemplate}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="countLabel">
+					<subreportParameterExpression><![CDATA[$P{countLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nic">
+					<subreportParameterExpression><![CDATA[$P{nic}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="monthLabel">
+					<subreportParameterExpression><![CDATA[$P{monthLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="exceededLabel">
+					<subreportParameterExpression><![CDATA[$P{exceededLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="mediumTitleLabel">
+					<subreportParameterExpression><![CDATA[$P{mediumTitleLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="parentName">
+					<subreportParameterExpression><![CDATA[$P{parentName}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{mediumDataSourceJanuary}.getData())]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{JasperSubReportLocation2}]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="21" width="555" height="10" isRemoveLineWhenBlank="true"/>
+				<subreportParameter name="STYLE_TEMPLATE">
+					<subreportParameterExpression><![CDATA[$P{styleTemplate}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="telephoneNo">
+					<subreportParameterExpression><![CDATA[$P{telephoneNo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="countLabel">
+					<subreportParameterExpression><![CDATA[$P{countLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="highTitleLabel">
+					<subreportParameterExpression><![CDATA[$P{highTitleLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="monthLabel">
+					<subreportParameterExpression><![CDATA[$P{monthLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nic">
+					<subreportParameterExpression><![CDATA[$P{nic}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="exceededLabel">
+					<subreportParameterExpression><![CDATA[$P{exceededLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="parentName">
+					<subreportParameterExpression><![CDATA[$P{parentName}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{highDataSourceJanuary}.getData())]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{JasperSubReportLocation3}]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="2" y="53" width="555" height="8" isRemoveLineWhenBlank="true"/>
+				<subreportParameter name="STYLE_TEMPLATE">
+					<subreportParameterExpression><![CDATA[$P{styleTemplate}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="telephoneNo">
+					<subreportParameterExpression><![CDATA[$P{telephoneNo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="countLabel">
+					<subreportParameterExpression><![CDATA[$P{countLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="highTitleLabel">
+					<subreportParameterExpression><![CDATA[$P{highTitleLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="monthLabel">
+					<subreportParameterExpression><![CDATA[$P{monthLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nic">
+					<subreportParameterExpression><![CDATA[$P{nic}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="exceededLabel">
+					<subreportParameterExpression><![CDATA[$P{exceededLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="parentName">
+					<subreportParameterExpression><![CDATA[$P{parentName}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{highDataSourceFebruary}.getData())]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{JasperSubReportLocation3}]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="2" y="44" width="555" height="9" isRemoveLineWhenBlank="true"/>
+				<subreportParameter name="telephoneNo">
+					<subreportParameterExpression><![CDATA[$P{telephoneNo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="STYLE_TEMPLATE">
+					<subreportParameterExpression><![CDATA[$P{styleTemplate}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="countLabel">
+					<subreportParameterExpression><![CDATA[$P{countLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nic">
+					<subreportParameterExpression><![CDATA[$P{nic}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="monthLabel">
+					<subreportParameterExpression><![CDATA[$P{monthLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="exceededLabel">
+					<subreportParameterExpression><![CDATA[$P{exceededLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="mediumTitleLabel">
+					<subreportParameterExpression><![CDATA[$P{mediumTitleLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="parentName">
+					<subreportParameterExpression><![CDATA[$P{parentName}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{mediumDataSourceFebruary}.getData())]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{JasperSubReportLocation2}]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="2" y="32" width="555" height="11" isRemoveLineWhenBlank="true"/>
+				<subreportParameter name="telephoneNo">
+					<subreportParameterExpression><![CDATA[$P{telephoneNo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="STYLE_TEMPLATE">
+					<subreportParameterExpression><![CDATA[$P{styleTemplate}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="countLabel">
+					<subreportParameterExpression><![CDATA[$P{countLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nic">
+					<subreportParameterExpression><![CDATA[$P{nic}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="monthLabel">
+					<subreportParameterExpression><![CDATA[$P{monthLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="exceededLabel">
+					<subreportParameterExpression><![CDATA[$P{exceededLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lowTitleLabel">
+					<subreportParameterExpression><![CDATA[$P{lowTitleLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="parentName">
+					<subreportParameterExpression><![CDATA[$P{parentName}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{lowDataSourceFebruary}.getData())]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{JasperSubReportLocation1}]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="2" y="74" width="555" height="9" isRemoveLineWhenBlank="true"/>
+				<subreportParameter name="telephoneNo">
+					<subreportParameterExpression><![CDATA[$P{telephoneNo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="STYLE_TEMPLATE">
+					<subreportParameterExpression><![CDATA[$P{styleTemplate}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="countLabel">
+					<subreportParameterExpression><![CDATA[$P{countLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nic">
+					<subreportParameterExpression><![CDATA[$P{nic}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="monthLabel">
+					<subreportParameterExpression><![CDATA[$P{monthLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="exceededLabel">
+					<subreportParameterExpression><![CDATA[$P{exceededLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="mediumTitleLabel">
+					<subreportParameterExpression><![CDATA[$P{mediumTitleLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="parentName">
+					<subreportParameterExpression><![CDATA[$P{parentName}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{mediumDataSourceMarch}.getData())]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{JasperSubReportLocation2}]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="2" y="83" width="555" height="8" isRemoveLineWhenBlank="true"/>
+				<subreportParameter name="STYLE_TEMPLATE">
+					<subreportParameterExpression><![CDATA[$P{styleTemplate}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="telephoneNo">
+					<subreportParameterExpression><![CDATA[$P{telephoneNo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="countLabel">
+					<subreportParameterExpression><![CDATA[$P{countLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="highTitleLabel">
+					<subreportParameterExpression><![CDATA[$P{highTitleLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="monthLabel">
+					<subreportParameterExpression><![CDATA[$P{monthLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nic">
+					<subreportParameterExpression><![CDATA[$P{nic}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="exceededLabel">
+					<subreportParameterExpression><![CDATA[$P{exceededLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="parentName">
+					<subreportParameterExpression><![CDATA[$P{parentName}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{highDataSourceMarch}.getData())]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{JasperSubReportLocation3}]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="2" y="62" width="555" height="11" isRemoveLineWhenBlank="true"/>
+				<subreportParameter name="telephoneNo">
+					<subreportParameterExpression><![CDATA[$P{telephoneNo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="STYLE_TEMPLATE">
+					<subreportParameterExpression><![CDATA[$P{styleTemplate}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="countLabel">
+					<subreportParameterExpression><![CDATA[$P{countLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nic">
+					<subreportParameterExpression><![CDATA[$P{nic}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="monthLabel">
+					<subreportParameterExpression><![CDATA[$P{monthLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="exceededLabel">
+					<subreportParameterExpression><![CDATA[$P{exceededLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lowTitleLabel">
+					<subreportParameterExpression><![CDATA[$P{lowTitleLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="parentName">
+					<subreportParameterExpression><![CDATA[$P{parentName}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{lowDataSourceMarch}.getData())]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{JasperSubReportLocation1}]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="2" y="91" width="555" height="8" isRemoveLineWhenBlank="true"/>
+				<subreportParameter name="telephoneNo">
+					<subreportParameterExpression><![CDATA[$P{telephoneNo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="STYLE_TEMPLATE">
+					<subreportParameterExpression><![CDATA[$P{styleTemplate}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="countLabel">
+					<subreportParameterExpression><![CDATA[$P{countLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nic">
+					<subreportParameterExpression><![CDATA[$P{nic}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="monthLabel">
+					<subreportParameterExpression><![CDATA[$P{monthLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="exceededLabel">
+					<subreportParameterExpression><![CDATA[$P{exceededLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lowTitleLabel">
+					<subreportParameterExpression><![CDATA[$P{lowTitleLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="parentName">
+					<subreportParameterExpression><![CDATA[$P{parentName}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{lowDataSourceApril}.getData())]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{JasperSubReportLocation1}]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="2" y="108" width="555" height="10" isRemoveLineWhenBlank="true"/>
+				<subreportParameter name="STYLE_TEMPLATE">
+					<subreportParameterExpression><![CDATA[$P{styleTemplate}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="telephoneNo">
+					<subreportParameterExpression><![CDATA[$P{telephoneNo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="countLabel">
+					<subreportParameterExpression><![CDATA[$P{countLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="highTitleLabel">
+					<subreportParameterExpression><![CDATA[$P{highTitleLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="monthLabel">
+					<subreportParameterExpression><![CDATA[$P{monthLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nic">
+					<subreportParameterExpression><![CDATA[$P{nic}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="exceededLabel">
+					<subreportParameterExpression><![CDATA[$P{exceededLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="parentName">
+					<subreportParameterExpression><![CDATA[$P{parentName}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{highDataSourceApril}.getData())]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{JasperSubReportLocation3}]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="2" y="99" width="555" height="9" isRemoveLineWhenBlank="true"/>
+				<subreportParameter name="telephoneNo">
+					<subreportParameterExpression><![CDATA[$P{telephoneNo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="STYLE_TEMPLATE">
+					<subreportParameterExpression><![CDATA[$P{styleTemplate}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="countLabel">
+					<subreportParameterExpression><![CDATA[$P{countLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nic">
+					<subreportParameterExpression><![CDATA[$P{nic}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="monthLabel">
+					<subreportParameterExpression><![CDATA[$P{monthLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="exceededLabel">
+					<subreportParameterExpression><![CDATA[$P{exceededLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="mediumTitleLabel">
+					<subreportParameterExpression><![CDATA[$P{mediumTitleLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="parentName">
+					<subreportParameterExpression><![CDATA[$P{parentName}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{mediumDataSourceApril}.getData())]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{JasperSubReportLocation2}]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="2" y="133" width="555" height="9" isRemoveLineWhenBlank="true"/>
+				<subreportParameter name="STYLE_TEMPLATE">
+					<subreportParameterExpression><![CDATA[$P{styleTemplate}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="telephoneNo">
+					<subreportParameterExpression><![CDATA[$P{telephoneNo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="countLabel">
+					<subreportParameterExpression><![CDATA[$P{countLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="highTitleLabel">
+					<subreportParameterExpression><![CDATA[$P{highTitleLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="monthLabel">
+					<subreportParameterExpression><![CDATA[$P{monthLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nic">
+					<subreportParameterExpression><![CDATA[$P{nic}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="exceededLabel">
+					<subreportParameterExpression><![CDATA[$P{exceededLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="parentName">
+					<subreportParameterExpression><![CDATA[$P{parentName}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{highDataSourceMay}.getData())]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{JasperSubReportLocation3}]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="2" y="124" width="555" height="9" isRemoveLineWhenBlank="true"/>
+				<subreportParameter name="telephoneNo">
+					<subreportParameterExpression><![CDATA[$P{telephoneNo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="STYLE_TEMPLATE">
+					<subreportParameterExpression><![CDATA[$P{styleTemplate}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="countLabel">
+					<subreportParameterExpression><![CDATA[$P{countLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nic">
+					<subreportParameterExpression><![CDATA[$P{nic}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="monthLabel">
+					<subreportParameterExpression><![CDATA[$P{monthLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="exceededLabel">
+					<subreportParameterExpression><![CDATA[$P{exceededLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="mediumTitleLabel">
+					<subreportParameterExpression><![CDATA[$P{mediumTitleLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="parentName">
+					<subreportParameterExpression><![CDATA[$P{parentName}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{mediumDataSourceMay}.getData())]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{JasperSubReportLocation2}]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="2" y="117" width="555" height="7" isRemoveLineWhenBlank="true"/>
+				<subreportParameter name="telephoneNo">
+					<subreportParameterExpression><![CDATA[$P{telephoneNo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="STYLE_TEMPLATE">
+					<subreportParameterExpression><![CDATA[$P{styleTemplate}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="countLabel">
+					<subreportParameterExpression><![CDATA[$P{countLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nic">
+					<subreportParameterExpression><![CDATA[$P{nic}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="monthLabel">
+					<subreportParameterExpression><![CDATA[$P{monthLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="exceededLabel">
+					<subreportParameterExpression><![CDATA[$P{exceededLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lowTitleLabel">
+					<subreportParameterExpression><![CDATA[$P{lowTitleLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="parentName">
+					<subreportParameterExpression><![CDATA[$P{parentName}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{lowDataSourceMay}.getData())]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{JasperSubReportLocation1}]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="2" y="159" width="555" height="9" isRemoveLineWhenBlank="true"/>
+				<subreportParameter name="STYLE_TEMPLATE">
+					<subreportParameterExpression><![CDATA[$P{styleTemplate}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="telephoneNo">
+					<subreportParameterExpression><![CDATA[$P{telephoneNo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="countLabel">
+					<subreportParameterExpression><![CDATA[$P{countLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="highTitleLabel">
+					<subreportParameterExpression><![CDATA[$P{highTitleLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="monthLabel">
+					<subreportParameterExpression><![CDATA[$P{monthLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nic">
+					<subreportParameterExpression><![CDATA[$P{nic}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="exceededLabel">
+					<subreportParameterExpression><![CDATA[$P{exceededLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="parentName">
+					<subreportParameterExpression><![CDATA[$P{parentName}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{highDataSourceJune}.getData())]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{JasperSubReportLocation3}]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="2" y="150" width="555" height="9" isRemoveLineWhenBlank="true"/>
+				<subreportParameter name="telephoneNo">
+					<subreportParameterExpression><![CDATA[$P{telephoneNo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="STYLE_TEMPLATE">
+					<subreportParameterExpression><![CDATA[$P{styleTemplate}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="countLabel">
+					<subreportParameterExpression><![CDATA[$P{countLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nic">
+					<subreportParameterExpression><![CDATA[$P{nic}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="monthLabel">
+					<subreportParameterExpression><![CDATA[$P{monthLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="exceededLabel">
+					<subreportParameterExpression><![CDATA[$P{exceededLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="mediumTitleLabel">
+					<subreportParameterExpression><![CDATA[$P{mediumTitleLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="parentName">
+					<subreportParameterExpression><![CDATA[$P{parentName}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{mediumDataSourceJune}.getData())]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{JasperSubReportLocation2}]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="2" y="143" width="555" height="7" isRemoveLineWhenBlank="true"/>
+				<subreportParameter name="telephoneNo">
+					<subreportParameterExpression><![CDATA[$P{telephoneNo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="STYLE_TEMPLATE">
+					<subreportParameterExpression><![CDATA[$P{styleTemplate}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="countLabel">
+					<subreportParameterExpression><![CDATA[$P{countLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nic">
+					<subreportParameterExpression><![CDATA[$P{nic}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="monthLabel">
+					<subreportParameterExpression><![CDATA[$P{monthLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="exceededLabel">
+					<subreportParameterExpression><![CDATA[$P{exceededLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lowTitleLabel">
+					<subreportParameterExpression><![CDATA[$P{lowTitleLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="parentName">
+					<subreportParameterExpression><![CDATA[$P{parentName}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{lowDataSourceJune}.getData())]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{JasperSubReportLocation1}]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="2" y="168" width="555" height="7" isRemoveLineWhenBlank="true"/>
+				<subreportParameter name="telephoneNo">
+					<subreportParameterExpression><![CDATA[$P{telephoneNo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="STYLE_TEMPLATE">
+					<subreportParameterExpression><![CDATA[$P{styleTemplate}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="countLabel">
+					<subreportParameterExpression><![CDATA[$P{countLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nic">
+					<subreportParameterExpression><![CDATA[$P{nic}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="monthLabel">
+					<subreportParameterExpression><![CDATA[$P{monthLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="exceededLabel">
+					<subreportParameterExpression><![CDATA[$P{exceededLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lowTitleLabel">
+					<subreportParameterExpression><![CDATA[$P{lowTitleLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="parentName">
+					<subreportParameterExpression><![CDATA[$P{parentName}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{lowDataSourceJuly}.getData())]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{JasperSubReportLocation1}]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="2" y="176" width="555" height="9" isRemoveLineWhenBlank="true"/>
+				<subreportParameter name="telephoneNo">
+					<subreportParameterExpression><![CDATA[$P{telephoneNo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="STYLE_TEMPLATE">
+					<subreportParameterExpression><![CDATA[$P{styleTemplate}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="countLabel">
+					<subreportParameterExpression><![CDATA[$P{countLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nic">
+					<subreportParameterExpression><![CDATA[$P{nic}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="monthLabel">
+					<subreportParameterExpression><![CDATA[$P{monthLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="exceededLabel">
+					<subreportParameterExpression><![CDATA[$P{exceededLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="mediumTitleLabel">
+					<subreportParameterExpression><![CDATA[$P{mediumTitleLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="parentName">
+					<subreportParameterExpression><![CDATA[$P{parentName}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{mediumDataSourceJuly}.getData())]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{JasperSubReportLocation2}]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="2" y="185" width="555" height="9" isRemoveLineWhenBlank="true"/>
+				<subreportParameter name="STYLE_TEMPLATE">
+					<subreportParameterExpression><![CDATA[$P{styleTemplate}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="telephoneNo">
+					<subreportParameterExpression><![CDATA[$P{telephoneNo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="countLabel">
+					<subreportParameterExpression><![CDATA[$P{countLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="highTitleLabel">
+					<subreportParameterExpression><![CDATA[$P{highTitleLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="monthLabel">
+					<subreportParameterExpression><![CDATA[$P{monthLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nic">
+					<subreportParameterExpression><![CDATA[$P{nic}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="exceededLabel">
+					<subreportParameterExpression><![CDATA[$P{exceededLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="parentName">
+					<subreportParameterExpression><![CDATA[$P{parentName}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{highDataSourceJuly}.getData())]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{JasperSubReportLocation3}]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="2" y="202" width="555" height="9" isRemoveLineWhenBlank="true"/>
+				<subreportParameter name="telephoneNo">
+					<subreportParameterExpression><![CDATA[$P{telephoneNo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="STYLE_TEMPLATE">
+					<subreportParameterExpression><![CDATA[$P{styleTemplate}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="countLabel">
+					<subreportParameterExpression><![CDATA[$P{countLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nic">
+					<subreportParameterExpression><![CDATA[$P{nic}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="monthLabel">
+					<subreportParameterExpression><![CDATA[$P{monthLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="exceededLabel">
+					<subreportParameterExpression><![CDATA[$P{exceededLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="mediumTitleLabel">
+					<subreportParameterExpression><![CDATA[$P{mediumTitleLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="parentName">
+					<subreportParameterExpression><![CDATA[$P{parentName}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{mediumDataSourceAugust}.getData())]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{JasperSubReportLocation2}]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="2" y="212" width="555" height="9" isRemoveLineWhenBlank="true"/>
+				<subreportParameter name="STYLE_TEMPLATE">
+					<subreportParameterExpression><![CDATA[$P{styleTemplate}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="telephoneNo">
+					<subreportParameterExpression><![CDATA[$P{telephoneNo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="countLabel">
+					<subreportParameterExpression><![CDATA[$P{countLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="highTitleLabel">
+					<subreportParameterExpression><![CDATA[$P{highTitleLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="monthLabel">
+					<subreportParameterExpression><![CDATA[$P{monthLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nic">
+					<subreportParameterExpression><![CDATA[$P{nic}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="exceededLabel">
+					<subreportParameterExpression><![CDATA[$P{exceededLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="parentName">
+					<subreportParameterExpression><![CDATA[$P{parentName}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{highDataSourceAugust}.getData())]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{JasperSubReportLocation3}]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="2" y="195" width="555" height="7" isRemoveLineWhenBlank="true"/>
+				<subreportParameter name="telephoneNo">
+					<subreportParameterExpression><![CDATA[$P{telephoneNo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="STYLE_TEMPLATE">
+					<subreportParameterExpression><![CDATA[$P{styleTemplate}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="countLabel">
+					<subreportParameterExpression><![CDATA[$P{countLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nic">
+					<subreportParameterExpression><![CDATA[$P{nic}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="monthLabel">
+					<subreportParameterExpression><![CDATA[$P{monthLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="exceededLabel">
+					<subreportParameterExpression><![CDATA[$P{exceededLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lowTitleLabel">
+					<subreportParameterExpression><![CDATA[$P{lowTitleLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="parentName">
+					<subreportParameterExpression><![CDATA[$P{parentName}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{lowDataSourceAugust}.getData())]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{JasperSubReportLocation1}]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="2" y="229" width="555" height="9" isRemoveLineWhenBlank="true"/>
+				<subreportParameter name="telephoneNo">
+					<subreportParameterExpression><![CDATA[$P{telephoneNo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="STYLE_TEMPLATE">
+					<subreportParameterExpression><![CDATA[$P{styleTemplate}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="countLabel">
+					<subreportParameterExpression><![CDATA[$P{countLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nic">
+					<subreportParameterExpression><![CDATA[$P{nic}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="monthLabel">
+					<subreportParameterExpression><![CDATA[$P{monthLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="exceededLabel">
+					<subreportParameterExpression><![CDATA[$P{exceededLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="mediumTitleLabel">
+					<subreportParameterExpression><![CDATA[$P{mediumTitleLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="parentName">
+					<subreportParameterExpression><![CDATA[$P{parentName}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{mediumDataSourceSeptember}.getData())]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{JasperSubReportLocation2}]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="2" y="238" width="555" height="9" isRemoveLineWhenBlank="true"/>
+				<subreportParameter name="STYLE_TEMPLATE">
+					<subreportParameterExpression><![CDATA[$P{styleTemplate}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="telephoneNo">
+					<subreportParameterExpression><![CDATA[$P{telephoneNo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="countLabel">
+					<subreportParameterExpression><![CDATA[$P{countLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="highTitleLabel">
+					<subreportParameterExpression><![CDATA[$P{highTitleLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="monthLabel">
+					<subreportParameterExpression><![CDATA[$P{monthLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nic">
+					<subreportParameterExpression><![CDATA[$P{nic}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="exceededLabel">
+					<subreportParameterExpression><![CDATA[$P{exceededLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="parentName">
+					<subreportParameterExpression><![CDATA[$P{parentName}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{highDataSourceSeptember}.getData())]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{JasperSubReportLocation3}]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="2" y="222" width="555" height="7" isRemoveLineWhenBlank="true"/>
+				<subreportParameter name="telephoneNo">
+					<subreportParameterExpression><![CDATA[$P{telephoneNo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="STYLE_TEMPLATE">
+					<subreportParameterExpression><![CDATA[$P{styleTemplate}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="countLabel">
+					<subreportParameterExpression><![CDATA[$P{countLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nic">
+					<subreportParameterExpression><![CDATA[$P{nic}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="monthLabel">
+					<subreportParameterExpression><![CDATA[$P{monthLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="exceededLabel">
+					<subreportParameterExpression><![CDATA[$P{exceededLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lowTitleLabel">
+					<subreportParameterExpression><![CDATA[$P{lowTitleLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="parentName">
+					<subreportParameterExpression><![CDATA[$P{parentName}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{lowDataSourceSeptember}.getData())]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{JasperSubReportLocation1}]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="2" y="264" width="555" height="9" isRemoveLineWhenBlank="true"/>
+				<subreportParameter name="STYLE_TEMPLATE">
+					<subreportParameterExpression><![CDATA[$P{styleTemplate}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="telephoneNo">
+					<subreportParameterExpression><![CDATA[$P{telephoneNo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="countLabel">
+					<subreportParameterExpression><![CDATA[$P{countLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="highTitleLabel">
+					<subreportParameterExpression><![CDATA[$P{highTitleLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="monthLabel">
+					<subreportParameterExpression><![CDATA[$P{monthLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nic">
+					<subreportParameterExpression><![CDATA[$P{nic}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="exceededLabel">
+					<subreportParameterExpression><![CDATA[$P{exceededLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="parentName">
+					<subreportParameterExpression><![CDATA[$P{parentName}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{highDataSourceOctober}.getData())]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{JasperSubReportLocation3}]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="2" y="254" width="555" height="9" isRemoveLineWhenBlank="true"/>
+				<subreportParameter name="telephoneNo">
+					<subreportParameterExpression><![CDATA[$P{telephoneNo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="STYLE_TEMPLATE">
+					<subreportParameterExpression><![CDATA[$P{styleTemplate}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="countLabel">
+					<subreportParameterExpression><![CDATA[$P{countLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nic">
+					<subreportParameterExpression><![CDATA[$P{nic}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="monthLabel">
+					<subreportParameterExpression><![CDATA[$P{monthLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="exceededLabel">
+					<subreportParameterExpression><![CDATA[$P{exceededLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="mediumTitleLabel">
+					<subreportParameterExpression><![CDATA[$P{mediumTitleLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="parentName">
+					<subreportParameterExpression><![CDATA[$P{parentName}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{mediumDataSourceOctober}.getData())]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{JasperSubReportLocation2}]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="2" y="247" width="555" height="7" isRemoveLineWhenBlank="true"/>
+				<subreportParameter name="telephoneNo">
+					<subreportParameterExpression><![CDATA[$P{telephoneNo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="STYLE_TEMPLATE">
+					<subreportParameterExpression><![CDATA[$P{styleTemplate}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="countLabel">
+					<subreportParameterExpression><![CDATA[$P{countLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nic">
+					<subreportParameterExpression><![CDATA[$P{nic}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="monthLabel">
+					<subreportParameterExpression><![CDATA[$P{monthLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="exceededLabel">
+					<subreportParameterExpression><![CDATA[$P{exceededLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lowTitleLabel">
+					<subreportParameterExpression><![CDATA[$P{lowTitleLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="parentName">
+					<subreportParameterExpression><![CDATA[$P{parentName}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{lowDataSourceOctober}.getData())]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{JasperSubReportLocation1}]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="2" y="289" width="555" height="9" isRemoveLineWhenBlank="true"/>
+				<subreportParameter name="STYLE_TEMPLATE">
+					<subreportParameterExpression><![CDATA[$P{styleTemplate}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="telephoneNo">
+					<subreportParameterExpression><![CDATA[$P{telephoneNo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="countLabel">
+					<subreportParameterExpression><![CDATA[$P{countLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="highTitleLabel">
+					<subreportParameterExpression><![CDATA[$P{highTitleLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="monthLabel">
+					<subreportParameterExpression><![CDATA[$P{monthLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nic">
+					<subreportParameterExpression><![CDATA[$P{nic}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="exceededLabel">
+					<subreportParameterExpression><![CDATA[$P{exceededLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="parentName">
+					<subreportParameterExpression><![CDATA[$P{parentName}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{highDataSourceNovember}.getData())]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{JasperSubReportLocation3}]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="2" y="280" width="555" height="9" isRemoveLineWhenBlank="true"/>
+				<subreportParameter name="telephoneNo">
+					<subreportParameterExpression><![CDATA[$P{telephoneNo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="STYLE_TEMPLATE">
+					<subreportParameterExpression><![CDATA[$P{styleTemplate}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="countLabel">
+					<subreportParameterExpression><![CDATA[$P{countLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nic">
+					<subreportParameterExpression><![CDATA[$P{nic}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="monthLabel">
+					<subreportParameterExpression><![CDATA[$P{monthLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="exceededLabel">
+					<subreportParameterExpression><![CDATA[$P{exceededLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="mediumTitleLabel">
+					<subreportParameterExpression><![CDATA[$P{mediumTitleLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="parentName">
+					<subreportParameterExpression><![CDATA[$P{parentName}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{mediumDataSourceNovember}.getData())]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{JasperSubReportLocation2}]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="2" y="273" width="555" height="7" isRemoveLineWhenBlank="true"/>
+				<subreportParameter name="telephoneNo">
+					<subreportParameterExpression><![CDATA[$P{telephoneNo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="STYLE_TEMPLATE">
+					<subreportParameterExpression><![CDATA[$P{styleTemplate}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="countLabel">
+					<subreportParameterExpression><![CDATA[$P{countLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nic">
+					<subreportParameterExpression><![CDATA[$P{nic}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="monthLabel">
+					<subreportParameterExpression><![CDATA[$P{monthLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="exceededLabel">
+					<subreportParameterExpression><![CDATA[$P{exceededLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lowTitleLabel">
+					<subreportParameterExpression><![CDATA[$P{lowTitleLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="parentName">
+					<subreportParameterExpression><![CDATA[$P{parentName}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{lowDataSourceNovember}.getData())]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{JasperSubReportLocation1}]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="2" y="314" width="555" height="9" isRemoveLineWhenBlank="true"/>
+				<subreportParameter name="STYLE_TEMPLATE">
+					<subreportParameterExpression><![CDATA[$P{styleTemplate}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="telephoneNo">
+					<subreportParameterExpression><![CDATA[$P{telephoneNo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="countLabel">
+					<subreportParameterExpression><![CDATA[$P{countLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="highTitleLabel">
+					<subreportParameterExpression><![CDATA[$P{highTitleLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="monthLabel">
+					<subreportParameterExpression><![CDATA[$P{monthLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nic">
+					<subreportParameterExpression><![CDATA[$P{nic}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="exceededLabel">
+					<subreportParameterExpression><![CDATA[$P{exceededLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="parentName">
+					<subreportParameterExpression><![CDATA[$P{parentName}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{highDataSourceDecember}.getData())]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{JasperSubReportLocation3}]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="2" y="305" width="555" height="9" isRemoveLineWhenBlank="true"/>
+				<subreportParameter name="telephoneNo">
+					<subreportParameterExpression><![CDATA[$P{telephoneNo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="STYLE_TEMPLATE">
+					<subreportParameterExpression><![CDATA[$P{styleTemplate}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="countLabel">
+					<subreportParameterExpression><![CDATA[$P{countLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nic">
+					<subreportParameterExpression><![CDATA[$P{nic}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="monthLabel">
+					<subreportParameterExpression><![CDATA[$P{monthLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="exceededLabel">
+					<subreportParameterExpression><![CDATA[$P{exceededLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="mediumTitleLabel">
+					<subreportParameterExpression><![CDATA[$P{mediumTitleLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="parentName">
+					<subreportParameterExpression><![CDATA[$P{parentName}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{mediumDataSourceDecember}.getData())]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{JasperSubReportLocation2}]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="2" y="298" width="555" height="7" isRemoveLineWhenBlank="true"/>
+				<subreportParameter name="telephoneNo">
+					<subreportParameterExpression><![CDATA[$P{telephoneNo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="STYLE_TEMPLATE">
+					<subreportParameterExpression><![CDATA[$P{styleTemplate}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="countLabel">
+					<subreportParameterExpression><![CDATA[$P{countLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nic">
+					<subreportParameterExpression><![CDATA[$P{nic}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="monthLabel">
+					<subreportParameterExpression><![CDATA[$P{monthLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="exceededLabel">
+					<subreportParameterExpression><![CDATA[$P{exceededLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lowTitleLabel">
+					<subreportParameterExpression><![CDATA[$P{lowTitleLabel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="parentName">
+					<subreportParameterExpression><![CDATA[$P{parentName}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{lowDataSourceDecember}.getData())]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{JasperSubReportLocation1}]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<frame>
+				<reportElement style="Frame_color" mode="Opaque" x="0" y="1" width="555" height="24"/>
+				<textField>
+					<reportElement x="2" y="0" width="171" height="20" forecolor="#FFFFFF"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{generatedDate}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<textField>
+				<reportElement style="Column header" x="471" y="0" width="82" height="21" forecolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{page}+$V{PAGE_NUMBER}+""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Transparent" x="0" y="34" width="575" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{GPLComment}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

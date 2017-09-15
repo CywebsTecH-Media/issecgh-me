@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+
+<!-- < ÀKURA, This application manages the daily activities of a Teacher 
+	and a Student of a School> Copyright (C) 2012 Virtusa Corporation. This program 
+	is free software: you can redistribute it and/or modify it under the terms 
+	of the GNU General Public License as published by the Free Software Foundation, 
+	either version 3 of the License, or (at your option) any later version. This 
+	program is distributed in the hope that it will be useful, but WITHOUT ANY 
+	WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
+	FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details. -->
+
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.virtusa.akura.api.dto.AssignmentMarkView" table="ASSIGNMENT_MARK_VIEW">
+		<composite-id>
+			<key-property name="studentId" column="STUDENT_ID" type="int" />
+			<key-property name="year" column="YEAR" type="date" />
+			<key-property name="assignmentId" column="ASSIGNMENT_ID"
+				type="int" />
+		</composite-id>
+		<property name="gradeId" column="GRADE_ID" type="int" />
+		<property name="name" column="NAME" type="string" />
+		<property name="gradeSubjectId" column="GRADE_SUBJECT_ID"
+			type="int" />
+		<property name="gradeDescription" column="GRADE_DESCRIPTION"
+			type="string" />
+		<property name="subjectId" column="SUBJECT_ID" type="int" />
+		<property name="subjectDescription" column="SUBJECT_DESCRIPTION"
+			type="string" />
+		<property name="gradingId" column="GRADING_ID" type="java.lang.Integer" />
+		<property name="grading" column="GRADING" type="string" />
+		<property name="marks" column="MARKS" type="java.lang.Float" />
+		<property name="absent" column="IS_ABSENT" type="boolean" />
+	</class>
+
+	<query name="findStudentAssignmentMarksBySubject">
+			<![CDATA[				
+				FROM	com.virtusa.akura.api.dto.AssignmentMarkView assignmentMarksView
+				WHERE	assignmentMarksView.studentId = ? 
+				AND		assignmentMarksView.year = ?
+				AND		assignmentMarksView.subjectDescription = ?
+			]]>
+	</query>
+	
+	<query name="findStudentAssignmentMarks">
+		<![CDATA[			
+					
+			FROM	com.virtusa.akura.api.dto.AssignmentMarkView assignmentMarksView				 
+			WHERE	assignmentMarksView.studentId = ? AND assignmentMarksView.year=?
+
+		]]>	
+	</query>
+	
+	<sql-query name="findAssignmentMarksBySubject">
+		<![CDATA[
+			SELECT am.NAME,am.MARKS,am.GRADING
+			,am.IS_ABSENT
+			FROM ASSIGNMENT_MARK_VIEW am WHERE am.STUDENT_ID = ?
+			AND am.YEAR= ?  AND am.SUBJECT_DESCRIPTION = ?
+			ORDER BY am.NAME
+		]]>
+	</sql-query>
+	
+	<sql-query name="findAssignmentSubjectsByStudentId">
+		<![CDATA[
+			SELECT DISTINCT am.SUBJECT_DESCRIPTION
+			FROM ASSIGNMENT_MARK_VIEW am WHERE am.STUDENT_ID = ? 
+			AND am.YEAR = ?
+			ORDER BY am.SUBJECT_DESCRIPTION
+		]]>
+	</sql-query>
+	
+	
+</hibernate-mapping>

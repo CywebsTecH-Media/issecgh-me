@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="NewDesignTest" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<template><![CDATA[$P{styleTemplate}]]></template>
+	<style name="Title" forecolor="#FFFFFF" lineSpacing="Single" fontName="SansSerif" fontSize="20" isBold="false" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#CCCCCC" lineSpacing="Single" fontName="SansSerif" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
+	<style name="Column header" forecolor="#666666" lineSpacing="Single" fontName="SansSerif" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
+	<style name="Detail" mode="Transparent" lineSpacing="Single" fontName="SansSerif" pdfFontName="Times-Roman"/>
+	<style name="Row" mode="Transparent" lineSpacing="Single" fontName="SansSerif" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F0EFEF" lineSpacing="Single"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="title" class="java.lang.String"/>
+	<parameter name="teacherid" class="java.lang.String"/>
+	<parameter name="teachername" class="java.lang.String"/>
+	<parameter name="logoPath" class="java.lang.String"/>
+	<parameter name="datefrom" class="java.lang.String"/>
+	<parameter name="dateto" class="java.lang.String"/>
+	<parameter name="present" class="java.lang.String"/>
+	<parameter name="absent" class="java.lang.String"/>
+	<parameter name="absentDays" class="java.lang.String"/>
+	<parameter name="reason" class="java.lang.String"/>
+	<parameter name="working" class="java.lang.String"/>
+	<parameter name="styleTemplate" class="java.lang.String"/>
+	<parameter name="staffRegNo" class="java.lang.String"/>
+	<parameter name="staffName" class="java.lang.String"/>
+	<parameter name="staffDateFrom" class="java.lang.String"/>
+	<parameter name="staffDateTo" class="java.lang.String"/>
+	<parameter name="staffPresent" class="java.lang.String"/>
+	<parameter name="staffAbsent" class="java.lang.String"/>
+	<parameter name="staffWorking" class="java.lang.String"/>
+	<parameter name="reportGeneratedOn" class="java.lang.String"/>
+	<parameter name="generatedDate" class="java.lang.String"/>
+	<parameter name="page" class="java.lang.String"/>
+	<parameter name="GPLComment" class="java.lang.String"/>
+	<parameter name="dateDeparture" class="java.lang.String"/>
+	<parameter name="departureDate" class="java.lang.String"/>
+	<parameter name="leaveStatus" class="java.lang.String"/>
+	<parameter name="approvedOrRejectedBy" class="java.lang.String"/>
+	<parameter name="dateJoined" class="java.lang.String"/>
+	<parameter name="Joinedate" class="java.lang.String"/>
+	<queryString language="hql">
+		<![CDATA[from TeacherAttendance]]>
+	</queryString>
+	<field name="date" class="java.lang.String"/>
+	<field name="reason" class="java.lang.String"/>
+	<field name="dateOfDeparture" class="java.lang.String"/>
+	<field name="leaveStatus" class="java.lang.String"/>
+	<field name="leaveApprovedBy" class="java.lang.String"/>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="164">
+			<frame>
+				<reportElement style="Frame_color" mode="Opaque" x="67" y="-20" width="509" height="71"/>
+				<textField>
+					<reportElement x="49" y="4" width="424" height="27" forecolor="#FFFFFF"/>
+					<textElement lineSpacing="Single">
+						<font size="18" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{title}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="88" y="31" width="100" height="20" forecolor="#FFFFFF"/>
+					<textElement lineSpacing="Single">
+						<font fontName="SansSerif"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{teacherid}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="88" y="51" width="100" height="20" forecolor="#FFFFFF"/>
+					<textElement lineSpacing="Single">
+						<font fontName="SansSerif"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{datefrom}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement x="263" y="51" width="78" height="20" isPrintWhenDetailOverflows="true" forecolor="#FFFFFF"/>
+					<textElement lineSpacing="Single">
+						<font fontName="SansSerif"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{dateto}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement x="263" y="31" width="133" height="20" isPrintWhenDetailOverflows="true" forecolor="#FFFFFF"/>
+					<textElement lineSpacing="Single">
+						<font fontName="SansSerif"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{teachername}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement x="12" y="52" width="76" height="19" forecolor="#FFFFFF"/>
+					<textElement lineSpacing="Single"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{staffDateFrom}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement x="190" y="31" width="73" height="20" forecolor="#FFFFFF"/>
+					<textElement lineSpacing="Single"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{staffName}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement x="190" y="51" width="73" height="20" forecolor="#FFFFFF"/>
+					<textElement lineSpacing="Single"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{staffDateTo}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement x="341" y="51" width="86" height="20" forecolor="#FFFFFF"/>
+					<textElement lineSpacing="Single"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{dateDeparture}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement x="427" y="51" width="81" height="20" isPrintWhenDetailOverflows="true" forecolor="#FFFFFF"/>
+					<textElement lineSpacing="Single"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{departureDate}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement style="Frame_color" mode="Opaque" x="67" y="51" width="509" height="26"/>
+				<line>
+					<reportElement x="1" y="0" width="507" height="1" forecolor="#FFFFFF"/>
+				</line>
+				<textField>
+					<reportElement x="13" y="5" width="148" height="20" forecolor="#FFFFFF"/>
+					<textElement lineSpacing="Single">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{reportGeneratedOn}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="161" y="6" width="171" height="20" forecolor="#FFFFFF"/>
+					<textElement lineSpacing="Single">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{generatedDate}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement x="342" y="6" width="86" height="20" forecolor="#FFFFFF"/>
+					<textElement lineSpacing="Single"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{dateJoined}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement x="427" y="6" width="81" height="20" isPrintWhenDetailOverflows="true" forecolor="#FFFFFF"/>
+					<textElement lineSpacing="Single"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{Joinedate}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<image>
+				<reportElement x="-19" y="-20" width="87" height="97"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{logoPath}]]></imageExpression>
+			</image>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="167" y="137" width="100" height="20"/>
+				<textElement lineSpacing="Single"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{absent}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="167" y="117" width="100" height="20"/>
+				<textElement lineSpacing="Single"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{present}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="167" y="97" width="100" height="20"/>
+				<textElement lineSpacing="Single"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{working}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="-19" y="77" width="594" height="1" backcolor="#356BA7"/>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="79" y="11" width="76" height="20" forecolor="#FFFFFF"/>
+				<textElement lineSpacing="Single"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{staffRegNo}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="68" y="97" width="100" height="20"/>
+				<textElement lineSpacing="Single"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{staffWorking}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="68" y="117" width="100" height="20"/>
+				<textElement lineSpacing="Single"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{staffPresent}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="68" y="137" width="100" height="20"/>
+				<textElement lineSpacing="Single"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{staffAbsent}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band/>
+	</pageHeader>
+	<columnHeader>
+		<band height="21">
+			<line>
+				<reportElement x="-30" y="0" width="609" height="1" forecolor="#666666"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement style="Text_and_ash_bg" mode="Opaque" x="28" y="1" width="144" height="20"/>
+				<textElement lineSpacing="Single">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{absentDays}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="Text_and_ash_bg" mode="Opaque" x="170" y="1" width="188" height="20"/>
+				<textElement lineSpacing="Single">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{reason}]]></textFieldExpression>
+			</textField>
+			<frame>
+				<reportElement style="Text_and_ash_bg" mode="Opaque" x="-19" y="1" width="48" height="20"/>
+			</frame>
+			<frame>
+				<reportElement style="Text_and_ash_bg" mode="Opaque" x="553" y="1" width="22" height="20"/>
+			</frame>
+			<textField isBlankWhenNull="true">
+				<reportElement style="Text_and_ash_bg" mode="Opaque" x="357" y="1" width="100" height="20"/>
+				<textElement lineSpacing="Single">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{leaveStatus}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Text_and_ash_bg" mode="Opaque" x="455" y="1" width="100" height="20"/>
+				<textElement lineSpacing="Single">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{approvedOrRejectedBy}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="19">
+			<frame>
+				<reportElement style="Row" mode="Opaque" x="-19" y="0" width="594" height="18"/>
+				<textField isBlankWhenNull="true">
+					<reportElement x="47" y="3" width="144" height="15"/>
+					<textElement lineSpacing="Single"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{date}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement stretchType="RelativeToTallestObject" x="189" y="3" width="188" height="15" isPrintWhenDetailOverflows="true"/>
+					<textElement lineSpacing="Single"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{reason}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="377" y="3" width="100" height="15" isPrintWhenDetailOverflows="true"/>
+					<textElement lineSpacing="Single"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{leaveStatus}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="475" y="3" width="99" height="15" isPrintWhenDetailOverflows="true"/>
+					<textElement lineSpacing="Single"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{leaveApprovedBy}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="54">
+			<frame>
+				<reportElement style="Frame_color" mode="Opaque" x="-19" y="1" width="594" height="24"/>
+				<textField>
+					<reportElement x="21" y="0" width="171" height="20" forecolor="#FFFFFF"/>
+					<textElement lineSpacing="Single">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{generatedDate}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Column header" x="491" y="0" width="82" height="21" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{page}+$V{PAGE_NUMBER}+""]]></textFieldExpression>
+				</textField>
+			</frame>
+			<textField>
+				<reportElement x="2" y="34" width="573" height="20"/>
+				<textElement lineSpacing="Single">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{GPLComment}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,473 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="StudentSummaryReport" language="groovy" pageWidth="595" pageHeight="1000" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="81"/>
+	<property name="ireport.y" value="0"/>
+	<template><![CDATA[$P{styleTemplate}]]></template>
+	<style name="Column header" forecolor="#666666" fontName="SansSerif" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
+	<parameter name="title" class="java.lang.String"/>
+	<parameter name="admissionNo" class="java.lang.String"/>
+	<parameter name="fullName" class="java.lang.String"/>
+	<parameter name="address" class="java.lang.String"/>
+	<parameter name="photo" class="java.lang.String"/>
+	<parameter name="dateOfBirth" class="java.lang.String"/>
+	<parameter name="admissionDate" class="java.lang.String"/>
+	<parameter name="JasperSubReportLocation1" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="datasource1" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="JasperSubReportLocation2" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="datasource2" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="logo" class="java.lang.String"/>
+	<parameter name="academicAchievementTitle" class="java.lang.String"/>
+	<parameter name="academicAchievementDescription" class="java.lang.String"/>
+	<parameter name="datasource3" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="JasperSubReportLocation3" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="datasource4" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="JasperSubReportLocation4" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="JasperSubReportLocation5" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="datasource5" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="datasource6" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="JasperSubReportLocation6" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="datasource7" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="JasperSubReportLocation7" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="datasource8" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="JasperSubReportLocation8" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="styleTemplate" class="java.lang.String"/>
+	<parameter name="reportGeneratedOn" class="java.lang.String"/>
+	<parameter name="generatedDate" class="java.lang.String"/>
+	<parameter name="page" class="java.lang.String"/>
+	<parameter name="GPLComment" class="java.lang.String"/>
+	<parameter name="faith_life_title" class="java.lang.String"/>
+	<parameter name="term_marks_year" class="java.lang.String"/>
+	<parameter name="category" class="java.lang.String"/>
+	<parameter name="comments" class="java.lang.String"/>
+	<parameter name="grading" class="java.lang.String"/>
+	<parameter name="sport_title" class="java.lang.String"/>
+	<parameter name="sport" class="java.lang.String"/>
+	<parameter name="sport_team" class="java.lang.String"/>
+	<parameter name="sport_position" class="java.lang.String"/>
+	<parameter name="club_society_title" class="java.lang.String"/>
+	<parameter name="club_society" class="java.lang.String"/>
+	<parameter name="position" class="java.lang.String"/>
+	<parameter name="achievement_title" class="java.lang.String"/>
+	<parameter name="achievement" class="java.lang.String"/>
+	<parameter name="activity" class="java.lang.String"/>
+	<parameter name="schorlaship_title" class="java.lang.String"/>
+	<parameter name="schorlaship" class="java.lang.String"/>
+	<parameter name="prefect_title" class="java.lang.String"/>
+	<parameter name="prefect_year" class="java.lang.String"/>
+	<parameter name="prefect_type" class="java.lang.String"/>
+	<parameter name="sub_term_title" class="java.lang.String"/>
+	<parameter name="term_marks_term" class="java.lang.String"/>
+	<parameter name="sub_term_marks" class="java.lang.String"/>
+	<parameter name="term_marks_subject" class="java.lang.String"/>
+	<parameter name="sub_term_grading" class="java.lang.String"/>
+	<parameter name="term_marks_title" class="java.lang.String"/>
+	<parameter name="term_marks_marks" class="java.lang.String"/>
+	<parameter name="dataSourceStudentAssignmentMarks" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="JasperSubReportLocation9" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="assignment_title" class="java.lang.String"/>
+	<parameter name="assignment_year" class="java.lang.String"/>
+	<parameter name="assignment_subject" class="java.lang.String"/>
+	<parameter name="assignment_name" class="java.lang.String"/>
+	<parameter name="assignment_marks" class="java.lang.String"/>
+	<parameter name="JasperSubReportLocation10" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="datasource10" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="exam_marks_title" class="java.lang.String"/>
+	<parameter name="exam_subject_label" class="java.lang.String"/>
+	<parameter name="mark_grade_label" class="java.lang.String"/>
+	<parameter name="exam_name_label" class="java.lang.String"/>
+	<parameter name="year_label" class="java.lang.String"/>
+	<parameter name="index_no_label" class="java.lang.String"/>
+	<parameter name="studentPersonalInfoTitle" class="java.lang.String"/>
+	<parameter name="dateOfDeparture" class="java.lang.String"/>
+	<parameter name="note" class="java.lang.String"/>
+	<parameter name="term_marks_term1" class="java.lang.String"/>
+	<parameter name="term_marks_term2" class="java.lang.String"/>
+	<parameter name="term_marks_term3" class="java.lang.String"/>
+	<parameter name="term_marks_grade_year" class="java.lang.String"/>
+	<field name="admissionNo" class="java.lang.String"/>
+	<field name="nameWtInitials" class="java.lang.String"/>
+	<field name="address" class="java.lang.String"/>
+	<field name="dateOfBirth" class="java.util.Date"/>
+	<field name="admissionDate" class="java.util.Date"/>
+	<field name="dateOfDeparture" class="java.lang.String"/>
+	<title>
+		<band height="265" splitType="Stretch">
+			<frame>
+				<reportElement style="Frame_color" mode="Opaque" x="81" y="1" width="392" height="79"/>
+				<textField>
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="49" y="0" width="299" height="44" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="18" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{title}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="0" y="44" width="392" height="1" forecolor="#FFFFFF"/>
+				</line>
+				<textField>
+					<reportElement x="43" y="58" width="140" height="20" forecolor="#FFFFFF"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{reportGeneratedOn}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="186" y="58" width="190" height="20" forecolor="#FFFFFF"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{generatedDate}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<image scaleImage="FillFrame">
+				<reportElement positionType="Float" x="473" y="1" width="82" height="79"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{photo}]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="0" y="1" width="81" height="79"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="81" y="117" width="91" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{admissionNo}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="178" y="117" width="266" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{admissionNo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="81" y="137" width="91" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{fullName}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="178" y="137" width="266" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{nameWtInitials}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="81" y="197" width="91" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{admissionDate}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="178" y="195" width="266" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{admissionDate}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="79" width="555" height="1"/>
+			</line>
+			<frame>
+				<reportElement x="0" y="80" width="555" height="23"/>
+				<textField>
+					<reportElement style="Text_and_ash_bg" mode="Opaque" x="81" y="0" width="244" height="23"/>
+					<textElement>
+						<font size="14" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{studentPersonalInfoTitle}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement style="Text_and_ash_bg" mode="Opaque" x="0" y="80" width="81" height="23"/>
+			</frame>
+			<frame>
+				<reportElement style="Text_and_ash_bg" mode="Opaque" x="325" y="80" width="230" height="23"/>
+			</frame>
+			<textField>
+				<reportElement positionType="Float" x="82" y="217" width="90" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{dateOfDeparture}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="178" y="215" width="266" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{dateOfDeparture}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="244" width="381" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{note}]]></textFieldExpression>
+			</textField>
+			<elementGroup/>
+			<frame>
+				<reportElement x="82" y="157" width="362" height="20"/>
+				<textField>
+					<reportElement x="0" y="0" width="91" height="20"/>
+					<textElement/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{address}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="96" y="0" width="266" height="20"/>
+					<textElement/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{address}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="82" y="177" width="362" height="20"/>
+				<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy" isBlankWhenNull="true">
+					<reportElement positionType="Float" x="96" y="0" width="266" height="20"/>
+					<textElement/>
+					<textFieldExpression class="java.util.Date"><![CDATA[$F{dateOfBirth}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement positionType="Float" x="0" y="0" width="91" height="20"/>
+					<textElement/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{dateOfBirth}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</title>
+	<detail>
+		<band height="596" splitType="Immediate">
+			<subreport>
+				<reportElement positionType="Float" x="0" y="298" width="389" height="50" isRemoveLineWhenBlank="true"/>
+				<subreportParameter name="position">
+					<subreportParameterExpression><![CDATA[$P{position}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="STYLE_TEMPLATE">
+					<subreportParameterExpression><![CDATA[$P{styleTemplate}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="term_marks_year">
+					<subreportParameterExpression><![CDATA[$P{term_marks_year}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="club_society">
+					<subreportParameterExpression><![CDATA[$P{club_society}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="club_society_title">
+					<subreportParameterExpression><![CDATA[$P{club_society_title}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{datasource6}.getData())]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{JasperSubReportLocation6}]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="198" width="389" height="50" isRemoveLineWhenBlank="true"/>
+				<subreportParameter name="schorlaship">
+					<subreportParameterExpression><![CDATA[$P{schorlaship}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="schorlaship_title">
+					<subreportParameterExpression><![CDATA[$P{schorlaship_title}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="STYLE_TEMPLATE">
+					<subreportParameterExpression><![CDATA[$P{styleTemplate}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="term_marks_year">
+					<subreportParameterExpression><![CDATA[$P{term_marks_year}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{datasource4}.getData())]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{JasperSubReportLocation4}]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="98" width="389" height="50" isRemoveLineWhenBlank="true"/>
+				<subreportParameter name="assignment_subject">
+					<subreportParameterExpression><![CDATA[$P{assignment_subject}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="assignment_name">
+					<subreportParameterExpression><![CDATA[$P{assignment_name}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="STYLE_TEMPLATE">
+					<subreportParameterExpression><![CDATA[$P{styleTemplate}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="assignment_year">
+					<subreportParameterExpression><![CDATA[$P{assignment_year}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="assignment_title">
+					<subreportParameterExpression><![CDATA[$P{assignment_title}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="assignment_marks">
+					<subreportParameterExpression><![CDATA[$P{assignment_marks}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{dataSourceStudentAssignmentMarks}.getData())]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{JasperSubReportLocation9}]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="48" width="389" height="50" isRemoveLineWhenBlank="true"/>
+				<subreportParameter name="STYLE_TEMPLATE">
+					<subreportParameterExpression><![CDATA[$P{styleTemplate}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="sub_term_marks">
+					<subreportParameterExpression><![CDATA[$P{sub_term_marks}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="term_marks_year">
+					<subreportParameterExpression><![CDATA[$P{term_marks_year}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="sub_term_title">
+					<subreportParameterExpression><![CDATA[$P{sub_term_title}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="term_marks_term">
+					<subreportParameterExpression><![CDATA[$P{term_marks_term}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="term_marks_subject">
+					<subreportParameterExpression><![CDATA[$P{term_marks_subject}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="sub_term_grading">
+					<subreportParameterExpression><![CDATA[$P{sub_term_grading}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{datasource2}.getData())]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{JasperSubReportLocation2}]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="248" width="389" height="50" isRemoveLineWhenBlank="true"/>
+				<subreportParameter name="achievement_title">
+					<subreportParameterExpression><![CDATA[$P{achievement_title}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="category">
+					<subreportParameterExpression><![CDATA[$P{category}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="STYLE_TEMPLATE">
+					<subreportParameterExpression><![CDATA[$P{styleTemplate}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="achievement">
+					<subreportParameterExpression><![CDATA[$P{achievement}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="term_marks_year">
+					<subreportParameterExpression><![CDATA[$P{term_marks_year}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="club_society">
+					<subreportParameterExpression><![CDATA[$P{club_society}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="activity">
+					<subreportParameterExpression><![CDATA[$P{activity}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{datasource5}.getData())]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{JasperSubReportLocation5}]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="148" width="389" height="50" isRemoveLineWhenBlank="true"/>
+				<subreportParameter name="STYLE_TEMPLATE">
+					<subreportParameterExpression><![CDATA[$P{styleTemplate}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="prefect_type">
+					<subreportParameterExpression><![CDATA[$P{prefect_type}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="prefect_year">
+					<subreportParameterExpression><![CDATA[$P{prefect_year}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="prefect_title">
+					<subreportParameterExpression><![CDATA[$P{prefect_title}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{datasource3}.getData())]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{JasperSubReportLocation3}]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="348" width="389" height="50" isRemoveLineWhenBlank="true"/>
+				<subreportParameter name="STYLE_TEMPLATE">
+					<subreportParameterExpression><![CDATA[$P{styleTemplate}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="sport_team">
+					<subreportParameterExpression><![CDATA[$P{sport_team}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="term_marks_year">
+					<subreportParameterExpression><![CDATA[$P{term_marks_year}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="sport_position">
+					<subreportParameterExpression><![CDATA[$P{sport_position}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="sport_title">
+					<subreportParameterExpression><![CDATA[$P{sport_title}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="sport">
+					<subreportParameterExpression><![CDATA[$P{sport}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{datasource7}.getData())]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{JasperSubReportLocation7}]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="-2" width="389" height="50" isRemoveLineWhenBlank="true"/>
+				<subreportParameter name="STYLE_TEMPLATE">
+					<subreportParameterExpression><![CDATA[$P{styleTemplate}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="term_marks_marks">
+					<subreportParameterExpression><![CDATA[$P{term_marks_marks}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="term_marks_term1">
+					<subreportParameterExpression><![CDATA[$P{term_marks_term1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="term_marks_grade_year">
+					<subreportParameterExpression><![CDATA[$P{term_marks_grade_year}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="term_marks_term2">
+					<subreportParameterExpression><![CDATA[$P{term_marks_term2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="term_marks_term3">
+					<subreportParameterExpression><![CDATA[$P{term_marks_term3}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="term_marks_subject">
+					<subreportParameterExpression><![CDATA[$P{term_marks_subject}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="term_marks_title">
+					<subreportParameterExpression><![CDATA[$P{term_marks_title}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{datasource1}.getData())]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{JasperSubReportLocation1}]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" x="0" y="398" width="389" height="50" isRemoveLineWhenBlank="true"/>
+				<subreportParameter name="STYLE_TEMPLATE">
+					<subreportParameterExpression><![CDATA[$P{styleTemplate}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="index_no_label">
+					<subreportParameterExpression><![CDATA[$P{index_no_label}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="exam_marks_title">
+					<subreportParameterExpression><![CDATA[$P{exam_marks_title}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="mark_grade_label">
+					<subreportParameterExpression><![CDATA[$P{mark_grade_label}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="year_label">
+					<subreportParameterExpression><![CDATA[$P{year_label}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="exam_subject_label">
+					<subreportParameterExpression><![CDATA[$P{exam_subject_label}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="exam_name_label">
+					<subreportParameterExpression><![CDATA[$P{exam_name_label}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="GPLComment">
+					<subreportParameterExpression><![CDATA[$P{GPLComment}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{datasource10}.getData())]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{JasperSubReportLocation10}]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="50">
+			<textField>
+				<reportElement x="0" y="30" width="576" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{GPLComment}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Column header" x="473" y="0" width="82" height="21" forecolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{page}+$V{PAGE_NUMBER}+""]]></textFieldExpression>
+			</textField>
+			<frame>
+				<reportElement style="Frame_color" mode="Opaque" x="0" y="0" width="555" height="24" forecolor="#D0B48E"/>
+				<textField>
+					<reportElement x="0" y="0" width="171" height="20" forecolor="#FFFFFF"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{generatedDate}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Column header" x="473" y="0" width="82" height="21" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{page}+$V{PAGE_NUMBER}+""]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+</jasperReport>

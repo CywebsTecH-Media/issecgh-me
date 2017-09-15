@@ -1,0 +1,55 @@
+/*
+ * < ÀKURA, This application manages the daily activities of a Teacher and a Student of a School>
+ *
+ * Copyright (C) 2012 Virtusa Corporation.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of 
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ */
+
+   body, html, div, blockquote, img, label, p, h1, h2, h3, h4, h5, h6, pre, ul, ol,  
+   li, dl, dt, dd, form, a, fieldset, input, th, td  
+   {  
+    margin-top: 0px; margin-right: 0px; margin-left:0px; padding: 0; border: 0; outline: none;  
+   }  
+     
+     
+   ul, ol  
+   {  
+    list-style: none;  
+	
+   }  
+     
+   a  
+   {  
+    color: black;  
+    text-decoration: none;  
+  }  
+     
+   a:hover  
+   {  
+   text-decoration: underline; 
+   color:#0000FF; 
+   }  
+    
+	.form{
+	display:inline;
+	
+	}
+	
+	label{
+	 font-size:12px;
+	 font-weight:bold;
+	}
+	
+	input[type=checkbox]{
+	 width:25px;
+	}
+	
+ 

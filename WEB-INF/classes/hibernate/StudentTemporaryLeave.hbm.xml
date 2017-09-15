@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+
+<!--
+    < ÀKURA, This application manages the daily activities of a Teacher and a Student of a School>
+
+    Copyright (C) 2012 Virtusa Corporation.
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 25, 2012 2:49:52 PM by Hibernate Tools 3.3.0.GA -->
+<hibernate-mapping>
+    <class name="com.virtusa.akura.api.dto.StudentTemporaryLeave"  table="STUDENT_TEMPORARY_LEAVE">
+    <id name="studentTemporaryLeaveId" type="int" column="STUDENT_TEMPORARY_LEAVE_ID">
+			<generator class="increment" />
+		</id>
+        <property name="toDate" type="date">
+            <column name="TO_DATE" />
+        </property>
+        <property name="fromDate" type="date">
+            <column name="FROM_DATE" />
+        </property>
+        <property name="reason" type="java.lang.String">
+            <column name="REASON" />
+        </property>
+        <property name="completeClearance" type="boolean">
+            <column name="COMPLETE_CLEARANCE" />
+        </property>
+        <property name="activateDate" type="date">
+            <column name="ACTIVATE_DATE" />
+        </property>
+        
+       <many-to-one name="student" class="com.virtusa.akura.api.dto.Student"
+			lazy="false">
+			<column name="STUDENT_ID" not-null="true" />
+		</many-to-one>
+        <property name="noOfDays" type="int">
+            <column name="NO_OF_DAYS" />
+        </property>
+    </class>
+    
+    <query name="getStudentTempLeaveByStudentId">
+   			<![CDATA[
+		 		from com.virtusa.akura.api.dto.StudentTemporaryLeave studentTempLeave
+ 		 		Where studentTempLeave.student.studentId = ?
+ 		 		order by studentTempLeave.student.studentId desc
+ 		 		limit 1;  
+			]]>
+	</query>
+
+    <query name="getLatestStudentTempLeaveByStudentId">
+   			<![CDATA[
+		 		from com.virtusa.akura.api.dto.StudentTemporaryLeave studentTempLeave
+ 		 		Where studentTempLeave.student.studentId = ? and studentTempLeave.studentTemporaryLeaveId = (select max(studentTempLeaves.studentTemporaryLeaveId) from com.virtusa.akura.api.dto.StudentTemporaryLeave studentTempLeaves Where studentTempLeaves.student.studentId = ?)
+			]]>
+	</query>
+</hibernate-mapping>

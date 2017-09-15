@@ -1,0 +1,271 @@
+<?xml version="1.0"?>
+<!-- < ÀKURA, This application manages the daily activities of a Teacher 
+	and a Student of a School> Copyright (C) 2012 Virtusa Corporation. This program 
+	is free software: you can redistribute it and/or modify it under the terms 
+	of the GNU General Public License as published by the Free Software Foundation, 
+	either version 3 of the License, or (at your option) any later version. This 
+	program is distributed in the hope that it will be useful, but WITHOUT ANY 
+	WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
+	FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details. -->
+
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.virtusa.akura.api.dto.StaffLeave" table="STAFF_LEAVE"
+		lazy="false">
+		<id name="staffLeaveId" type="integer" column="STAFF_LEAVE_ID">
+			<generator class="increment" />
+		</id>
+		<property name="staffId" type="int" column="STAFF_ID"
+			not-null="true" />
+		<property name="reason" type="string" column="REASON"
+			not-null="false" />
+		<property name="fromDate" type="date" column="FROM_DATE"
+			not-null="true" />
+		<property name="toDate" type="date" column="TO_DATE"
+			not-null="true" />
+		<property name="noOfDays" type="java.lang.Float" column="NO_OF_DAYS"
+			not-null="true" />
+		<property name="deleted" type="boolean" not-null="false">
+			<column name="DELETED" />
+		</property>
+		<property name="modifiedTime" type="timestamp" column="MODIFIED_TIME"
+			not-null="true" generated="always" />
+		<property name="staffLeaveTypeId" type="java.lang.Integer"
+			column="STAFF_LEAVE_TYPE_ID" not-null="false" />
+		<property name="staffLeaveStatusId" type="java.lang.Integer"
+			column="STAFF_LEAVE_STATUS_ID" not-null="false" />
+		<property name="appliedDate" type="date" column="APPLIED_DATE"
+			not-null="false" />
+		<property name="approvedRejectedDate" type="date"
+			column="APPROVED_REJECTED_DATE" not-null="false" />
+		<many-to-one name="userLogin" class="com.virtusa.akura.api.dto.UserLogin"
+			column="USER_LOGIN_ID" not-null="false" />
+		<property name="dateType" type="string" column="DATE_TYPE"
+			not-null="false" />
+		<property name="comment" type="string" column="COMMENT"
+			not-null="false" />
+
+	</class>
+
+	<query name="getStaffLeaveByStaffId">
+   			<![CDATA[
+		 		from com.virtusa.akura.api.dto.StaffLeave staffLeave
+ 		 		Where staffLeave.staffId = ?
+			]]>
+	</query>
+
+	<query name="getStaffLeaveByDatePeriodAndStaffId">
+   			<![CDATA[
+		 		from com.virtusa.akura.api.dto.StaffLeave staffLeave
+ 		 		Where staffLeave.fromDate >= ? AND staffLeave.toDate <= ? AND staffLeave.staffId = ?
+ 		 		order by staffLeave.appliedDate
+			]]>
+	</query>
+
+	<query name="getStaffLeaveCountByPreviousYear">
+   			<![CDATA[
+   				select sum(noOfDays)
+		 		from com.virtusa.akura.api.dto.StaffLeave staffLeave
+ 		 		Where staffLeave.fromDate >= ? 
+ 		 			AND staffLeave.toDate <= ? 
+ 		 			AND staffLeave.staffId = ? 
+ 		 			AND staffLeave.staffLeaveStatusId = 1
+ 		 		group by staffLeave.staffId
+			]]>
+	</query>
+
+	<sql-query name="findAppliedStaffLeaveTypes">
+        <![CDATA[
+        	SELECT st.STAFF_LEAVE_TYPE_ID, st.DESCRIPTION, IFNULL(STML.Max_Leave_Count, st.MAX_NO_OF_LEAVES) as MAX_DAYS, 
+				ifnull(sum(sl.NO_OF_DAYS),0) as UTILIZED_DAYS, IFNULL(STML.Max_Leave_Count, st.MAX_NO_OF_LEAVES) - ifnull(sum(sl.NO_OF_DAYS),0) as AVAILABLE_DAYS
+			FROM STAFF_LEAVE_TYPE st left join STAFF_LEAVE sl 
+			ON st.STAFF_LEAVE_TYPE_ID=sl.STAFF_LEAVE_TYPE_ID 
+			LEFT JOIN STAFF_MODIFIED_LEAVES STML ON STML.STAFF_LEAVE_TYPE_ID = st.STAFF_LEAVE_TYPE_ID AND STML.STAFF_ID = ? AND STML.YEAR = YEAR(?)
+			WHERE sl.STAFF_ID= ? and year(sl.FROM_DATE) = ? 
+			and (sl.STAFF_LEAVE_STATUS_ID = 1 or sl.STAFF_LEAVE_STATUS_ID = 5 or sl.STAFF_LEAVE_STATUS_ID = 6) 
+			and (st.GENDER = 'A' or st.GENDER = (select s.GENDER from STAFF s where s.STAFF_ID = ?))
+			GROUP BY sl.STAFF_ID, st.STAFF_LEAVE_TYPE_ID
+        ]]>
+	</sql-query>
+
+	<sql-query name="findNotAppliedStaffLeaveTypes">
+        <![CDATA[
+        	SELECT st.STAFF_LEAVE_TYPE_ID, st.DESCRIPTION, IFNULL(STML.Max_Leave_Count, st.MAX_NO_OF_LEAVES) as MAX_DAYS, 0 as UTILIZED_DAYS, IFNULL(STML.Max_Leave_Count, st.MAX_NO_OF_LEAVES)- 0 as AVAILABLE_DAYS 
+        	FROM STAFF_LEAVE_TYPE st LEFT JOIN STAFF_LEAVE sl 
+        	ON st.STAFF_LEAVE_TYPE_ID=sl.STAFF_LEAVE_TYPE_ID 
+        	LEFT JOIN STAFF_MODIFIED_LEAVES STML ON STML.STAFF_LEAVE_TYPE_ID = st.STAFF_LEAVE_TYPE_ID AND STML.STAFF_ID = ? AND STML.YEAR = YEAR(?)
+        	WHERE st.STAFF_LEAVE_TYPE_ID NOT IN (SELECT sl.STAFF_LEAVE_TYPE_ID 
+        	FROM STAFF_LEAVE sl WHERE sl.STAFF_ID = ? and year(sl.FROM_DATE) = ? 
+        	and (sl.STAFF_LEAVE_STATUS_ID=1 or sl.STAFF_LEAVE_STATUS_ID = 5 or sl.STAFF_LEAVE_STATUS_ID = 6)) 
+        	and (st.GENDER = 'A' or st.GENDER = (select s.GENDER from STAFF s where s.STAFF_ID = ?))
+        	GROUP BY st.STAFF_LEAVE_TYPE_ID 
+        ]]>
+	</sql-query>
+
+	<sql-query name="findStaffLeaveForStaffLeaveType">
+        <![CDATA[
+        	SELECT st.MAX_NO_OF_LEAVES as MAX_DAYS, 
+				ifnull(sum(sl.NO_OF_DAYS),0) as UTILIZED_DAYS, st.MAX_NO_OF_LEAVES-ifnull(sum(sl.NO_OF_DAYS),0) as AVAILABLE_DAYS
+			FROM STAFF_LEAVE_TYPE st LEFT JOIN STAFF_LEAVE sl 
+			ON st.STAFF_LEAVE_TYPE_ID=sl.STAFF_LEAVE_TYPE_ID 
+			WHERE sl.STAFF_ID= ? and year(sl.FROM_DATE) = ? and st.STAFF_LEAVE_TYPE_ID = ? and (sl.STAFF_LEAVE_STATUS_ID=1 || sl.STAFF_LEAVE_STATUS_ID=3 || sl.STAFF_LEAVE_STATUS_ID=6)
+			GROUP BY sl.STAFF_ID, st.STAFF_LEAVE_TYPE_ID
+        ]]>
+	</sql-query>
+
+	<query name="deleteLeaveRocordsByDepartureDate">
+		<![CDATA[
+			delete com.virtusa.akura.api.dto.StaffLeave staffLeave
+ 		 	Where (staffLeave.staffId = ? AND staffLeave.fromDate > ?)
+		]]>
+	</query>
+
+	<query name="updateToDateWithDepartureDate">
+		<![CDATA[
+			update com.virtusa.akura.api.dto.StaffLeave staffLeave
+   			set staffLeave.toDate = ?
+ 		 	Where (staffLeave.staffId = ? AND staffLeave.toDate > ?)
+		]]>
+	</query>
+
+	<query name="markAsDeletedAllStaffLeaveByStaffId">
+		<![CDATA[
+			update com.virtusa.akura.api.dto.StaffLeave staffLeave
+   			set staffLeave.deleted = 1
+ 		 	Where (staffLeave.staffId = ?)
+		]]>
+	</query>
+
+	<query name="findExistStaffLeave">
+   			<![CDATA[
+		 		FROM com.virtusa.akura.api.dto.StaffLeave staffLeave
+ 		 		WHERE staffLeave.staffId = ?
+ 		 		AND (fromDate BETWEEN ? AND ? 
+ 		 			OR toDate BETWEEN ? AND ? 
+ 		 			OR ? BETWEEN fromDate AND toDate 
+ 		 			OR ? BETWEEN fromDate AND toDate)
+ 		 		AND staffLeave.staffLeaveStatusId <> 4
+			]]>
+	</query>
+
+	<sql-query name="findAppliedStaffLeaveTypesForJoinYearOld">
+        <![CDATA[
+        	SELECT st.STAFF_LEAVE_TYPE_ID, st.DESCRIPTION, count_max_leaves(st.MAX_NO_OF_LEAVES, month(s.DATE_OF_HIRE)) as MAX_DAYS, 
+				ifnull(sum(sl.NO_OF_DAYS),0) as UTILIZED_DAYS, 
+				count_max_leaves(st.MAX_NO_OF_LEAVES, month(s.DATE_OF_HIRE))-ifnull(sum(sl.NO_OF_DAYS),0) as AVAILABLE_DAYS
+			FROM STAFF_LEAVE_TYPE st 
+			LEFT JOIN STAFF_LEAVE sl ON st.STAFF_LEAVE_TYPE_ID=sl.STAFF_LEAVE_TYPE_ID 
+			LEFT JOIN STAFF s ON sl.STAFF_ID = s.STAFF_ID  
+			WHERE sl.STAFF_ID= ? and (sl.FROM_DATE between ? and ?) and sl.STAFF_LEAVE_STATUS_ID = 1 
+			and (st.GENDER = 'A' or st.GENDER = (select s.GENDER from STAFF s where s.STAFF_ID = ?))
+			GROUP BY sl.STAFF_ID, st.STAFF_LEAVE_TYPE_ID
+        ]]>
+	</sql-query>
+	
+	<sql-query name="findAppliedStaffLeaveTypesForJoinYear">
+        <![CDATA[
+        	SELECT st.STAFF_LEAVE_TYPE_ID, st.DESCRIPTION,  
+        	IFNULL(STML.Max_Leave_Count, count_max_leaves(st.MAX_NO_OF_LEAVES, month(s.DATE_OF_HIRE))) as CUR_MAX_DAYS, 
+				ifnull(sum(sl.NO_OF_DAYS),0) as UTILIZED_DAYS, 
+				IFNULL(STML.Max_Leave_Count, count_max_leaves(st.MAX_NO_OF_LEAVES, month(s.DATE_OF_HIRE)))-ifnull(sum(sl.NO_OF_DAYS),0) as AVAILABLE_DAYS
+			FROM STAFF_LEAVE_TYPE st 
+			LEFT JOIN STAFF_LEAVE sl ON st.STAFF_LEAVE_TYPE_ID=sl.STAFF_LEAVE_TYPE_ID 
+			LEFT JOIN STAFF s ON sl.STAFF_ID = s.STAFF_ID
+			LEFT JOIN STAFF_MODIFIED_LEAVES STML ON STML.STAFF_LEAVE_TYPE_ID = st.STAFF_LEAVE_TYPE_ID AND STML.STAFF_ID = ? AND STML.YEAR = year(?)
+			WHERE sl.STAFF_ID= ? and (sl.FROM_DATE between ? and ?) 
+			and (sl.STAFF_LEAVE_STATUS_ID = 1 or sl.STAFF_LEAVE_STATUS_ID = 5 or sl.STAFF_LEAVE_STATUS_ID = 6)  
+			and (st.GENDER = 'A' or st.GENDER = (select s.GENDER from STAFF s where s.STAFF_ID = ?))			
+			GROUP BY sl.STAFF_ID, st.STAFF_LEAVE_TYPE_ID
+        ]]>
+	</sql-query>
+
+	<sql-query name="findNotAppliedStaffLeaveTypesForJoinYear">
+        <![CDATA[
+        	SELECT st.STAFF_LEAVE_TYPE_ID, st.DESCRIPTION, 
+        	IFNULL(STML.Max_Leave_Count, count_max_leaves(st.MAX_NO_OF_LEAVES, (SELECT month(s.DATE_OF_HIRE) FROM STAFF s WHERE s.STAFF_ID=? GROUP BY s.STAFF_ID))) as MAX_DAYS, 0 as UTILIZED_DAYS, 
+        		IFNULL(STML.Max_Leave_Count, count_max_leaves(st.MAX_NO_OF_LEAVES, (SELECT month(s.DATE_OF_HIRE) FROM STAFF s WHERE s.STAFF_ID=? GROUP BY s.STAFF_ID)))- 0 as AVAILABLE_DAYS 
+        	FROM STAFF_LEAVE_TYPE st 
+        	LEFT JOIN STAFF_LEAVE sl ON st.STAFF_LEAVE_TYPE_ID=sl.STAFF_LEAVE_TYPE_ID 
+        	LEFT JOIN  STAFF_MODIFIED_LEAVES STML ON st.STAFF_LEAVE_TYPE_ID = STML.STAFF_LEAVE_TYPE_ID AND STML.STAFF_ID = ? AND STML.YEAR = year(?)
+        	WHERE st.STAFF_LEAVE_TYPE_ID NOT IN (SELECT sl.STAFF_LEAVE_TYPE_ID 
+        											FROM STAFF_LEAVE sl 
+        											WHERE sl.STAFF_ID = ? and (sl.FROM_DATE between ? and ?) 
+        											and (sl.STAFF_LEAVE_STATUS_ID=1 or sl.STAFF_LEAVE_STATUS_ID=5 or sl.STAFF_LEAVE_STATUS_ID=6)) 
+        	and (st.GENDER = 'A' or st.GENDER = (select s.GENDER from STAFF s where s.STAFF_ID = ?))        	
+        	GROUP BY st.STAFF_LEAVE_TYPE_ID 
+        ]]>
+	</sql-query>
+
+	<sql-query name="findStaffLeaveForStaffLeaveTypeForJoinYear">
+        <![CDATA[
+        	SELECT count_max_leaves(st.MAX_NO_OF_LEAVES, (SELECT month(s.DATE_OF_HIRE) FROM STAFF s WHERE s.STAFF_ID=? GROUP BY s.STAFF_ID)) as MAX_DAYS, 
+				ifnull(sum(sl.NO_OF_DAYS),0) as UTILIZED_DAYS, 
+				count_max_leaves(st.MAX_NO_OF_LEAVES, (SELECT month(s.DATE_OF_HIRE) FROM STAFF s WHERE s.STAFF_ID=? GROUP BY s.STAFF_ID))-ifnull(sum(sl.NO_OF_DAYS),0) as AVAILABLE_DAYS
+			FROM STAFF_LEAVE_TYPE st 
+			LEFT JOIN STAFF_LEAVE sl ON st.STAFF_LEAVE_TYPE_ID=sl.STAFF_LEAVE_TYPE_ID  
+			WHERE sl.STAFF_ID= ? and (sl.FROM_DATE between ? and ?) AND st.STAFF_LEAVE_TYPE_ID = ? AND (sl.STAFF_LEAVE_STATUS_ID=1 || sl.STAFF_LEAVE_STATUS_ID=3 || sl.STAFF_LEAVE_STATUS_ID=6)
+			GROUP BY sl.STAFF_ID, st.STAFF_LEAVE_TYPE_ID
+        ]]>
+	</sql-query>
+	
+	<sql-query name="getStaffLeaveListByStatusId">
+		<![CDATA[
+			SELECT s.REGISTRATION_NO, s.FULL_NAME, sl.STAFF_LEAVE_ID, sl.STAFF_ID,sl.FROM_DATE, sl.TO_DATE, 
+			    sl.REASON, sl.NO_OF_DAYS, sl.STAFF_LEAVE_TYPE_ID, 
+          		sl.APPLIED_DATE,sl.DATE_TYPE, slt.DESCRIPTION, s.NAME_WT_INITIALS
+			FROM STAFF_LEAVE sl 
+			JOIN STAFF s ON sl.STAFF_ID = s.STAFF_ID
+			JOIN STAFF_LEAVE_TYPE slt ON slt.STAFF_LEAVE_TYPE_ID = sl.STAFF_LEAVE_TYPE_ID
+			WHERE sl.DELETED = 0 AND sl.STAFF_LEAVE_STATUS_ID=?
+			GROUP BY sl.APPLIED_DATE,sl.STAFF_LEAVE_ID
+		]]>
+	</sql-query>
+	
+	<sql-query name="getAppliedStaffLeaveListByStaffId">
+		<![CDATA[
+			SELECT s.REGISTRATION_NO, s.FULL_NAME, sl.STAFF_LEAVE_ID, sl.STAFF_ID,sl.FROM_DATE, sl.TO_DATE, 
+			    sl.REASON, sl.NO_OF_DAYS, sl.STAFF_LEAVE_TYPE_ID, 
+          		sl.APPLIED_DATE,sl.DATE_TYPE, slt.DESCRIPTION, s.NAME_WT_INITIALS, sl.STAFF_LEAVE_STATUS_ID
+			FROM STAFF_LEAVE sl 
+			JOIN STAFF s ON sl.STAFF_ID = s.STAFF_ID
+			JOIN STAFF_LEAVE_TYPE slt ON slt.STAFF_LEAVE_TYPE_ID = sl.STAFF_LEAVE_TYPE_ID
+			WHERE sl.DELETED = 0 AND s.STAFF_ID=?
+			GROUP BY sl.APPLIED_DATE,sl.STAFF_LEAVE_ID
+		]]>
+	</sql-query>
+	
+	<sql-query name="getAppliedStaffLeaveListByBothStaffIdAndStatusId">
+		<![CDATA[
+			SELECT s.REGISTRATION_NO, s.FULL_NAME, sl.STAFF_LEAVE_ID, sl.STAFF_ID,sl.FROM_DATE, sl.TO_DATE, 
+			    sl.REASON, sl.NO_OF_DAYS, sl.STAFF_LEAVE_TYPE_ID, 
+          		sl.APPLIED_DATE,sl.DATE_TYPE, slt.DESCRIPTION, s.NAME_WT_INITIALS
+			FROM STAFF_LEAVE sl 
+			JOIN STAFF s ON sl.STAFF_ID = s.STAFF_ID
+			JOIN STAFF_LEAVE_TYPE slt ON slt.STAFF_LEAVE_TYPE_ID = sl.STAFF_LEAVE_TYPE_ID
+			WHERE sl.DELETED = 0 AND sl.STAFF_LEAVE_STATUS_ID=? AND s.STAFF_ID=?
+			GROUP BY sl.APPLIED_DATE,sl.STAFF_LEAVE_ID
+		]]>
+	</sql-query>
+
+	<query
+		name="getStaffLeaveListWithApprovedOrInprogressLeaveByStaffTypeAndDate">
+        <![CDATA[
+        	SELECT staffLeave
+        	FROM com.virtusa.akura.api.dto.Staff staff,
+                com.virtusa.akura.api.dto.StaffLeave staffLeave
+        	WHERE staff.staffId = staffLeave.staffId
+                AND staff.staffCategory.academic = ?
+                AND staffLeave.fromDate <= ?
+                AND staffLeave.toDate >= ?
+                AND (
+                        staffLeave.staffLeaveStatusId = 1
+                        OR staffLeave.staffLeaveStatusId = 3
+                        OR staffLeave.staffLeaveStatusId = 6
+                )
+        ]]>
+	</query>
+
+</hibernate-mapping>

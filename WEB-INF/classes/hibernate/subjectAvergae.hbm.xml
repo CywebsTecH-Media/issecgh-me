@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+
+	<!--
+		< ÀKURA, This application manages the daily activities of a Teacher
+		and a Student of a School> Copyright (C) 2012 Virtusa Corporation.
+		This program is free software: you can redistribute it and/or modify
+		it under the terms of the GNU General Public License as published by
+		the Free Software Foundation, either version 3 of the License, or (at
+		your option) any later version. This program is distributed in the
+		hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+		the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+		PURPOSE. See the GNU General Public License for more details.
+	-->
+
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.virtusa.akura.api.dto.SubjectAverage" table="SUBJECT_AVG">
+
+		<id name="subjectAvegareId" type="int" column="SUBJECT_AVG_ID">
+			<generator class="increment" />
+		</id>
+		<property name="year" type="date">
+			<column name="YEAR" />
+		</property>
+		<many-to-one name="term" class="com.virtusa.akura.api.dto.Term"
+			column="TERM_ID" lazy="false" />
+		<many-to-one name="gradeSubject" class="com.virtusa.akura.api.dto.GradeSubject"
+			column="GRADE_SUBJECT_ID" lazy="false" />
+		<many-to-one name="classGrade" class="com.virtusa.akura.api.dto.ClassGrade"
+			column="CLASS_GRADE_ID" lazy="false" />
+		<many-to-one name="studyMedium" class="com.virtusa.akura.api.dto.StudyMedium"
+			column="MEDIUM_ID" lazy="false" />
+		<many-to-one name="grade" class="com.virtusa.akura.api.dto.Grade"
+			column="GRADE_ID" lazy="false" />
+		<property name="average" type="double">
+			<column name="AVERAGE" />
+		</property>
+		<property name="studentCount" type="int">
+			<column name="STUDENT_COUNT" />
+		</property>
+
+	</class>
+
+	<query name="all">
+		<![CDATA[
+			FROM
+				com.virtusa.akura.api.dto.SubjectAverage subAvg
+		]]>
+	</query>
+
+	<query name="getSubjectAveragesForClass">
+		<![CDATA[
+			FROM
+				com.virtusa.akura.api.dto.SubjectAverage subAvg
+			WHERE
+				year(subAvg.year) = ? and  subAvg.term.termId = ? and subAvg.classGrade.classGradeId = ?
+				AND subAvg.gradeSubject.gradeSubjectId IS NOT NULL
+			ORDER BY subAvg.studyMedium.studyMediumId, subAvg.gradeSubject.gradeSubjectId
+
+		]]>
+	</query>
+
+	<query name="getSubjectAveragesForGradeOnly">
+		<![CDATA[
+			FROM
+				com.virtusa.akura.api.dto.SubjectAverage subAvg
+			WHERE
+				year(subAvg.year) = ? and  subAvg.term.termId = ? and subAvg.grade.gradeId = ?
+
+		]]>
+	</query>
+	<sql-query name="getSubjectAveragesForGrade">
+        <![CDATA[
+        SELECT gsv.grade_subject_id, grade_average
+        FROM GRADE_SUBJECT_AVERAGE gsv, TERM t, GRADE g
+        WHERE g.description=gsv.grade AND
+        	 g.grade_id=? AND
+        	 t.description = gsv.term AND
+        	 t.term_id=? AND
+        	  year(gsv.year) = ?;
+        ]]>
+	</sql-query>
+
+	<query name="getClassAveragesAndCount">
+		<![CDATA[
+
+		SELECT subAvg.term.termId, subAvg.average, subAvg.studentCount
+			FROM
+				com.virtusa.akura.api.dto.SubjectAverage subAvg
+			WHERE subAvg.classGrade.classGradeId=? and
+				year(subAvg.year) = ?  and
+				subAvg.gradeSubject.gradeSubjectId is null
+				order by subAvg.term.termId
+
+		]]>
+	</query>
+
+
+</hibernate-mapping>

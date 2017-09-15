@@ -1,0 +1,369 @@
+<?xml version="1.0"?>
+
+<!-- < ÀKURA, This application manages the daily activities of a Teacher 
+	and a Student of a School> Copyright (C) 2012 Virtusa Corporation. This program 
+	is free software: you can redistribute it and/or modify it under the terms 
+	of the GNU General Public License as published by the Free Software Foundation, 
+	either version 3 of the License, or (at your option) any later version. This 
+	program is distributed in the hope that it will be useful, but WITHOUT ANY 
+	WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
+	FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details. -->
+
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.virtusa.akura.api.dto.Staff" table="STAFF">
+		<id name="staffId" type="int" column="STAFF_ID">
+			<generator class="increment" />
+		</id>
+		<many-to-one name="staffCategory"
+			class="com.virtusa.akura.api.dto.StaffCategory" fetch="select" lazy="false">
+			<column name="STAFF_CATEGORY_ID" not-null="true" />
+		</many-to-one>
+		<property name="cityId" type="java.lang.Integer" column="CITY_ID"
+			not-null="false" />
+		<property name="section" type="java.lang.Integer" column="SECTION_ID"
+			not-null="false" />
+		<property name="race" type="java.lang.Integer" column="RACE_ID"
+			not-null="false" />
+		<property name="staffServiceCategory" type="java.lang.Integer"
+			column="STAFF_SERVICE_ID" not-null="false" />
+		<property name="civilStatus" type="java.lang.Integer" column="CIVIL_STATUS_ID"
+			not-null="false" />
+		<property name="tempCityId" type="java.lang.Integer" column="TEMP_CITY_ID"
+			not-null="false" />
+		<property name="religionId" type="java.lang.Integer" column="RELIGION_ID"
+			not-null="false" />
+		<property name="registrationNo" type="string">
+			<column name="REGISTRATION_NO" length="45" not-null="true"
+				unique="true" sql-type="varchar" />
+		</property>
+		<property name="firstAppointmetDate" type="date"
+			column="DATE_FIRST_APPOINTMENT" not-null="false" />
+		<property name="dateOfHire" type="date" column="DATE_OF_HIRE"
+			not-null="false" />
+		<property name="dateOfDepature" type="date" column="DATE_OF_DEPARTURE"
+			not-null="false" />
+		<property name="appointmentNature" type="java.lang.Integer"
+			column="NATURE_ID" not-null="false" />
+		<property name="appointmentClassification" type="java.lang.Integer"
+			column="CLASSIFICATION_ID" not-null="false" />
+		<property name="basicSalary" type="float" column="BASIC_SALARY"
+			not-null="false" />
+		<property name="salaryScale" type="string" column="SALARY_SCALE"
+			not-null="false" />
+		<property name="history" type="string" column="HISTORY"
+			not-null="false" />
+		<property name="otherInfo" type="string" column="OTHER_INFO"
+			not-null="false" />
+		<property name="fullName" type="string" column="FULL_NAME"
+			not-null="true" />
+		<property name="nameWithIntials" type="string" column="NAME_WT_INITIALS"
+			not-null="false" />
+		<property name="lastName" type="string" column="LAST_NAME"
+			not-null="true" />
+		<property name="nationalID" type="string" column="NATIONAL_ID_NO"
+			not-null="false" />
+		<property name="dateOfBirth" type="date" column="DOB"
+			not-null="false" />
+		<property name="address" type="string" column="ADDRESS"
+			not-null="false" />
+		<property name="tempAddress" type="string" column="TEMP_ADDRESS"
+			not-null="false" />
+
+		<property name="countryId" type="integer" column="COUNTRY_ID"
+			not-null="false" />
+			
+		<property name="mobileNo" type="string" column="MOBILE_NO"
+			not-null="false" />
+		<property name="residenceNo" type="string" column="RESIDENCE_NO"
+			not-null="false" />
+			
+		<property name="emergencyContactName" type="string" column="EMERGENCY_CONTACT_NAME"
+			not-null="false" />	
+		<property name="emergencyContactMobileNo" type="string" column="EMERGENCY_MOBILE_NO"
+			not-null="false" />
+		<property name="emergencyContactResidenceNo" type="string" column="EMERGENCY_RESIDENCE_NO"
+			not-null="false" />
+		<property name="officeNo" type="string" column="OFFICE_NO"
+			not-null="false" />
+		<property name="email" type="string" column="EMAIL" not-null="false" />
+		<property name="gender" type="char" column="GENDER" not-null="false" />
+		<property name="staffGrade" type="string" column="STAFF_GRADE"
+			not-null="false" />
+		<property name="staffClass" type="string" column="STAFF_CLASS"
+			not-null="false" />
+		<property name="modifiedTime" type="timestamp" column="MODIFIED_TIME"
+			not-null="true" generated="always" />
+		<property name="photo" type="binary">
+			<column name="PHOTO" sql-type="blob" />
+		</property>
+		<property name="interest" type="string" column="INTEREST"
+			not-null="false" />
+		<property name="insurancePolicyDetails" type="string" column="INSURANCE_POLICY_DETAILS"
+			not-null="false" />
+		
+		<set name="subjectTeachers" inverse="true">
+			<key column="STAFF_ID" not-null="true" />
+			<one-to-many class="com.virtusa.akura.api.dto.SubjectTeacher" />
+		</set>
+		<set name="sectionHeads" inverse="true">
+			<key column="STAFF_ID" not-null="true" />
+			<one-to-many class="com.virtusa.akura.api.dto.SectionHead" />
+		</set>
+		<set name="classTeachers" inverse="true">
+			<key column="STAFF_ID" not-null="true" />
+			<one-to-many class="com.virtusa.akura.api.dto.ClassTeacher" />
+		</set>
+		<set name="staffProfessionals" inverse="true">
+			<key column="STAFF_ID" not-null="true" />
+			<one-to-many class="com.virtusa.akura.api.dto.StaffProfessional" />
+		</set>
+		<set name="staffEducations" inverse="true">
+			<key column="STAFF_ID" not-null="true" />
+			<one-to-many class="com.virtusa.akura.api.dto.StaffEducation" />
+		</set>
+
+		<many-to-one name="coreSubject" class="com.virtusa.akura.api.dto.Subject"
+			column="SUBJECT_ID" lazy="false" not-found="ignore">
+
+		</many-to-one>
+
+		<many-to-one name="studyMedium" class="com.virtusa.akura.api.dto.StudyMedium"
+			column="STUDY_MEDIUM_ID" lazy="false">
+		</many-to-one>
+
+	</class>
+	<query name="staffSearchWithoutAcademicPastStaff">
+			<![CDATA[
+			from	com.virtusa.akura.api.dto.Staff
+			where	((? = '' OR lastName like ?)
+            		and (? = '' OR registrationNo = ?)
+            		and (dateOfDepature != null))
+			]]>
+	</query>
+
+	<query name="staffSearchWithAcademicPastStaff">
+			<![CDATA[
+			from	com.virtusa.akura.api.dto.Staff
+			where	((? = '' OR lastName like ?)
+            		and (? = '' OR registrationNo = ?)
+            		and (staffCategory.academic = ?)
+            		and (dateOfDepature != null))
+			]]>
+	</query>
+	
+	<query name="staffSearchWithoutAcademicPresentStaff">
+			<![CDATA[
+			from	com.virtusa.akura.api.dto.Staff
+			where	((? = '' OR lastName like ?)
+            		and (? = '' OR registrationNo = ?)
+            		and (dateOfDepature = null))
+			]]>
+	</query>
+
+	<query name="staffSearchWithAcademicPresentStaff">
+			<![CDATA[
+			from	com.virtusa.akura.api.dto.Staff
+			where	((? = '' OR lastName like ?)
+            		and (? = '' OR registrationNo = ?)
+            		and (staffCategory.academic = ?)
+            		and (dateOfDepature = null))
+			]]>
+	</query>
+	
+	<query name="staffSearchWithoutAcademic">
+			<![CDATA[
+			from	com.virtusa.akura.api.dto.Staff
+			where	((? = '' OR lastName like ?)
+            		and (? = '' OR registrationNo = ?))
+			]]>
+	</query>
+
+	<query name="staffSearchWithAcademic">
+			<![CDATA[
+			from	com.virtusa.akura.api.dto.Staff
+			where	((? = '' OR lastName like ?)
+            		and (? = '' OR registrationNo = ?)
+            		and (staffCategory.academic = ?))
+			]]>
+	</query>
+
+	<query name="checkRegistrationNoIsExist">
+			<![CDATA[
+			Select	staffId
+			from	com.virtusa.akura.api.dto.Staff staff
+			where	(staff.registrationNo = ?)
+			]]>
+	</query>
+
+	<query name="getAcademicStaff">
+			<![CDATA[
+			from	com.virtusa.akura.api.dto.Staff
+			where	(staffCategory.academic = 1)
+					and (dateOfDepature = null)
+			]]>
+	</query>
+	<query name="getMaxStaffId">
+			<![CDATA[
+			SELECT MAX(staffId)
+			FROM   com.virtusa.akura.api.dto.Staff
+			]]>
+	</query>
+
+	<query name="getStaffByCategory">
+			<![CDATA[
+			from	com.virtusa.akura.api.dto.Staff
+			where	(staffCategory.catogaryID = ?)
+					and (dateOfDepature = null)
+			]]>
+	</query>
+	
+	<query name="getStaffByGender">
+			<![CDATA[
+			from	com.virtusa.akura.api.dto.Staff
+			where	gender = ?
+					and (dateOfDepature = null)
+			]]>
+	</query>
+	
+	<query name="getStaffByCivilStatus">
+			<![CDATA[
+			from	com.virtusa.akura.api.dto.Staff
+			where	religionId = ?
+					and (dateOfDepature = null)
+			]]>
+	</query>
+	
+	<query name="getStaffByReligion">
+			<![CDATA[
+			from	com.virtusa.akura.api.dto.Staff
+			where	civilStatus = ?
+					and (dateOfDepature = null)
+			]]>
+	</query>
+	
+	<query name="getSelectedDateStaffByCategory">
+			<![CDATA[
+			from	com.virtusa.akura.api.dto.Staff
+			where	(staffCategory.catogaryID = ?)
+					and (dateOfDepature = null or dateOfDepature >= ?) 
+					and (dateOfHire <= ?)
+			]]>
+	</query>
+	
+	<query name="getDepatureStaffByCategory">
+			<![CDATA[
+			from	com.virtusa.akura.api.dto.Staff
+			where	(staffCategory.catogaryID = ?)
+					and (dateOfDepature != null)
+			]]>
+	</query>
+	
+	<query name="getAllStaffByCategory">
+			<![CDATA[
+			from	com.virtusa.akura.api.dto.Staff
+			where	(staffCategory.catogaryID = ?)
+			]]>
+	</query>
+	
+	
+	<query name="getAllAvailableStaff">
+			<![CDATA[
+			from	com.virtusa.akura.api.dto.Staff
+			]]>
+	</query>
+	
+	<query name="getAllAvailableStaffWithOutDeparture">
+			<![CDATA[
+			from	com.virtusa.akura.api.dto.Staff
+			where	dateOfDepature = null
+			]]>
+	</query>
+	
+	<query name="getAllAvailableStaffWithOutDepartureDate">
+			<![CDATA[
+			from	com.virtusa.akura.api.dto.Staff
+			where	(dateOfDepature = null or dateOfDepature >= ?)
+			        and (dateOfHire <= ?)
+			]]>
+	</query>
+
+	<query name="getStaffByType">
+			<![CDATA[
+			from	com.virtusa.akura.api.dto.Staff
+			where	(staffCategory.academic = ?)
+					and ((dateOfHire <=? and dateOfDepature =null) or 
+						(dateOfHire <=? and dateOfDepature >= ? ))
+			]]>
+	</query>
+
+	<query name="getTeacherIdByRegistrationNo">
+			<![CDATA[
+				SELECT staff.staffId
+				FROM com.virtusa.akura.api.dto.Staff staff
+				WHERE staff.registrationNo = ?
+			]]>
+	</query>
+	
+	<query name="checkEmailAvailability">
+			<![CDATA[
+				SELECT email
+				FROM com.virtusa.akura.api.dto.Staff staff
+				WHERE staff.email = ? 
+			]]>
+	</query>
+	
+	<query name="getEmailsForStaff">
+			<![CDATA[
+				SELECT email
+				FROM com.virtusa.akura.api.dto.Staff staff
+				WHERE staff.staffId IN (:staffIdList)and staff.email!=null and staff.email !='' 
+			]]>
+	</query>
+
+	<query name="getStaffMemberByRegistrationNo">
+			<![CDATA[
+				FROM com.virtusa.akura.api.dto.Staff staff
+				WHERE staff.registrationNo = ? 
+			]]>
+	</query>
+	
+	<query name="deleteStaffAttendenceByDepartureDate">
+		<![CDATA[
+			DELETE com.virtusa.akura.api.dto.DailyTeacherAttendance dailyTeacherAttendance 
+			WHERE dailyTeacherAttendance.staffId = ? AND dailyTeacherAttendance.date > ?
+		]]>
+	</query>
+	
+	<query name="getStaffCount">
+		<![CDATA[
+			SELECT count(staff.staffId)
+			FROM com.virtusa.akura.api.dto.Staff staff
+			WHERE staff.dateOfDepature IS NULL
+		]]>
+	</query>
+	
+	<query name="chechStaffMemberIsExsitsByNIC">
+		<![CDATA[
+			FROM com.virtusa.akura.api.dto.Staff staff
+			WHERE staff.nationalID = ?
+		]]>
+	</query>
+	
+	<query name="chechStaffMemberIsExsitsWithRegNo">
+		<![CDATA[
+			FROM com.virtusa.akura.api.dto.Staff staff
+			WHERE staff.registrationNo = ?
+		]]>
+	</query>
+	<query name="getStaffMemberFromStaffId">
+		<![CDATA[
+			FROM com.virtusa.akura.api.dto.Staff staff
+			WHERE staff.staffId = ?
+		]]>
+	</query>
+	
+</hibernate-mapping>

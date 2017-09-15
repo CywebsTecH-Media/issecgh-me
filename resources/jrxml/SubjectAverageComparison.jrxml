@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SubjectAverageComparison" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" resourceBundle="reportTemplate">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<template><![CDATA[$P{STYLE_TEMPLATE}]]></template>
+	<parameter name="STYLE_TEMPLATE" class="java.lang.String"/>
+	<field name="term" class="java.lang.String"/>
+	<field name="subject" class="java.lang.String"/>
+	<field name="marks" class="java.lang.Integer"/>
+	<field name="classAverage" class="java.lang.Double"/>
+	<field name="gradeAverage" class="java.lang.Double"/>
+	<field name="absent" class="java.lang.Boolean"/>
+	<title>
+		<band height="36" splitType="Stretch">
+			<textField>
+				<reportElement style="Text_sub_title" x="33" y="0" width="312" height="32"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$R{subject_average_title}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="25" splitType="Stretch">
+			<rectangle>
+				<reportElement style="Frame_color" x="33" y="0" width="466" height="25"/>
+			</rectangle>
+			<textField>
+				<reportElement x="43" y="3" width="88" height="20" forecolor="#FFFFFF"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$R{term}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="141" y="2" width="90" height="20" forecolor="#FFFFFF"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$R{subject}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="243" y="2" width="74" height="20" forecolor="#FFFFFF"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$R{marks}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="328" y="2" width="80" height="20" forecolor="#FFFFFF"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$R{class_average}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="420" y="2" width="79" height="20" forecolor="#FFFFFF"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$R{grade_average}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="28" splitType="Stretch">
+			<rectangle>
+				<reportElement x="33" y="0" width="466" height="27"/>
+			</rectangle>
+			<textField>
+				<reportElement isPrintRepeatedValues="false" x="43" y="0" width="87" height="27"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{term}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="141" y="0" width="90" height="27"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{subject}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="243" y="0" width="74" height="27"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{absent} == true ? "ab" : $F{marks}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="420" y="0" width="79" height="27"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{gradeAverage}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="328" y="1" width="80" height="27"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{classAverage}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="130" y="-23" width="1" height="50"/>
+			</line>
+			<line>
+				<reportElement x="231" y="-23" width="1" height="50"/>
+			</line>
+			<line>
+				<reportElement x="317" y="-23" width="1" height="50"/>
+			</line>
+			<line>
+				<reportElement x="408" y="-23" width="1" height="50"/>
+			</line>
+		</band>
+	</detail>
+</jasperReport>

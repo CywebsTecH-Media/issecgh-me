@@ -1,0 +1,1086 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- < CYBERSCHOOL, This application manages the daily activities of a Teacher
+		and a Student of a School> Copyright (C) 2017 a CywebsTech Media Coperation.
+		Author = Eric Brown Appiah
+		Contact = 0205212015. -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc
+ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+		p:prefix="jsp/" p:suffix=".jsp" p:order="1" />
+
+
+	<bean class="org.springframework.web.servlet.view.XmlViewResolver"
+		p:location="/WEB-INF/jasper-views.xml" p:order="0" />
+
+
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>AkuraErrorMsg</value>
+				<value>application</value>
+				<value>validatorExpression</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver" >
+		<!-- one of the properties available; the maximum file size in bytes (2097152 B = 2 MB) -->
+		<property name="maxUploadSize" value="6097152"/>
+		</bean>
+
+	<bean name="manageBloodGroup"
+		class="com.virtusa.akura.common.controller.BloodGroupController">
+		<property name="commonService" ref="commonService" />
+		<property name="bloodGroupValidator" ref="bloodGroupValidator" />
+	</bean>
+
+	<bean name="studentExamMarks"
+		class="com.virtusa.akura.student.controller.ExamMarksController">
+		<property name="commonService" ref="commonService" />
+		<property name="studentService" ref="studentServiceAudit" />
+	</bean>
+
+	<bean name="managePrefectType"
+		class="com.virtusa.akura.student.controller.PrefectTypeController">
+		<property name="commonService" ref="commonService" />
+		<property name="prefectTypeValidator" ref="prefectTypeValidator" />
+	</bean>
+
+	<bean name="/manageWarningLevel.htm"
+		class="com.virtusa.akura.student.controller.WarningLevelController">
+		<property name="commonService" ref="commonService" />
+		<property name="warningLevelValidator" ref="warningLevelValidator" />
+
+	</bean>
+
+	<!-- Reference Module - Manage StaffLeaveTypes -->
+	<bean name="/manageStaffLeaveTypes.htm"
+		class="com.virtusa.akura.common.controller.StaffLeaveTypeController">
+		<property name="staffCommonService" ref="staffCommonService" />
+		<property name="staffLeaveTypeValidator" ref="staffLeaveTypeValidator" />
+
+	</bean>
+
+	<bean name="manageExamSubject"
+		class="com.virtusa.akura.common.controller.ExamSubjectController">
+		<property name="commonService" ref="commonService" />
+		<property name="examSubjectValidator" ref="examSubjectValidator" />
+	</bean>
+
+	<bean name="manageClass"
+		class="com.virtusa.akura.common.controller.ManageClassController">
+		<property name="commonService" ref="commonService" />
+		<property name="schoolClassValidator" ref="schoolClassValidator" />
+	</bean>
+
+	<bean name="/manageAssignment.htm"
+		class="com.virtusa.akura.common.controller.ManageAssignmentController">
+		<property name="commonService" ref="commonService" />
+		<property name="studentService" ref="studentService" />
+		<property name="assignmentValidator" ref="assignmentValidator" />
+	</bean>
+
+	<bean name="/manageActiveExtendTempStudentLeave.htm"
+		class="com.virtusa.akura.student.controller.StudentTemporaryLeaveController">
+		<property name="commonService" ref="commonService" />
+		<property name="studentService" ref="studentService" />
+		<property name="userService" ref="userService"></property>
+		<property name="emailService" ref="emailService" />
+		<property name="temporaryLeaveValidator" ref="temporaryLeaveValidator" />
+	</bean>
+
+	<bean name="classTeacherAllocation.htm"
+		class="com.virtusa.akura.staff.controller.ClassTeacherController">
+		<property name="commonService" ref="commonService" />
+		<property name="staffService" ref="staffService" />
+	</bean>
+
+	<bean name="manageExam"
+		class="com.virtusa.akura.common.controller.ManageExamsController">
+		<property name="commonService" ref="commonService" />
+		<property name="examValidator" ref="examValidator" />
+		<property name="studentService" ref="studentService" />
+	</bean>
+	<bean name="/forgotPassword.htm"
+		class="com.virtusa.akura.common.controller.ForgotPasswordController">
+		<property name="userService" ref="userService" />
+		<property name="emailService" ref="emailService" />
+		<property name="forgotPasswordValidator" ref="forgotPasswordValidate" />
+		<property name="forgotUserNameValidator" ref="forgotUsernameValidate" />
+	</bean>
+
+	<bean name="/manageSecurityQuestion.htm"
+		class="com.virtusa.akura.common.controller.ManageSecurityQuestionsController">
+		<property name="userService" ref="userService" />
+		<property name="securityQuestionsValidator" ref="securityQuestionsValidator" />
+	</bean>
+
+	<bean name="/changePassword.htm"
+		class="com.virtusa.akura.common.controller.ChangePasswordController">
+		<property name="userSecurityQuestionsValidator" ref="userSecurityQuestionsValidator" />
+		<property name="userPasswordValidator" ref="userPasswordValidator" />
+		<property name="userService" ref="userService" />
+		<property name="emailService" ref="emailService" />
+		<property name="loginController" ref="/welcomeAll.htm" />
+	</bean>
+
+	<bean name="/studentMarks.htm"
+		class="com.virtusa.akura.student.controller.StudentTermMarkController">
+		<property name="commonService" ref="commonService" />
+		<property name="studentService" ref="studentServiceAudit" />
+		<property name="userService" ref="userService" />
+		<property name="staffService" ref="staffService" />
+	</bean>
+
+	<bean name="/academicDetails.htm"
+		class="com.virtusa.akura.student.controller.StudentAcademicLifeController">
+		<property name="commonService" ref="commonService" />
+		<property name="studentService" ref="studentService" />
+		<property name="studentLoginDelegate" ref="studentLoginDelegate" />
+
+	</bean>
+
+	<bean name="/createSystemUser.htm"
+		class="com.virtusa.akura.user.controller.CreateSystemUserController">
+		<property name="systemUserValidator" ref="systemUserValidator" />
+		<property name="userService" ref="userService" />
+		<property name="staffSystemUserDelegate" ref="staffSystemUserDelegate" />
+		<property name="studentSystemUserDelegate" ref="studentSystemUserDelegate" />
+		<property name="emailService" ref="emailService" />
+		<property name="parentSystemUserDelegate" ref="parentSystemUserDelegate" />
+	</bean>
+
+	<bean name="manageSubjectGrade.htm"
+		class="com.virtusa.akura.common.controller.GradeSubjectController">
+		<property name="commonService" ref="commonService" />
+		<property name="gradeSubjectValidator" ref="gradeSubjectValidator" />
+		<property name="studentService" ref="studentService" />
+	</bean>
+
+	<bean name="/manageStaffCategory.htm"
+		class="com.virtusa.akura.common.controller.ManageStaffCategoryController">
+		<property name="staffCommonService" ref="staffCommonService" />
+		<property name="staffCategoryValidator" ref="staffCategoryValidator" />
+	</bean>
+
+	<bean name="/studentDetails.htm"
+		class="com.virtusa.akura.student.controller.StudentDetailController">
+		<property name="commonService" ref="commonServiceAudit" />
+		<property name="studentService" ref="studentServiceAudit" />
+		<property name="studentDetailValidator" ref="studentDetailValidator" />
+		<property name="studentLoginDelegate" ref="studentLoginDelegate" />
+		<property name="userService" ref="userService" />
+	</bean>
+
+	<bean name="/AdminParent.htm"
+		class="com.virtusa.akura.student.controller.StudentParentController">
+		<property name="commonService" ref="commonService" />
+		<property name="parentService" ref="parentService" />
+		<property name="studentService" ref="studentService" />
+		<property name="staffService" ref="staffService" />
+		<property name="parentValidator" ref="parentValidator" />
+		<property name="donationValidator" ref="donationValidator" />
+		<property name="emailService" ref="emailService" />
+		<property name="commonSmsService" ref="commonSmsService" />
+	</bean>
+
+	<bean name="/manageCivilStatus.htm"
+		class="com.virtusa.akura.common.controller.ManageCivilStatusController">
+		<property name="staffCommonService" ref="staffCommonService" />
+		<property name="civilStatusValidator" ref="civilStatusValidator"></property>
+
+	</bean>
+
+	<bean name="/getChildList.htm"
+		class="com.virtusa.akura.student.controller.ParentsChildsControler">
+		<property name="parentService" ref="parentService" />
+	</bean>
+
+	<bean name="/coCurricularActivity.htm"
+		class="com.virtusa.akura.student.controller.CoCurricularActivityController">
+		<property name="studentService" ref="studentService" />
+		<property name="commonService" ref="commonService" />
+		<property name="studentLoginDelegate" ref="studentLoginDelegate" />
+
+	</bean>
+
+	<bean name="/FaithLifeRating.htm"
+		class="com.virtusa.akura.student.controller.FaithLifeRatingController">
+		<property name="studentService" ref="studentService" />
+		<property name="commonService" ref="commonService" />
+		<property name="faithLifeRatingValidator" ref="faithLifeRatingValidator" />
+		<property name="studentProgressBarService" ref="studentProgressBarService" />
+		<property name="studentLoginDelegate" ref="studentLoginDelegate" />
+	</bean>
+
+	<!-- Reference Module - Manage ClubSociety -->
+	<bean name="/manageClubSociety.htm"
+		class="com.virtusa.akura.common.controller.ManageClubSocietyController">
+		<property name="commonService" ref="commonService" />
+		<property name="clubSocietyValidator" ref="clubSocietyValidator" />
+	</bean>
+
+	<!-- Reference Module - Manage Sport -->
+	<bean name="/manageSport.htm"
+		class="com.virtusa.akura.common.controller.CreateSportController">
+		<property name="commonService" ref="commonService" />
+		<property name="sportValidator" ref="sportValidator" />
+	</bean>
+
+	<!-- Reference Module - Manage SportSub -->
+	<bean name="/manageSportSub.htm"
+		class="com.virtusa.akura.common.controller.ManageSportSubController">
+		<property name="commonService" ref="commonService" />
+		<property name="sportSubValidator" ref="sportSubValidator" />
+	</bean>
+
+	<!-- Reference Module - Manage SportCategory -->
+	<bean name="/manageSportCategory.htm"
+		class="com.virtusa.akura.common.controller.ManageSportCategoryController">
+		<property name="commonService" ref="commonService" />
+		<property name="sportCategoryValidator" ref="sportCategoryValidator" />
+		<property name="studentService" ref="studentService"></property>
+	</bean>
+
+<!-- 	<bean name="/login.htm" class="com.virtusa.akura.common.controller.LoginController"> -->
+<!-- 		<property name="userService" ref="userService" /> -->
+<!-- 		<property name="commonService" ref="commonService" /> -->
+<!-- 		<property name="staffLoginDelegate" ref="staffLoginDelegate" /> -->
+<!-- 		<property name="studentLoginDelegate" ref="studentLoginDelegate" /> -->
+<!-- 		<property name="parentLoginDelegate" ref="parentLoginDelegate" /> -->
+<!-- 		<property name="userDefinedRoleLoginDelegate" ref="userDefinedRoleLoginDelegate" /> -->
+<!-- 	</bean> -->
+
+<bean name="/welcomeAll.htm" class="com.virtusa.akura.common.controller.LoginController">
+		<property name="userService" ref="userService" />
+		<property name="commonService" ref="commonService" />
+		<property name="staffLoginDelegate" ref="staffLoginDelegate" />
+		<property name="studentLoginDelegate" ref="studentLoginDelegate" />
+		<property name="parentLoginDelegate" ref="parentLoginDelegate" />
+		<property name="userDefinedRoleLoginDelegate" ref="userDefinedRoleLoginDelegate" />
+	</bean>
+
+	<bean name="/commonLinks.htm" class="com.virtusa.akura.common.controller.CommonController">
+		<property name="commonService" ref="commonService" />
+		<property name="provinceValidator" ref="provinceValidator" />
+		<property name="districtValidator" ref="districtValidator" />
+		<property name="cityValidator" ref="cityValidator" />
+		<property name="countryValidator" ref="countryValidator" />
+		<property name="subjectValidator" ref="subjectValidator" />
+		<property name="streamValidator" ref="streamValidator" />
+	</bean>
+
+	<!-- Reference Module - Manage Grade -->
+	<bean name="/manageGrade.htm"
+		class="com.virtusa.akura.common.controller.ManageGradeController">
+		<property name="commonService" ref="commonService" />
+		<property name="gradeValidator" ref="gradeValidator"></property>
+		<property name="studentService" ref="studentService" />
+	</bean>
+
+	<!-- Reference Module - Manage Religion -->
+	<bean name="/manageReligion.htm"
+		class="com.virtusa.akura.common.controller.ManageReligionController">
+		<property name="commonService" ref="commonService" />
+		<property name="religionValidator" ref="religionValidator" />
+	</bean>
+
+	<!-- Reference Module - Manage Appointment Nature -->
+	<bean name="/manageAppointmentNature.htm"
+		class="com.virtusa.akura.common.controller.AppointmentNatureController">
+		<property name="staffCommonService" ref="staffCommonService" />
+		<property name="appointmentNatureValidator" ref="appointmentNatureValidator" />
+
+
+	</bean>
+
+	<!-- Reference Module - Manage AppointmentClassification -->
+	<bean name="/manageAppointmentClassification.htm"
+		class="com.virtusa.akura.common.controller.ManageAppointmentClassificationController">
+		<property name="staffCommonService" ref="staffCommonService" />
+		<property name="appointmentClassificationValidator" ref="appointmentClassificationValidator" />
+	</bean>
+
+	<!-- Reference Module - Manage Study mediums -->
+	<bean name="/manageStudyMediums.htm"
+		class="com.virtusa.akura.common.controller.ManageStudyMediumController">
+		<property name="commonService" ref="commonService" />
+		<property name="studyMediumValidator" ref="studyMediumValidator" />
+	</bean>
+
+	<!-- Reference Module - Manage House -->
+	<bean name="/manageHouse.htm"
+		class="com.virtusa.akura.common.controller.ManageHouseController">
+		<property name="commonService" ref="commonService" />
+		<property name="houseValidator" ref="houseValidator" />
+	</bean>
+
+	<!-- Reference Module - Manage Educational Qualification -->
+	<bean name="/manageEducationalQualification.htm"
+		class="com.virtusa.akura.common.controller.ManageEducationalQualificationController">
+		<property name="staffCommonService" ref="staffCommonService" />
+		<property name="educationalQualificationValidator" ref="educationalQualificationValidator"></property>
+	</bean>
+
+	<!-- Reference Module - Manage Professional Qualification -->
+	<bean name="/manageProfessionalQualification.htm"
+		class="com.virtusa.akura.common.controller.ManageProfessionalQualificationController">
+		<property name="staffCommonService" ref="staffCommonService" />
+		<property name="professionalQualificationValidator" ref="professionalQualificationValidator"></property>
+	</bean>
+	
+	<!-- Reference Module - Manage Institute -->
+	<bean name="/manageInstitute.htm"
+		class="com.virtusa.akura.common.controller.ManageInstituteController">
+		<property name="staffCommonService" ref="staffCommonService" />
+		<property name="instituteValidator" ref="instituteValidator"/>
+	</bean>
+
+	<!-- Reference Module - Manage Scholarship -->
+	<bean name="/manageScholarship.htm"
+		class="com.virtusa.akura.common.controller.ManageScholarshipController">
+		<property name="commonService" ref="commonService" />
+		<property name="scholarshipValidator" ref="scholarshipValidator" />
+	</bean>
+
+	<!-- Reference Module - Manage Method Of Travel -->
+	<bean name="/manageMethodOfTravel.htm"
+		class="com.virtusa.akura.common.controller.ManageMethodOfTravelController">
+		<property name="commonService" ref="commonService" />
+		<property name="methodOfTravelValidator" ref="methodOfTravelValidator" />
+	</bean>
+
+	<!-- Reference Module - Manage Membership Position -->
+	<bean name="/managePosition.htm"
+		class="com.virtusa.akura.common.controller.ManagePositionController">
+		<property name="commonService" ref="commonService" />
+		<property name="positionValidator" ref="positionValidator" />
+	</bean>
+
+	<!-- Reference Module - Manage Working Segment -->
+	<bean name="/manageWorkingSegment.htm"
+		class="com.virtusa.akura.common.controller.ManageWorkingSegmentController">
+		<property name="commonService" ref="commonService" />
+		<property name="workingSegmentValidator" ref="workingSegmentValidator" />
+	</bean>
+
+	<!-- Reference Module - Manage Term -->
+	<bean name="/manageTerm.htm"
+		class="com.virtusa.akura.common.controller.ManageTermController">
+		<property name="commonService" ref="commonService" />
+		<property name="termValidator" ref="termValidator" />
+	</bean>
+
+	<!-- Reference Module - Manage Sub Term -->
+	<bean name="/manageSubTerm.htm"
+		class="com.virtusa.akura.common.controller.ManageSubTermController">
+		<property name="commonService" ref="commonService" />
+		<property name="subTermValidator" ref="subTermValidator"></property>
+	</bean>
+
+	<!-- Reference Module - Grading Information -->
+	<bean name="/manageGradingInformation.htm"
+		class="com.virtusa.akura.common.controller.ManageGradingInformationController">
+		<property name="commonService" ref="commonService" />
+		<property name="gradingValidator" ref="gradingValidator" />
+	</bean>
+
+	<!-- Reference Module - Nationality Information -->
+	<bean name="/manageNationality.htm"
+		class="com.virtusa.akura.common.controller.NationalityController">
+		<property name="commonService" ref="commonService" />
+		<property name="nationalityValidator" ref="nationalityValidator" />
+	</bean>
+
+	<!-- Reference Module - Race Information -->
+	<bean name="/manageRace.htm" class="com.virtusa.akura.common.controller.RaceController">
+		<property name="commonService" ref="commonService" />
+		<property name="raceValidator" ref="raceValidator" />
+	</bean>
+
+	<!-- Reference Module - Title Information -->
+	<bean name="/manageTitle.htm" class="com.virtusa.akura.common.controller.TitleController">
+		<property name="staffcommonService" ref="staffCommonService" />
+		<property name="titleValidator" ref="titleValidator" />
+	</bean>
+
+	<bean name="/studentSearch.htm"
+		class="com.virtusa.akura.student.controller.StudentSearchController">
+		<property name="studentService" ref="studentService" />
+		<property name="commonService" ref="commonService" />
+		<property name="userService" ref="userService" />
+	</bean>
+
+	<bean name="/studentSubject.htm"
+		class="com.virtusa.akura.student.controller.StudentSubjectController">
+		<property name="studentService" ref="studentService" />
+		<property name="commonService" ref="commonService" />
+		<property name="userService" ref="userService" />
+		<property name="staffService" ref="staffService" />
+	</bean>
+
+	<!-- Student Module - Discipline Tab -->
+	<bean name="/studentDiscipline.htm"
+		class="com.virtusa.akura.student.controller.StudentDisciplineController">
+		<property name="studentService" ref="studentService" />
+		<property name="commonService" ref="commonService" />
+		<property name="commonSmsService" ref="commonSmsService"/>
+		<property name="studentDisciplineValidator" ref="studentDisciplineValidator"></property>
+	</bean>
+
+	<bean name="/staffSearch.htm"
+		class="com.virtusa.akura.staff.controller.StaffSearchController">
+		<property name="staffService" ref="staffService" />
+		<property name="userService" ref="userService" />
+	</bean>
+
+	<bean name="/showSubTermView.htm"
+		class="com.virtusa.akura.student.controller.StudentSubTermMarkController">
+		<property name="commonService" ref="commonService" />
+		<property name="studentService" ref="studentService" />
+	</bean>
+
+	<bean name="/studentClass.htm"
+		class="com.virtusa.akura.student.controller.StudentClassController">
+		<property name="commonService" ref="commonService" />
+		<property name="studentService" ref="studentServiceAudit" />
+	</bean>
+
+	<!-- Student Module - Leave Tab -->
+	<bean name="/studentLeave.htm"
+		class="com.virtusa.akura.student.controller.StudentLeaveController">
+		<property name="studentService" ref="studentService" />
+		<property name="commonService" ref="commonService" />
+		<property name="studentLeaveValidator" ref="studentLeaveValidator" />
+	</bean>
+
+	<bean name="/teacherSubjectAllocation.htm"
+		class="com.virtusa.akura.staff.controller.SubjectTeacherAssignController">
+		<property name="commonService" ref="commonService" />
+		<property name="staffService" ref="staffService" />
+	</bean>
+
+	<!-- Staff Module- Add New Section Head -->
+	<bean name="/sectionHeadAllocation.htm"
+		class="com.virtusa.akura.staff.controller.SectionHeadAllocationController">
+		<property name="staffService" ref="staffService" />
+		<property name="commonService" ref="commonService" />
+		<property name="staffCommonService" ref="staffCommonService" />
+		<property name="sectionHeadValidator" ref="sectionHeadValidator" />
+	</bean>
+
+
+	<!-- Staff Module- Update Leave Approval Process -->
+	<bean name="/leaveApprovalProcess.htm"
+		class="com.virtusa.akura.staff.controller.LeaveApprovalProcessController">
+		<property name="staffService" ref="staffService" />
+		<property name="staffCommonService" ref="staffCommonService" />
+		<property name="emailService" ref="emailService" />
+		<property name="dailyAttendanceService" ref="dailyAttendanceService" />
+		<property name="leaveApprovalProcessValidator" ref="leaveApprovalProcessValidator" />
+	</bean>
+
+
+	<!-- Staff Module - Add New Staff Member -->
+	<bean name="/viewStaffMemberDetails"
+		class="com.virtusa.akura.staff.controller.StaffDetailsController">
+		<property name="staffService" ref="staffService" />
+		<property name="commonService" ref="commonService" />
+		<property name="staffCommonService" ref="staffCommonService" />
+		<property name="userService" ref="userService" />
+		<property name="staffDetailsValidator" ref="staffDetailsValidator" />
+	</bean>
+
+	<!-- Student Module - Message Board Tab -->
+	<bean name="/studentProgressReport.htm"
+		class="com.virtusa.akura.student.controller.MessageBoardController">
+		<property name="emailService" ref="emailService" />
+		<property name="studentService" ref="studentService" />
+		<property name="commonService" ref="commonService" />
+		<property name="parentService" ref="parentService" />
+		<property name="userService" ref="userService" />
+	</bean>
+
+	<!-- Student Module - Attendance Tab -->
+	<bean name="/studentAttendanceForm.htm"
+		class="com.virtusa.akura.student.controller.StudentAttendenceController">
+		<property name="studentService" ref="studentService" />
+		<property name="commonService" ref="commonService" />
+		<property name="dailyAttendanceService" ref="dailyAttendanceService" />
+		<property name="studentAttendanceValidator" ref="studentAttendanceValidator" />
+	</bean>
+
+	<!-- <bean name="/generateStudentWiseSwipInOutReport.htm" class="com.virtusa.akura.reporting.controller.GenerateStudentWiseSwipInOutReportController"> 
+		<property name="attendanceReportingService" ref="attendanceReportingService" 
+		/> <property name="studentService" ref="studentService" /> <property name="studentWiseSwipeInOutAttendanceValidator" 
+		ref="studentWiseSwipeInOutAttendanceValidator" /> <property name="commonService" 
+		ref="commonService" /> <property name="dailyAttendanceService" ref="dailyAttendanceService" 
+		/> </bean> -->
+
+	<bean name="/messageToTeacher.htm"
+		class="com.virtusa.akura.student.controller.MessageToTeacherControler">
+		<property name="parentService" ref="parentService" />
+		<property name="studentService" ref="studentService" />
+		<property name="staffService" ref="staffService" />
+		<property name="emailService" ref="emailService" />
+
+	</bean>
+
+	<!-- Student Module - View Student Details after search -->
+	<bean name="/loadStudentDetails.htm"
+		class="com.virtusa.akura.student.controller.StudentDetailsLoadController">
+		<property name="commonService" ref="commonService"></property>
+		<property name="studentService" ref="studentService" />
+	</bean>
+
+	<!-- Staff Module - View Staff Details after search -->
+	<bean name="/loadStaffDetails.htm"
+		class="com.virtusa.akura.staff.controller.StaffDetailsLoadController">
+	</bean>
+
+	<!-- Staff Module - Staff Qualifications Tab -->
+	<bean name="/staffQualifications.htm"
+		class="com.virtusa.akura.staff.controller.StaffQualificationsController">
+		<property name="staffCommonService" ref="staffCommonService"></property>
+		<property name="staffService" ref="staffService"></property>
+		<property name="staffEducationValidator" ref="staffEducationValidator"></property>
+		<property name="staffProfessionalValidator" ref="staffProfessionalValidator"></property>
+	</bean>
+
+	<!-- Reference Module - Manage Donation Type Tab -->
+	<bean name="/manageDonationType.htm"
+		class="com.virtusa.akura.common.controller.ManageDonationTypeController">
+		<property name="commonService" ref="commonService"></property>
+		<property name="donationTypeValidator" ref="donationTypeValidator"></property>
+	</bean>
+
+
+	<!-- Reference Module - Manage Holiday -->
+	<bean name="/manageHoliday.htm"
+		class="com.virtusa.akura.common.controller.ManageHolidayController">
+		<property name="commonService" ref="commonService" />
+		<property name="holidayValidator" ref="holidayValidator" />
+	</bean>
+
+	<bean name="managePublication.htm"
+		class="com.virtusa.akura.common.controller.PublicationController">
+		<property name="commonService" ref="commonService"></property>
+		<property name="publicationValidator" ref="publicationValidator"></property>
+		<property name="commonSmsService" ref="commonSmsService"></property>
+	</bean>
+
+	<bean name="/handleException.htm"
+		class="com.virtusa.akura.common.controller.ExceptionController">
+	</bean>
+
+	<!-- Class Wise Exam Absentees Report -->
+	<bean name="/classWiseExamAbenteeList.htm"
+		p:cRExamAbsentListValidator-ref="cRExamAbsentListValidator"
+		class="com.virtusa.akura.reporting.controller.CRExamAbsentListController">
+		<property name="commonReportingService" ref="commonReportingService">
+		</property>
+		<property name="commonService" ref="commonService"></property>
+	</bean>
+
+	<!-- Class Wise Student Term Marks Evaluation Report enhancement -->
+	<bean name="/studentPerformance.htm"
+		class="com.virtusa.akura.reporting.controller.StudentPerformanceController">
+		<property name="studentService" ref="studentService"></property>
+		<property name="cRStudentPerformanceBetweenValidator" ref="cRStudentPerformanceBetweenValidator"></property>
+		<property name="commonService" ref="commonService"></property>
+	</bean>
+
+	<!-- Class Teacher List and Section Head List Report -->
+	<bean name="/customizedStaffGeneralReports.htm"
+		class="com.virtusa.akura.reporting.controller.CustomStaffReportController">
+		<property name="staffService" ref="staffService" />
+		<property name="commonService" ref="commonService" />
+		<property name="staffCommonService" ref="staffCommonService" />
+		<property name="schoolTeacherListSectionHeadListValidator"
+			ref="schoolTeacherListSectionHeadListValidator" />
+	</bean>
+
+	<!-- Class Wise Average term test marks for a given subject(s) for a grade 
+		Report -->
+	<bean name="/averageTermMarkClassWise.htm"
+		class="com.virtusa.akura.reporting.controller.CRAverageTermMarkClassWiseController">
+		<property name="commonService" ref="commonService"></property>
+		<property name="studentService" ref="studentService"></property>
+		<property name="cRAverageTermMarkClassWiseValidator" ref="cRAverageTermMarkClassWiseValidator"></property>
+	</bean>
+
+	<!--per day class wise attendnce Report -->
+	<bean name="/PerDayClassWiseAttendanceReport.htm"
+		class="com.virtusa.akura.reporting.controller.PerDayClassWiseAttendanceController">
+		<property name="dailyAttendanceService" ref="dailyAttendanceService" />
+		<property name="studentService" ref="studentService" />
+		<property name="commonService" ref="commonService"></property>
+		<property name="perDayClassWiseAttendanceValidator" ref="perDayClassWiseAttendanceValidator"></property>
+	</bean>
+
+	<!--Generate Annual Student attendance Report. -->
+	<bean name="/annualStudentAttendanceReport.htm"
+		class="com.virtusa.akura.reporting.controller.AnnualStudentAttendanceController">
+		<property name="attendanceReportingService" ref="attendanceReportingService" />
+		<property name="commonService" ref="commonService" />
+		<property name="annualStudentAttendanceTemplateValidator"
+			ref="annualStudentAttendanceTemplateValidator" />
+	</bean>
+
+	<!-- Generate Teacher Wise Attendance Report -->
+	<bean name="/GenerateTeacherWiseAttendanceReport.htm"
+		p:attendanceReportingService-ref="attendanceReportingService"
+		p:teacherWiseAttendanceValidator-ref="teacherWiseAttendanceValidator"
+		p:staffCommonService-ref="staffCommonService" p:staffService-ref="staffService"
+		class="com.virtusa.akura.reporting.controller.GenerateTeacherWiseAttendanceReportController">
+	</bean>
+
+	<!-- Generate Teacher Early Attendance Report -->
+	<bean name="/GenerateTeacherEarlyLateAttendiesReport.htm"
+		p:attendanceReportingService-ref="attendanceReportingService"
+		p:lateComersValidator-ref="lateComersValidator" p:staffService-ref="staffService"
+		class="com.virtusa.akura.reporting.controller.GenerateTeacherEarlyLateAttendiesReportController" />
+
+	<!--per day staff category wise attendnce Report -->
+	<bean name="/PerDayStaffCategoryWiseAttendanceReport.htm"
+		class="com.virtusa.akura.reporting.controller.PerDayStaffCategoryWiseAttendanceController">
+		<property name="dailyAttendanceService" ref="dailyAttendanceService" />
+		<property name="staffService" ref="staffService"></property>
+		<property name="commonService" ref="commonService"></property>
+		<property name="staffCommonService" ref="staffCommonService"></property>
+		<property name="perDayStaffCategoryWiseAttendanceValidator"
+			ref="perDayStaffCategoryWiseAttendanceValidator"></property>
+	</bean>
+
+	<!-- Generate Student Wise Attendance Report -->
+	<bean name="/GenerateStudentWiseAttendanceReport.htm"
+		p:attendanceReportingService-ref="attendanceReportingService"
+		p:dailyAttendanceService-ref="dailyAttendanceService"
+		p:studentWiseAttendanceValidator-ref="studentWiseAttendanceValidator"
+		p:commonService-ref="commonService" p:studentService-ref="studentService"
+		class="com.virtusa.akura.reporting.controller.GenerateStudentWiseAttendanceReportController">
+	</bean>
+
+	<!-- Generate Student Early Attendance Report -->
+	<bean name="/GenerateEarlyLateAttendeesStudentReport.htm"
+		p:attendanceReportingService-ref="attendanceReportingService"
+		p:lateComersValidator-ref="lateComersValidator"
+		class="com.virtusa.akura.reporting.controller.GenerateEarlyLateAttendeesStudentReportController" />
+
+	<!-- Generate Teacher Wise Present and Absent Days Report -->
+	<bean name="/GenerateTeacherWisePresentAndAbsentDaysReport.htm"
+		class="com.virtusa.akura.reporting.controller.GenarateTeacherWisePresentAndAbsentDaysReportController">
+		<property name="attendanceReportingService" ref="attendanceReportingService" />
+		<property name="presentAndAbsentDaysValidator" ref="presentAndAbsentDaysValidator" />
+		<property name="commonService" ref="commonService" />
+		<property name="staffCommonService" ref="staffCommonService" />
+		<property name="staffService" ref="staffService" />
+	</bean>
+
+	<bean name="/staffExtraCurricular.htm"
+		class="com.virtusa.akura.staff.controller.StaffExtraCurricularController">
+		<property name="commonService" ref="commonService"></property>
+		<property name="staffService" ref="staffService" />
+	</bean>
+
+	<!-- Class Wise Student Disciplinary Action Report -->
+	<bean name="/studentDisciplinaryActionClassWise.htm"
+		class="com.virtusa.akura.reporting.controller.ClassWiseStudentDisciplinaryActionController">
+		<property name="commonService" ref="commonService"></property>
+		<property name="commonReportingService" ref="commonReportingService"></property>
+		<property name="disciplinaryActionClassWiseValidator" ref="disciplinaryActionClassWiseValidator"></property>
+		<property name="staffService" ref="staffService"></property>
+	</bean>
+
+	<!-- Reference Module - Manage Seminar -->
+	<bean name="/manageSeminar.htm"
+		class="com.virtusa.akura.common.controller.ManageSeminarController">
+		<property name="commonService" ref="commonService" />
+		<property name="seminarValidator" ref="seminarValidator" />
+	</bean>
+
+
+
+	<bean name="/manageSpecialEvents.htm"
+		class="com.virtusa.akura.common.controller.ManageSpecialEventsController">
+		<property name="commonService" ref="commonService" />
+		<property name="specialEventsValidator" ref="specialEventsValidator" />
+	</bean>
+
+
+	<!-- Reference Module - Manage System Users -->
+	<bean name="/manageSystemUsers.htm"
+		class="com.virtusa.akura.user.controller.ManageSystemUsersController">
+		<property name="userService" ref="userService" />
+		<property name="staffSystemUserDelegate" ref="staffSystemUserDelegate" />
+		<property name="studentSystemUserDelegate" ref="studentSystemUserDelegate" />
+		<property name="parentSystemUserDelegate" ref="parentSystemUserDelegate" />	
+	</bean>
+
+
+	<!-- General Reports - Student Summary Report -->
+	<bean name="/studentSummaryReport.htm"
+		class="com.virtusa.akura.reporting.controller.StudentSummaryReportController">
+		<property name="studentSummaryReportTemplateValidator" ref="studentSummaryReportTemplateValidator" />
+		<property name="commonService" ref="commonService" />
+		<property name="studentService" ref="studentService" />
+	</bean>
+
+	<bean name="/DailyAttendance.htm"
+		class="com.virtusa.akura.attendance.controller.DailyAttendanceController">
+		<property name="commonService" ref="commonService" />
+		<property name="studentService" ref="studentService" />
+		<property name="dailyAttendanceService" ref="dailyAttendanceService" />
+		<property name="parentService" ref="parentService" />
+		<property name="commonSmsService" ref="commonSmsService" />
+	</bean>
+
+	<bean name="/SpecialEventsAttendance.htm"
+		class="com.virtusa.akura.attendance.controller.SpecialEventsAttendanceController">
+		<property name="commonService" ref="commonService" />
+		<property name="dailyAttendanceService" ref="dailyAttendanceService" />
+		<property name="studentService" ref="studentService" />
+	</bean>
+
+	<bean name="/attendanceDashboard.htm"
+		class="com.virtusa.akura.attendance.controller.AttendanceDashboardController">
+		<property name="commonService" ref="commonService" />
+		<property name="dailyAttendanceService" ref="dailyAttendanceService" />
+		<property name="attendanceDashboardValidator" ref="attendanceDashboardValidator" />
+	</bean>
+
+	<!-- Staff Module - Staff Leave -->
+	<bean name="/staffLeave.htm"
+		class="com.virtusa.akura.staff.controller.StaffLeaveController">
+		<property name="staffService" ref="staffService" />
+		<property name="staffLeaveValidator" ref="staffLeaveValidator" />
+		<property name="staffCommonService" ref="staffCommonService" />
+		<property name="emailService" ref="emailService" />
+		<property name="userService" ref="userService" />
+	</bean>
+
+	<bean name="/TeacherDailyAttendance.htm"
+		class="com.virtusa.akura.attendance.controller.TeacherAttendanceController">
+		<property name="commonService" ref="commonService" />
+		<property name="staffService" ref="staffService" />
+		<property name="dailyAttendanceService" ref="dailyAttendanceService" />
+	</bean>
+	
+	<bean name="/selfStaffAttendance.htm"
+		class="com.virtusa.akura.attendance.controller.SelfStaffAttendanceController">
+		<property name="staffService" ref="staffService"/>
+		<property name="attendanceService" ref="dailyAttendanceService"/>
+		<property name="commonService" ref="commonService"></property>		
+	</bean>
+	
+
+	<!-- General Reports - Class Wise Student List -->
+	<bean name="/classWiseStudentList.htm"
+		class="com.virtusa.akura.reporting.controller.ClassWiseStudentReportController">
+		<property name="commonService" ref="commonService" />
+		<property name="studentService" ref="studentService" />
+		<property name="classWiseStudentReportTemplateValidator" ref="classWiseStudentReportTemplateValidator" />
+	</bean>
+
+	<!-- Generate Grade Wise Best Student Attendance Report -->
+	<bean name="/bestStudentAttendanceReport.htm" p:commonService-ref="commonService"
+		p:studentService-ref="studentService"
+		p:attendanceReportingService-ref="attendanceReportingService"
+		p:bestStudentWiseAttendanceValidator-ref="bestStudentWiseAttendanceValidator"
+		class="com.virtusa.akura.reporting.controller.BestStudentAttendanceReportController" />
+
+	<bean name="/MainReports.htm"
+		class="com.virtusa.akura.reporting.controller.ReportController">
+		<property name="staffService" ref="staffService" />
+	</bean>
+
+	<bean name="/schoolDetail.htm" class="com.virtusa.akura.school.controller.SchoolController">
+		<property name="commonService" ref="commonService" />
+		<property name="staffService" ref="staffService" />
+		<property name="schoolService" ref="schoolService" />
+		<property name="studentService" ref="studentService" />
+		<property name="schoolValidator" ref="schoolValidator" />
+	</bean>
+
+
+	<!-- Students' special event attendance Report -->
+	<bean name="/specialEventAttendanceReport.htm"
+		p:studentSpecialEventAttendanceReportValidator-ref="studentSpecialEventAttendanceReportValidator"
+		class="com.virtusa.akura.reporting.controller.StudentSpecialEventAttendanceReportController">
+		<property name="commonService" ref="commonService" />
+		<property name="specialEventAttendanceService" ref="specialEventAttendanceService" />
+		<property name="studentService" ref="studentService" />
+
+	</bean>
+
+	<!-- Class wise student marks sheet Report -->
+	<bean name="/classWiseStudentMarksReport.htm"
+		p:classWiseStudentMarksSheetValidator-ref="classWiseStudentMarksSheetValidator"
+		class="com.virtusa.akura.reporting.controller.ClassWiseStudentMarksSheetController">
+		<property name="commonService" ref="commonService" />
+		<property name="studentService" ref="studentService" />
+		<property name="staffService" ref = "staffService" />
+	</bean>
+
+	<!-- Subject prize rank Report -->
+	<bean name="/prizeListReport.htm" p:prizeTopListValidator-ref="prizeTopListValidator"
+		class="com.virtusa.akura.reporting.controller.PrizeTopListController">
+		<property name="commonService" ref="commonService" />
+		<property name="studentService" ref="studentService" />
+	</bean>
+
+	<bean name="/studentAssignmentMarks.htm"
+		class="com.virtusa.akura.student.controller.StudentAssignmentMarkController">
+		<property name="commonService" ref="commonService" />
+		<property name="studentService" ref="studentServiceAudit" />
+	</bean>
+
+	<bean name="/viewAuditDetails.htm"
+		class="com.virtusa.akura.common.controller.ViewAuditController">
+		<property name="userService" ref="userService" />
+		<property name="viewAuditDetailsValidator" ref="viewAuditDetailsValidator" />
+		<property name="auditManagerService" ref="auditManagerService" />
+		<property name="commonService" ref="commonService" />
+	</bean>
+
+	<bean name="/showMoreDetails.htm"
+		class="com.virtusa.akura.common.controller.ViewAuditDetailsController">
+		<property name="auditManagerService" ref="auditManagerService" />
+	</bean>
+
+	<!-- User Role Management Module beans -->
+	<bean name="/manageUserRoles.htm"
+		class="com.virtusa.akura.user.controller.ManageUserRolesController">
+		<property name="userService" ref="userService"></property>
+		<property name="userRoleValidator" ref="userRoleValidator"></property>
+	</bean>
+
+	<!-- user role details load -->
+	<bean name="/loadUserRolefDetails.htm"
+		class="com.virtusa.akura.user.controller.UserRoleDetailsLoadController">
+	</bean>
+
+	<!-- Exam Results Report -->
+	<bean name="/examResultsReport.htm"
+		class="com.virtusa.akura.reporting.controller.GenarateExamResultsReportController">
+		<property name="commonService" ref="commonService" />
+		<property name="studentService" ref="studentService" />
+		<property name="examResultsReportValidator" ref="examResultsReportValidator" />
+	</bean>
+
+	<bean name="/studentReportCardReport.htm"
+		class="com.virtusa.akura.reporting.controller.StudentReportCardController">
+		<property name="commonService" ref="commonService" />
+		<property name="studentService" ref="studentService" />
+		<property name="staffService" ref="staffService" />
+	</bean>
+
+	<!-- Staff Profile Report -->
+	<bean name="/staffProfileReport.htm"
+		class="com.virtusa.akura.reporting.controller.StaffProfileReportController">
+		<property name="staffService" ref="staffService"></property>
+		<property name="staffCommonService" ref="staffCommonService" />
+		<property name="staffProfileReportValidator" ref="staffProfileReportValidator"></property>
+		<property name="commonService" ref="commonService" />
+	</bean>
+
+	<!-- Staff Service Category -->
+	<bean name="/manageStaffServiceCategory.htm"
+		class="com.virtusa.akura.common.controller.ManageStaffServiceCategoryController">
+		<property name="staffCommonService" ref="staffCommonService" />
+		<property name="staffServiceCategoryValidator" ref="staffServiceCategoryValidator" />
+	</bean>
+
+	<!-- Staff Departure Service Category -->
+	<bean name="/staffDepartureDetails.htm"
+		class="com.virtusa.akura.staff.controller.StaffPastServiceController">
+		<property name="staffService" ref="staffService" />
+		<property name="staffDepartureDetailsValidator" ref="staffDepartureDetailsValidator" />
+		<property name="staffPastServiceValidator" ref="staffPastServiceValidator" />
+	</bean>
+
+	<!-- Student Suspend Service Category -->
+	<bean name="/suspendStudentDetails.htm"
+		class="com.virtusa.akura.student.controller.RejoinSuspendedStudentController">
+		<property name="studentService" ref="studentService"></property>
+		<property name="rejoinSuspendedStudentValidator" ref="rejoinSuspendedStudentValidator"></property>
+		<property name="emailService" ref="emailService"></property>
+		<property name="userService" ref="userService"></property>
+
+
+	</bean>
+
+
+	<!-- Reference Module - Manage Emplyment Status -->
+	<bean name="/manageEmploymentStatus.htm"
+		class="com.virtusa.akura.common.controller.ManageEmploymentStatusController">
+		<property name="commonService" ref="commonService" />
+		<property name="employmentStatusValidator" ref="employmentStatusValidator"></property>
+	</bean>
+
+	<!-- Reference Module - Manage Section -->
+	<bean name="/manageSection.htm" class="com.virtusa.akura.common.controller.SectionController">
+		<property name="staffCommonService" ref="staffCommonService" />
+		<property name="sectionValidator" ref="sectionValidator" />
+	</bean>
+
+	<!-- added static resource caching -->
+	<bean
+		class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping" />
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
+
+	<!-- auditing beans -->
+	<bean id="studentServiceAudit" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces">
+			<value>com.virtusa.akura.student.service.StudentService</value>
+		</property>
+		<property name="target">
+			<ref bean="studentService" />
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>afterReturnAdvisor</value>
+
+			</list>
+		</property>
+	</bean>
+	<bean id="commonServiceAudit" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces">
+			<value>com.virtusa.akura.common.service.CommonService</value>
+		</property>
+		<property name="target">
+			<ref bean="commonService" />
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>afterReturnAdvisor</value>
+			</list>
+		</property>
+	</bean>
+	<!-- Stdent Module - Terminate Student -->
+	<bean name="/terminateStudent.htm"
+		class="com.virtusa.akura.student.controller.StudentTerminateController">
+		<property name="studentService" ref="studentService" />
+		<property name="commonService" ref="commonService" />
+		<property name="emailService" ref="emailService" />
+		<property name="userService" ref="userService" />
+		<property name="studentSuspendValidator" ref="studentSuspendValidator" />
+		<property name="studentTerminateValidator" ref="studentTerminateValidator" />
+		<property name="studentTemporaryLeaveTerminateValidator" ref="studentTemporaryLeaveTerminateValidator" />
+		<property name="parentService" ref="parentService" />
+		<property name="commonSmsService" ref="commonSmsService" />
+
+
+	</bean>
+
+	
+	<!-- Two Factor Authentication Controller. -->
+	<bean name="/showVerificationPage.htm"
+		class="com.virtusa.akura.common.controller.TwoFactorAuthenticationController">
+		<property name="userService" ref="userService" />
+		<property name="commonSmsService" ref="commonSmsService" />
+		<property name="userVerificationValidator" ref="userVerificationValidator" />
+	</bean>
+	
+	<!-- Report Module - Student Scholarship -->
+	<bean name="/studentScholarshipReport.htm"
+		class="com.virtusa.akura.reporting.controller.StudentScholarshipReportController">
+		<property name="commonService" ref="commonService" />
+		<property name="commonReportingService" ref="commonReportingService" />
+	 	
+	<property name="studentScholarshipReportValidator" ref="studentScholarshipReportValidator" /> 
+	</bean>
+	<mvc:resources mapping="/resources/**" location="/resources/**"
+		cache-period="31556926" />
+	
+	<!-- SMS Module -->
+	<bean name="/studentNotification.htm"
+		class="com.virtusa.akura.sms.controller.StudentBulkSMSController">
+			<property name="studentService" ref="studentService" />
+			<property name="commonService" ref="commonService" />
+			<property name="parentService" ref="parentService" />
+			<property name="commonSmsService" ref="commonSmsService" />
+	</bean>
+	<bean name="/publicSms.htm"
+		class="com.virtusa.akura.sms.controller.PublicSmsSendingController">
+					<property name="parentService" ref="parentService" />
+					<property name="commonSmsService" ref="commonSmsService" />
+				</bean>
+	
+	
+	<bean name="/monthlySMSSubCription.htm"
+		class="com.virtusa.akura.reporting.controller.GenarateMonthlySMSSubCriptionReportController">
+		<property name="monthlySmsSubscribtionValidator" ref="monthlySmsSubscribtionValidator" />
+		<property name="commonSmsService" ref="commonSmsService" />
+		<property name="parentService" ref="parentService" />
+		<property name="commonService" ref="commonService" />
+	    
+	
+	</bean>
+	<bean name="/sMSModuleReport.htm"
+		class="com.virtusa.akura.reporting.controller.SMSModuleReportController">
+	</bean>
+
+	<!-- Attendance File Upload-->
+	<bean name="/attendanceFileUpload.htm"
+		class="com.virtusa.akura.attendance.controller.FileUploadController">
+			<property name="dailyAttendanceService" ref="dailyAttendanceService" />
+			<property name="fileValidator" ref="fileValidator" />
+	</bean>
+	
+	<bean name="/attendanceFileUploadHistory.htm"
+		class="com.virtusa.akura.attendance.controller.AttendanceFileUploadHistoryController">
+			<property name="dailyAttendanceService" ref="dailyAttendanceService" />
+			<property name="numberOfRecords" value="20" />
+	</bean>
+	
+	<bean name="/staffUploads.htm"
+		class="com.virtusa.akura.upload.controller.StaffUploadsController">
+		<property name="commonService" ref="commonService" />
+		<property name="staffCommonService" ref="staffCommonService" />
+		<property name="bulkFileValidator" ref="bulkFileValidator" />
+		<property name="staffService" ref="staffService" />
+	</bean>
+	
+	<bean name="/userLoginUpload.htm"
+		class="com.virtusa.akura.upload.controller.UserLoginController">
+		<property name="commonService" ref="commonService" />
+		<property name="bulkFileValidator" ref="bulkFileValidator" />
+		<property name="parentservice" ref="parentService" />
+		<property name="userService" ref="userService"></property>
+	</bean>
+	
+	<bean name="/studentUploads.htm"
+		class="com.virtusa.akura.upload.controller.StudentUploadsController">
+		<property name="studentService" ref="studentService" />
+		<property name="commonService" ref="commonService" />
+		<property name="parentService" ref="parentService" />
+		<property name="staffService" ref="staffService" />
+		<property name="bulkFileValidator" ref="bulkFileValidator" />
+	</bean>
+	
+	<bean name="/referenceUploads.htm"
+		class="com.virtusa.akura.upload.controller.ReferenceUploadsController">
+		<property name="commonService" ref="commonService" />		
+		<property name="bulkFileValidator" ref="bulkFileValidator" />
+	</bean>
+	
+	<bean name="/templateDownloads.htm"
+		class="com.virtusa.akura.upload.controller.TemplateController">
+	</bean>
+	
+</beans>

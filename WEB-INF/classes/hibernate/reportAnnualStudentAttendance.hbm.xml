@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+
+	<!--
+		< ÀKURA, This application manages the daily activities of a Teacher
+		and a Student of a School> Copyright (C) 2012 Virtusa Corporation.
+		This program is free software: you can redistribute it and/or modify
+		it under the terms of the GNU General Public License as published by
+		the Free Software Foundation, either version 3 of the License, or (at
+		your option) any later version. This program is distributed in the
+		hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+		the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+		PURPOSE. See the GNU General Public License for more details.
+	-->
+
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.virtusa.akura.api.dto.AnnualStudentAttendanceTemplate" table="ANNUAL_STUDENT_ATTENDANCE_VIEW">
+
+		<composite-id>
+			<key-property name="studentId" column="STUDENT_ID" type="int" />
+			<key-property name="classGradeId" column="CLASS_GRADE_ID" type="int" />
+		</composite-id>
+		
+		<property name="admissionNo" column="ADMISSION_NO" type="string" />
+		<property name="fullName" column="FULL_NAME" type="string" />
+		<property name="nameWithInitials" column="NAME_WT_INITIALS" type="string" />
+		<property name="year" column="YEAR"
+			type="string" />
+		<property name="presentCount" column="PRESENT_COUNT"
+			type="int" />
+		<property name="className" column="CLASS_NAME" type="string" />	
+	</class>
+</hibernate-mapping>

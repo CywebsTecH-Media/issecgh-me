@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+
+<!--
+    < ÀKURA, This application manages the daily activities of a Teacher and a Student of a School>
+
+    Copyright (C) 2012 Virtusa Corporation.
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <class name="com.virtusa.akura.api.dto.StaffProfileReportTemplate" table="STAFF_PROFILE_VIEW">
+  	<composite-id>
+			<key-property name="staffId" column="STAFF_ID" type="int" />								
+	</composite-id>
+   	<property name="nationalID" column="NATIONAL_ID_NO" type="string" />
+	<property name="fullName" column="FULL_NAME" type="string" />
+	<property name="nameWithIntials" column="NAME_WT_INITIALS" type="string" />
+   	<property name="section" column="SECTION" type="string" />
+   	<property name="address" column="ADDRESS" type="string" />  		
+  	<property name="city" column="CITY" type="string"/>
+  	<property name="residenceNo" column="RESIDENCE_NO" type="string"/>
+  	<property name="mobileNo" column="MOBILE_NO" type="string"/>
+  	<property name="email" column="EMAIL" type="string"/>
+  	<property name="country" column="COUNTRY" type="string"/>
+  	<property name="race" column="RACE" type="string"/>
+  	<property name="religion" column="RELIGION" type="string"/>
+  	<property name="civilStatus" column="CIVIL_STATUS" type="string"/>
+  	<property name="dateOfBirth" column="DOB" type="date"/>
+  	<property name="gender" column="GENDER" type="string"/>
+  	<property name="firstAppointmetDate" column="DATE_FIRST_APPOINTMENT" type="date"/>
+  	<property name="dateOfHire" column="DATE_OF_HIRE" type="date"/>
+  	<property name="appointmentNature" column="APPOINTMENT_NATURE" type="string"/>
+  	<property name="appointmentClassification" column="APPOINTMENT_CLASSIFICATION" type="string"/>
+  	<property name="studyMedium" column="STUDY_MEDIUM" type="string"/>
+  	<property name="staffCategory" column="STAFF_CATEGORY" type="string"/>
+  	<property name="staffServiceCategory" column="STAFF_SERVICE" type="string"/>
+  	<property name="staffClass" column="STAFF_CLASS" type="string"/>
+  	<property name="staffGrade" column="STAFF_GRADE" type="string"/>
+  	<property name="basicSalary" column="BASIC_SALARY" type="java.lang.Float"/>
+  	<property name="photo" type="binary">
+			<column name="PHOTO" sql-type="blob" />
+		</property>
+  	
+  </class>
+  
+   <query name="getStaffProfileReportTemplateByStaffId">
+        <![CDATA[
+        	FROM com.virtusa.akura.api.dto.StaffProfileReportTemplate
+        	WHERE staffId = ?
+        ]]>
+	</query>
+
+</hibernate-mapping>

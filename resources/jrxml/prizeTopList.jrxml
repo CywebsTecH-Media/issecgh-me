@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="classWiseStudentMarkSheet" language="groovy" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.2100000000000006"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<template><![CDATA[$P{styleTemplate}]]></template>
+	<style name="Row" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F0EFEF"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="logo" class="java.lang.String"/>
+	<parameter name="subjects" class="java.util.List"/>
+	<parameter name="nameWithInitials" class="java.lang.String"/>
+	<parameter name="admissionNo" class="java.lang.String"/>
+	<parameter name="title" class="java.lang.String"/>
+	<parameter name="gradeLabel" class="java.lang.String"/>
+	<parameter name="grade" class="java.lang.String"/>
+	<parameter name="reportGeneratedOn" class="java.lang.String"/>
+	<parameter name="page" class="java.lang.String"/>
+	<parameter name="styleTemplate" class="java.lang.String"/>
+	<parameter name="yearLabel" class="java.lang.String"/>
+	<parameter name="yearValue" class="java.lang.String"/>
+	<parameter name="gplComment" class="java.lang.String"/>
+	<parameter name="subjectAvaregeList" class="java.util.List"/>
+	<parameter name="generatedDate" class="java.lang.String"/>
+	<parameter name="totalLabel" class="java.lang.String"/>
+	<parameter name="averageLabel" class="java.lang.String"/>
+	<parameter name="rankLabel" class="java.lang.String"/>
+	<parameter name="termLabel" class="java.util.List"/>
+	<parameter name="note" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select smrd.admissionNo as 'admissionNo', smrd.name as 'name', smrd.marks as 'marks' from StudentMarksReportData smrd;]]>
+	</queryString>
+	<field name="name" class="java.lang.String"/>
+	<field name="admissionNo" class="java.lang.String"/>
+	<field name="marks" class="java.util.List"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="104" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="-20" width="87" height="99" backcolor="#E6E6E6"/>
+				<image>
+					<reportElement x="0" y="0" width="87" height="99"/>
+					<imageExpression class="java.lang.String"><![CDATA[$P{logo}]]></imageExpression>
+				</image>
+			</frame>
+			<frame>
+				<reportElement style="Frame_color" mode="Opaque" x="67" y="-20" width="705" height="70"/>
+				<textField>
+					<reportElement x="11" y="10" width="674" height="31" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Center">
+						<font size="18"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{title}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="79" y="47" width="65" height="20" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{gradeLabel}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="150" y="47" width="117" height="20" forecolor="#FFFFFF"/>
+					<textElement/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{grade}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="353" y="47" width="64" height="20" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{yearLabel}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="422" y="47" width="100" height="20" forecolor="#FFFFFF"/>
+					<textElement/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{yearValue}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement style="Frame_color" mode="Opaque" x="67" y="52" width="705" height="27"/>
+				<textField>
+					<reportElement x="80" y="5" width="116" height="20" forecolor="#FFFFFF"/>
+					<textElement/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{reportGeneratedOn}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="191" y="5" width="187" height="20" forecolor="#FFFFFF"/>
+					<textElement/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{generatedDate}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="87" width="317" height="14"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{note}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="25" splitType="Stretch">
+			<frame>
+				<reportElement mode="Transparent" x="0" y="0" width="752" height="25"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textField isStretchWithOverflow="true">
+					<reportElement mode="Opaque" x="78" y="0" width="187" height="25" isPrintWhenDetailOverflows="true" backcolor="#CCCCCC"/>
+					<box leftPadding="3">
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="11" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{nameWithInitials}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Opaque" x="337" y="0" width="72" height="25" backcolor="#CCCCCC"/>
+					<box topPadding="2" rightPadding="0">
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="11" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{termLabel}.get(1)]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Opaque" x="409" y="0" width="72" height="25" backcolor="#CCCCCC"/>
+					<box topPadding="2" rightPadding="0">
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="11" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{termLabel}.get(2)]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Opaque" x="481" y="0" width="90" height="25" backcolor="#CCCCCC"/>
+					<box topPadding="2">
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="11" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{totalLabel}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Opaque" x="571" y="0" width="90" height="25" backcolor="#CCCCCC"/>
+					<box topPadding="2">
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="11" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{averageLabel}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Opaque" x="661" y="0" width="90" height="25" backcolor="#CCCCCC"/>
+					<box topPadding="2">
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="11" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{rankLabel}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Opaque" x="265" y="0" width="72" height="25" backcolor="#CCCCCC"/>
+					<box topPadding="2" rightPadding="0">
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="11" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{termLabel}.get(0)]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Opaque" x="0" y="0" width="78" height="25" backcolor="#CCCCCC"/>
+					<box leftPadding="3">
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{admissionNo}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="25" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="0" width="752" height="25"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textField isStretchWithOverflow="true">
+					<reportElement x="0" y="0" width="78" height="25" isPrintWhenDetailOverflows="true"/>
+					<box leftPadding="3">
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{admissionNo}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="337" y="0" width="72" height="25"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{marks}.get(1)]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="409" y="0" width="72" height="25"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{marks}.get(2)]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="571" y="0" width="90" height="25"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{marks}.get(6)]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="661" y="0" width="90" height="25"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{marks}.get(7)]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement x="78" y="0" width="187" height="25" isPrintWhenDetailOverflows="true"/>
+					<box leftPadding="3">
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{name}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="265" y="0" width="72" height="25"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{marks}.get(0)]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="481" y="0" width="90" height="25"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{marks}.get(5)]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Frame_color" mode="Opaque" x="-20" y="1" width="689" height="24" forecolor="#FFFFFF"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{generatedDate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Frame_color" mode="Opaque" x="669" y="1" width="102" height="24" forecolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{page}+" "+$V{PAGE_NUMBER}+"    "]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement mode="Transparent" x="-20" y="34" width="791" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{gplComment}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="1" splitType="Stretch"/>
+	</summary>
+</jasperReport>

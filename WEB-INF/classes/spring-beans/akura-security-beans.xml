@@ -1,0 +1,786 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- < ÀKURA, This application manages the daily activities of a Teacher
+	and a Student of a School> Copyright (C) 2012 Virtusa Corporation. This program
+	is free software: you can redistribute it and/or modify it under the terms
+	of the GNU General Public License as published by the Free Software Foundation,
+	either version 3 of the License, or (at your option) any later version. This
+	program is distributed in the hope that it will be useful, but WITHOUT ANY
+	WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+	FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details. -->
+
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd">
+
+
+	<global-method-security pre-post-annotations="enabled" />
+
+	<!-- authentication manager and password hashing -->
+	<authentication-manager alias="authenticationManager">
+		<authentication-provider ref="daoAuthenticationProvider" />
+	</authentication-manager>
+
+	<beans:bean id="daoAuthenticationProvider"
+		class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
+		<beans:property name="userDetailsService" ref="userDetailsService" />
+		<beans:property name="passwordEncoder" ref="passwordEncoder" />
+		<beans:property name="saltSource" ref="saltSource" />
+	</beans:bean>
+
+	<beans:bean id="saltSource"
+		class="org.springframework.security.authentication.dao.ReflectionSaltSource">
+		<beans:property name="userPropertyToUse" value="username" />
+	</beans:bean>
+
+	<beans:bean id="accessDecisionManager"
+		class="org.springframework.security.access.vote.AffirmativeBased">
+		<beans:property name="decisionVoters">
+			<beans:list>
+				<beans:bean class="org.springframework.security.access.vote.RoleVoter">
+					<!-- <beans:property name="rolePrefix" value="ROLE_" /> -->
+				</beans:bean>
+				<beans:bean
+					class="org.springframework.security.access.vote.AuthenticatedVoter" />
+			</beans:list>
+		</beans:property>
+	</beans:bean>
+	
+
+	<http auto-config="true" use-expressions="true">
+		
+		<session-management session-fixation-protection="migrateSession" />
+
+		<intercept-url pattern="/resources/css/*" access="permitAll" />
+		<intercept-url pattern="/resources/js/*" access="permitAll" />
+		<intercept-url pattern="/resources/images/*" access="permitAll" />
+		<intercept-url pattern="/login.htm" access="permitAll" />
+		<intercept-url pattern="/welcomeAll.htm" access="permitAll" />
+		<intercept-url pattern="/showContactAdminPage.htm" access="permitAll" />
+		<intercept-url pattern="/showVerificationPage.htm" access="permitAll" />
+		<intercept-url pattern="/submitUserVerificationCode.htm" access="permitAll" />
+		<intercept-url pattern="/forgotUsername.htm" access="permitAll" />
+		<intercept-url pattern="/submitEmail.htm" access="permitAll" />
+		<intercept-url pattern="/forgotPassword.htm" access="permitAll" />
+		<intercept-url pattern="/submitUserAnswers.htm" access="permitAll" />
+		<intercept-url pattern="/changePassword.htm" access="permitAll" />
+		<intercept-url pattern="/manageSecurityQuestion.htm"
+			access="permitAll" />
+		<intercept-url pattern="/answerSecurityQuestions.htm"
+			access="permitAll" />
+		<intercept-url pattern="/adminWelcome.htm" access="isAuthenticated()" />
+
+		<intercept-url pattern="/staffSearch.htm" access="hasRole('Search Staff Members')" />
+		<intercept-url pattern="/deleteStaff.htm" access="hasRole('Delete Staff Member')" />
+		<intercept-url pattern="/newStaffDetails.htm"
+			access="hasRole('Add/Edit Staff Member Page')" />
+		<intercept-url pattern="/viewStaffMemberDetails.htm"
+			access="hasRole('View Staff Member Details')" />
+		<intercept-url pattern="/saveStaffDetails.htm" access="hasAnyRole('Save Staff Details',
+		'Edit Date Of Departure')" />
+		<intercept-url pattern="/staffQualifications.htm"
+			access="hasRole('View Staff Qualification page')" />
+		<intercept-url pattern="/saveStaffEducationQualification.htm"
+			access="hasRole('Add/Edit Qualification')" />
+		<intercept-url pattern="/saveStaffProfessionalQualification.htm"
+			access="hasRole('Add/Edit Qualification')" />
+		<intercept-url pattern="/deleteStaffEducation.htm"
+			access="hasRole('Delete Qualification')" />
+		<intercept-url pattern="/deleteStaffProfessional.htm"
+			access="hasRole('Delete Qualification')" />
+		<intercept-url pattern="/staffExtraCurricular.htm"
+			access="hasRole('View Staff Extra Curricular page')" />
+		<intercept-url pattern="/saveOrUpdateStaffClubSociety.htm"
+			access="hasRole('Add/Edit Staff Extra Curricular')" />
+		<intercept-url pattern="/saveOrUpdateStaffSport.htm"
+			access="hasRole('Add/Edit Staff Extra Curricular')" />
+		<intercept-url pattern="/saveOrUpdateStaffExternalActivity.htm"
+			access="hasRole('Add/Edit Staff Extra Curricular')" />
+		<intercept-url pattern="/saveOrUpdateStaffSeminar.htm"
+			access="hasRole('Add/Edit Staff Extra Curricular')" />
+		<intercept-url pattern="/deleteStaffClubSociety.htm"
+			access="hasRole('Delete Staff Extra Curricular')" />
+		<intercept-url pattern="/deleteStaffSport.htm"
+			access="hasRole('Delete Staff Extra Curricular')" />
+		<intercept-url pattern="/deleteStaffExternalActivity.htm"
+			access="hasRole('Delete Staff Extra Curricular')" />
+		<intercept-url pattern="/deleteStaffSeminar.htm"
+			access="hasRole('Delete Staff Extra Curricular')" />
+		<intercept-url pattern="/staffLeave.htm"
+			access="hasRole('View Staff Leave Page')" />
+		<intercept-url pattern="/saveOrUpdateStaffLeave.htm"
+			access="hasAnyRole('Add Staff Leave','Edit Staff Leave')" />
+
+		<intercept-url pattern="/deleteStaffLeave.htm" access="hasRole('Delete Staff Leave')" />
+		<intercept-url pattern="/teacherSubjectAllocation.htm"
+			access="hasRole('View Teacher Subject Allocation Page')" />
+		<intercept-url pattern="/searchsubjectteacher.htm"
+			access="hasRole('Search Teacher Subject Allocation')" />
+		<intercept-url pattern="/addSubjectTeacher.htm"
+			access="hasRole('Add/Edit Teacher Subject Allocation')" />
+		<intercept-url pattern="/deleteSubjectTeacher.htm"
+			access="hasRole('Delete Teacher Subject Allocation')" />
+		<intercept-url pattern="/classTeacherAllocation.htm"
+			access="hasRole('View Class Teacher Allocation Page')" />
+		<intercept-url pattern="/staffSearchClassTeacher.htm"
+			access="hasRole('Search Class Teacher Allocation')" />
+		<intercept-url pattern="/staffSaveOrUpdateClassTeacher.htm"
+			access="hasRole('Add/Edit Class Teacher Allocation')" />
+		<intercept-url pattern="/staffDeleteClassTeacher.htm"
+			access="hasRole('Delete Class Teacher Allocation')" />
+		<intercept-url pattern="/sectionHeadAllocation.htm"
+			access="hasRole('View Section Head Allocation Page')" />
+		<intercept-url pattern="/staffSearchSectionHeadList.htm"
+			access="hasRole('Search Section Head Allocation')" />
+		<intercept-url pattern="/staffAddSectionHead.htm"
+			access="hasRole('Add/Edit Section Head Allocation')" />
+		<intercept-url pattern="/staffDeleteSectionHead.htm"
+			access="hasRole('Delete Section Head Allocation')" />
+		<intercept-url pattern="/studentSearch.htm"
+			access="hasRole('View Student Search Page')" />
+		<intercept-url pattern="/Search.htm" access="hasRole('Student Search')" />
+		<intercept-url pattern="/deleteStudent.htm" access="hasRole('Delete Student')" />
+		<intercept-url pattern="/newStudentDetails.htm" access="hasRole('Add New Student')" />
+		<intercept-url pattern="/studentDetails.htm"
+			access="hasAnyRole('View Student Details','Parent View Student Details')" />
+		<intercept-url pattern="/saveStudentDetails.htm" access="hasRole('Save Student Details')" />
+
+		<intercept-url pattern="/manageSection.htm"
+			access="hasRole('View Manage Sections page')" method="GET" />
+		<intercept-url pattern="/saveOrUpdateSection.htm"
+			access="hasRole('Save or Update a Section')" method="POST" />
+		<intercept-url pattern="/manageDeleteSection.htm"
+			access="hasRole('Delete a Section')" />
+
+		<intercept-url pattern="/studentSummaryReport.htm"
+			access="hasAnyRole('Print Student Summary','Parent Print Student Summary','View Student Summary Report')" />
+
+		<intercept-url pattern="/FaithLifeRating.htm"
+			access="hasAnyRole('View Student Religious Activities','Parent View Student Religious Activities')" />
+		<intercept-url pattern="/saveOrUpdateFaithLifeRating.htm"
+			access="hasRole('Save Religious Activity')" />
+		<intercept-url pattern="/deleteFaithLifeRating.htm"
+			access="hasRole('Delete Religious Activity')" />
+		<intercept-url pattern="/academicDetails.htm"
+			access="hasAnyRole('View Student Academic Life','Parent View Student Academic Life')" />
+		<intercept-url pattern="/showSubTermView.htm"
+			access="hasAnyRole('View Student Academic Life','Parent View Student Academic Life')" />
+		<intercept-url pattern="/showAssignmentMarks.htm"
+			access="hasAnyRole('View Student Academic Life','Parent View Student Academic Life')" />
+		<intercept-url pattern="/savePrefectDetails.htm"
+			access="hasRole('Add/Edit Student Academic Data')" />
+		<intercept-url pattern="/editPrefectDetails.htm"
+			access="hasRole('Add/Edit Student Academic Data')" />
+		<intercept-url pattern="/saveScholarshipDetails.htm"
+			access="hasRole('Add/Edit Student Academic Data')" />
+		<intercept-url pattern="/editScholarshipDetails.htm"
+			access="hasRole('Add/Edit Student Academic Data')" />
+		<intercept-url pattern="/saveAchievementDetails.htm"
+			access="hasRole('Add/Edit Student Academic Data')" />
+		<intercept-url pattern="/editAchievementDetails.htm"
+			access="hasRole('Add/Edit Student Academic Data')" />
+		<intercept-url pattern="/saveEditSeminarsDetails.htm"
+			access="hasRole('Add/Edit Student Academic Data')" />
+		<intercept-url pattern="/deletePrefectDetails.htm"
+			access="hasRole('Delete Student Academic Data')" />
+		<intercept-url pattern="/deleteScholarshipDetails.htm"
+			access="hasRole('Delete Student Academic Data')" />
+		<intercept-url pattern="/deleteAchievementDetails.htm"
+			access="hasRole('Delete Student Academic Data')" />
+		<intercept-url pattern="/deleteSeminarsDetails.htm"
+			access="hasRole('Delete Student Academic Data')" />
+		<intercept-url pattern="/coCurricularActivity.htm"
+			access="hasAnyRole('View Co Curricular Details','Parent View Co Curricular Details')" />
+		<intercept-url pattern="/saveOrUpdateStudentClubSociety.htm"
+			access="hasRole('Add/Edit Co Curricular Details')" />
+		<intercept-url pattern="/saveOrUpdateAchievement.htm"
+			access="hasRole('Add/Edit Co Curricular Details')" />
+		<intercept-url pattern="/saveOrUpdateStudentSport.htm"
+			access="hasRole('Add/Edit Co Curricular Details')" />
+		<intercept-url pattern="/deleteStudentClubsociety.htm"
+			access="hasRole('Delete Co Curricular Details')" />
+		<intercept-url pattern="/deleteAchievement.htm"
+			access="hasRole('Delete Co Curricular Details')" />
+		<intercept-url pattern="/deleteStudentSport.htm"
+			access="hasRole('Delete Co Curricular Details')" />
+		<intercept-url pattern="/studentDiscipline.htm"
+			access="hasAnyRole('View Student Disciplines','Parent View Student Disciplines')" />
+		<intercept-url pattern="/saveOrUpdateStudentDiscipline.htm"
+			access="hasRole('Add/Edit Student Discipline')" />
+		<intercept-url pattern="/deleteStudentDiscipline.htm"
+			access="hasRole('Delete Student Discipline')" />
+		<intercept-url pattern="/studentLeave.htm"
+			access="hasAnyRole('View Student Leave','Parent View Student Leave','Link Add Leave')" />
+		<intercept-url pattern="/saveOrUpdateStudentLeave.htm"
+			access="hasRole('Add/Edit Student Leave')" />
+		<intercept-url pattern="/deleteStudentLeave.htm" access="hasRole('Delete Student Leave')" />
+		<intercept-url pattern="/AdminParent.htm"
+			access="hasAnyRole('View Parent Details','Parent View Parent Details')" />
+		<intercept-url pattern="/SaveAdminParent.htm" access="hasRole('Save Parent Details')" />
+		<intercept-url pattern="/saveParentByParent.htm"
+			access="hasRole('Change Details Request')" />
+		<intercept-url pattern="/saveOrUpdateDonation.htm"
+			access="hasRole('Add/Edit Donation')" />
+		<intercept-url pattern="/deleteDonation.htm" access="hasRole('Delete Donation')" />
+		<intercept-url pattern="/studentAttendanceForm.htm"
+			access="hasAnyRole('View Attendance Page','Parent View Attendance Page')" />
+		<intercept-url pattern="/messageToTeacher.htm"
+			access="hasRole('Message To Teacher page')" />
+		<intercept-url pattern="/sendEmailRequest.htm"
+			access="hasRole('Send Message To Teacher')" />
+		<intercept-url pattern="/populateAttendence.htm"
+			access="hasAnyRole('Search Attendeance','Parent Search Attendeance')" />
+		<intercept-url pattern="/studentProgressReport.htm"
+			access="hasRole('View Message Board Page')" />
+		<intercept-url pattern="/studentProgressPdf.htm"
+			access="hasRole('Preview Message Board Report')" />
+		<intercept-url pattern="/EmailProgressSummary.htm"
+			access="hasRole('Send Message Board Email')" />
+		<intercept-url pattern="/studentClass.htm"
+			access="hasRole('View Student Class search page')" />
+		<intercept-url pattern="/searchStudentByGradeYear.htm"
+			access="hasRole('Search Student Class')" />
+		<intercept-url pattern="/saveStudentList.htm" access="hasRole('Save Student Class')" />
+		<intercept-url pattern="/studentSubject.htm"
+			access="hasRole('View Student Subject Search page')" />
+		<intercept-url pattern="/searchStudentSubjectList.htm"
+			access="hasRole('Search Student Subject List')" />
+		<intercept-url pattern="/saveorupdatestudentsubject.htm"
+			access="hasRole('Save Or Update Student Subject')" />
+		<intercept-url pattern="/studentMarks.htm"
+			access="hasAnyRole('View Student Mark Entry Page')" />
+		<intercept-url pattern="/studentExamMarks.htm"
+			access="hasAnyRole('View Student Exam Mark Entry Page')" />
+		<intercept-url pattern="/searchStudentTermMarkList.htm"
+			access="hasRole('Search Student Marks')" />
+
+		<intercept-url pattern="/searchExamMarks.htm"
+			access="hasRole('Search Student Exam Marks')" />
+		<intercept-url pattern="/saveExamMarks.htm"
+			access="hasAnyRole('Save Exam Marks', 'Edit Exam Marks')" />
+		<intercept-url pattern="/studentAssignmentMarks.htm"
+			access="hasRole('View Student Assignment Mark Entry page')" />
+		<intercept-url pattern="/searchStudentAssignmentMarks.htm"
+			access="hasRole('Search Student Assignment Marks')" />
+		<intercept-url pattern="/updateStudentAssignmentMarks.htm"
+			access="hasRole('Update Student Assignment Marks')" />
+		<intercept-url pattern="/saveStudentAssignmentMarks.htm"
+			access="hasRole('Save Student Assignment')" />
+		<intercept-url pattern="/referenceModule.htm"
+			access="hasRole('View Reference Module Page')" />
+		<intercept-url pattern="/manageProvince.htm"
+			access="hasRole('View Manage Province Page')" />
+		<intercept-url pattern="/manageSearchProvince.htm"
+			access="hasRole('Search Province')" />
+		<intercept-url pattern="/manageSaveOrUpdateProvince.htm"
+			access="hasRole('Add/Edit Province')" />
+		<intercept-url pattern="/manageDeleteProvince.htm"
+			access="hasRole('Delete Province')" />
+		<intercept-url pattern="/manageDistrict.htm"
+			access="hasRole('View Manage District page')" />
+		<intercept-url pattern="/manageSearchDistrict.htm"
+			access="hasRole('Search District')" />
+		<intercept-url pattern="/manageSaveOrUpdateDistrict.htm"
+			access="hasRole('Add/Edit District')" />
+		<intercept-url pattern="/manageDeleteDistrict.htm"
+			access="hasRole('Delete District')" />
+		<intercept-url pattern="/manageCountry.htm"
+			access="hasRole('View Manage Country page')" />
+		<intercept-url pattern="/manageSearchCountry.htm"
+			access="hasRole('Search countries')" />
+		<intercept-url pattern="/manageSaveOrUpdateCountry.htm"
+			access="hasRole('Add/Edit Country')" />
+		<intercept-url pattern="/manageDeleteCountry.htm"
+			access="hasRole('Delete Country')" />
+
+		<intercept-url pattern="/manageNationality.htm"
+			access="hasRole('View Nationality Page')" />
+			
+		<intercept-url pattern="/selfStaffAttendance.htm"
+			access="hasRole('View Self Staff Attendance Page')" />
+
+		<intercept-url pattern="/manageSaveOrUpdateStaffServiceCategory.htm"
+			access="hasRole('Save/Update Staff Service Category')" />
+		<intercept-url pattern="/manageStaffServiceCategory.htm"
+			access="hasRole('View Manage Staff Service Category Page')" />
+		<intercept-url pattern="/manageDeleteStaffServiceCategory.htm"
+			access="hasRole('Delete Staff Service Category')" />
+
+		<intercept-url pattern="/manageNationality.htm"
+			access="hasRole('View Nationality Page')" />
+
+		<intercept-url pattern="/manageSaveOrUpdateNationality.htm"
+			access="hasRole('Add/Edit Nationality')" />
+		<intercept-url pattern="/manageDeleteNationality.htm"
+			access="hasRole('Delete Nationality')" />
+		<intercept-url pattern="/manageRace.htm" access="hasRole('View Race Page')" />
+		<intercept-url pattern="/manageTitle.htm" access="hasRole('View Title Page')" />
+		<intercept-url pattern="/manageSaveOrUpdateTitle.htm"
+			access="hasRole('Add/Edit Title')" />
+	    <intercept-url pattern="/manageDeleteTitle.htm" access="hasRole('Delete Title')" />
+		<intercept-url pattern="/manageSaveOrUpdateRace.htm"
+			access="hasRole('Add/Edit Race')" />
+		<intercept-url pattern="/manageDeleteRace.htm" access="hasRole('Delete Race')" />
+		<intercept-url pattern="/manageReligion.htm" access="hasRole('View Religion Page')" />
+		<intercept-url pattern="/saveOrUpdateReligion.htm"
+			access="hasRole('Add/Edit Religion')" />
+		<intercept-url pattern="/manageDeleteReligion.htm"
+			access="hasRole('Delete Religion')" />
+
+		<intercept-url pattern="/manageAppointmentNature.htm"
+			access="hasRole('View Appointment Nature Page')" />
+		<intercept-url pattern="/saveOrUpdateAppointmentNature.htm"
+			access="hasRole('Add/Edit Appointment Nature')" />
+		<intercept-url pattern="/manageDeleteAppointmentNature.htm"
+			access="hasRole('Delete Appointment Nature')" />
+
+		<intercept-url pattern="/manageStaffCategory.htm"
+			access="hasRole('View Staff Category Information')" />
+		<intercept-url pattern="/manageSaveOrUpdateStaffCategory.htm"
+			access="hasRole('Add/Edit Staff Category')" />
+		<intercept-url pattern="/manageDeleteStaffCategory.htm"
+			access="hasRole('Delete Staff Category')" />
+		<intercept-url pattern="/managePublication.htm"
+			access="hasRole('View Manage News And Events')" />
+		<intercept-url pattern="/saveOrUpdatePublication.htm"
+			access="hasRole('Add/Edit News and Events')" />
+		<intercept-url pattern="/manageDeletePublication.htm"
+			access="hasRole('Delete News and Events')" />
+		<intercept-url pattern="/manageExamSubject.htm"
+			access="hasRole('View Exam Subject Page')" />
+		<intercept-url pattern="/saveOrUpdateExamSubjects.htm"
+			access="hasRole('Add/Edit Exam Subject')" />
+		<intercept-url pattern="/deleteExamSubject.htm" access="hasRole('Delete Exam Subject')" />
+		<intercept-url pattern="/manageGrade.htm" access="hasRole('View Manage Grade')" />
+		<intercept-url pattern="/saveOrUpdateGrade.htm" access="hasRole('Add/Edit Grade')" />
+		<intercept-url pattern="/manageDeleteGrade.htm" access="hasRole('Delete Grade')" />
+		<intercept-url pattern="/manageSubjectGrade.htm"
+			access="hasRole('View Manage Grade Subjects page')" />
+		<intercept-url pattern="/saveOrUpdateGradeSubjects.htm"
+			access="hasRole('Add/Edit Grade Subject')" />
+		<intercept-url pattern="/editGradeSubjects.htm"
+			access="hasRole('Add/Edit Grade Subject')" />
+		<intercept-url pattern="/deleteGradeSubject.htm" access="hasRole('Delete Grade Subject')" />
+		<intercept-url pattern="/manageStreams.htm"
+			access="hasRole('View manage Study Stream')" />
+		<intercept-url pattern="/manageSearchStream.htm" access="hasRole('Search Study Stream')" />
+		<intercept-url pattern="/manageSaveOrUpdateStream.htm"
+			access="hasRole('Add/Edit Study Stream')" />
+		<intercept-url pattern="/manageDeleteStream.htm" access="hasRole('Delete Study Stream')" />
+		<intercept-url pattern="/manageStudyMediums.htm"
+			access="hasRole('View Manage Study Medium')" />
+		<intercept-url pattern="/manageSMSearch.htm" access="hasRole('Search Study Medium')" />
+		<intercept-url pattern="/manageSaveOrUpdateMedium.htm"
+			access="hasRole('Add/Edit Study Medium')" />
+		<intercept-url pattern="/manageDeleteMedium.htm" access="hasRole('Delete Study Medium')" />
+		<intercept-url pattern="/manageSubjects.htm" access="hasRole('View manage Subjects')" />
+		<intercept-url pattern="/manageSearchSubject.htm"
+			access="hasRole('Search Subject')" />
+		<intercept-url pattern="/manageSaveOrUpdateSubject.htm"
+			access="hasRole('Add/Edit Subjects')" />
+		<intercept-url pattern="/manageDeleteSubject.htm"
+			access="hasRole('Delete Subjects')" />
+		<intercept-url pattern="/manageEducationalQualification.htm"
+			access="hasRole('View Educational Qualification')" />
+		<intercept-url pattern="/saveOrUpdateEducationalQualification.htm"
+			access="hasRole('Add/Edit Educational Qualification')" />
+		<intercept-url pattern="/manageDeleteEducationalQualification.htm"
+			access="hasRole('Delete Educational Qualification')" />
+		<intercept-url pattern="/manageProfessionalQualification.htm"
+			access="hasRole('View Professional Qualification')" />
+		<intercept-url pattern="/saveOrUpdateProfessionalQualification.htm"
+			access="hasRole('Add/Edit Professional Qualification')" />
+		<intercept-url pattern="/manageDeleteProfessionalQualification.htm"
+			access="hasRole('Delete Professional Qualification')" />
+			
+		<intercept-url pattern="/manageInstitute.htm"
+			access="hasRole('View Institute')" />
+		<intercept-url pattern="/saveOrUpdateInstitute.htm"
+			access="hasRole('Add/Edit Institute')" />	
+		<intercept-url pattern="/manageDeleteInstitute.htm"
+			access="hasRole('Delete Institute')" />	
+			
+		<intercept-url pattern="/manageSeminar.htm" access="hasRole('View manage Seminars')" />
+		<intercept-url pattern="/saveOrUpdateSeminar.htm"
+			access="hasRole('Add/Edit Seminar')" />
+		<intercept-url pattern="/manageDeleteSeminar.htm"
+			access="hasRole('Delete Seminar')" />
+		<intercept-url pattern="/viewAuditDetails.htm" access="hasRole('View Audit Details')" />
+		<intercept-url pattern="/searchAuditDetails.htm" access="hasRole('Search Audit Details')" />
+		<intercept-url pattern="/manageSport.htm" access="hasRole('View Manage Sports')" />
+		<intercept-url pattern="/saveOrUpdateSport.htm" access="hasRole('Add/Edit Sport')" />
+		<intercept-url pattern="/manageDeleteSport.htm" access="hasRole('Delete Sport')" />
+		<intercept-url pattern="/manageSportSub.htm"
+			access="hasRole('View Manage Sport Subs')" />
+		<intercept-url pattern="/saveOrUpdateSportSub.htm"
+			access="hasRole('Add/Edit Sport sub')" />
+		<intercept-url pattern="/manageDeleteSportSub.htm"
+			access="hasRole('Delete Sport Sub')" />
+		<intercept-url pattern="/manageSportCategory.htm"
+			access="hasRole('View Manage Sports Categories')" />
+		<intercept-url pattern="/saveOrUpdateSportCategory.htm"
+			access="hasRole('Add/Edit Sport Category')" />
+		<intercept-url pattern="/manageDeleteSportCategory.htm"
+			access="hasRole('Delete Sport Category')" />
+		<intercept-url pattern="/manageScholarship.htm"
+			access="hasRole('View Manage Scholarship page.')" />
+		<intercept-url pattern="/saveOrUpdateScholarship.htm"
+			access="hasRole('Save or Update a Scholarship')" />
+		<intercept-url pattern="/manageDeleteScholarship.htm"
+			access="hasRole('Delete a Scholarship')" />
+		<intercept-url pattern="/managePosition.htm"
+			access="hasRole('View Manage Membership positions page.')" />
+		<intercept-url pattern="/saveOrUpdatePosition.htm"
+			access="hasRole('Save or Update a Position')" />
+		<intercept-url pattern="/manageDeletePosition.htm"
+			access="hasRole('Delete a Position')" />
+		<intercept-url pattern="/managePrefectType.htm"
+			access="hasRole('View Manage Prefect Type page.')" />
+		<intercept-url pattern="/manageSaveOrUpdatePrefectType.htm"
+			access="hasRole('Save or Update a Prefect Type')" />
+		<intercept-url pattern="/manageDeletePrefectType.htm"
+			access="hasRole('Delete a Prefect Type')" />
+		<intercept-url pattern="/manageClass.htm"
+			access="hasRole('View Manage classes page.')" />
+		<intercept-url pattern="/manageSaveOrUpdateSchoolClass.htm"
+			access="hasRole('Save or Update a Class')" />
+		<intercept-url pattern="/manageDeleteSchoolClass.htm"
+			access="hasRole('Delete a Class')" />
+		<intercept-url pattern="/manageDonationType.htm"
+			access="hasRole('View Manage donation type page.')" />
+		<intercept-url pattern="/saveOrUpdateDonationType.htm"
+			access="hasRole('Save or Update a donation type')" />
+		<intercept-url pattern="/DeleteDonationType.htm"
+			access="hasRole('Delete a donation type')" />
+		<intercept-url pattern="/manageExam.htm"
+			access="hasRole('View Manage Exams page.')" />
+		<intercept-url pattern="/manageSaveOrUpdateExam.htm"
+			access="hasRole('Save or Update a Manage Exams')" />
+		<intercept-url pattern="/manageDeleteExam.htm"
+			access="hasRole('Delete a Manage Exams')" />
+		<intercept-url pattern="/manageGradingInformation.htm"
+			access="hasRole('View Manage Grading Information page.')" />
+		<intercept-url pattern="/saveOrUpdateGrading.htm"
+			access="hasRole('Save or Update a Grading Information')" />
+		<intercept-url pattern="/manageDeleteGrading.htm"
+			access="hasRole('Delete a Grading Information')" />
+		<intercept-url pattern="/manageClubSociety.htm"
+			access="hasRole('View Manage Club and Societies page.')" />
+		<intercept-url pattern="/saveOrUpdateClubSociety.htm"
+			access="hasRole('Save or Update a Club and Society')" />
+		<intercept-url pattern="/manageDeleteClubSociety.htm"
+			access="hasRole('Delete a Club and Society')" />
+		<intercept-url pattern="/manageBloodGroup.htm"
+			access="hasRole('View Manage Blood Group page')" />
+		<intercept-url pattern="/manageSaveOrUpdateBloodGroup.htm"
+			access="hasRole('Save or Update a Blood Group')" />
+		<intercept-url pattern="/manageDeleteBloodGroup.htm"
+			access="hasRole('Delete a Blood Group')" />
+		<intercept-url pattern="/manageHouse.htm"
+			access="hasRole('View Manage House page.')" />
+		<intercept-url pattern="/saveOrUpdateHouse.htm"
+			access="hasRole('Save or Update a House')" />
+		<intercept-url pattern="/manageDeleteHouse.htm" access="hasRole('Delete a House')" />
+		<intercept-url pattern="/manageMethodOfTravel.htm"
+			access="hasRole('View Manage Method of Travel page.')" />
+		<intercept-url pattern="/saveOrUpdateMethodOfTravel.htm"
+			access="hasRole('Save or Update a Method of Travel')" />
+		<intercept-url pattern="/manageDeleteMethodOfTravel.htm"
+			access="hasRole('Delete a Method of Travel')" />
+		<intercept-url pattern="/manageWorkingSegment.htm"
+			access="hasRole('View Manage Working Segment page.')" />
+		<intercept-url pattern="/saveOrUpdateWorkingSegment.htm"
+			access="hasRole('Save or Update a Working Segment')" />
+		<intercept-url pattern="/manageDeleteWorkingSegment.htm"
+			access="hasRole('Delete a Working Segment')" />
+		<intercept-url pattern="/manageHoliday.htm" access="hasRole('View Manage Calendar')" />
+		<intercept-url pattern="/saveOrUpdateHoliday.htm"
+			access="hasRole('Save/Update Manage Calendar')" />
+		<intercept-url pattern="/manageDeleteHoliday.htm"
+			access="hasRole('Delete Manage Calendar')" />
+		<intercept-url pattern="/populateHolidayData.htm"
+			access="hasRole('Search Manage Calendar')" />
+		<intercept-url pattern="/manageSpecialEvents.htm"
+			access="hasRole('View Manage Special Events Page')" />
+		<intercept-url pattern="/findParticipentList.htm"
+			access="hasRole('Find participant list for Special Events Page')" />
+		<intercept-url pattern="/saveOrUpdateSpecialEvent.htm"
+			access="hasRole('save/update Special Events Page')" />
+		<intercept-url pattern="/deleteSpecialEvent.htm"
+			access="hasRole('delete Special Events Page')" />
+		<intercept-url pattern="/manageAssignment.htm"
+			access="hasRole('View Manage Assignments Page')" />
+		<intercept-url pattern="/populateGradeSubjectList4.htm"
+			access="hasRole('List Manage Assignments')" />
+		<intercept-url pattern="/manageSaveOrUpdateAssignment.htm"
+			access="hasRole('Save/Update Manage Assignments')" />
+		<intercept-url pattern="/manageDeleteAssignment.htm"
+			access="hasRole('Delete Manage Assignments')" />
+		<intercept-url pattern="/schoolDetail.htm" access="hasRole('View School Details')" />
+		<intercept-url pattern="/saveOrUpdateSchool.htm" access="hasRole('Edit School Details')" />
+		<intercept-url pattern="/StudentGeneralReports.htm"
+			access="hasRole('View Student General Reports Page')" />
+		<intercept-url pattern="/averaGETermMarkClassWise.htm"
+			access="hasRole('View Grade Wise Term Marks Graph')" />
+		<intercept-url pattern="/findclasses1.htm"
+			access="hasRole('View Grade Wise Term Marks Graph')" />
+		<intercept-url pattern="/AveraGETermMarkClassWise.htm"
+			access="hasRole('View Grade Wise Term Marks Graph')" />
+		<intercept-url pattern="/classWiseExamAbenteeList.htm"
+			access="hasRole('View Class Wise Exam Absentees Report')" />
+		<intercept-url pattern="/ExamAbsentClassWiseReport.htm"
+			access="hasRole('View Class Wise Exam Absentees Report')" />
+		<intercept-url pattern="/populateGradeClassList1.htm"
+			access="hasRole('View Class Wise Exam Absentees Report')" />
+		<intercept-url pattern="/studentPerformance.htm"
+			access="hasRole('View Class Wise Student Term Marks Evaluation Report')" />
+		<intercept-url pattern="/studentPreformanceReport.htm"
+			access="hasRole('View Class Wise Student Term Marks Evaluation Report')" />
+		<intercept-url pattern="/populateGradeClassList2.htm"
+			access="hasRole('View Class Wise Student Term Marks Evaluation Report')" />
+		<intercept-url pattern="/classWiseStudentList.htm"
+			access="hasRole('View Class Wise Students Report')" />
+		<intercept-url pattern="/classWiseStudentListReport.htm"
+			access="hasRole('View Class Wise Students Report')" />
+		<intercept-url pattern="/showStudentSummaryReportForm.htm"
+			access="hasRole('View Student Summary Report')" />
+		<intercept-url pattern="/studentDisciplinaryActionClassWise.htm"
+			access="hasRole('View Class Wise Student Disciplinary Action Report')" />
+		<intercept-url pattern="/populateGradeClassList.htm"
+			access="hasRole('View Class Wise Student Disciplinary Action Report')" />
+		<intercept-url pattern="/StudentDisciplinaryActions.htm"
+			access="hasRole('View Class Wise Student Disciplinary Action Report')" />
+		<intercept-url pattern="/classWiseStudentMarksReport.htm"
+			access="hasRole('View Class Wise Student Marks Sheet Report')" />
+		<intercept-url pattern="/loadClassListForStudentMarkSheetReport.htm"
+			access="hasRole('View Class Wise Student Marks Sheet Report')" />
+		<intercept-url pattern="/prizeListReport.htm"
+			access="hasRole('View Prize List Report')" />
+		<intercept-url pattern="/loadSubjectsForPrizeListReport.htm"
+			access="hasRole('View Prize List Report')" />
+		<intercept-url pattern="/subjectPrizeListReport.htm"
+			access="hasRole('View Prize List Report')" />
+		<intercept-url pattern="/examResultsReport.htm"
+			access="hasRole('View Exam Results Report')" />
+		<intercept-url pattern="/StudentAttendanceReports.htm"
+			access="hasRole('View Student Attendance Report Page')" />
+		<intercept-url pattern="/GenerateStudentWiseAttendanceReport.htm"
+			access="hasRole('View Student Wise Attendance Report')" />
+		<intercept-url pattern="/studentAttendanceReport.htm"
+			access="hasRole('View Student Wise Attendance Report')" />
+		<intercept-url pattern="/bestStudentAttendanceReport.htm" access="hasRole('View Grade Wise Best Student Attendance Report')"/>
+		<intercept-url pattern="/PerDayClassWiseAttendanceReport.htm"
+			access="hasRole('View Day Class Wise Attendance Report')" />
+		<intercept-url pattern="/AbsentClassWiseReport.htm"
+			access="hasRole('View Day Class Wise Attendance Report')" />
+		<intercept-url pattern="/GenerateEarlyLateAttendeesStudentReport.htm"
+			access="hasRole('View Student Late Comers Attendees Report')" />
+		<intercept-url pattern="/studentLateReport.htm"
+			access="hasRole('View Student Late Comers Attendees Report')" />
+		<intercept-url pattern="/specialEventAttendanceReport.htm"
+			access="hasRole('View Students Attendance On Special Events')" />
+		<intercept-url pattern="/studentSpecialEventAttendance.htm"
+			access="hasRole('View Students Attendance On Special Events')" />
+		<intercept-url pattern="/StaffGeneralReports.htm"
+			access="hasRole('View Staff General Report Page')" />
+		<intercept-url pattern="/customizedStaffGeneralReports.htm"
+			access="hasRole('View Customized Staff Related Reports')" />
+		<intercept-url pattern="/StaffAttendanceReports.htm"
+			access="hasRole('View Staff Attendance Reports Page')" />
+		<intercept-url pattern="/GenerateTeacherWiseAttendanceReport.htm"
+			access="hasRole('View Staff Wise Attendance Report')" />
+		<intercept-url pattern="/teacherWiseReport.htm"
+			access="hasAnyRole('View Staff Wise Attendance Report','View Staff Late Comers Attendees Report')" />
+		<intercept-url pattern="/GenerateTeacherEarlyLateAttendiesReport.htm"
+			access="hasRole('View Staff Late Comers Attendees Report')" />
+		<intercept-url pattern="/teacherLateReport.htm"
+			access="hasRole('View Staff Late Comers Attendees Report')" />
+		<intercept-url pattern="/manageStaffLeaveTypes.htm"
+			access="hasRole('View Staff Leave Type Page')" />
+		<intercept-url pattern="/manageSaveOrUpdateStaffleaveTypes.htm"
+			access="hasRole('Add/Edit Staff Leave Type')" />
+		<intercept-url pattern="/manageDeleteStaffLeaveType.htm"
+			access="hasRole('Delete Staff Leave Type')" />
+
+
+		<intercept-url pattern="/PerDayStaffCategoryWiseAttendanceReport.htm"
+			access="hasRole('View Per Day Staff Category Wise Attendance Report')" />
+		<intercept-url pattern="/AbsentStaffCategoryWiseReport.htm"
+			access="hasRole('View Per Day Staff Category Wise Attendance Report')" />
+		<intercept-url pattern="/GenerateTeacherWisePresentAndAbsentDaysReport.htm"
+			access="hasRole('View Staff Wise Present and Absent Days Report')" />
+		<intercept-url pattern="/DailyAttendance.htm"
+			access="hasRole('View Student Attendance Page')" />
+		<intercept-url pattern="/DailyAttendanceReload.htm"
+			access="hasRole('View Student Attendance Page')" />
+		<intercept-url pattern="/changeDateList.htm"
+			access="hasRole('View Student Attendance Page')" />
+		<intercept-url pattern="/searchStudentAttendance.htm"
+			access="hasRole('View Student Attendance')" />
+		<intercept-url pattern="/saveorupdateStudentAttendance.htm"
+			access="hasRole('Save Student Attendance')" />
+		<intercept-url pattern="/TeacherDailyAttendance.htm"
+			access="hasRole('View Staff Attendance Page')" />
+		<intercept-url pattern="/onChangeDateList.htm"
+			access="hasRole('View Staff Attendance Page')" />
+		<intercept-url pattern="/TeacherDailyAttendanceReload.htm"
+			access="hasRole('View Staff Attendance Page')" />
+		<intercept-url pattern="/searchTeacherDailyAttendance.htm"
+			access="hasRole('View Staff Attendance')" />
+		<intercept-url pattern="/saveorupdateTeacherAttendance.htm"
+			access="hasRole('Save Staff Attendance')" />
+		<intercept-url pattern="/SpecialEventsAttendance.htm"
+			access="hasRole('View Special Events Attendance Page')" />
+		<intercept-url pattern="/changeParticipationList.htm"
+			access="hasRole('View Special Events Attendance Page')" />
+		<intercept-url pattern="/populateParticipantList.htm"
+			access="hasRole('View Special Events Attendance Page')" />
+		<intercept-url pattern="/searchSpecialEventsAttendance.htm"
+			access="hasRole('View Special Events Attendance')" />
+		<intercept-url pattern="/saveorupdateSpecialEventsAttendance.htm"
+			access="hasRole('Save Special Events Attendance')" />
+		<intercept-url pattern="/manageUserRoles.htm"
+			access="hasRole('View Manage User Roles page')" />
+		<intercept-url pattern="/viewUserRoleDetails.htm"
+			access="hasRole('Edit User Role')" />
+		<intercept-url pattern="/deleteUserRole.htm" access="hasRole('delete User Role')" />
+		<intercept-url pattern="/newUserRoleDetails.htm"
+			access="hasRole('View Add new User Role page')" />
+		<intercept-url pattern="/saveOrUpdateUserRole.htm"
+			access="hasRole('Save or update user role')" />
+		<intercept-url pattern="/manageSystemUsers.htm" access="hasRole('search System User')" />
+		<intercept-url pattern="/viewSystemUser.htm" access="hasRole('Edit System User')" />
+		<intercept-url pattern="/unlockUser.htm" access="hasRole('Unlock User')" />
+		<intercept-url pattern="/updateUserStatus.htm"
+			access="hasRole('Enable / Disable User')" />
+		<intercept-url pattern="/editSystemUser.htm" access="hasRole('Edit User')" />
+		<intercept-url pattern="/deleteUserLogin.htm" access="hasRole('Delete System User')" />
+
+		<intercept-url pattern="/createSystemUser.htm"
+			access="hasAnyRole('View Add new System User page','view System User Details')"
+			method="GET" />
+		<intercept-url pattern="/createSystemUser.htm"
+			access="hasRole('Save or update System user')" method="POST" />
+
+		<intercept-url pattern="/showStaffProfileReport.htm"
+			access="hasRole('View Staff Profile Report')" />
+
+		<intercept-url pattern="/staffProfileReport.htm"
+			access="hasRole('Print Staff Profile Report')" method="GET" />
+		<intercept-url pattern="/staffProfileReport.htm"
+			access="hasRole('View Staff Profile Report')" method="POST" />
+
+		<intercept-url pattern="/saveOrUpdateStudentTermMark.htm"
+			access="hasAnyRole('Edit Student mark','Add Student mark','View Student mark')" />
+		<intercept-url pattern="/getChildList.htm" access="hasRole('View Children')" />
+		<intercept-url pattern="/studentReportCardPage.htm"
+			access="hasRole('View Class Wise Student Report Card Report')" />
+
+		<intercept-url pattern="/manageAppointmentClassification.htm"
+			access="hasRole('View AppointmentClassification Page')" />
+		<intercept-url pattern="/saveOrUpdateAppointmentClassification.htm"
+			access="hasRole('Add/Edit AppointmentClassification')" />
+		<intercept-url pattern="/manageDeleteAppointmentClassification.htm"
+			access="hasRole('Delete AppointmentClassification')" />
+
+		<intercept-url pattern="/manageWarningLevel.htm"
+			access="hasRole('View Warning Level Page')" />
+		<intercept-url pattern="/manageSaveOrUpdateWarningLevel.htm"
+			access="hasRole('Add/Edit Warning Level')" />
+		<intercept-url pattern="/manageDeleteWarningLevel.htm"
+			access="hasRole('Delete Warning Level')" />
+
+		<intercept-url pattern="/manageCivilStatus.htm" access="hasRole('View Manage Civil Status Page')" />
+		<intercept-url pattern="/manageSaveOrUpdateCivilStatus.htm" access="hasRole('Save/Update Civil Status')" />
+		<intercept-url pattern="/manageDeleteCivilStatus.htm" access="hasRole('Delete Civil Status')" />
+
+		<intercept-url pattern="/manageCity.htm" access="hasRole('View Manage Cities page')" />
+		<intercept-url pattern="/manageSearchCity.htm" access="hasRole('Search Cities')" />
+		<intercept-url pattern="/manageSaveOrUpdateCity.htm" access="hasRole('Add/Edit City')" />
+		<intercept-url pattern="/manageDeleteCity.htm" access="hasRole('Delete City')" />
+
+		<intercept-url pattern="/studentReportCard.htm" access="hasRole('Print Student Report Card')" />
+
+
+
+		<intercept-url pattern="/saveStaffTerminate.htm" access="hasRole('Terminate Staff Member')" />
+		<intercept-url pattern="/staffDepartureDetails.htm" access="hasRole('Terminate Staff Member')" />
+
+		<intercept-url pattern="/viewPastStaffService.htm" access="hasRole('View Staff Service')" />
+		<intercept-url pattern="/manageRejoinStaffMember.htm" access="hasRole('View Staff Service')" />
+
+		<intercept-url pattern="/manageActiveExtendTempStudentLeave.htm" access="hasRole('Activate Student')" />
+		<intercept-url pattern="/extendStudentTemp.htm" access="hasRole('Activate Student')" />
+		<intercept-url pattern="/saveExtendedStudentTemp.htm" access="hasRole('Activate Student')" />
+
+		<intercept-url pattern="/saveOrUpdateTerminateStudent.htm" access="hasRole('Terminate Student')" />
+		<intercept-url pattern="/saveOrUpdatePastStudent.htm" access="hasRole('Terminate Student')" />
+		<intercept-url pattern="/saveOrUpdateTempStudent.htm" access="hasRole('Terminate Student')" />
+		<intercept-url pattern="/terminateStudent.htm" access="hasRole('Terminate Student')" />
+		<intercept-url pattern="checkTerminateStudent.htm" access="hasRole('Terminate Student')" />
+
+		<intercept-url pattern="/suspendStudentDetails.htm" access="hasRole('Activate Student')" />
+		<intercept-url pattern="/manageActivateSuspendedStudent.htm" access="hasRole('Activate Student')" />
+
+		<intercept-url pattern="/annualStudentAttendanceReport.htm"
+
+			access="hasRole('View Annual Student Attendance Report')" />
+
+		<intercept-url pattern="/manageEmploymentStatus.htm" access="hasRole('View Employment Status')" />
+		<intercept-url pattern="/manageSaveOrUpdateEmploymentStatus.htm" access="hasRole('Save or Update a Employment Status')" />
+		<intercept-url pattern="/manageDeleteEmploymentStatus.htm" access="hasRole('Delete Employment Status')" />
+
+		<intercept-url pattern="/leaveApprovalProcess.htm" access="hasRole('Leave Approval Process')" />
+
+		<intercept-url pattern="/attendanceDashboard.htm" access="hasRole('Attendance Dashboard')" />
+		<intercept-url pattern="/studentNotification.htm" access="hasRole('View Students Bulk SMS')" />
+		
+		<intercept-url pattern="/attendanceFileUpload.htm" access="hasRole('Attendance File Upload')" />
+		<!-- <intercept-url pattern="/studentScholarshipReport.htm" access="hasRole('View Scholarship Wise Student Report')" /> -->
+		
+		<intercept-url pattern="/attendanceFileUploadHistory.htm" access="hasRole('View Attendance File Upload History')" />
+		
+		<intercept-url pattern="/termMarkImport.htm" access="hasAnyRole('Save Exam Marks', 'Edit Exam Marks')"  />
+		<intercept-url pattern="/termMarkExport.htm" access="hasRole('Search Student Marks')" />
+		
+		
+		
+		<intercept-url pattern="/referenceUploads.htm" access="hasRole('Reference Uploads')" />
+		<intercept-url pattern="/classfileUpload.htm" access="hasRole('Reference Uploads')" />
+		<intercept-url pattern="/gradefileUpload.htm" access="hasRole('Reference Uploads')" />
+		<intercept-url pattern="/subjectfileUpload.htm" access="hasRole('Reference Uploads')" />
+		
+		<intercept-url pattern="/staffUploads.htm" access="hasRole('Staff Uploads')" />
+		<intercept-url pattern="/staffUpload.htm" access="hasRole('Staff Uploads')" />
+		
+		<intercept-url pattern="/templateDownloads.htm" access="hasRole('Templates')" />
+		<intercept-url pattern="/downloadTemplates.htm" access="hasRole('Templates')" />
+		<intercept-url pattern="/downloadIndividualTemplate.htm" access="hasRole('Templates')" />
+		
+		<intercept-url pattern="/userLoginUpload.htm" access="hasRole('User Login Uploads')" />
+		<intercept-url pattern="/parentLoginUpload.htm" access="hasRole('User Login Uploads')" />
+		
+		<intercept-url pattern="/studentUploads.htm" access="hasRole('Student Uploads')" />
+		<intercept-url pattern="/studentExport.htm" access="hasRole('Student Uploads')" />
+		<intercept-url pattern="/studentUpdateImport.htm" access="hasRole('Student Uploads')" />
+		<intercept-url pattern="/parentImport.htm" access="hasRole('Student Uploads')" />
+		<intercept-url pattern="/studentImport.htm" access="hasRole('Student Uploads')" />
+		
+		
+		
+		<form-login login-page="/login.htm" login-processing-url="/j_spring_security_check"
+			authentication-failure-url="/loginError.htm"
+			always-use-default-target="false" default-target-url="/adminWelcome.htm" />
+
+		<logout invalidate-session="true" logout-url="/j_spring_security_logout" />
+
+		<!-- Uncomment to limit the number of sessions a user can have -->
+		<session-management invalid-session-url="/jsp/timeout.jsp">
+			<concurrency-control max-sessions="1"
+				error-if-maximum-exceeded="true" />
+		</session-management>
+	</http>
+
+
+</beans:beans>

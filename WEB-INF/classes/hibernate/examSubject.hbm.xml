@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<!--
+		< ÀKURA, This application manages the daily activities of a Teacher
+		and a Student of a School> Copyright (C) 2012 Virtusa Corporation.
+		This program is free software: you can redistribute it and/or modify
+		it under the terms of the GNU General Public License as published by
+		the Free Software Foundation, either version 3 of the License, or (at
+		your option) any later version. This program is distributed in the
+		hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+		the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+		PURPOSE. See the GNU General Public License for more details.
+	-->
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.virtusa.akura.api.dto.ExamSubject" table="EXAM_SUBJECT">
+		<id name="examSubjectId" type="int" column="EXAM_SUBJECT_ID">
+			<generator class="increment" />
+		</id>
+		<many-to-one name="subject" class="com.virtusa.akura.api.dto.Subject"
+			lazy="false">
+			<column name="SUBJECT_ID" not-null="true" />
+		</many-to-one>
+		<many-to-one name="exam" class="com.virtusa.akura.api.dto.Exam"
+			lazy="false">
+			<column name="EXAM_ID" not-null="true" />
+		</many-to-one>
+		<property name="optionalSubject" type="boolean" column="IS_OPTIONAL_SUBJECT" />
+		<property name="modifiedTime" type="timestamp" generated="always">
+			<column name="MODIFIED_TIME" length="19" not-null="true" />
+		</property>
+	</class>
+
+	<query name="findSubjectsByExam">
+        <![CDATA[
+        	FROM com.virtusa.akura.api.dto.ExamSubject examSubject
+            WHERE examSubject.exam.description = ?
+        ]]>
+	</query>
+	<query name="findExamSubjectByDes">
+        <![CDATA[
+        	FROM com.virtusa.akura.api.dto.ExamSubject examSubject
+            WHERE examSubject.exam.description = ? AND examSubject.subject.description = ?
+        ]]>
+	</query>
+	<query name="existExamSubject">
+        <![CDATA[
+        	FROM com.virtusa.akura.api.dto.ExamSubject examSubject
+            WHERE examSubject.exam.examId = ? AND examSubject.subject.subjectId = ?
+        ]]>
+	</query>
+	<query name="getExamSubjectIdListByExam">
+        <![CDATA[
+        	FROM com.virtusa.akura.api.dto.ExamSubject examSubject
+            WHERE examSubject.exam.examId = ?
+            order by examSubject.subject.description
+        ]]>
+	</query>
+	<query name="findExamSubjectByExamId">
+        <![CDATA[
+        	SELECT examSubject.examSubjectId
+        	FROM com.virtusa.akura.api.dto.ExamSubject examSubject
+            WHERE examSubject.exam.examId = ?
+        ]]>
+	</query>
+	<query name="examSubjectCountByExam">
+        <![CDATA[
+        	SELECT COUNT(examSubject.examSubjectId) AS count
+        	FROM com.virtusa.akura.api.dto.ExamSubject examSubject
+            WHERE examSubject.exam.examId = ?
+        ]]>
+	</query>
+	<sql-query name="newExamSubjects">
+        <![CDATA[
+        	SELECT exam_subject_id FROM EXAM_SUBJECT
+				WHERE exam_id = ?  AND exam_subject_id NOT IN (
+					SELECT es.exam_subject_id from EXAM_MARKS em
+					RIGHT JOIN EXAM_SUBJECT es
+					ON es.exam_subject_id = em.exam_subject_id
+					INNER JOIN EXAM exam
+					ON exam.exam_id = es.exam_id
+					WHERE es.exam_id = ? and year = ?)
+        ]]>
+	</sql-query>
+	<query name="findExamSubjectExist">
+        <![CDATA[
+        	SELECT examSubjectId
+        	FROM com.virtusa.akura.api.dto.ExamSubject examSubject
+            WHERE examSubject.exam.examId = ?
+        ]]>
+	</query>
+	<sql-query name="isExistExamMarks">
+        <![CDATA[
+        	select Count(em.exam_subject_id) from EXAM_SUBJECT es
+		join EXAM_MARKS em
+			on em.exam_subject_id = es.exam_subject_id
+			where em.exam_subject_id = ? and (em.marks != null || em.grading_id != null
+			|| em.is_Optional != 1)
+        ]]>
+	</sql-query>
+</hibernate-mapping>

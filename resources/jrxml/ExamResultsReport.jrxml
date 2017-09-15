@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="NewDesignTest" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="29"/>
+	<template><![CDATA[$P{styleTemplate}]]></template>
+	<style name="Title" forecolor="#FFFFFF" lineSpacing="Single" fontName="SansSerif" fontSize="20" isBold="false" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#CCCCCC" lineSpacing="Single" fontName="SansSerif" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
+	<style name="Column header" forecolor="#666666" lineSpacing="Single" fontName="SansSerif" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
+	<style name="Detail" mode="Transparent" lineSpacing="Single" fontName="SansSerif" pdfFontName="Times-Roman"/>
+	<style name="Row" mode="Transparent" lineSpacing="Single" fontName="SansSerif" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F0EFEF" lineSpacing="Single"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="title" class="java.lang.String"/>
+	<parameter name="logoPath" class="java.lang.String"/>
+	<parameter name="styleTemplate" class="java.lang.String"/>
+	<parameter name="reportGeneratedOn" class="java.lang.String"/>
+	<parameter name="generatedDate" class="java.lang.String"/>
+	<parameter name="page" class="java.lang.String"/>
+	<parameter name="GPLComment" class="java.lang.String"/>
+	<parameter name="fullName" class="java.lang.String"/>
+	<parameter name="indexNo" class="java.lang.String"/>
+	<parameter name="subjects" class="java.lang.String"/>
+	<parameter name="marksGrade" class="java.lang.String"/>
+	<parameter name="date" class="java.lang.String"/>
+	<parameter name="principle" class="java.lang.String"/>
+	<parameter name="description" class="java.lang.String"/>
+	<parameter name="Exam_Name" class="java.lang.String"/>
+	<parameter name="Year" class="java.lang.String"/>
+	<queryString language="hql">
+		<![CDATA[from TeacherAttendance]]>
+	</queryString>
+	<field name="marks" class="java.lang.Float"/>
+	<field name="markType" class="java.lang.Boolean"/>
+	<field name="gradingAcronym" class="java.lang.String"/>
+	<field name="subjectDescription" class="java.lang.String"/>
+	<field name="nameWithInitials" class="java.lang.String"/>
+	<field name="examAdmissionNo" class="java.lang.String"/>
+	<field name="examDescription" class="java.lang.String"/>
+	<field name="year" class="java.util.Date"/>
+	<field name="gradingDescription" class="java.lang.String"/>
+	<field name="optional" class="java.lang.String"/>
+	<field name="absent" class="java.lang.Boolean"/>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="164">
+			<frame>
+				<reportElement style="Frame_color" mode="Opaque" x="67" y="-20" width="509" height="37"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement x="40" y="4" width="424" height="27" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Center" lineSpacing="Single">
+						<font size="18" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{title}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement style="Frame_color" mode="Opaque" x="67" y="18" width="509" height="59"/>
+				<textField>
+					<reportElement x="83" y="37" width="148" height="20" forecolor="#FFFFFF"/>
+					<textElement lineSpacing="Single">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{reportGeneratedOn}]]></textFieldExpression>
+				</textField>
+				<textField pattern="">
+					<reportElement x="215" y="37" width="188" height="20" forecolor="#FFFFFF"/>
+					<textElement lineSpacing="Single">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{generatedDate}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement stretchType="RelativeToTallestObject" x="125" y="10" width="160" height="20" isPrintWhenDetailOverflows="true" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Center" lineSpacing="Single">
+						<font size="14" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{examDescription}]]></textFieldExpression>
+				</textField>
+				<textField pattern="yyyy">
+					<reportElement x="357" y="10" width="79" height="20" forecolor="#FFFFFF"/>
+					<textElement lineSpacing="Single">
+						<font size="14" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.util.Date"><![CDATA[$F{year}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="83" y="10" width="96" height="20" forecolor="#FFFFFF"/>
+					<textElement lineSpacing="Single">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{Exam_Name}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="315" y="10" width="67" height="20" forecolor="#FFFFFF"/>
+					<textElement lineSpacing="Single">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{Year}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<image>
+				<reportElement x="-19" y="-20" width="87" height="97"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{logoPath}]]></imageExpression>
+			</image>
+			<line>
+				<reportElement x="-19" y="77" width="594" height="1" backcolor="#356BA7"/>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="168" y="97" width="281" height="20" isPrintWhenDetailOverflows="true"/>
+				<textElement lineSpacing="Single">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{nameWithInitials}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="168" y="117" width="280" height="20" isPrintWhenDetailOverflows="true"/>
+				<textElement lineSpacing="Single">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{examAdmissionNo}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="69" y="17" width="507" height="1" forecolor="#FFFFFF"/>
+			</line>
+			<textField>
+				<reportElement x="69" y="97" width="95" height="20"/>
+				<textElement lineSpacing="Single">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{fullName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="69" y="117" width="95" height="20"/>
+				<textElement lineSpacing="Single">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{indexNo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="164" y="97" width="4" height="20"/>
+				<textElement lineSpacing="Single"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="164" y="117" width="4" height="20"/>
+				<textElement lineSpacing="Single"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band/>
+	</pageHeader>
+	<columnHeader>
+		<band height="21">
+			<line>
+				<reportElement x="-19" y="-1" width="595" height="1" forecolor="#666666"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</line>
+			<frame>
+				<reportElement style="Text_and_ash_bg" mode="Opaque" x="-19" y="1" width="593" height="18"/>
+			</frame>
+			<textField>
+				<reportElement style="Text_and_ash_bg" mode="Opaque" x="69" y="0" width="123" height="20"/>
+				<textElement textAlignment="Left" lineSpacing="Single">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{subjects}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Text_and_ash_bg" mode="Opaque" x="209" y="0" width="131" height="20"/>
+				<textElement textAlignment="Center" lineSpacing="Single">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{marksGrade}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="Text_and_ash_bg" mode="Opaque" x="361" y="0" width="131" height="20"/>
+				<textElement lineSpacing="Single">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{description}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="-20" y="20" width="595" height="1" forecolor="#666666"/>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="19">
+			<frame>
+				<reportElement style="Row" mode="Opaque" x="30" y="0" width="525" height="15"/>
+				<textField isBlankWhenNull="true">
+					<reportElement x="331" y="0" width="131" height="15"/>
+					<textElement lineSpacing="Single"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{gradingDescription}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="40" y="0" width="122" height="15"/>
+					<textElement lineSpacing="Single">
+						<font size="10"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{subjectDescription}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="179" y="0" width="130" height="15"/>
+					<textElement textAlignment="Center" lineSpacing="Single">
+						<font size="10"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[($F{absent} ? "AB" : ($F{markType}) ? $F{marks} : $F{gradingAcronym})]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="15"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="119">
+			<frame>
+				<reportElement style="Frame_color" mode="Opaque" x="-19" y="75" width="594" height="24"/>
+				<textField>
+					<reportElement x="40" y="2" width="171" height="20" forecolor="#FFFFFF"/>
+					<textElement lineSpacing="Single">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{generatedDate}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Column header" x="511" y="0" width="82" height="21" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{page}+$V{PAGE_NUMBER}+""]]></textFieldExpression>
+				</textField>
+			</frame>
+			<textField>
+				<reportElement x="22" y="99" width="552" height="20"/>
+				<textElement textAlignment="Center" lineSpacing="Single">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{GPLComment}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="30" y="5" width="139" height="20"/>
+				<textElement lineSpacing="Single"/>
+				<text><![CDATA[.............................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="372" y="5" width="143" height="20"/>
+				<textElement lineSpacing="Single"/>
+				<text><![CDATA[...............................................]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="67" y="25" width="100" height="20"/>
+				<textElement lineSpacing="Single">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="354" y="25" width="169" height="20"/>
+				<textElement textAlignment="Center" lineSpacing="Single">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{principle}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

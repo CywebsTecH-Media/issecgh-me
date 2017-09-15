@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+
+<!-- < ÀKURA, This application manages the daily activities of a Teacher 
+	and a Student of a School> Copyright (C) 2012 Virtusa Corporation. This program 
+	is free software: you can redistribute it and/or modify it under the terms 
+	of the GNU General Public License as published by the Free Software Foundation, 
+	either version 3 of the License, or (at your option) any later version. This 
+	program is distributed in the hope that it will be useful, but WITHOUT ANY 
+	WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
+	FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details. -->
+
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.virtusa.akura.api.dto.StudentSpecialEventParticipationView"
+		table="STUDENT_SPECIAL_EVENT_PARTICIPATION">
+
+		<composite-id name="id"
+			class="com.virtusa.akura.api.dto.StudentSpecialEventParticipationViewId">
+			<key-property name="admissionNo" column="ADMISSION_NO" />
+			<key-property name="specialEventParticipationId" column="SPECIAL_EVENT_PARTICIPATION_ID" />
+		</composite-id>
+
+		<property name="fullName" type="string" column="FULL_NAME"
+			update="false" />
+			
+		<property name="nameWithInitals" type="string" column="NAME_WT_INITIALS" />
+
+		<property name="sportCategoryId" type="java.lang.Integer"
+			column="SPORT_CATEGORY_ID" update="false" />
+
+		<property name="classGradeId" type="java.lang.Integer"
+			column="CLASS_GRADE_ID" update="false" />
+
+		<property name="clubSocietyId" type="java.lang.Integer"
+			column="CLUB_SOCIETY_ID" update="false" />
+
+		<property name="studentId" type="int" column="STUDENT_ID"
+			update="false" />
+
+		<property name="year" type="date" column="YEAR" update="false" />
+
+	</class>
+
+
+	<query name="getSpecialEventParticipationStudentInfo">
+			<![CDATA[
+				FROM
+					com.virtusa.akura.api.dto.StudentSpecialEventParticipationView
+				WHERE
+						id.specialEventParticipationId = ? AND year = ?
+			]]>
+	</query>
+</hibernate-mapping>

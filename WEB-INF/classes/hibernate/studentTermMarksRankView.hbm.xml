@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+
+	<!--
+		< ÀKURA, This application manages the daily activities of a Teacher
+		and a Student of a School> Copyright (C) 2012 Virtusa Corporation.
+		This program is free software: you can redistribute it and/or modify
+		it under the terms of the GNU General Public License as published by
+		the Free Software Foundation, either version 3 of the License, or (at
+		your option) any later version. This program is distributed in the
+		hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+		the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+		PURPOSE. See the GNU General Public License for more details.
+	-->
+
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.virtusa.akura.api.dto.StudentTermMarksRank"
+		table="STUDENT_TERM_MARK_RANK_VIEW">
+
+		<composite-id name="id"
+			class="com.virtusa.akura.api.dto.StudentTermMarksRankViewId">
+			<key-property name="studentClassInfoID" column="STUDENT_CLASS_INFO_ID"
+				type="int" />
+			<key-property name="termID" column="TERM_ID" type="int" />
+		</composite-id>
+
+		<property name="year" type="date">
+			<column name="YEAR" length="10" not-null="true" />
+		</property>
+
+		<property name="classGradeId" type="int">
+			<column name="CLASS_GRADE_ID" not-null="true" />
+		</property>
+
+		<property name="average" type="double">
+			<column name="AVERAGE" not-null="true" />
+		</property>
+		<property name="rank" type="int">
+			<column name="rank" not-null="true" />
+		</property>
+		<property name="term" type="string">
+			<column name="TERM" not-null="true" />
+		</property>
+		<property name="total" type="int">
+			<column name="TOTAL" not-null="true" />
+		</property>
+	</class>
+
+	<query name="findStudentTermMarksRank">
+			<![CDATA[
+			FROM	com.virtusa.akura.api.dto.StudentTermMarksRank stmr
+			WHERE	id.studentClassInfoID =? AND id.termID = ?
+			]]>
+	</query>
+
+	<query name="getStudentTermMarksRanks">
+			<![CDATA[
+			FROM	com.virtusa.akura.api.dto.StudentTermMarksRank stmr
+			WHERE	classGradeId =? AND id.termID = ? AND year(YEAR) = ?
+			ORDER BY id.studentClassInfoID
+			]]>
+	</query>
+
+	<query name="findStudentRank">
+			<![CDATA[
+			FROM	com.virtusa.akura.api.dto.StudentTermMarksRank stmr
+			WHERE	id.studentClassInfoID = ?
+			ORDER BY term
+			]]>
+	</query>
+	<query name="findBestStudentAverage">
+			<![CDATA[
+			SELECT studentTermMarksRank.average
+			FROM	com.virtusa.akura.api.dto.StudentTermMarksRank studentTermMarksRank
+			WHERE	studentTermMarksRank.rank = 1
+					AND studentTermMarksRank.classGradeId = ?
+					AND studentTermMarksRank.term = ?
+					AND studentTermMarksRank.year = ?
+			]]>
+	</query>
+	<query name="findClassAverageAndClassStudentsCount">
+			<![CDATA[
+			SELECT COUNT(id.studentClassInfoID) as StudentCount,
+    				ROUND (SUM(average) / COUNT(id.studentClassInfoID), 2) as ClassAverage
+			FROM	com.virtusa.akura.api.dto.StudentTermMarksRank studentTermMarksRank
+			WHERE	studentTermMarksRank.classGradeId = ?
+					AND studentTermMarksRank.id.termID = ?
+					AND studentTermMarksRank.year = ?
+			]]>
+	</query>
+</hibernate-mapping>

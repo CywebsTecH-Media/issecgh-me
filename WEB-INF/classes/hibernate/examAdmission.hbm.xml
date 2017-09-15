@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- < ÀKURA, This application manages the daily activities of a Teacher 
+	and a Student of a School> Copyright (C) 2012 Virtusa Corporation. This program 
+	is free software: you can redistribute it and/or modify it under the terms 
+	of the GNU General Public License as published by the Free Software Foundation, 
+	either version 3 of the License, or (at your option) any later version. This 
+	program is distributed in the hope that it will be useful, but WITHOUT ANY 
+	WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
+	FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details. -->
+
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.virtusa.akura.api.dto.ExamAdmission" table="EXAM_ADMISSIONS">
+		<id name="examAdmissionId" type="int" column="EXAM_ADMISSION_ID">
+			<generator class="increment" />
+		</id>
+		<property name="admissionNo" type="string">
+			<column name="ADMISSION_NO" length="45" not-null="true" unique="true"
+				 />
+		</property>
+		<property name="examId" type="int">
+			<column name="EXAM_ID" not-null="true" />
+		</property>
+		<property name="studentId" type="int">
+			<column name="STUDENT_ID" not-null="true" />
+		</property>
+		<property name="year" type="date">
+			<column name="YEAR" not-null="true" />
+		</property>
+
+		<property name="modifiedTime" column="MODIFIED_TIME" type="timestamp"
+			not-null="true" generated="always" />
+	</class>
+
+	<query name="findByAdmission">
+		<![CDATA[
+			FROM  com.virtusa.akura.api.dto.ExamAdmission
+			WHERE admissionNo = ? AND year = ?
+			AND examId = ?
+		]]>
+	</query>
+	<query name="findExamAdmissionByStudentId">
+		<![CDATA[
+			FROM  com.virtusa.akura.api.dto.ExamAdmission
+			WHERE admissionNo = ? AND year = ? AND studentId = ?
+			AND examId = ?
+		]]>
+	</query>
+	<query name="findByExamAdmission">
+		<![CDATA[
+			SELECT e.admissionNo
+			FROM com.virtusa.akura.api.dto.ExamAdmission e
+			WHERE e.admissionNo = ?
+		]]>
+	</query>
+	<sql-query name="findExamDescriptionAndAdmissionNoByStudentId">
+		<![CDATA[
+			SELECT e.DESCRIPTION, ed.ADMISSION_NO,e.EXAM_ID FROM
+ 			EXAM e INNER JOIN EXAM_ADMISSIONS ed ON e.EXAM_ID = ed.EXAM_ID
+			WHERE ed.STUDENT_ID = ? AND ed.YEAR = ? ORDER BY e.DESCRIPTION
+		]]>
+	</sql-query>
+	
+	<query name="findAdmissionNo">
+		<![CDATA[
+			Select	examadmission
+			FROM com.virtusa.akura.api.dto.ExamAdmission examadmission,
+			com.virtusa.akura.api.dto.StudentClassInfo studentclassinfo
+			WHERE examadmission.studentId = studentclassinfo.student.studentId
+			AND examadmission.examId = ? AND studentclassinfo.classGrade.classGradeId = ?
+			AND year(studentclassinfo.year) = ?
+			order by studentclassinfo.student.nameWtInitials asc
+	]]>
+	
+	</query>
+	
+	 <query name="findStudentIndexList">
+        <![CDATA[
+        	FROM com.virtusa.akura.api.dto.ExamAdmission examadmission
+        	WHERE examadmission.examAdmissionId IN (:editedExamIndexIdList)
+        
+        ]]>
+	</query>
+	<query name="findExamAdmissionByStudentIdExamAndYear">
+		<![CDATA[
+			FROM  com.virtusa.akura.api.dto.ExamAdmission
+			WHERE studentId = ? AND examId = ? AND year(year) = ? 
+		]]>
+	</query>
+	
+</hibernate-mapping>

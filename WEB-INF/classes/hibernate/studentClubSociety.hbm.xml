@@ -1,0 +1,113 @@
+<?xml version="1.0"?>
+
+<!--
+    < ÀKURA, This application manages the daily activities of a Teacher and a Student of a School>
+
+    Copyright (C) 2012 Virtusa Corporation.
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.virtusa.akura.api.dto.StudentClubSociety" table="STUDENT_CLUB_SOCIETY">
+		<id name="studentClubSocietyId" type="int" column="STUDENT_CLUB_SOCIETY_ID">
+			<generator class="increment" />
+		</id>
+		<many-to-one name="clubSociety" class="com.virtusa.akura.api.dto.ClubSociety"
+			lazy="false">
+			<column name="CLUB_SOCIETY_ID" not-null="true" unique="true" />
+		</many-to-one>
+		<many-to-one name="position" class="com.virtusa.akura.api.dto.Position"
+			lazy="false">
+			<column name="POSITION_ID" not-null="true" />
+		</many-to-one>
+		<many-to-one name="student" class="com.virtusa.akura.api.dto.Student"
+			lazy="false">
+			<column name="STUDENT_ID" not-null="true" unique="true" />
+		</many-to-one>
+		<property name="year" type="date">
+			<column name="YEAR" length="10" not-null="true" unique="true" />
+		</property>
+		<property name="membershipNo" type="string">
+			<column name="MEMBERSHIP_NO" length="45" />
+		</property>
+		<property name="status" type="java.lang.Byte">
+			<column name="STATUS" />
+		</property>
+		<property name="modifiedTime" column="MODIFIED_TIME" type="timestamp"
+			not-null="true" generated="always" />
+	</class>
+
+	<query name="getClubSocietyListForStudent">
+   		<![CDATA[
+		from com.virtusa.akura.api.dto.StudentClubSociety studentClubSociety
+ 		Where studentClubSociety.student.studentId = ?
+ 		AND studentClubSociety.year = ?
+		]]>
+	</query>
+	<query name="getClubSocietyListForStudentById">
+   		<![CDATA[
+		from com.virtusa.akura.api.dto.StudentClubSociety studentClubSociety
+ 		Where studentClubSociety.student.studentId = ?
+		]]>
+	</query>
+	<query name="findStudentClubSociety">
+  		<![CDATA[
+  		from com.virtusa.akura.api.dto.StudentClubSociety studentClubSociety
+ 		 Where studentClubSociety.student.studentId = ?
+ 		 AND studentClubSociety.clubSociety.clubSocietyId = ?
+ 		 AND studentClubSociety.year = ?
+		]]>
+	</query>
+
+	<query name="getStudentListByClubSociety">
+  		<![CDATA[
+  		from com.virtusa.akura.api.dto.StudentClubSociety studentClubSociety
+ 		 Where studentClubSociety.clubSociety.clubSocietyId = ?
+ 		 AND studentClubSociety.year = ?
+ 		 AND studentClubSociety.student.statusId != 2
+		]]>
+	</query>
+	
+	<query name="findStudentClubSocietyByClubSocietyId">
+  		<![CDATA[
+  		from com.virtusa.akura.api.dto.StudentClubSociety studentClubSociety
+ 		 Where studentClubSociety.clubSociety.clubSocietyId = ?
+ 		 AND studentClubSociety.year = ?
+		]]>
+	</query>
+
+	<query name="getNonCurrentStudentListByClubSociety">
+  		<![CDATA[
+  		select studentClubSociety 
+  		from 	com.virtusa.akura.api.dto.StudentClubSociety studentClubSociety, 
+  			 	com.virtusa.akura.api.dto.StudentLeave studentLeave
+ 		 Where 	studentClubSociety.clubSociety.clubSocietyId = ?
+ 		 AND 	studentClubSociety.year = ?
+ 		 AND 	studentClubSociety.student.studentId = studentLeave.studentId
+ 		 AND 	? BETWEEN studentLeave.fromDate AND studentLeave.toDate
+		]]>
+	</query>
+	
+	<!-- for mobility purpose -->
+	<query name="clubSocietyAndPositionForStudent">
+   			<![CDATA[
+   				SELECT studentClubSociety.clubSociety.description
+		 		FROM com.virtusa.akura.api.dto.StudentClubSociety studentClubSociety
+ 		 		WHERE studentClubSociety.student.studentId = ?
+ 		 		AND studentClubSociety.year = ?
+			]]>
+	</query>
+	
+</hibernate-mapping>

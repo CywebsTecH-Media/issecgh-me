@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+
+<!--
+    < ÀKURA, This application manages the daily activities of a Teacher and a Student of a School>
+
+    Copyright (C) 2012 Virtusa Corporation.
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.virtusa.akura.api.dto.DailyStudentAttendance" table="DAILY_STUDENT_ATTENDANCE">
+		<id name="dailyStudentAttendanceId" type="integer" column="DAILY_STUDENT_ATTENDANCE_ID">
+			<generator class="increment" />
+		</id>
+		<property name="studentId" type="integer">
+			<column name="STUDENT_ID"  not-null="true"  />
+		</property>
+		<property name="timeIn" type="string">
+			<column name="TIME_IN"  not-null="true" sql-type="time" />
+		</property>
+		<property name="timeOut" type="string">
+			<column name="TIME_OUT"  not-null="true" sql-type="time" />
+		</property>
+		<property name="date" type="date" column="DATE"
+			not-null="true" />
+		<property name="modifiedTime" type="timestamp" generated="always">
+			<column name="MODIFIED_TIME" length="19" not-null="true" />
+		</property>
+
+	</class>
+
+	<query name="getStudentAttendance">
+		<![CDATA[
+
+			from com.virtusa.akura.api.dto.DailyStudentAttendance dailyStudentAttendance
+			where dailyStudentAttendance.studentId in 
+				(select studentClassInfo.student.studentId 
+				from com.virtusa.akura.api.dto.StudentClassInfo studentClassInfo 
+				where studentClassInfo.classGrade.classGradeId = ? 
+				and year(studentClassInfo.year)= ?)
+			and dailyStudentAttendance.date = ?
+
+		]]>
+	</query>
+
+	<query name="getStudentAttendancebyStudentId">
+		<![CDATA[
+
+			from com.virtusa.akura.api.dto.DailyStudentAttendance dailyStudentAttendance
+			where dailyStudentAttendance.studentId = ? and dailyStudentAttendance.date = ?
+
+		]]>
+	</query>
+
+	<query name="getAttendance">
+		<![CDATA[
+
+			FROM com.virtusa.akura.api.dto.DailyStudentAttendance dailyStudentAttendance
+			WHERE dailyStudentAttendance.studentId = ? AND
+			dailyStudentAttendance.date BETWEEN  ? AND ?
+
+		]]>
+	</query>
+	
+	<query name="getNonCurrentStudentAttendanceList">
+		<![CDATA[
+
+			from com.virtusa.akura.api.dto.DailyStudentAttendance dailyStudentAttendance
+			where dailyStudentAttendance.studentId in (select studentClassInfo.student.studentId from com.virtusa.akura.api.dto.StudentClassInfo studentClassInfo where studentClassInfo.classGrade.classGradeId = ? and studentClassInfo.student.statusId != 1)
+			and dailyStudentAttendance.date = ?
+
+		]]>
+	</query>
+	
+    <sql-query name="callStudentDailyAttendance" callable="true">
+		<![CDATA[
+			CALL sp_student_daily_attendance(?,?,?,?)
+		 ]]>
+	</sql-query>
+	
+</hibernate-mapping>

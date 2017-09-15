@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="StudentTermMarks" language="groovy" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" isFloatColumnFooter="true">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<template><![CDATA[$P{STYLE_TEMPLATE}]]></template>
+	<parameter name="STYLE_TEMPLATE" class="java.lang.String"/>
+	<parameter name="highTitleLabel" class="java.lang.String"/>
+	<parameter name="monthLabel" class="java.lang.String"/>
+	<parameter name="exceededLabel" class="java.lang.String"/>
+	<parameter name="nic" class="java.lang.String"/>
+	<parameter name="parentName" class="java.lang.String"/>
+	<parameter name="telephoneNo" class="java.lang.String"/>
+	<field name="fromMonth" class="java.lang.String"/>
+	<field name="exceedCount" class="java.lang.String"/>
+	<field name="parentNicd" class="java.lang.String"/>
+	<field name="parentName" class="java.lang.String"/>
+	<field name="telNo" class="java.lang.String"/>
+	<title>
+		<band height="43">
+			<textField>
+				<reportElement style="Frame_color" mode="Opaque" x="35" y="10" width="291" height="21" forecolor="#FFFFFF"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{highTitleLabel}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Frame_color" mode="Opaque" x="301" y="10" width="141" height="21" forecolor="#FFFFFF"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{monthLabel}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="Frame_color" x="442" y="10" width="96" height="21" isRemoveLineWhenBlank="true" forecolor="#FFFFFF"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{fromMonth}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="23" splitType="Stretch">
+			<line>
+				<reportElement x="538" y="1" width="1" height="21"/>
+			</line>
+			<line>
+				<reportElement x="35" y="22" width="503" height="1"/>
+			</line>
+			<line>
+				<reportElement x="36" y="0" width="503" height="1"/>
+			</line>
+			<line>
+				<reportElement x="142" y="0" width="1" height="22"/>
+			</line>
+			<textField>
+				<reportElement style="Text_and_ash_bg" mode="Transparent" x="421" y="3" width="114" height="20"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{exceededLabel}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Text_and_ash_bg" mode="Transparent" x="144" y="0" width="105" height="20"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{nic}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Text_and_ash_bg" mode="Transparent" x="250" y="1" width="170" height="20"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{parentName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Text_and_ash_bg" x="36" y="2" width="107" height="20"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{telephoneNo}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="35" y="1" width="1" height="21"/>
+			</line>
+			<line>
+				<reportElement x="418" y="0" width="1" height="22"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="24" splitType="Stretch">
+			<line>
+				<reportElement x="418" y="0" width="1" height="21"/>
+			</line>
+			<line>
+				<reportElement x="142" y="0" width="1" height="21"/>
+			</line>
+			<line>
+				<reportElement x="538" y="0" width="1" height="21"/>
+			</line>
+			<line>
+				<reportElement x="35" y="22" width="503" height="1"/>
+			</line>
+			<line>
+				<reportElement x="249" y="-2" width="1" height="23"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="421" y="1" width="117" height="20" isRemoveLineWhenBlank="true"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{exceedCount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="144" y="1" width="105" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{parentNicd}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="36" y="3" width="107" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{telNo}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="35" y="-1" width="1" height="24"/>
+			</line>
+			<line>
+				<reportElement x="249" y="-22" width="1" height="20"/>
+			</line>
+			<textField>
+				<reportElement x="250" y="2" width="170" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{parentName}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

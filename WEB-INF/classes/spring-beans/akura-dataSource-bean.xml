@@ -1,0 +1,265 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- < ÀKURA, This application manages the daily activities of a Teacher
+	and a Student of a School> Copyright (C) 2012 Virtusa Corporation. This program
+	is free software: you can redistribute it and/or modify it under the terms
+	of the GNU General Public License as published by the Free Software Foundation,
+	either version 3 of the License, or (at your option) any later version. This
+	program is distributed in the hope that it will be useful, but WITHOUT ANY
+	WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+	FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details. -->
+
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.springframework.org/schema/beans" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+                           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd
+                           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+
+
+	<!-- Bean definition for Transaction manager -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+
+	<!-- Data sources -->
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<!-- bean id="dataSourceSMS" class="org.apache.commons.dbcp.BasicDataSource" -->
+		<property name="driverClassName">
+			<value>com.mysql.jdbc.Driver</value>
+		</property>
+		<property name="url">
+			<value>jdbc:mysql://localhost:3306/akura
+			</value>
+
+		</property>
+		<property name="username">
+			<value>root</value>
+		</property>
+		<property name="password">
+			<value>PatiencePokua22@.</value>
+		</property>
+	</bean>
+
+	<!-- session factory -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<property name="mappingResources">
+			<list>
+				<value>hibernate/achievement.hbm.xml
+				</value>
+				<value>hibernate/bloodGroup.hbm.xml
+				</value>
+				<value>hibernate/city.hbm.xml</value>
+				<value>hibernate/class.hbm.xml</value>
+				<value>hibernate/assignment.hbm.xml</value>
+				<value>hibernate/classGrade.hbm.xml
+				</value>
+				<value>hibernate/classTeacher.hbm.xml
+				</value>
+				<value>hibernate/clubSociety.hbm.xml
+				</value>
+				<value>hibernate/district.hbm.xml</value>
+				<value>hibernate/donation.hbm.xml</value>
+				<value>hibernate/donationType.hbm.xml
+				</value>
+				<value>hibernate/educationalQualification.hbm.xml
+				</value>
+				<value>hibernate/faithLifeRating.hbm.xml</value>
+				<value>hibernate/grade.hbm.xml</value>
+				<value>hibernate/gradeSubject.hbm.xml
+				</value>
+				<value>hibernate/grading.hbm.xml</value>
+				<value>hibernate/holiday.hbm.xml</value>
+				<value>hibernate/house.hbm.xml</value>
+				<value>hibernate/language.hbm.xml</value>
+				<value>hibernate/meritAward.hbm.xml
+				</value>
+				<value>hibernate/methodOfTravel.hbm.xml
+				</value>
+				<value>hibernate/nationality.hbm.xml
+				</value>
+				<value>hibernate/exam.hbm.xml</value>
+				<value>hibernate/examSubject.hbm.xml</value>
+				<value>hibernate/examMarks.hbm.xml</value>
+				<value>hibernate/examAdmission.hbm.xml</value>
+				<value>hibernate/parent.hbm.xml</value>
+				<value>hibernate/parentDonation.hbm.xml
+				</value>
+				<value>hibernate/position.hbm.xml</value>
+				<value>hibernate/prefectType.hbm.xml
+				</value>
+				<value>hibernate/professionalQualification.hbm.xml
+				</value>
+				<value>hibernate/province.hbm.xml</value>
+				<value>hibernate/publication.hbm.xml</value>
+				<value>hibernate/publicationType.hbm.xml</value>
+				<value>hibernate/religion.hbm.xml</value>
+				<value>hibernate/scholarship.hbm.xml
+				</value>
+				<value>hibernate/school.hbm.xml</value>
+				<value>hibernate/sectionHead.hbm.xml
+				</value>
+				<value>hibernate/sport.hbm.xml</value>
+				<value>hibernate/sportCategory.hbm.xml
+				</value>
+				<value>hibernate/sportSub.hbm.xml</value>
+				<value>hibernate/staff.hbm.xml</value>
+				<value>hibernate/staffCategory.hbm.xml
+				</value>
+				<value>hibernate/staffEducation.hbm.xml
+				</value>
+				<value>hibernate/staffProfessional.hbm.xml
+				</value>
+				<value>hibernate/stream.hbm.xml</value>
+				<value>hibernate/student.hbm.xml</value>
+				<value>hibernate/studentClassInfo.hbm.xml
+				</value>
+				<value>hibernate/studentClubSociety.hbm.xml
+				</value>
+				<value>hibernate/studentDisability.hbm.xml
+				</value>
+				<value>hibernate/studentDiscipline.hbm.xml
+				</value>
+				<value>hibernate/studentLeave.hbm.xml</value>
+				<value>hibernate/studentParent.hbm.xml
+				</value>
+				<value>hibernate/studentPrefect.hbm.xml
+				</value>
+				<value>hibernate/studentScholarship.hbm.xml
+				</value>
+				<value>hibernate/studentSport.hbm.xml
+				</value>
+				<value>hibernate/studentTermMark.hbm.xml
+				</value>
+				<value>hibernate/subject.hbm.xml</value>
+				<value>hibernate/subjectTeacher.hbm.xml
+				</value>
+				<value>hibernate/subTerm.hbm.xml</value>
+				<value>hibernate/term.hbm.xml</value>
+				<value>hibernate/userLogin.hbm.xml
+				</value>
+				<value>hibernate/userRole.hbm.xml</value>
+				<value>hibernate/userSecurityQuestions.hbm.xml
+				</value>
+				<value>hibernate/securityQuestions.hbm.xml
+				</value>
+				<value>hibernate/warningLevel.hbm.xml
+				</value>
+				<value>hibernate/workingSegment.hbm.xml
+				</value>
+				<value>hibernate/faithLifeComment.hbm.xml
+				</value>
+				<value>hibernate/faithLifeCategory.hbm.xml
+				</value>
+				<value>hibernate/studentSubTermMark.hbm.xml
+				</value>
+				<value>hibernate/reportAbsenteeList.hbm.xml</value>
+				<value>hibernate/reportAverageTermMark.hbm.xml</value>
+				<value>hibernate/reportStudentClubSociety.hbm.xml</value>
+				<value>hibernate/reportStudentDiscipline.hbm.xml</value>
+				<value>hibernate/studentAttendance.hbm.xml</value>
+				<value>hibernate/teacherAttendence.hbm.xml</value>
+				<value>hibernate/staffClubSociety.hbm.xml</value>
+				<value>hibernate/staffSport.hbm.xml</value>
+				<value>hibernate/staffSeminar.hbm.xml</value>
+				<value>hibernate/staffExternalActivity.hbm.xml</value>
+				<value>hibernate/seminar.hbm.xml</value>
+				<value>hibernate/dailyStudentAttendance.hbm.xml</value>
+				<value>hibernate/studentTermMarkView.hbm.xml</value>
+				<value>hibernate/staffLeave.hbm.xml</value>
+				<value>hibernate/dailyTeacherAttendance.hbm.xml</value>
+				<value>hibernate/studyMedium.hbm.xml</value>
+				<value>hibernate/participantCategory.hbm.xml</value>
+				<value>hibernate/specialEvents.hbm.xml</value>
+				<value>hibernate/specialEventsParticipation.hbm.xml</value>
+				<value>hibernate/specialEventsAttendance.hbm.xml</value>
+				<value>hibernate/StudentSeminar.hbm.xml</value>
+				<value>hibernate/studentSpecialEventParticipationView.hbm.xml
+				</value>
+				<value>hibernate/studentSubTermMarkView.hbm.xml</value>
+				<value>hibernate/businessAudit.hbm.xml</value>
+				<value>hibernate/businessAuditDetails.hbm.xml</value>
+				<value>hibernate/studentTermMarksRankView.hbm.xml</value>
+				<value>hibernate/subjectAverageTermMarks.hbm.xml</value>
+				<value>hibernate/studentSubjectAverage.hbm.xml</value>
+				<value>hibernate/section.hbm.xml</value>
+				<value>hibernate/race.hbm.xml</value>
+				<value>hibernate/civilStatus.hbm.xml</value>
+				<value>hibernate/appointmentNature.hbm.xml</value>
+				<value>hibernate/appointmentClassification.hbm.xml</value>
+				<value>hibernate/staffServiceCategory.hbm.xml</value>
+				<value>hibernate/studentsGradeRankView.hbm.xml</value>
+				<value>hibernate/studentGradeSubjectRank.hbm.xml</value>
+				<value>hibernate/classWiseStudentsSubjectsView.hbm.xml</value>
+				<value>hibernate/studentAssignmentMark.hbm.xml</value>
+				<value>hibernate/studentAnnualGradeRank.hbm.xml</value>
+				<value>hibernate/module.hbm.xml</value>
+				<value>hibernate/page.hbm.xml</value>
+				<value>hibernate/tab.hbm.xml</value>
+				<value>hibernate/privilege.hbm.xml</value>
+				<value>hibernate/roleTab.hbm.xml</value>
+				<value>hibernate/rolePrivilege.hbm.xml</value>
+				<value>hibernate/privilegeDependency.hbm.xml</value>
+				<value>hibernate/country.hbm.xml</value>
+				<value>hibernate/assignmentMarkView.hbm.xml</value>
+				<value>hibernate/examResults.hbm.xml</value>
+				<value>hibernate/markingFlag.hbm.xml</value>
+				<value>hibernate/employmentStatus.hbm.xml</value>
+				<value>hibernate/studentTermMarkPerformance.hbm.xml</value>
+				<value>hibernate/staffProfileReportTemplate.hbm.xml</value>
+				<value>hibernate/mediumWiseClassSubjectAverageView.hbm.xml</value>
+				<value>hibernate/auditEventType.hbm.xml	</value>
+				<value>hibernate/staffLeaveType.hbm.xml	</value>
+				<value>hibernate/faithLifeGrading.hbm.xml</value>
+				<value>hibernate/staffPastService.hbm.xml</value>
+				<value>hibernate/staffAttendence.hbm.xml</value>
+				<value>hibernate/suspendedStudentDetails.hbm.xml</value>
+				<value>hibernate/studentStatus.hbm.xml</value>
+				<value>hibernate/StudentTemporaryLeave.hbm.xml</value>
+				<value>hibernate/pastStudent.hbm.xml</value>
+				<value>hibernate/staffLeaveStatus.hbm.xml</value>
+				<value>hibernate/reportAnnualStudentAttendance.hbm.xml</value>
+				<value>hibernate/bestStudentAttendance.hbm.xml</value>
+				<value>hibernate/studentscholarshipview.hbm.xml</value>
+				<value>hibernate/attendanceConfirmStatus.hbm.xml</value>
+				<value>hibernate/subjectAvergae.hbm.xml</value>
+				<value>hibernate/studentTermMarksSummery.hbm.xml</value>
+				<value>hibernate/attendanceFileUploadHistory.hbm.xml</value>
+				<value>hibernate/bulkUploadHistory.hbm.xml</value>
+				<value>hibernate/termMarkFile.hbm.xml</value>
+				<value>hibernate/staffModifiedLeaves.hbm.xml</value>
+				<value>hibernate/auditDetail.hbm.xml</value>
+				<value>hibernate/auditCategory.hbm.xml</value>
+				<value>hibernate/title.hbm.xml</value>
+				<value>hibernate/institute.hbm.xml</value>
+			</list>
+
+		</property>
+
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect
+				</prop>
+				<prop key="hibernate.max_fetch_depth">3</prop>
+				<prop key="hibernate.autocommit">false</prop>
+				<prop key="hibernate.show_sql">false</prop>
+
+				<prop key="hibernate.jdbc.batch_size">1000</prop>				
+				<prop key="hibernate.default_batch_fetch_size">1000</prop>
+				<!-- <prop key="hibernate.cache.use_second_level_cache">false</prop>
+					<prop key="hibernate.query.factory_class">org.hibernate.hql.classic.ClassicQueryTranslatorFactory</prop> -->
+			</props>
+		</property>
+	</bean>
+</beans>

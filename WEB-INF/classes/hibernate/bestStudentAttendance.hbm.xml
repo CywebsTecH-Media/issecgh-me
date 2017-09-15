@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+
+<!--
+    < ÀKURA, This application manages the daily activities of a Teacher and a Student of a School>
+
+    Copyright (C) 2012 Virtusa Corporation.
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.virtusa.akura.api.dto.BestStudentAttendanceTemplate" table="BESTSTUDENTATTENDANCEVIEW">
+
+		<composite-id>
+			<key-property name="studentID" column="DDDEmpNo" type="string" />
+		</composite-id>
+
+		<property name="studentName" column="DDDEmpName" type="string" />
+		<property name="classDescription" column="ClassDescription" type="string" />
+		<property name="gradeDescription" column="GradeDescription" type="string" />
+		<property name="monthId" column="MonthId" type="integer"/>
+		<property name="year" column="yearId" type="integer" />
+		<property name="photo" column="Photo" type="binary"/>
+
+	</class>
+
+	 <sql-query name="callStudentGamificationSearch" >
+        <![CDATA[
+			CALL sp_student_gamification_search(?,?,?,?,?,?)
+		]]>
+    </sql-query>
+
+</hibernate-mapping>

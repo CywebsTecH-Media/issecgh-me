@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+
+<!-- < ÀKURA, This application manages the daily activities of a Teacher
+	and a Student of a School> Copyright (C) 2012 Virtusa Corporation. This program
+	is free software: you can redistribute it and/or modify it under the terms
+	of the GNU General Public License as published by the Free Software Foundation,
+	either version 3 of the License, or (at your option) any later version. This
+	program is distributed in the hope that it will be useful, but WITHOUT ANY
+	WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+	FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details. -->
+
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.virtusa.akura.api.dto.MediumWiseClassSubjectAverageView"
+		table="MEDIUM_WISE_CLASS_SUBJECT_AVERAGE_VIEW">
+		<composite-id>
+			<key-property name="classDescription" column="CLASS_DESCRIPTION"
+				type="string" />
+			<key-property name="year" column="YEAR" type="date" />
+			<key-property name="gradeSubjectId" column="GRADE_SUBJECT_ID"
+				type="int" />
+			<key-property name="term" column="TERM" type="string" />
+			<key-property name="languageId" column="LANGUAGE_ID"
+				type="int" />
+		</composite-id>
+
+		<property name="classGradeId" column="CLASS_GRADE_ID" type="int"
+			update="false" />
+
+		<property name="gradeDescription" column="GRADE" type="string"
+			update="false" />
+		<property name="subject" column="SUBJECT" type="string"
+			update="false" />
+		<property name="totalMarks" column="TOTAL_MARKS" type="int"
+			update="false" />
+		<property name="studentCount" column="STUDENT_COUNT" type="int"
+			update="false" />
+		<property name="average" column="AVERAGE" type="double"
+			update="false" />
+	</class>
+
+	<query name="findMediumWiseClassSubjectAverage">
+			<![CDATA[
+				from com.virtusa.akura.api.dto.MediumWiseClassSubjectAverageView mwcsav
+				where mwcsav.classGradeId = ? and
+				year(mwcsav.year) = ? and
+				mwcsav.gradeSubjectId = ? and
+				mwcsav.term = ? and
+				mwcsav.languageId = ?
+			]]>
+	</query>
+
+	<query name="findMediumWiseClassSubjectAverageList">
+			<![CDATA[
+				select mwcsav
+				from com.virtusa.akura.api.dto.MediumWiseClassSubjectAverageView mwcsav,
+					com.virtusa.akura.api.dto.Term t
+				where mwcsav.classGradeId = ? and
+				year(mwcsav.year) = ? and
+				mwcsav.term = t.description and
+				t.termId =?
+				order by mwcsav.languageId
+			]]>
+	</query>
+
+	<query name="findStudyMediumsInClass">
+			<![CDATA[
+				select distinct mwcsav.languageId
+				from com.virtusa.akura.api.dto.MediumWiseClassSubjectAverageView mwcsav
+				where mwcsav.classGradeId = ? and
+				year(mwcsav.year) = ? and
+				mwcsav.term = ?
+			]]>
+	</query>
+
+</hibernate-mapping>

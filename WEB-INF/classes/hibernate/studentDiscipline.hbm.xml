@@ -1,0 +1,128 @@
+<?xml version="1.0"?>
+
+<!--
+    < ÀKURA, This application manages the daily activities of a Teacher and a Student of a School>
+
+    Copyright (C) 2012 Virtusa Corporation.
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.virtusa.akura.api.dto.StudentDiscipline" table="STUDENT_DISCIPLINE">
+		<id name="studentDisciplineId" type="integer" column="STUDENT_DISCIPLINE_ID">
+			<generator class="increment" />
+		</id>
+		<property name="userLoginId" type="java.lang.Integer">
+            <column name="USER_LOGIN_ID" not-null="false" />
+        </property>
+		<property name="studentId" type="int" column="STUDENT_ID"
+			not-null="true" />
+		<property name="warningLevelId" type="int" column="WARNING_LEVEL_ID"
+			not-null="true" />
+		<property name="comment" type="string" column="COMMENT"
+			not-null="false" />
+		<property name="informedtoParent" type="boolean"
+			column="IS_INFORMED_TO_PARENT" not-null="true" />
+		<property name="modifiedTime" type="timestamp" column="MODIFIED_TIME"
+			not-null="true" generated="always"/>
+		<property name="date" type="date" column="DATE"
+			not-null="true" />
+	</class>
+
+	<sql-query name="viewStudentDisciplineByStudentId" cacheable="false"
+		callable="false">
+		<return alias="descipline" class="com.virtusa.akura.api.dto.StudentDiscipline"
+			lock-mode="read" />
+   			<![CDATA[
+				Select * from STUDENT_DISCIPLINE
+				where student_id = ?
+			]]>
+	</sql-query>
+
+	<sql-query name="viewStudentDisciplineByStudentIdAndUserLoginId" cacheable="false"
+		callable="false">
+		<return alias="descipline" class="com.virtusa.akura.api.dto.StudentDiscipline"
+			lock-mode="read" />
+   			<![CDATA[
+				Select * from STUDENT_DISCIPLINE
+				where student_id = ? AND user_login_id = ?
+			]]>
+	</sql-query>
+
+	<sql-query name="viewAllStudentDisciplineInfoByYear" cacheable="false"
+		callable="false">
+		<return alias="descipline" class="com.virtusa.akura.api.dto.StudentDiscipline"
+			lock-mode="read" />
+   		<![CDATA[
+		Select * from STUDENT_DISCIPLINE
+ 		 Where DATE >= ?
+ 		 AND DATE <= ?
+		]]>
+	</sql-query>
+	
+		
+	
+	<query name="getStudentDiscilpineByName">
+		<![CDATA[
+		   from com.virtusa.akura.api.dto.StudentDiscipline as studentDiscipline
+		   where ((studentDiscipline.comment=?) AND ((studentDiscipline.informedtoParent=?) AND ((studentDiscipline.warningLevelId=?) AND (studentDiscipline.date=?)) ))
+  		]]>
+	</query>
+	
+	<sql-query name="viewCurrentYearStudentDisciplineByStudentId" cacheable="false"
+		callable="false">
+		<return alias="descipline" class="com.virtusa.akura.api.dto.StudentDiscipline"
+			lock-mode="read" />
+   		<![CDATA[
+		Select * from STUDENT_DISCIPLINE
+				where student_id = ? AND EXTRACT( YEAR FROM date) = ? order by date DESC
+		]]>
+	</sql-query>
+	<!--  
+	<sql-query name="getSelectedDisciplinaryactionByStudent" cacheable="false"
+		callable="false">
+		<return alias="descipline" class="com.virtusa.akura.api.dto.StudentDiscipline"
+			lock-mode="read" />
+   		<![CDATA[
+		from STUDENT_DISCIPLINE
+		where student_id = ? AND studentDisciplineId = ? 
+		]]>
+	</sql-query>-->
+	<query name="getDisciplinaryActionById">
+   			<![CDATA[
+		 		from com.virtusa.akura.api.dto.StudentDiscipline studentDiscipline
+ 		 		Where studentDisciplineId = ?
+			]]>
+	</query>
+	
+	<query name="getDisciplineForStudentByDate">
+  		<![CDATA[
+		 from com.virtusa.akura.api.dto.StudentDiscipline studentDiscipline
+ 		 Where studentDiscipline.studentId = ?
+ 		 AND studentDiscipline.date = ?
+		]]>
+    </query>
+    
+	<sql-query name="getStudentDisciplineByStudentIdAndCurrentYearForMobileApplication">
+  		<![CDATA[
+			SELECT wl.COLOUR, sd.DATE,  sd.IS_INFORMED_TO_PARENT, sd.COMMENT
+		 	FROM STUDENT_DISCIPLINE sd JOIN WARNING_LEVEL wl
+			ON sd.WARNING_LEVEL_ID = wl.WARNING_LEVEL_ID
+ 		 	WHERE sd.STUDENT_ID = ? AND sd.DATE >= ?
+ 		 	ORDER BY sd.DATE DESC
+		]]>
+    </sql-query>
+	
+</hibernate-mapping>

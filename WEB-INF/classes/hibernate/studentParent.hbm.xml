@@ -1,0 +1,380 @@
+<?xml version="1.0"?>
+
+<!--
+    < ÀKURA, This application manages the daily activities of a Teacher and a Student of a School>
+
+    Copyright (C) 2012 Virtusa Corporation.
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.virtusa.akura.api.dto.StudentParent" table="STUDENT_PARENT" lazy="false">
+		<id name="studentParentId" type="int" column="STUDENT_PARENT_ID">
+			<generator class="increment" />
+		</id>
+		<many-to-one name="student" class="com.virtusa.akura.api.dto.Student"
+			fetch="select">
+			<column name="STUDENT_ID" not-null="true" unique="true" />
+		</many-to-one>
+		<many-to-one name="parent" class="com.virtusa.akura.api.dto.Parent"
+			fetch="select">
+			<column name="PARENT_ID" not-null="true" unique="true" />
+		</many-to-one>
+		<property name="relationship" type="char">
+			<column name="RELATIONSHIP" length="1" not-null="true">
+				<comment>F- FATHER M-MOTHER G-GUARDIAN</comment>
+			</column>
+		</property>
+		
+		<property name="deleted" type="boolean" not-null="false">
+			<column name="DELETED" />
+		</property>
+		<property name="isSmsSubscribed" type="boolean" not-null="false">
+			<column name="IS_SMS_SUBSCRIBED" />
+		</property>
+		<property name="parentToken" type="string" not-null="false">
+			<column name="TOKEN" />
+		</property>
+		<property name="modifiedTime" type="timestamp" generated="always">
+			<column name="MODIFIED_TIME" length="19" not-null="true" />
+		</property>
+	</class>
+	<sql-query name="getParentsByStudentId" cacheable="false"
+		callable="false">
+		<return alias="studentParent" class="com.virtusa.akura.api.dto.StudentParent"
+			lock-mode="read" />
+   		<![CDATA[
+			SELECT * FROM STUDENT_PARENT
+  			WHERE STUDENT_ID = ?
+		]]>
+	</sql-query>
+	
+	<query name="getChildrenByParnetId">
+   			<![CDATA[
+		 		select studentParent.student FROM com.virtusa.akura.api.dto.StudentParent studentParent
+ 		 		WHERE studentParent.parent.parentId = ?
+
+			]]>
+	</query>
+	
+	<query name="isParentUsedByOtherStudent">
+   			<![CDATA[
+		 		select studentParent.studentParentId FROM com.virtusa.akura.api.dto.StudentParent studentParent 
+ 		 		WHERE studentParent.parent.nationalIdNo = ? and studentParent.student.studentId !=? 
+
+			]]>
+	</query>
+	
+	<query name="isParentUsedBySameStudent">
+   			<![CDATA[
+		 		select studentParent.studentParentId FROM com.virtusa.akura.api.dto.StudentParent studentParent 
+ 		 		WHERE studentParent.parent.nationalIdNo = ? and studentParent.student.studentId =? 
+
+			]]>
+	</query>
+	
+	<query name="isParentUsedBySameStudentWithRelationship">
+   			<![CDATA[
+		 		select studentParent.studentParentId FROM com.virtusa.akura.api.dto.StudentParent studentParent 
+ 		 		WHERE studentParent.student.studentId =? and (studentParent.parent.nationalIdNo = ? or studentParent.parent.relationship = ?)
+
+			]]>
+	</query>
+	
+	<query name="getSPRrelationByStudent">
+   			<![CDATA[
+		 		FROM com.virtusa.akura.api.dto.StudentParent studentParent
+ 		 		WHERE studentParent.student.studentId = ? and studentParent.relationship=?
+
+			]]>
+	</query>
+	
+	<query name="getSPRrelationByParent">
+   			<![CDATA[
+		 		select studentParent.student FROM com.virtusa.akura.api.dto.StudentParent studentParent
+ 		 		WHERE studentParent.parent.nationalIdNo = ? and studentParent.relationship=?
+
+			]]>
+	</query>
+	
+	<query name="deleteStudentByDepartureDate">
+		<![CDATA[
+			update com.virtusa.akura.api.dto.StudentParent studentParent
+   			set studentParent.deleted = 1
+ 		 	Where (studentParent.student.studentId = ?)
+		]]>
+	</query>
+
+
+
+
+	<query name="getSmsSubscribedListByStudentList">
+   			<![CDATA[
+			SELECT 
+				studentParent.parentToken
+			FROM 
+				com.virtusa.akura.api.dto.StudentParent studentParent
+			WHERE 
+				studentParent.student.studentId IN (:studentIdList)and studentParent.isSmsSubscribed=true
+
+			]]>
+	</query>
+	
+	<query name="getSmsSubscribedStudentIdListByStudentList">
+   			<![CDATA[
+			
+
+        SELECT 
+				studentParent.student.studentId
+			FROM 
+				com.virtusa.akura.api.dto.StudentParent studentParent
+			WHERE 
+				studentParent.student.studentId IN (:studentIdList)and studentParent.isSmsSubscribed=true
+
+
+			]]>
+	</query>
+
+	<query name="getAllSubcribedParentToken">
+		<![CDATA[
+			SELECT 
+				studentParent.parentToken
+			FROM 
+				com.virtusa.akura.api.dto.StudentParent studentParent
+			WHERE 
+				studentParent.isSmsSubscribed = true
+		]]>
+	</query>
+	
+	<query name="getTelephoneNumberListByTokenList">
+		<![CDATA[
+			SELECT 
+				studentParent.parentToken,
+				parent.mobileNo,
+				student.nameWtInitials
+				
+			FROM 
+				com.virtusa.akura.api.dto.StudentParent studentParent,
+				com.virtusa.akura.api.dto.Parent parent,
+				com.virtusa.akura.api.dto.Student student 
+			WHERE 
+			    studentParent.parent.parentId = parent.parentId and
+			    studentParent.student.studentId = student.studentId and
+				studentParent.parentToken IN (:tokenList)
+		]]>
+	</query>
+	
+	<query name="getStudentIdListByTokenList">
+		<![CDATA[
+			SELECT 
+				
+				studentParent.student
+			FROM 
+				com.virtusa.akura.api.dto.StudentParent studentParent,
+				com.virtusa.akura.api.dto.Parent parent 
+			WHERE 
+			    studentParent.parent.parentId = parent.parentId and
+				studentParent.parentToken IN (:tokenList)
+		]]>
+	</query>
+	
+	<query name="getTelephoneNumberListByParentIdAndStudentId">
+		<![CDATA[
+			SELECT 
+				studentParent.parentToken,
+				parent.mobileNo
+				
+			FROM 
+				com.virtusa.akura.api.dto.StudentParent studentParent,
+				com.virtusa.akura.api.dto.Parent parent 
+			WHERE 
+			    studentParent.parent.parentId = parent.parentId and
+				studentParent.parent.parentId = ? and
+				studentParent.student.studentId = ? 
+		]]>
+	</query>
+	
+	<query name="checkParentIsSmsSubscribedForAnotherStudent">
+		<![CDATA[
+			SELECT 
+				studentParent
+				
+			FROM 
+				com.virtusa.akura.api.dto.StudentParent studentParent,
+				com.virtusa.akura.api.dto.Parent parent 
+			WHERE 
+			    studentParent.parent.parentId = parent.parentId and
+				parent.nationalIdNo = ? and 
+				studentParent.isSmsSubscribed = true
+		]]>
+	</query>
+	<query name="getSubscriptionsByStudentId">
+  		<![CDATA[
+	 		SELECT 
+	 			studentParent.parent.parentId,
+	 			studentParent.parent.fullName,
+	 			studentParent.parentToken,
+	 			studentParent.parent.mobileNo,
+	 			studentParent.student.nameWtInitials,
+	 			studentParent.isSmsSubscribed
+	 		FROM 
+	 			com.virtusa.akura.api.dto.StudentParent studentParent			
+		 	WHERE 
+		 		studentParent.student.studentId =? and
+		 		studentParent.isSmsSubscribed  = true 	 		
+		]]>
+	</query>
+	<query name="smsUnSubscriptionByStudentId">
+		<![CDATA[
+			UPDATE com.virtusa.akura.api.dto.StudentParent studentParent
+   			set studentParent.isSmsSubscribed = 0
+ 		 	Where (studentParent.student.studentId = ?)
+		]]>
+	</query>
+	<query name="getStudentsDetailsByTokenList">
+		<![CDATA[
+			SELECT 
+				studentParent.studentParentId,
+				studentParent.student.admissionNo,
+				studentParent.student.nameWtInitials,
+				studentParent.student.studentId,
+				studentParent.relationship
+				
+			FROM 
+				com.virtusa.akura.api.dto.StudentParent studentParent,
+				com.virtusa.akura.api.dto.Parent parent 
+			WHERE 
+			    studentParent.parent.parentId = parent.parentId and
+				studentParent.parentToken IN (:tokenList) 
+				order by cast (studentParent.student.admissionNo AS int) , studentParent.relationship
+		]]>
+	</query>
+	
+	
+		<query name="getTokenByStudentsParentId">
+		<![CDATA[
+			SELECT 
+				studentParent.parentToken
+			FROM 
+				com.virtusa.akura.api.dto.StudentParent studentParent
+			WHERE 
+				studentParent.studentParentId IN (:studentParentIdList)
+						
+			
+		]]>
+	</query>
+	<query name="getAllParentTokenList">
+		<![CDATA[
+			SELECT 
+				studentParent.parentToken
+			FROM 
+				com.virtusa.akura.api.dto.StudentParent studentParent
+			WHERE 
+				studentParent.parentToken IS NOT NULL
+		]]>
+	</query>
+	
+	<query name="getStudentParentFromNIC">
+            <![CDATA[
+                  SELECT 
+				studentParent,parent
+                  FROM 
+                        com.virtusa.akura.api.dto.StudentParent studentParent,
+                        com.virtusa.akura.api.dto.Parent parent
+                  WHERE
+                        studentParent.parent.parentId = parent.parentId
+                        and
+                        parent.nationalIdNo IN (:parentNICList)
+            ]]>
+      </query>
+	<query name="getAllParentTokenListByGradeIdandClassId">
+		<![CDATA[
+		
+		SELECT 
+				studentParent.parentToken
+			FROM 
+				com.virtusa.akura.api.dto.StudentParent studentParent
+			WHERE 
+				studentParent.parentToken IS NOT NULL
+
+		]]>
+	</query>
+	
+	<query name="getAllParentTokenListByGradeId">
+		<![CDATA[
+		
+		SELECT 
+				studentParent.parentToken
+			FROM 
+				com.virtusa.akura.api.dto.StudentParent studentParent
+			WHERE 
+				studentParent.parentToken IS NOT NULL
+		]]>
+	</query>
+	
+	<query name="getTokenFromGradeIdandClassId">
+		<![CDATA[
+		
+		SELECT 
+				studentParent.parentToken
+			FROM 
+				com.virtusa.akura.api.dto.ClassGrade classGrade,
+				com.virtusa.akura.api.dto.StudentClassInfo classInfo,
+				com.virtusa.akura.api.dto.StudentParent studentParent
+			WHERE 
+				classGrade.grade.gradeId =? and
+				classGrade.classGradeId =? and
+				classGrade.classGradeId = classInfo.classGrade.classGradeId and
+				classInfo.student.studentId = studentParent.student.studentId 
+	
+		]]>
+	</query>
+		<query name="getTokenFromGradeId">
+		<![CDATA[
+		
+		SELECT 
+				studentParent.parentToken
+			FROM 
+				com.virtusa.akura.api.dto.ClassGrade classGrade,
+				com.virtusa.akura.api.dto.StudentClassInfo classInfo,
+				com.virtusa.akura.api.dto.StudentParent studentParent
+			WHERE 
+				classGrade.grade.gradeId =? and
+				classGrade.classGradeId = classInfo.classGrade.classGradeId and
+				classInfo.student.studentId = studentParent.student.studentId 
+	
+		]]>
+	</query>
+	
+		<query name="getParentAndStudentByTokenList" >
+		<![CDATA[
+	SELECT
+			studentParent,student,classGrade
+		FROM 
+			com.virtusa.akura.api.dto.StudentParent studentParent,
+			com.virtusa.akura.api.dto.Parent parent,
+			com.virtusa.akura.api.dto.Student student,
+			com.virtusa.akura.api.dto.ClassGrade classGrade,
+			com.virtusa.akura.api.dto.StudentClassInfo studentClassInfo
+		WHERE 
+			studentParent.parentToken IN (:tokenList) and
+			studentParent.parent.parentId = parent.parentId and
+			student.studentId = studentParent.student.studentId and
+		    studentClassInfo.student.studentId = studentParent.student.studentId and
+		    studentClassInfo.classGrade.classGradeId = classGrade.classGradeId
+		    
+		    ]]>
+	</query>
+</hibernate-mapping>

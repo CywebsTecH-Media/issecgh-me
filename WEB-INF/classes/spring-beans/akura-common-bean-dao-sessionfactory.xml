@@ -1,0 +1,526 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+	<!--
+		< ÀKURA, This application manages the daily activities of a Teacher
+		and a Student of a School> Copyright (C) 2012 Virtusa Corporation.
+		This program is free software: you can redistribute it and/or modify
+		it under the terms of the GNU General Public License as published by
+		the Free Software Foundation, either version 3 of the License, or (at
+		your option) any later version. This program is distributed in the
+		hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+		the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+		PURPOSE. See the GNU General Public License for more details.
+	-->
+
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.springframework.org/schema/beans" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+                           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd
+                           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+
+	<!-- Data sources -->
+	<import resource="akura-dataSource-bean.xml" />
+
+	<!-- Bean definition for the ProvinceDao -->
+	<bean id="provinceDao" class="com.virtusa.akura.common.dao.ProvinceDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<!-- Bean definition for the DistrictDao -->
+	<bean id="districtDao" class="com.virtusa.akura.common.dao.DistrictDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<!-- Bean definition for the ExamSubjectDao -->
+	<bean id="examSubjectDao" class="com.virtusa.akura.common.dao.ExamSubjectDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<!-- Bean definition for the CityDao -->
+	<bean id="cityDao" class="com.virtusa.akura.common.dao.CityDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<!-- Bean definition for the CountryDao -->
+	<bean id="countryDao" class="com.virtusa.akura.common.dao.CountryDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<!-- Bean definition for the religionDao -->
+	<bean id="religionDao" class="com.virtusa.akura.common.dao.ReligionDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<!-- Bean definition for the SchoolClassDao -->
+	<bean id="languageDao" class="com.virtusa.akura.common.dao.LanguageDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<!-- Bean definition for the houseDao -->
+	<bean id="houseDao" class="com.virtusa.akura.common.dao.HouseDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<!-- Bean definition for the BloodGroupDao -->
+	<bean id="bloodGroupDao" class="com.virtusa.akura.common.dao.BloodGroupDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<!-- Bean definition for the MethodOfTravelDao -->
+	<bean id="methodOfTravelDao" class="com.virtusa.akura.common.dao.MethodOfTravelDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<!-- Bean definition for the NationalityDao -->
+	<bean id="nationalityDao" class="com.virtusa.akura.common.dao.NationalityDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+
+<!-- Bean definition for the RaceDao -->
+	<bean id="raceDao" class="com.virtusa.akura.common.dao.RaceDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<!-- Bean definition for the TitleDao -->
+	<bean id="titleDao" class="com.virtusa.akura.common.dao.TitleDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+
+	<!-- Bean definition for the educationalQualificationDao -->
+	<bean id="educationalQualificationDao"
+		class="com.virtusa.akura.common.dao.EducationalQualificationDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<!-- Bean definition for the professionalQualificationDao -->
+	<bean id="professionalQualificationDao"
+		class="com.virtusa.akura.common.dao.ProfessionalQualificationDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	
+	<!-- Bean definition for the professionalQualificationDao -->
+	<bean id="instituteDao"
+		class="com.virtusa.akura.common.dao.InstituteDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<!-- Bean definition for the termDao -->
+	<bean id="termDao" class="com.virtusa.akura.common.dao.TermDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<!-- Bean definition for the subTtermDao -->
+	<bean id="subTermDao" class="com.virtusa.akura.common.dao.SubTermDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<!-- Bean definition for the SubjectDao -->
+	<bean id="subjectDao" class="com.virtusa.akura.common.dao.SubjectDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<!-- bean definition for the club society dao -->
+	<bean id="clubSocietyDaoTarget" class="com.virtusa.akura.common.dao.ClubSocietyDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<!-- bean definition for the sport dao -->
+	<bean id="sportDaoTarget" class="com.virtusa.akura.common.dao.SportDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<!-- bean definition for the sport sub dao -->
+	<bean id="sportSubDaoTarget" class="com.virtusa.akura.common.dao.SportSubDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<!-- Bean definition for the prefectTypeDao -->
+	<bean id="prefectTypeDao" class="com.virtusa.akura.common.dao.PrefectTypeDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<!-- Bean definition for the examDao -->
+	<bean id="examDao" class="com.virtusa.akura.common.dao.ExamDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<!-- Bean definition for the SchoolClassDao -->
+	<bean id="schoolClassDao" class="com.virtusa.akura.common.dao.SchoolClassDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<!-- Bean definition for the scholarshipDao -->
+	<bean id="scholarshipDao" class="com.virtusa.akura.common.dao.ScholarshipDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<!-- Bean definition for the PublicationTypeDao -->
+	<bean id="publicationTypeDao" class="com.virtusa.akura.common.dao.PublicationTypeDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<!-- Bean definition for the PublicationDao -->
+	<bean id="publicationDao" class="com.virtusa.akura.common.dao.PublicationDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<!-- bean definition for the sport category dao -->
+	<bean id="sportCategoryDaoTarget" class="com.virtusa.akura.common.dao.SportCategoryDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<!-- bean definition for the holiday dao -->
+	<bean id="holidayDao" class="com.virtusa.akura.common.dao.HolidayDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<!-- bean definition for the faithLifeCategory dao -->
+	<bean id="faithLifeCategoryDao" class="com.virtusa.akura.common.dao.FaithLifeCategoryDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<!-- bean definition for the faithLifeComment dao -->
+	<bean id="faithLifeCommentDao" class="com.virtusa.akura.common.dao.FaithLifeCommentDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<!-- Bean definition for the seminarDao -->
+	<bean id="seminarDao" class="com.virtusa.akura.common.dao.SeminarDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="studyMediumDao" class="com.virtusa.akura.common.dao.StudyMediumDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<!-- bean definition for the warning level dao -->
+	<bean id="warningLevelDaoTarget" class="com.virtusa.akura.common.dao.WarningLevelDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<!-- Bean definition for the StreamDao -->
+	<bean id="streamDao" class="com.virtusa.akura.common.dao.StreamDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<!-- Bean definition for the classGradeDao -->
+	<bean id="classGradeDao" class="com.virtusa.akura.common.dao.ClassGradeDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<!-- Bean definition for the gradeDao -->
+	<bean id="gradeDao" class="com.virtusa.akura.common.dao.GradeDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<!-- Bean definition for the gradeSubjectDao -->
+	<bean id="gradeSubjectDao" class="com.virtusa.akura.common.dao.GradeSubjectDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<!-- Bean definition for the gradingDao -->
+	<bean id="gradingDao" class="com.virtusa.akura.common.dao.GradingDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<!-- Bean definition for the positionDao -->
+	<bean id="positionDao" class="com.virtusa.akura.common.dao.PositionDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="staffCategoryDao" class="com.virtusa.akura.common.dao.StaffCategoryDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="donationTypeDao" class="com.virtusa.akura.common.dao.StaffCategoryDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<!-- bean definition for the working segment dao -->
+	<bean id="workingSegmentDaoTarget" class="com.virtusa.akura.common.dao.WorkingSegmentDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<!-- Bean definition for the donationTypeDaoTarget -->
+	<bean id="donationTypeDaoTarget" class="com.virtusa.akura.common.dao.DonationTypeDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="userDao" class="com.virtusa.akura.common.dao.UserDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="moduleDao" class="com.virtusa.akura.common.dao.ModuleDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="tabDao" class="com.virtusa.akura.common.dao.TabDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="pageDao" class="com.virtusa.akura.common.dao.PageDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="privilegeDao" class="com.virtusa.akura.common.dao.PrivilegeDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="roleTabDao" class="com.virtusa.akura.common.dao.RoleTabDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="rolePrivilegeDao" class="com.virtusa.akura.common.dao.RolePrivilegeDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="privilegeDependencyDao" class="com.virtusa.akura.common.dao.PrivilegeDependencyDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="userRoleDao" class="com.virtusa.akura.common.dao.UserRoleDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="userLoginDao" class="com.virtusa.akura.common.dao.UserLoginDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="userSecurityQuestionsDao"
+		class="com.virtusa.akura.common.dao.UserSecurityQuestionsDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="securityQuestionsDao" class="com.virtusa.akura.common.dao.SecurityQuestionsDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="participantCategoryDao" class="com.virtusa.akura.common.dao.ParticipantCategoryDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="specialEventsDao" class="com.virtusa.akura.common.dao.SpecialEventsDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="specialEventsParticipationDao"
+		class="com.virtusa.akura.common.dao.SpecialEventsParticipationDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<!-- bean definition for the assignment dao -->
+	<bean id="assignmentDao" class="com.virtusa.akura.common.dao.AssignmentDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<!-- bean definition for the section dao -->
+	<bean id="sectionDao" class="com.virtusa.akura.common.dao.SectionDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	
+	<!-- bean definition for the civil status dao -->
+	<bean id="civilStatusDao" class="com.virtusa.akura.common.dao.CivilStatusDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<!-- bean definition for the AppointmentNature dao -->
+	<bean id="appointmentNatureDao" class="com.virtusa.akura.common.dao.AppointmentNatureDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<!-- bean definition for the AppointmentClassification dao -->
+	<bean id="appointmentClassificationDao" class="com.virtusa.akura.common.dao.AppointmentClassificationDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<!-- bean definition for the StaffService dao -->
+	<bean id="StaffServiceCategoryDao" class="com.virtusa.akura.common.dao.StaffServiceCategoryDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="employmentStatusDao" class="com.virtusa.akura.common.dao.EmploymentStatusDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="auditEventTypeDao" class="com.virtusa.akura.common.dao.AuditEventTypeDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	
+
+	<!-- bean definition for the StaffService dao -->
+	<bean id="markingFlagDao" class="com.virtusa.akura.common.dao.MarkingFlagDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	
+	<!-- bean definition for the Staff Leave Type dao -->
+	<bean id="staffLeaveTypeDao" class="com.virtusa.akura.common.dao.StaffLeaveTypeDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="faithLifeGradingDao" class="com.virtusa.akura.common.dao.FaithLifeGradingDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="studentStatusDao" class="com.virtusa.akura.common.dao.StudentStatusDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	
+	<bean id="bulkUploadHistoryDao" class="com.virtusa.akura.common.dao.BulkUploadHistoryDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+</beans>

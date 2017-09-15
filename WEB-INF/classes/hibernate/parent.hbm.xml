@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+
+<!--
+    < ÀKURA, This application manages the daily activities of a Teacher and a Student of a School>
+
+    Copyright (C) 2012 Virtusa Corporation.
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.virtusa.akura.api.dto.Parent" table="PARENT" lazy="false">
+		<id name="parentId" column="PARENT_ID" type="integer">
+			<generator class="increment" />
+		</id>
+		<property name="teacherRegNo" type="string" column="TEACHER_REG_NO"
+			not-null="false" />
+		<property name="cityId" type="integer" column="CITY_ID" />
+		<property name="employmentStatusId" type="integer" column="EMPLOYMENT_STATUS_ID"
+			not-null="false" />
+		<property name="teacher" column="IS_TEACHER" type="boolean"
+			not-null="true" />
+		<property name="pastPupil" column="IS_PAST_PUPIL" type="boolean"
+			not-null="true" />
+		<property name="fullName" column="FULL_NAME" type="string"
+			not-null="true" />
+		<property name="nameWithInitials" column="NAME_WT_INITIALS"
+			type="string" not-null="true" />
+		<property name="lastName" column="LAST_NAME" type="string"
+			not-null="true" />
+		<property name="nationalIdNo" column="NATIONAL_ID_NO" type="string"
+			not-null="true" />
+		<property name="address" column="ADDRESS" type="string" />
+		<property name="mobileNo" column="MOBILE_NO" type="string" />
+		<property name="residenceNo" column="RESIDENCE_NO" type="string" />
+		<property name="officeNo" column="OFFICE_NO" type="string" />
+		<property name="relationship" column="RELATIONSHIP" not-null="true"
+			type="string" />
+		<property name="modifiedTime" column="MODIFIED_TIME" type="timestamp"
+			not-null="true" generated="always" />
+		<property name="email" column="EMAIL" type="string" not-null="false" />
+		<property name="religionId" column="RELIGION_ID" type="java.lang.Integer" not-null="false"/>
+		<property name="alumniId" column="ALUMINI_NO" type="string" />
+		<property name="incomeLevel" column="INCOME_LEVEL" type="string" />
+		<property name="tempAddress" column="TEMP_ADDRESS" type="string" />
+		<property name="tempCityId" column="TEMP_CITY_ID" type="integer" />
+		<property name="officeName" column="OFFICE_NAME" type="string" />
+		<property name="officeAddress" column="OFFICE_ADDRESS" type="string" />
+		<property name="officeCityId" column="OFFICE_CITY_ID" type="integer" />
+		<property name="officeFaxNo" column="OFFICE_FAX_NO" type="string" />
+		<property name="officeEmail" column="OFFICE_EMAIL_ADDRESS"
+			type="string" />
+		<property name="designation" type="string" column="DESIGNATION" />
+		<property name="workingSegmentId" type="integer" column="WORKING_SEGMENT_ID" />
+	</class>
+	<sql-query name="getParentByNIC" cacheable="false" callable="false">
+		<return alias="parent" class="com.virtusa.akura.api.dto.Parent"
+			lock-mode="read" />
+   		<![CDATA[
+			SELECT * FROM PARENT
+  			WHERE NATIONAL_ID_NO = ?
+		]]>
+	</sql-query>
+	
+	<sql-query name="getParentByMOBILE" cacheable="false" callable="false">
+		<return alias="parent" class="com.virtusa.akura.api.dto.Parent"
+			lock-mode="read" />
+   		<![CDATA[
+			SELECT * FROM PARENT
+  			WHERE MOBILE_NO = ?
+		]]>
+	</sql-query>
+	
+	<sql-query name="getParentByParentId" cacheable="false" callable="false">
+		<return alias="parent" class="com.virtusa.akura.api.dto.Parent"
+			lock-mode="read" />
+   		<![CDATA[
+			SELECT * FROM PARENT
+  			WHERE PARENT_ID = ?
+		]]>
+	</sql-query>
+	
+	<sql-query name="getAllMobileNumbers" cacheable="false" callable="false">
+		<![CDATA[
+			select NAME_WT_INITIALS,MOBILE_NO from PARENT where (MOBILE_NO !="" or MOBILE_NO !=null ) 
+			]]>
+	</sql-query>
+	
+	
+</hibernate-mapping>

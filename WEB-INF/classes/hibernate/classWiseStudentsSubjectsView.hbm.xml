@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+
+<!--
+    < ÀKURA, This application manages the daily activities of a Teacher and a Student of a School>
+
+    Copyright (C) 2012 Virtusa Corporation.
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.virtusa.akura.api.dto.ClassWiseStudentsSubjectsDTO" table="CLASS_WISE_STUDENTS_SUBJECTS_VIEW">
+  		<id name="studentClassInfoId" column="STUDENT_CLASS_INFO_ID" type="int" />
+  		<property name="studentId" type="int" column="STUDENT_ID" />
+  		<property name="admissionNo" type="string" column="ADMISSION_NO" />
+  		<property name="classGradeId" type="int" column="CLASS_GRADE_ID" />
+  		<property name="gradeSubjectId" type="int" column="GRADE_SUBJECT_ID" />
+  		<property name="nameWithInit" type="string" column="FULLNAME" />
+  		 <property name="year" type="date">
+			<column name="YEAR" length="10" not-null="true" />
+		</property>
+  	</class>
+
+  	<query name="findClassWiseStudentsBySubject">
+			<![CDATA[
+				SELECT	classWiseStudentsSubjectsDTO
+				FROM	com.virtusa.akura.api.dto.ClassWiseStudentsSubjectsDTO classWiseStudentsSubjectsDTO, com.virtusa.akura.api.dto.Student student
+				WHERE	classWiseStudentsSubjectsDTO.classGradeId = ?
+					and classWiseStudentsSubjectsDTO.gradeSubjectId = ?
+					and classWiseStudentsSubjectsDTO.year = ?
+					and classWiseStudentsSubjectsDTO.studentId = student.studentId
+					and ( student.statusId = 1
+					or  student.statusId = 3 )
+					Order by classWiseStudentsSubjectsDTO.nameWithInit
+			]]>
+	</query>
+
+</hibernate-mapping>

@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- < CYBERSCHOOL, This application manages the daily activities of a Teacher
+		and a Student of a School> Copyright (C) 2017 a CywebsTech Media Coperation.
+		Author = Eric Brown Appiah
+		Contact = 0205212015. -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/util
+		http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+
+	<!-- Declare Spring's View Resolvers for Jasper Based on the bean names
+		we can infer that: * pdfReport is for generating PDFs -->
+	<!-- id: the name to be used as a reference in the controller url: the path
+		where the Jasper JRXML file is located reportDateKey: the name of the datasource.
+		This is passed by the controller -->
+<!--	 <bean id="emptyReport" class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView"-->
+<!--		p:url="resources/jrxml/CommonEmptyReport.jrxml"/>-->
+
+	<bean id="pdfReport"
+		class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView"
+		p:url="resources/jrxml/StudentProgressReport.jrxml" p:reportDataKey="datasource"
+		p:subReportUrls-ref="customSubReportUrls" p:subReportDataKeys-ref="customSubReportDatasource" />
+
+	<bean id="pdfReportForLists"
+		class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView"
+		p:url="resources/jrxml/SchoolSectionHeadTeacherReport.jrxml"
+		p:reportDataKey="datasource" p:subReportUrls-ref="customSubReportUrls"
+		p:subReportDataKeys-ref="customSubReportDatasource" />
+
+	<util:map id="customSubReportUrls">
+		<!-- This entry key must be declared exactly as you declared it in the
+			master JRXML file -->
+		<!-- Here we assigned two sub-report templates -->
+		<entry key="JasperCustomSubReportLocation1" value="resources/jrxml/FaithLifeRating.jrxml" />
+		<entry key="JasperCustomSubReportLocation4" value="resources/jrxml/StudentAttendance.jrxml" />
+		<entry key="JasperCustomSubReportLocation3" value="resources/jrxml/SubTermMarksReport.jrxml" />
+		<entry key="JasperCustomSubReportLocation5" value="resources/jrxml/AverageTermMarksReport.jrxml" />
+		<entry key="JasperCustomSubReportLocation6" value="resources/jrxml/SubjectAverageComparison.jrxml" />
+		<entry key="JasperCustomSubReportLocation7" value="resources/jrxml/StudentTermRank.jrxml" />
+		<entry key="JasperCustomSubReportLocation8" value="resources/jrxml/AssignmentMarksReport.jrxml" />
+	</util:map>
+
+	<util:list id="customSubReportDatasource">
+		<!-- This value must be declared exactly as you declared it in the master
+			JRXML file -->
+		<!-- Here we assigned two sub-report datasources -->
+		<value>JasperCustomSubReportDatasource1</value>
+		<value>JasperCustomSubReportDatasource3</value>
+		<value>JasperCustomSubReportDatasource4</value>
+		<value>JasperCustomSubReportDatasource5</value>
+		<value>JasperCustomSubReportDatasource6</value>
+		<value>JasperCustomSubReportDatasource7</value>
+		<value>JasperCustomSubReportDatasource8</value>
+	</util:list>
+
+	<!-- Describes the student term marks report. -->
+	<bean id="averageTermMarks"
+		class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView"
+		p:url="resources/jrxml/CRAverageTermMarkClassWise.jrxml"
+		p:reportDataKey="datasource" />
+
+	<bean id="studentSummaryReport"
+		class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView"
+		p:url="resources/jrxml/StudentSummaryReport.jrxml" p:reportDataKey="datasource"
+		p:subReportUrls-ref="subReportUrls" p:subReportDataKeys-ref="subReportDatasource" />
+
+
+	<util:map id="subReportUrls">
+		<!-- This entry key must be declared exactly as you declared it in the
+			master JRXML file -->
+		<!-- Here we assigned two sub-report templates -->
+		<entry key="JasperSubReportLocation1" value="resources/jrxml/StudentTermMarks.jrxml" />
+		<entry key="JasperSubReportLocation2" value="resources/jrxml/StudentSubTermMarksReport.jrxml" />
+		<entry key="JasperSubReportLocation3" value="resources/jrxml/StudentPrefectDetail.jrxml" />
+		<entry key="JasperSubReportLocation4" value="resources/jrxml/StudentScholarshipDetail.jrxml" />
+		<entry key="JasperSubReportLocation5" value="resources/jrxml/StudentAchievementDetail.jrxml" />
+		<entry key="JasperSubReportLocation6" value="resources/jrxml/StudentClubSocietyDetail.jrxml" />
+		<entry key="JasperSubReportLocation7" value="resources/jrxml/StudentSportDetail.jrxml" />
+		<entry key="JasperSubReportLocation8" value="resources/jrxml/StudentFaithLifeDetail.jrxml" />
+		<entry key="JasperSubReportLocation9" value="resources/jrxml/StudentAssignmentMarks.jrxml" />
+		<entry key="JasperSubReportLocation10" value="resources/jrxml/StudentExamMarks.jrxml" />
+	</util:map>
+
+	<util:list id="subReportDatasource">
+		<!-- This value must be declared exactly as you declared it in the master
+			JRXML file -->
+		<!-- Here we assigned two sub-report datasources -->
+		<value>datasource1</value>
+		<value>datasource2</value>
+		<value>datasource3</value>
+		<value>datasource4</value>
+		<value>datasource5</value>
+		<value>datasource6</value>
+		<value>datasource7</value>
+		<value>datasource8</value>
+		<value>dataSourceStudentAssignmentMarks</value>
+		<value>datasource10</value>
+	</util:list>
+
+	<bean id="classWiseStudentsReport"
+		class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView"
+		p:url="resources/jrxml/ClassWiseStudentsReport.jrxml" p:reportDataKey="datasource" />
+
+	<bean id="studentSpecialEventAttendance"
+		class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView"
+		p:url="resources/jrxml/studentSpecialEventAttendance.jrxml"
+		p:reportDataKey="datasource" />
+
+
+	<bean id="classWiseStudentMarkSheetReport"
+		class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView"
+		p:url="resources/jrxml/classWiseStudentMarkSheet.jrxml"
+		p:reportDataKey="datasource" p:subReportUrls-ref="subClassWiseStudentMarkSheetReportUrls"
+		p:subReportDataKeys-ref="subClassWiseStudentMarkSheetReportDatasource" />
+
+
+	<util:list id="subClassWiseStudentMarkSheetReportDatasource">
+		<!-- This value must be declared exactly as you declared it in the master
+			JRXML file -->
+		<!-- Here we assigned two sub-report datasources -->
+		<value>datasource1</value>
+	</util:list>
+
+	<util:map id="subClassWiseStudentMarkSheetReportUrls">
+		<!-- This entry key must be declared exactly as you declared it in the
+			master JRXML file -->
+		<!-- Here we assigned two sub-report templates -->
+		<entry key="JasperSubReportLocation1" value="resources/jrxml/mediumWiseSubjectAverages.jrxml" />
+
+	</util:map>
+
+	<!-- <bean id="prizeTopList" -->
+	<!-- class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView" -->
+	<!-- p:url="resources/jrxml/prizeTopList.jrxml" -->
+	<!-- p:reportDataKey="datasource" /> -->
+
+	<bean id="examReultsReport"
+		class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView"
+		p:url="resources/jrxml/ExamResultsReport.jrxml" p:reportDataKey="datasource" />
+
+	<bean id="StudentReportCard"
+		class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView"
+		p:url="resources/jrxml/StudentReportCard.jrxml"
+		p:reportDataKey="datasource" />
+
+	<bean id="staffProfileReport"
+		class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView"
+		p:url="resources/jrxml/StaffProfileReport.jrxml"
+		p:reportDataKey="datasource" />
+		
+	<bean id="annualStudentAttendanceReport"
+		class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView"
+		p:url="resources/jrxml/AnnualStudentAttendanceReport.jrxml"
+		p:reportDataKey="datasource" />
+		
+	<bean id="studentScholarshipReport"
+		class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView"
+		p:url="resources/jrxml/ScholarshipWiseStudentsReport.jrxml" 
+		p:reportDataKey="datasource" />
+	
+	<bean id="studentBestAttendanceReport"
+		class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView"
+		p:url="resources/jrxml/GradeWiseBestStudentAttendance.jrxml" 
+		p:reportDataKey="datasource" />
+	
+	
+	<bean id="smsMonthWiseReport"
+		class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView"
+		p:url="resources/jrxml/SmsMontWiseSubscriptionReport.jrxml"
+		p:reportDataKey="datasource"
+		 />
+
+
+    <util:map id="smsMonthWiseSubReportUrls">
+		<!-- This entry key must be declared exactly as you declared it in the
+			master JRXML file -->
+		<!-- Here we assigned two sub-report templates -->
+		<entry key="JasperSubReportLocation1" value="resources/jrxml/MonthWiseLowSmsSubscriberReport.jrxml" />
+		<entry key="JasperSubReportLocation2" value="resources/jrxml/MonthWiseMediumSmsSubscriberReport.jrxml" />
+		<entry key="JasperSubReportLocation3" value="resources/jrxml/MonthWiseHighSmsSubscriberReport.jrxml" />
+	</util:map>
+
+	<util:list id="smsMonthWiseSubReportDatasource">
+		<!-- This value must be declared exactly as you declared it in the master
+			JRXML file -->
+		<!-- Here we assigned two sub-report datasources -->
+		<value>lowDataSource</value>
+		<value>mediumDataSource</value>
+		<value>highDataSource</value>
+	</util:list>
+
+	
+	
+	<bean id="smsUserWiseReport"
+		class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView"
+		p:url="resources/jrxml/SmsUserWiseSubscriptionReport.jrxml"
+		p:reportDataKey="datasource"
+		p:subReportUrls-ref="smsUserWiseSubReportUrls" p:subReportDataKeys-ref="smsUserWiseSubReportDatasource" />
+
+
+    <util:map id="smsUserWiseSubReportUrls">
+		<!-- This entry key must be declared exactly as you declared it in the
+			master JRXML file -->
+		<!-- Here we assigned two sub-report templates -->
+		<entry key="JasperSubReportLocation1" value="resources/jrxml/UserWiseLowSmsSubscriberReport.jrxml" />
+		<entry key="JasperSubReportLocation2" value="resources/jrxml/UserWiseMediumSmsSubscriberReport.jrxml" />
+		<entry key="JasperSubReportLocation3" value="resources/jrxml/UserWiseHighSmsSubscriberReport.jrxml" />
+	</util:map>
+
+	<util:list id="smsUserWiseSubReportDatasource">
+		<!-- This value must be declared exactly as you declared it in the master
+			JRXML file -->
+		<!-- Here we assigned two sub-report datasources -->
+		<value>lowDataSourceJanuary</value>
+		<value>mediumDataSourceJanuary</value>
+		<value>highDataSourceJanuary</value>
+		
+		<value>lowDataSourceFebruary</value>
+		<value>mediumDataSourceFebruary</value>
+		<value>highDataSourceFebruary</value>
+		
+		<value>lowDataSourceMarch</value>
+		<value>mediumDataSourceMarch</value>
+		<value>highDataSourceMarch</value>
+		
+		<value>lowDataSourceApril</value>
+		<value>mediumDataSourceApril</value>
+		<value>highDataSourceApril</value>
+		
+		<value>lowDataSourceMay</value>
+		<value>mediumDataSourceMay</value>
+		<value>highDataSourceMay</value>
+		
+		<value>lowDataSourceJune</value>
+		<value>mediumDataSourceJune</value>
+		<value>highDataSourceJune</value>
+		
+		<value>lowDataSourceJune</value>
+		<value>mediumDataSourceJune</value>
+		<value>highDataSourceJune</value>
+		
+		<value>lowDataSourceJuly</value>
+		<value>mediumDataSourceJuly</value>
+		<value>highDataSourceJuly</value>
+		
+		<value>lowDataSourceAugust</value>
+		<value>mediumDataSourceAugust</value>
+		<value>highDataSourceAugust</value>
+		
+		<value>lowDataSourceSeptember</value>
+		<value>mediumDataSourceSeptember</value>
+		<value>highDataSourceSeptember</value>
+		
+		<value>lowDataSourceOctober</value>
+		<value>mediumDataSourceOctober</value>
+		<value>highDataSourceOctober</value>
+		
+		<value>lowDataSourceNovember</value>
+		<value>mediumDataSourceNovember</value>
+		<value>highDataSourceNovember</value>
+		
+		<value>lowDataSourceDecember</value>
+		<value>mediumDataSourceDecember</value>
+		<value>highDataSourceDecember</value>
+		
+		
+	</util:list>
+
+	
+	
+</beans>

@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="StudentProgressReport" language="groovy" pageWidth="595" pageHeight="1000" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="0" bottomMargin="0" resourceBundle="reportTemplate">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="48"/>
+	<template><![CDATA[$P{styleTemplate}]]></template>
+	<parameter name="JasperCustomSubReportDatasource1" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="title" class="java.lang.String"/>
+	<parameter name="logo" class="java.lang.String"/>
+	<parameter name="JasperCustomSubReportLocation1" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="generator" class="java.lang.String"/>
+	<parameter name="JasperCustomSubReportDatasource3" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="JasperCustomSubReportLocation3" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="studentName" class="java.lang.String"/>
+	<parameter name="comment" class="java.lang.String"/>
+	<parameter name="class" class="java.lang.String"/>
+	<parameter name="year" class="java.util.Date"/>
+	<parameter name="JasperCustomSubReportDatasource4" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="JasperCustomSubReportLocation4" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="styleTemplate" class="java.lang.String"/>
+	<parameter name="JasperCustomSubReportDatasource5" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="JasperCustomSubReportLocation5" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="JasperCustomSubReportDatasource7" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="JasperCustomSubReportLocation7" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="JasperCustomSubReportDatasource6" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="JasperCustomSubReportLocation6" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="term" class="java.lang.String"/>
+	<parameter name="JasperCustomSubReportLocation8" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="JasperCustomSubReportDatasource8" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="photo" class="java.lang.String"/>
+	<parameter name="GPLComment" class="java.lang.String"/>
+	<field name="marks" class="java.lang.Float"/>
+	<field name="subjectName" class="java.lang.String"/>
+	<field name="term" class="java.lang.String"/>
+	<title>
+		<band height="287" splitType="Stretch">
+			<image onErrorType="Blank">
+				<reportElement x="480" y="0" width="95" height="88"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{photo}]]></imageExpression>
+			</image>
+			<image onErrorType="Blank">
+				<reportElement positionType="FixRelativeToBottom" x="-20" y="0" width="94" height="88"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+			<frame>
+				<reportElement style="Frame_color" positionType="FixRelativeToBottom" mode="Opaque" x="96" y="0" width="384" height="88"/>
+				<textField>
+					<reportElement style="Frame_color" mode="Opaque" x="19" y="3" width="334" height="32" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$R{progress_title}]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement x="129" y="68" width="102" height="20" isPrintWhenDetailOverflows="true" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Left">
+						<font size="10" isUnderline="false"/>
+					</textElement>
+					<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="0" y="63" width="381" height="1" forecolor="#FFFFFF"/>
+				</line>
+				<textField>
+					<reportElement x="65" y="43" width="166" height="20" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Left">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{class}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="240" y="44" width="72" height="20" isPrintWhenDetailOverflows="true" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Right">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$R{year_lable}]]></textFieldExpression>
+				</textField>
+				<textField pattern="yyyy">
+					<reportElement x="314" y="43" width="61" height="20" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Left">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression class="java.util.Date"><![CDATA[$P{year}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="19" y="68" width="110" height="20" isPrintWhenDetailOverflows="true" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Left"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$R{generated_on}]]></textFieldExpression>
+				</textField>
+				<frame>
+					<reportElement x="19" y="43" width="212" height="20"/>
+				</frame>
+				<frame>
+					<reportElement x="239" y="43" width="136" height="20"/>
+				</frame>
+			</frame>
+			<textField>
+				<reportElement x="147" y="104" width="162" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{generator}]]></textFieldExpression>
+			</textField>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="21" y="124" width="140" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement x="21" y="149" width="532" height="30" forecolor="#000000"/>
+				<textElement>
+					<font size="18" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{studentName}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="149" y="184" width="406" height="103" backcolor="#FFFFFF"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{comment}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="21" y="148" width="534" height="1"/>
+				<graphicElement>
+					<pen lineStyle="Double"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="-20" y="90" width="595" height="1"/>
+			</line>
+			<textField>
+				<reportElement x="33" y="184" width="107" height="25"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$R{general_comment}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="21" y="104" width="109" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$R{generated_by}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="116" y="43" width="45" height="20" isPrintWhenDetailOverflows="true" forecolor="#FFFFFF"/>
+				<textElement textAlignment="Left">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$R{class_lable}]]></textFieldExpression>
+			</textField>
+			<frame>
+				<reportElement x="115" y="91" width="212" height="20"/>
+			</frame>
+		</band>
+	</title>
+	<detail>
+		<band height="660" splitType="Stretch">
+			<frame>
+				<reportElement positionType="Float" x="1" y="0" width="510" height="660" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue()==1)]]></printWhenExpression>
+				</reportElement>
+				<lineChart>
+					<chart renderType="draw" theme="default">
+						<reportElement positionType="Float" x="0" y="50" width="499" height="521" isRemoveLineWhenBlank="true"/>
+						<chartTitle position="Top"/>
+						<chartSubtitle/>
+						<chartLegend/>
+					</chart>
+					<categoryDataset>
+						<categorySeries>
+							<seriesExpression><![CDATA[$F{subjectName}]]></seriesExpression>
+							<categoryExpression><![CDATA[$F{term}]]></categoryExpression>
+							<valueExpression><![CDATA[$F{marks}]]></valueExpression>
+						</categorySeries>
+					</categoryDataset>
+					<linePlot>
+						<plot/>
+						<categoryAxisFormat>
+							<axisFormat>
+								<labelFont/>
+								<tickLabelFont/>
+							</axisFormat>
+						</categoryAxisFormat>
+						<valueAxisFormat>
+							<axisFormat>
+								<labelFont/>
+								<tickLabelFont/>
+							</axisFormat>
+						</valueAxisFormat>
+					</linePlot>
+				</lineChart>
+				<textField>
+					<reportElement style="Text_sub_title" x="32" y="0" width="340" height="23" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+					<textElement>
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$R{academic_report}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="32" y="27" width="340" height="23" isRemoveLineWhenBlank="true"/>
+					<textElement/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$R{term_test_results}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+		<band height="50" splitType="Stretch">
+			<subreport isUsingCache="true">
+				<reportElement positionType="Float" x="0" y="0" width="408" height="50" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue()==1)]]></printWhenExpression>
+				</reportElement>
+				<subreportParameter name="STYLE_TEMPLATE">
+					<subreportParameterExpression><![CDATA[$P{styleTemplate}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{JasperCustomSubReportDatasource3}.getData())]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{JasperCustomSubReportLocation3}]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="50" splitType="Stretch">
+			<subreport isUsingCache="true">
+				<reportElement positionType="Float" x="0" y="0" width="408" height="50" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue()==1)]]></printWhenExpression>
+				</reportElement>
+				<subreportParameter name="STYLE_TEMPLATE">
+					<subreportParameterExpression><![CDATA[$P{styleTemplate}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{JasperCustomSubReportDatasource5}.getData())]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{JasperCustomSubReportLocation5}]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="50">
+			<subreport isUsingCache="true">
+				<reportElement positionType="Float" x="0" y="0" width="408" height="50" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue()==1)]]></printWhenExpression>
+				</reportElement>
+				<subreportParameter name="STYLE_TEMPLATE">
+					<subreportParameterExpression><![CDATA[$P{styleTemplate}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{JasperCustomSubReportDatasource7}.getData())]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{JasperCustomSubReportLocation7}]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="50" splitType="Stretch">
+			<subreport isUsingCache="true">
+				<reportElement positionType="Float" x="0" y="0" width="408" height="50" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue()==1)]]></printWhenExpression>
+				</reportElement>
+				<subreportParameter name="STYLE_TEMPLATE">
+					<subreportParameterExpression><![CDATA[$P{styleTemplate}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{JasperCustomSubReportDatasource6}.getData())]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{JasperCustomSubReportLocation6}]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="50" splitType="Stretch">
+			<subreport isUsingCache="true">
+				<reportElement positionType="Float" x="0" y="0" width="408" height="50" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue()==1)]]></printWhenExpression>
+				</reportElement>
+				<subreportParameter name="STYLE_TEMPLATE">
+					<subreportParameterExpression><![CDATA[$P{styleTemplate}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{JasperCustomSubReportDatasource1}.getData())]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{JasperCustomSubReportLocation1}]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="50">
+			<subreport isUsingCache="true">
+				<reportElement positionType="Float" x="0" y="0" width="408" height="50" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue()==1)]]></printWhenExpression>
+				</reportElement>
+				<subreportParameter name="STYLE_TEMPLATE">
+					<subreportParameterExpression><![CDATA[$P{styleTemplate}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{JasperCustomSubReportDatasource4}.getData())]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{JasperCustomSubReportLocation4}]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="50" splitType="Stretch">
+			<subreport isUsingCache="true">
+				<reportElement positionType="Float" x="0" y="0" width="408" height="50" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue()==1)]]></printWhenExpression>
+				</reportElement>
+				<subreportParameter name="STYLE_TEMPLATE">
+					<subreportParameterExpression><![CDATA[$P{styleTemplate}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource ($P{JasperCustomSubReportDatasource8}.getData())]]></dataSourceExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{JasperCustomSubReportLocation8}]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="46" splitType="Stretch">
+			<textField>
+				<reportElement positionType="Float" x="1" y="24" width="574" height="22"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{GPLComment}]]></textFieldExpression>
+			</textField>
+			<frame>
+				<reportElement style="Frame_color" mode="Opaque" x="0" y="0" width="555" height="24" forecolor="#D0B48E"/>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement x="0" y="0" width="197" height="20" forecolor="#FFFFFF"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="471" y="3" width="82" height="21" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$R{Report_page}+ "" +$V{PAGE_NUMBER}+""]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+</jasperReport>

@@ -1,0 +1,114 @@
+<?xml version="1.0"?>
+
+<!--
+    < ÀKURA, This application manages the daily activities of a Teacher and a Student of a School>
+
+    Copyright (C) 2012 Virtusa Corporation.
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.virtusa.akura.api.dto.ClassGrade" table="CLASS_GRADE">
+        <id name="classGradeId" type="int" column="CLASS_GRADE_ID">
+            <generator class="increment" />
+        </id>
+        <many-to-one name="schoolClass" class="com.virtusa.akura.api.dto.SchoolClass" lazy="false" fetch="join">
+            <column name="CLASS_ID" not-null="true" />
+        </many-to-one>
+        <many-to-one name="grade" class="com.virtusa.akura.api.dto.Grade" lazy="false" fetch="select">
+            <column name="GRADE_ID" not-null="true" />
+        </many-to-one>
+        <property name="description" type="string">
+            <column name="DESCRIPTION" not-null="true" />
+        </property>
+        <property name="modifiedTime" type="timestamp" generated="always">
+            <column name="MODIFIED_TIME" length="19" not-null="true" />
+        </property>
+    </class>
+
+	<query name="getClassesByGrade">
+		<![CDATA[
+			from com.virtusa.akura.api.dto.ClassGrade classGrade
+			where classGrade.grade = ?
+		]]>
+	</query>
+	<query name="getClassGradeByGradeIdAndClassId">
+		<![CDATA[
+			from com.virtusa.akura.api.dto.ClassGrade classGrade
+			where classGrade.grade.gradeId = ?
+			and  classGrade.schoolClass.classId = ?
+		]]>
+	</query>
+
+	<query name="getClassGradeByName">
+		<![CDATA[
+			from com.virtusa.akura.api.dto.ClassGrade classGrade
+			where classGrade.description = ?
+		]]>
+	</query>
+
+	<query name="getClassGradeByStaffRegistrationNo">
+		<![CDATA[
+			SELECT distinct(classGrade)
+			FROM com.virtusa.akura.api.dto.ClassGrade classGrade,
+				com.virtusa.akura.api.dto.ClassTeacher classTeacher,
+				com.virtusa.akura.api.dto.SubjectTeacher subjectTeacher,
+				com.virtusa.akura.api.dto.GradeSubject gradeSubject,
+				com.virtusa.akura.api.dto.Staff staff
+			WHERE (
+				   	(classGrade.classGradeId = classTeacher.classGrade.classGradeId
+					AND staff.staffId = classTeacher.staff.staffId
+					AND classTeacher.year = ?)
+				OR
+					(classGrade.schoolClass.classId = subjectTeacher.schoolClass.classId
+            		AND subjectTeacher.gradeSubject.gradeSubjectId = gradeSubject.gradeSubjectId
+            		AND classGrade.grade.gradeId = gradeSubject.grade.gradeId
+            		AND staff.staffId = subjectTeacher.staff.staffId
+            		AND subjectTeacher.year = ?)
+				)
+				AND
+					staff.registrationNo = ?
+		]]>
+	</query>
+
+	<query name="getClassesByGradeId">
+		<![CDATA[
+			from com.virtusa.akura.api.dto.ClassGrade classGrade
+			where classGrade.grade.gradeId = ?
+		]]>
+	</query>
+
+	<sql-query name="findTeacherByClass">
+		<![CDATA[
+			SELECT ct.staff_id
+			FROM CLASS_GRADE classGrade
+            INNER JOIN CLASS_TEACHER ct
+            ON ct.class_grade_Id = classGrade.class_grade_Id
+            INNER JOIN STAFF staff
+            ON staff.staff_id = ct.staff_id
+            INNER JOIN USER_LOGIN ul
+            ON ul.USER_IDENTIFICATION_NO = staff.REGISTRATION_NO
+			WHERE staff.STAFF_ID = ? AND classGrade.class_grade_Id = ?
+		]]>
+	</sql-query>
+
+
+	<query name="getClassesByClassId">
+		<![CDATA[
+			from com.virtusa.akura.api.dto.ClassGrade classGrade
+			where classGrade.schoolClass.classId = ?
+		]]>
+	</query>
+
+</hibernate-mapping>

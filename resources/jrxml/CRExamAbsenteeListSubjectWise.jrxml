@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="NewDesignTest" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F0EFEF"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="fullNameLableText" class="java.lang.String"/>
+	<parameter name="termDescriptionLableText" class="java.lang.String"/>
+	<parameter name="admissionNumberLableText" class="java.lang.String"/>
+	<parameter name="ExamAbsenteeListSubjectWiseTitleText" class="java.lang.String"/>
+	<parameter name="classDescriptionLableText" class="java.lang.String"/>
+	<parameter name="subjectLabelText" class="java.lang.String"/>
+	<parameter name="subjectText" class="java.lang.String"/>
+	<parameter name="gradeLableText" class="java.lang.String"/>
+	<parameter name="gradeText" class="java.lang.String"/>
+	<parameter name="logoPath" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[Select * From StudentAttendence]]>
+	</queryString>
+	<field name="nationalityId" class="java.lang.Integer"/>
+	<field name="fullName" class="java.lang.String"/>
+	<field name="admissionNumber" class="java.lang.String"/>
+	<field name="classDescription" class="java.lang.String"/>
+	<field name="gradeDescription" class="java.lang.String"/>
+	<field name="termDescription" class="java.lang.String"/>
+	<field name="subjectDescription" class="java.lang.String"/>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="79">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="-20" width="87" height="99" backcolor="#E6E6E6"/>
+				<image>
+					<reportElement x="0" y="0" width="87" height="99"/>
+					<imageExpression class="java.lang.String"><![CDATA[$P{logoPath}]]></imageExpression>
+				</image>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="66" y="-20" width="509" height="65" backcolor="#356BA7"/>
+				<textField>
+					<reportElement x="62" y="0" width="447" height="43" forecolor="#FFFFFF"/>
+					<textElement>
+						<font size="18" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{ExamAbsenteeListSubjectWiseTitleText}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="62" y="43" width="71" height="20" forecolor="#FFFFFF"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{gradeLableText}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="118" y="42" width="91" height="20" forecolor="#FFFFFF"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{gradeText}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="209" y="42" width="102" height="20" forecolor="#FFFFFF"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{subjectLabelText}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="282" y="43" width="177" height="20" forecolor="#FFFFFF"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{subjectText}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="66" y="47" width="509" height="32" forecolor="#000000" backcolor="#356BA7"/>
+				<staticText>
+					<reportElement x="62" y="12" width="147" height="20" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Left">
+						<font size="12" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Report Generated On :]]></text>
+				</staticText>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement x="209" y="12" width="149" height="20" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Right">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band/>
+	</pageHeader>
+	<columnHeader>
+		<band height="31">
+			<line>
+				<reportElement x="-20" y="20" width="595" height="1" forecolor="#666666"/>
+			</line>
+			<frame>
+				<reportElement mode="Opaque" x="555" y="0" width="20" height="20" backcolor="#E6E6E6"/>
+			</frame>
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="0" width="22" height="20" backcolor="#E6E6E6"/>
+			</frame>
+			<textField>
+				<reportElement mode="Opaque" x="153" y="0" width="173" height="20" forecolor="#006699" backcolor="#E6E6E6"/>
+				<textElement textAlignment="Left">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{fullNameLableText}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="326" y="0" width="132" height="20" forecolor="#006699" backcolor="#E6E6E6"/>
+				<textElement textAlignment="Left">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{termDescriptionLableText}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="458" y="0" width="97" height="20" forecolor="#006699" backcolor="#E6E6E6"/>
+				<textElement textAlignment="Left">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{classDescriptionLableText}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="1" y="0" width="152" height="20" forecolor="#006699" backcolor="#E6E6E6"/>
+				<textElement textAlignment="Left">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{admissionNumberLableText}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="27" splitType="Stretch">
+			<frame>
+				<reportElement style="Row" mode="Opaque" x="0" y="0" width="555" height="18"/>
+				<textField>
+					<reportElement x="13" y="0" width="115" height="18"/>
+					<textElement/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{admissionNumber}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="153" y="0" width="157" height="18"/>
+					<textElement/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{fullName}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="326" y="0" width="115" height="18"/>
+					<textElement/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{termDescription}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="458" y="0" width="95" height="18"/>
+					<textElement/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{classDescription}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="26" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="1" width="555" height="24" forecolor="#D0B48E" backcolor="#006699"/>
+			</frame>
+			<textField>
+				<reportElement style="Column header" x="471" y="0" width="82" height="21" forecolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Page "+$V{PAGE_NUMBER}+""]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="2" y="1" width="197" height="20" forecolor="#FFFFFF"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

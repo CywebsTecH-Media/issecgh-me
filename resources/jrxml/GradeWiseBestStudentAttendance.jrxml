@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="NewDesignTest" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<template><![CDATA[$P{styleTemplate}]]></template>
+	<style name="Title" forecolor="#FFFFFF" fontName="SansSerif" fontSize="20" isBold="false" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#CCCCCC" fontName="SansSerif" fontSize="10" isBold="false" pdfFontName="Times-Roman"/>
+	<style name="Column header" forecolor="#666666" fontName="SansSerif" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
+	<style name="Detail" mode="Transparent" fontName="SansSerif" pdfFontName="Times-Roman"/>
+	<style name="Row" mode="Transparent" fontName="SansSerif" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F0EFEF"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="title" class="java.lang.String"/>
+	<parameter name="studentid" class="java.lang.String"/>
+	<parameter name="studentname" class="java.lang.String"/>
+	<parameter name="year" class="java.lang.String"/>
+	<parameter name="month" class="java.lang.String"/>
+	<parameter name="logoPath" class="java.lang.String"/>
+	<parameter name="styleTemplate" class="java.lang.String"/>
+	<parameter name="reportGeneratedOn" class="java.lang.String"/>
+	<parameter name="generatedDate" class="java.lang.String"/>
+	<parameter name="page" class="java.lang.String"/>
+	<parameter name="GPLComment" class="java.lang.String"/>
+	<parameter name="gradeDescription" class="java.lang.String"/>
+	<parameter name="classDescription" class="java.lang.String"/>
+	<parameter name="gradeLabel" class="java.lang.String"/>
+	<parameter name="monthLabel" class="java.lang.String"/>
+	<parameter name="yearLabel" class="java.lang.String"/>
+	<parameter name="presentDaysLabel" class="java.lang.String"/>
+	<parameter name="acdamicDayLabel" class="java.lang.String"/>
+	<parameter name="acdamicDays" class="java.lang.String"/>
+	<parameter name="sizeLabel" class="java.lang.String"/>
+	<field name="gradeDescription" class="java.lang.String"/>
+	<field name="classDescription" class="java.lang.String"/>
+	<field name="studentID" class="java.lang.String"/>
+	<field name="studentName" class="java.lang.String"/>
+	<field name="presentDays" class="java.lang.String"/>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="79">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="-20" width="87" height="99" backcolor="#E6E6E6"/>
+				<image>
+					<reportElement x="0" y="0" width="87" height="99"/>
+					<imageExpression class="java.lang.String"><![CDATA[$P{logoPath}]]></imageExpression>
+				</image>
+			</frame>
+			<frame>
+				<reportElement style="Frame_color" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="66" y="-20" width="509" height="67"/>
+				<textField>
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="40" y="0" width="424" height="35" forecolor="#FFFFFF"/>
+					<textElement>
+						<font size="18" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{title}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="40" y="47" width="54" height="20" forecolor="#FFFFFF"/>
+					<textElement/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{gradeLabel}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="SubTitle" x="80" y="47" width="83" height="20" forecolor="#FFFFFF"/>
+					<textElement>
+						<font pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{gradeDescription}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement positionType="Float" isPrintRepeatedValues="false" x="244" y="47" width="77" height="20" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{monthLabel}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="SubTitle" positionType="Float" x="323" y="47" width="54" height="20" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Left">
+						<font pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{month}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="159" y="47" width="50" height="20" forecolor="#FFFFFF"/>
+					<textElement/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{yearLabel}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="SubTitle" x="191" y="47" width="57" height="20" forecolor="#FFFFFF"/>
+					<textElement>
+						<font pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{year}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="393" y="47" width="80" height="20" forecolor="#FFFFFF"/>
+					<textElement/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{acdamicDayLabel}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="SubTitle" x="473" y="47" width="35" height="20" forecolor="#FFFFFF"/>
+					<textElement>
+						<font pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{acdamicDays}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement style="Frame_color" mode="Opaque" x="66" y="47" width="509" height="32" forecolor="#000000"/>
+				<textField>
+					<reportElement x="40" y="12" width="148" height="20" forecolor="#FFFFFF"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{reportGeneratedOn}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="188" y="12" width="171" height="20" forecolor="#FFFFFF"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{generatedDate}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<line>
+				<reportElement x="67" y="47" width="508" height="1" forecolor="#FFFFFF"/>
+			</line>
+		</band>
+	</title>
+	<pageHeader>
+		<band/>
+	</pageHeader>
+	<columnHeader>
+		<band height="37">
+			<line>
+				<reportElement x="-20" y="20" width="595" height="1" forecolor="#666666"/>
+			</line>
+			<frame>
+				<reportElement style="Text_and_ash_bg" mode="Opaque" x="553" y="0" width="22" height="20"/>
+			</frame>
+			<frame>
+				<reportElement style="Text_and_ash_bg" mode="Opaque" x="-20" y="0" width="22" height="20"/>
+			</frame>
+			<textField>
+				<reportElement style="Text_and_ash_bg" mode="Opaque" x="160" y="0" width="120" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{studentid}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Text_and_ash_bg" mode="Opaque" x="280" y="0" width="165" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{studentname}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Text_and_ash_bg" mode="Opaque" x="2" y="0" width="158" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{classDescription}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Text_and_ash_bg" mode="Opaque" x="445" y="0" width="108" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{presentDaysLabel}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="26" splitType="Stretch">
+			<frame>
+				<reportElement style="Row" mode="Opaque" x="0" y="0" width="555" height="18"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" isPrintRepeatedValues="false" x="191" y="0" width="89" height="18"/>
+					<textElement>
+						<font fontName="SansSerif" size="10"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{studentID}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" stretchType="RelativeToTallestObject" isPrintRepeatedValues="false" x="324" y="0" width="165" height="18"/>
+					<textElement/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{studentName}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" isPrintRepeatedValues="false" x="64" y="0" width="107" height="18"/>
+					<textElement/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{classDescription}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Detail" positionType="Float" x="489" y="0" width="66" height="18"/>
+					<textElement/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{presentDays}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<frame>
+				<reportElement style="Frame_color" mode="Opaque" x="0" y="1" width="555" height="24"/>
+				<textField>
+					<reportElement x="2" y="0" width="171" height="20" forecolor="#FFFFFF"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{generatedDate}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<textField>
+				<reportElement style="Column header" x="471" y="0" width="82" height="21" forecolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{page}+$V{PAGE_NUMBER}+""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Transparent" x="0" y="34" width="575" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{GPLComment}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

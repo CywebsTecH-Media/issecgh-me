@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ClassWiseStudentsReport" language="groovy" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.2100000000000004"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<template><![CDATA[$P{styleTemplate}]]></template>
+	<style name="Column header" forecolor="#666666" fontName="SansSerif" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
+	<subDataset name="dataset1"/>
+	<parameter name="logo" class="java.lang.String"/>
+	<parameter name="title" class="java.lang.String"/>
+	<parameter name="reportGenerate" class="java.lang.String"/>
+	<parameter name="generatedDate" class="java.lang.String"/>
+	<parameter name="styleTemplate" class="java.lang.String"/>
+	<parameter name="page" class="java.lang.String"/>
+	<parameter name="GPLComment" class="java.lang.String"/>
+	<parameter name="scholarshipName" class="java.lang.String"/>
+	<parameter name="sponsorship" class="java.lang.String"/>
+	<parameter name="count" class="java.lang.Integer"/>
+	<parameter name="scholarshipLabelName" class="java.lang.String"/>
+	<parameter name="sponsorshipLable" class="java.lang.String"/>
+	<parameter name="countLabel" class="java.lang.String"/>
+	<parameter name="admissionNo" class="java.lang.String"/>
+	<parameter name="studentName" class="java.lang.String"/>
+	<parameter name="class" class="java.lang.String"/>
+	<parameter name="admissionLabel" class="java.lang.String"/>
+	<parameter name="nameLabel" class="java.lang.String"/>
+	<parameter name="classLabel" class="java.lang.String"/>
+	<parameter name="generatedOn" class="java.lang.String"/>
+	<parameter name="yearLabel" class="java.lang.String"/>
+	<field name="admissionNo" class="java.lang.String"/>
+	<field name="nameWithInitials" class="java.lang.String"/>
+	<field name="description" class="java.lang.String"/>
+	<field name="year" class="java.util.Date"/>
+	<title>
+		<band height="113">
+			<image>
+				<reportElement x="2" y="0" width="99" height="99"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+			<frame>
+				<reportElement style="Frame_color" positionType="Float" mode="Opaque" x="94" y="-1" width="501" height="85"/>
+				<textField>
+					<reportElement x="28" y="7" width="304" height="29" forecolor="#FFFFFF"/>
+					<textElement>
+						<font size="18" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{title}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement x="27" y="34" width="109" height="20" forecolor="#FFFFFF"/>
+					<textElement/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{scholarshipLabelName}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement positionType="Float" x="124" y="34" width="357" height="20" forecolor="#FFFFFF"/>
+					<textElement/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{scholarshipName}]]></textFieldExpression>
+				</textField>
+				<elementGroup>
+					<textField>
+						<reportElement positionType="Float" x="26" y="62" width="110" height="20" forecolor="#FFFFFF"/>
+						<textElement/>
+						<textFieldExpression class="java.lang.String"><![CDATA[$P{sponsorshipLable}]]></textFieldExpression>
+					</textField>
+					<textField>
+						<reportElement positionType="Float" x="369" y="62" width="40" height="20" forecolor="#FFFFFF"/>
+						<textElement/>
+						<textFieldExpression class="java.lang.String"><![CDATA[$P{count}]]></textFieldExpression>
+					</textField>
+					<textField>
+						<reportElement positionType="Float" x="286" y="62" width="89" height="20" forecolor="#FFFFFF"/>
+						<textElement/>
+						<textFieldExpression class="java.lang.String"><![CDATA[$P{countLabel}]]></textFieldExpression>
+					</textField>
+					<textField>
+						<reportElement positionType="Float" x="99" y="62" width="136" height="20" forecolor="#FFFFFF"/>
+						<textElement/>
+						<textFieldExpression class="java.lang.String"><![CDATA[$P{sponsorship}]]></textFieldExpression>
+					</textField>
+				</elementGroup>
+			</frame>
+			<frame>
+				<reportElement style="Frame_color" positionType="Float" mode="Opaque" x="94" y="83" width="501" height="28"/>
+				<textField>
+					<reportElement x="136" y="4" width="159" height="20" forecolor="#FFFFFF"/>
+					<textElement>
+						<font size="10"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{generatedDate}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="26" y="4" width="120" height="20" forecolor="#FFFFFF"/>
+					<textElement/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{generatedOn}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<line>
+				<reportElement positionType="Float" x="101" y="83" width="486" height="1" forecolor="#FFFFFF"/>
+			</line>
+			<line>
+				<reportElement x="0" y="110" width="597" height="1"/>
+			</line>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="27">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="0" width="594" height="25" backcolor="#E6E6E6"/>
+				<textField>
+					<reportElement x="212" y="3" width="97" height="20" forecolor="#356BA7"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{admissionLabel}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="309" y="3" width="184" height="20" forecolor="#356BA7"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{nameLabel}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="493" y="3" width="100" height="20" forecolor="#356BA7"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{classLabel}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="108" y="2" width="75" height="20" forecolor="#356BA7"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{yearLabel}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="26">
+			<textField>
+				<reportElement x="211" y="6" width="98" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{admissionNo}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="309" y="6" width="184" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{nameWithInitials}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="493" y="6" width="100" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{description}]]></textFieldExpression>
+			</textField>
+			<textField pattern="yyyy">
+				<reportElement isPrintRepeatedValues="false" x="107" y="6" width="75" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{year}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="50"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="38"/>
+	</pageFooter>
+	<lastPageFooter>
+		<band height="64">
+			<frame>
+				<reportElement style="Frame_color" mode="Opaque" x="20" y="0" width="564" height="24"/>
+				<textField>
+					<reportElement style="Column header" x="482" y="4" width="82" height="20" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{page}+$V{PAGE_NUMBER}+""]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="4" width="171" height="20" forecolor="#FFFFFF"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{generatedDate}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<textField>
+				<reportElement mode="Transparent" x="22" y="34" width="575" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{GPLComment}]]></textFieldExpression>
+			</textField>
+		</band>
+	</lastPageFooter>
+	<noData>
+		<band height="20"/>
+	</noData>
+</jasperReport>

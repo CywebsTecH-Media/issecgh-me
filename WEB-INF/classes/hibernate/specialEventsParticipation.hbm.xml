@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+
+<!-- < ÀKURA, This application manages the daily activities of a Teacher 
+	and a Student of a School> Copyright (C) 2012 Virtusa Corporation. This program 
+	is free software: you can redistribute it and/or modify it under the terms 
+	of the GNU General Public License as published by the Free Software Foundation, 
+	either version 3 of the License, or (at your option) any later version. This 
+	program is distributed in the hope that it will be useful, but WITHOUT ANY 
+	WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
+	FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details. -->
+
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.virtusa.akura.api.dto.SpecialEventsParticipation"
+		table="SPECIAL_EVENT_PARTICIPATION">
+		<id name="specialEventsParticipationId" type="integer"
+			column="SPECIAL_EVENT_PARTICIPATION_ID">
+			<generator class="increment" />
+		</id>
+		<many-to-one name="specialEvents"
+			class="com.virtusa.akura.api.dto.SpecialEvents" lazy="false">
+			<column name="SPECIAL_EVENT_ID" not-null="true" />
+		</many-to-one>
+		<many-to-one name="classGrade" class="com.virtusa.akura.api.dto.ClassGrade"
+			lazy="false">
+			<column name="CLASS_GRADE_ID" not-null="false" />
+		</many-to-one>
+		<many-to-one name="sportCategory"
+			class="com.virtusa.akura.api.dto.SportCategory" lazy="false">
+			<column name="SPORT_CATEGORY_ID" not-null="false" />
+		</many-to-one>
+		<many-to-one name="clubSociety" class="com.virtusa.akura.api.dto.ClubSociety"
+			lazy="false">
+			<column name="CLUB_SOCIETY_ID" not-null="false" />
+		</many-to-one>
+		<property name="modifiedTime" column="MODIFIED_TIME" type="timestamp"
+			not-null="true" generated="always" />
+	</class>
+
+	
+	<query name="getSpecialEventParticipationListById">
+			<![CDATA[
+			from	com.virtusa.akura.api.dto.SpecialEventsParticipation specialEventsParticipation
+			where	specialEventsParticipation.specialEvents.specialEventsId = ? 
+			]]>
+	</query>
+
+	<query name="getSpecialEventParticipationByEventId">
+		<![CDATA[
+			from com.virtusa.akura.api.dto.SpecialEventsParticipation specialEventParticipation
+			where specialEventParticipation.specialEvents.specialEventsId = ?
+		]]>
+	</query>
+	
+	
+	<query name="getParticipantListBySpecialEvent">
+		<![CDATA[
+			from com.virtusa.akura.api.dto.SpecialEventsParticipation specialEventsParticipation
+			where specialEventsParticipation.specialEvents = ?
+		]]>
+	</query>
+
+</hibernate-mapping>
+
+
+

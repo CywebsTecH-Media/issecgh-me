@@ -1,0 +1,193 @@
+<?xml version="1.0"?>
+
+<!--
+    < ÀKURA, This application manages the daily activities of a Teacher and a Student of a School>
+
+    Copyright (C) 2012 Virtusa Corporation.
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.virtusa.akura.api.dto.StudentAssignmentMark" table="STUDENT_ASSIGNMENT_MARK">
+		<id name="studentAssignmentMarksId" type="int" column="STUDENT_ASSIGNMENT_MARKS_ID">
+			<generator class="increment" />
+		</id>
+		<property name="gradeSubjectId" type="int">
+			<column name="GRADE_SUBJECT_ID" not-null="true" />
+		</property>
+		<property name="studentClassInfoId" type="int">
+			<column name="STUDENT_CLASS_INFO_ID" not-null="true" />
+		</property>
+		<property name="assignmentId" type="int">
+			<column name="ASSIGNMENT_ID" not-null="true" />
+		</property>
+		<property name="year" type="date">
+			<column name="YEAR" not-null="true" />
+		</property>
+		<property name="gradingId" type="java.lang.Integer">
+			<column name="GRADING_ID" not-null="false" />
+		</property>
+		<property name="marks" type="java.lang.Float">
+			<column name="MARKS" precision="12" scale="0" />
+		</property>
+		<property name="isAbsent" type="boolean">
+			<column name="IS_ABSENT" />
+		</property>
+		<property name="modifiedTime" type="timestamp" generated="always">
+			<column name="MODIFIED_TIME" length="19" not-null="true" />
+		</property>
+	</class>
+
+	<query name="findStudentsAssignmentMarks">
+			<![CDATA[
+				SELECT studentAssignmentMark,
+					student.nameWtInitials,
+					student.admissionNo
+				FROM com.virtusa.akura.api.dto.StudentAssignmentMark studentAssignmentMark,
+					com.virtusa.akura.api.dto.StudentClassInfo studentClassInfo,
+					com.virtusa.akura.api.dto.Student student
+				WHERE studentAssignmentMark.studentClassInfoId = studentClassInfo.studentClassInfoId
+				AND studentClassInfo.student.studentId = student.studentId
+				AND studentAssignmentMark.assignmentId=?
+				AND studentAssignmentMark.gradeSubjectId=?
+				AND studentAssignmentMark.year=?
+				AND studentClassInfo.classGrade.classGradeId=?
+				ORDER BY student.nameWtInitials
+			]]>
+	</query>
+
+
+	<query name="findStudentsClassInfoIdsNotInAssignmentMarks">
+			<![CDATA[
+				SELECT DISTINCT studentClassInfo.studentClassInfoId
+				FROM com.virtusa.akura.api.dto.StudentClassInfo studentClassInfo,
+					 com.virtusa.akura.api.dto.Student student
+				WHERE (studentClassInfo.studentClassInfoId NOT IN(SELECT stm.studentClassInfoId
+																   FROM com.virtusa.akura.api.dto.StudentAssignmentMark stm))
+				
+				
+				
+				AND studentClassInfo.year = ?
+				AND studentClassInfo.student.studentId = student.studentId
+				AND (student.statusId = 1
+				OR  student.statusId = 3)
+				ORDER BY student.nameWtInitials
+			]]>
+	</query>
+
+
+
+	<query name="findStudentsClassInfoIdsNotInAssignmentMarksByAssignmentId">
+			<![CDATA[
+			
+			
+			SELECT DISTINCT studentClassInfo.studentClassInfoId
+				FROM com.virtusa.akura.api.dto.StudentClassInfo studentClassInfo,
+					 com.virtusa.akura.api.dto.Student student,
+					 com.virtusa.akura.api.dto.StudentTermMark studentTermMark				 
+				WHERE (studentClassInfo.studentClassInfoId NOT IN(SELECT stm.studentClassInfoId
+																   FROM com.virtusa.akura.api.dto.StudentAssignmentMark stm
+																   where stm.assignmentId = ?))
+				
+				
+				and studentTermMark.studentClassInfoId = studentClassInfo.studentClassInfoId
+				AND studentClassInfo.year = ?
+				and studentTermMark.gradeSubjectId = ?
+				AND studentClassInfo.classGrade.classGradeId = ?
+				AND studentClassInfo.student.studentId = student.studentId
+				AND (student.statusId = 1
+				OR  student.statusId = 3)
+				ORDER BY student.nameWtInitials
+				
+			]]>
+	</query>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<query name="isExistsStudentsAssignmentMarks">
+			<![CDATA[
+				SELECT studentAssignmentMark
+				FROM com.virtusa.akura.api.dto.StudentAssignmentMark studentAssignmentMark
+				WHERE studentAssignmentMark.assignmentId=?
+			]]>
+	</query>
+
+	<query name="findStudentsAssignmentMarksByStudentId">
+		<![CDATA[
+			SELECT studentAssignmentMark.year,
+				subject.description,
+				assignment.name,
+				studentAssignmentMark.gradingId,
+				studentAssignmentMark.marks,
+				studentAssignmentMark.isAbsent
+			FROM com.virtusa.akura.api.dto.StudentAssignmentMark studentAssignmentMark,
+				com.virtusa.akura.api.dto.StudentClassInfo studentClassInfo,
+				com.virtusa.akura.api.dto.Assignment assignment,
+				com.virtusa.akura.api.dto.GradeSubject gradeSubject,
+				com.virtusa.akura.api.dto.Subject subject
+			WHERE studentAssignmentMark.studentClassInfoId = studentClassInfo.studentClassInfoId
+				AND assignment.assignmentId = studentAssignmentMark.assignmentId
+				AND gradeSubject.gradeSubjectId = studentAssignmentMark.gradeSubjectId
+				AND subject.subjectId = gradeSubject.subject.subjectId
+				AND studentClassInfo.student.studentId = ?
+				AND studentClassInfo.student.statusId = 1
+		]]>
+	</query>
+
+	<query name="findStudentsAssignmentMarksByStudentIdForReport">
+		<![CDATA[
+			SELECT studentAssignmentMark.year,
+				subject.description,
+				assignment.name,
+				studentAssignmentMark.gradingId,
+				studentAssignmentMark.marks,
+				studentAssignmentMark.isAbsent
+			FROM com.virtusa.akura.api.dto.StudentAssignmentMark studentAssignmentMark,
+				com.virtusa.akura.api.dto.StudentClassInfo studentClassInfo,
+				com.virtusa.akura.api.dto.Assignment assignment,
+				com.virtusa.akura.api.dto.GradeSubject gradeSubject,
+				com.virtusa.akura.api.dto.Subject subject
+			WHERE studentAssignmentMark.studentClassInfoId = studentClassInfo.studentClassInfoId
+				AND assignment.assignmentId = studentAssignmentMark.assignmentId
+				AND gradeSubject.gradeSubjectId = studentAssignmentMark.gradeSubjectId
+				AND subject.subjectId = gradeSubject.subject.subjectId
+				AND studentClassInfo.student.studentId = ?
+		]]>
+	</query>
+
+</hibernate-mapping>

@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+
+<!-- < ÀKURA, This application manages the daily activities of a Teacher 
+	and a Student of a School> Copyright (C) 2012 Virtusa Corporation. This program 
+	is free software: you can redistribute it and/or modify it under the terms 
+	of the GNU General Public License as published by the Free Software Foundation, 
+	either version 3 of the License, or (at your option) any later version. This 
+	program is distributed in the hope that it will be useful, but WITHOUT ANY 
+	WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
+	FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details. -->
+
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.virtusa.akura.api.dto.SpecialEventsAttendance"
+		table="SPECIAL_EVENT_ATTENDANCE">
+		<id name="specialEventsAttendanceId" type="integer"
+			column="SPECIAL_EVENT_ATTENDANCE_ID">
+			<generator class="increment" />
+		</id>
+		<many-to-one name="specialEventsParticipation"
+			class="com.virtusa.akura.api.dto.SpecialEventsParticipation" lazy="false">
+			<column name="SPECIAL_EVENT_PARTICIPATION_ID" not-null="true" />
+		</many-to-one>
+		<property name="studentId" type="integer" column="STUDENT_ID"
+			not-null="true" />
+		<property name="modifiedTime" column="MODIFIED_TIME" type="timestamp"
+			not-null="true" generated="always" />
+	</class>
+	
+	<query name="getSpecialEventAttendanceList">
+			<![CDATA[
+			from	com.virtusa.akura.api.dto.SpecialEventsAttendance specialEventsAttendance
+			where	specialEventsAttendance.specialEventsParticipation.specialEventsParticipationId = ? 
+			]]>
+	</query>
+	<query name="getSpecialEventAttendanceObject">
+			<![CDATA[
+			from	com.virtusa.akura.api.dto.SpecialEventsAttendance specialEventsAttendance
+			where	specialEventsAttendance.specialEventsParticipation.specialEventsParticipationId = ? 
+			AND 	specialEventsAttendance.studentId = ?
+			]]>
+	</query>
+	
+	<query name="getStudentsIdsOfSpecialEventAttendance">
+			<![CDATA[
+				select specialEventsParticipation.studentId FROM
+				com.virtusa.akura.api.dto.SpecialEventsAttendance specialEventsParticipation 
+				WHERE specialEventsParticipation.specialEventsParticipation.specialEventsParticipationId = ?
+			]]>
+	</query>
+
+</hibernate-mapping>

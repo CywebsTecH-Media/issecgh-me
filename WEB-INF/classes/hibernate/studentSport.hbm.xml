@@ -1,0 +1,143 @@
+<?xml version="1.0"?>
+
+<!--
+    < ÀKURA, This application manages the daily activities of a Teacher and a Student of a School>
+
+    Copyright (C) 2012 Virtusa Corporation.
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.virtusa.akura.api.dto.StudentSport" table="STUDENT_SPORT"
+		lazy="false">
+		<id name="studentSportId" type="int" column="STUDENT_SPORT_ID">
+			<generator class="increment" />
+		</id>
+		<many-to-one name="sportCategory" class="com.virtusa.akura.api.dto.SportCategory"
+			lazy="false">
+			<column name="SPORT_CATEGORY_ID" not-null="true" unique="true" />
+		</many-to-one>
+		<many-to-one name="position" class="com.virtusa.akura.api.dto.Position"
+			lazy="false">
+			<column name="POSITION_ID" not-null="true" />
+		</many-to-one>
+		<many-to-one name="student" class="com.virtusa.akura.api.dto.Student"
+			lazy="false">
+			<column name="STUDENT_ID" not-null="true" unique="true" />
+		</many-to-one>
+		<property name="sportColour" type="int">
+			<column name="IS_SCHOOL_COLOUR" />
+		</property>
+		<property name="year" type="date">
+			<column name="YEAR" length="10" not-null="true" unique="true" />
+		</property>
+		<property name="status" type="java.lang.Byte">
+			<column name="STATUS" />
+		</property>
+		<property name="modifiedTime" column="MODIFIED_TIME" type="timestamp"
+			not-null="true" generated="always" />
+	</class>
+
+	<query name="getSportsListForStudentById">
+  		<![CDATA[
+		 from com.virtusa.akura.api.dto.StudentSport studentSport
+ 		 Where studentSport.student.studentId = ?
+ 		 AND studentSport.year = ?
+		]]>
+	</query>
+	
+	<query name="getSportsNameListForStudent">
+  		<![CDATA[
+  		 select studentSport.sportCategory.sport.description
+		 from com.virtusa.akura.api.dto.StudentSport studentSport
+ 		 Where studentSport.student.studentId = ?
+ 		 AND studentSport.year = ?
+		]]>
+	</query>
+
+	<query name="getSportsListByStudentIdOnly">
+  		<![CDATA[
+		 FROM com.virtusa.akura.api.dto.StudentSport studentSport
+ 		 WHERE studentSport.student.studentId = ?
+		]]>
+	</query>
+
+	<query name="findStudentSport">
+  		<![CDATA[
+		from com.virtusa.akura.api.dto.StudentSport studentSport
+ 		 Where studentSport.student.studentId = ?
+ 		 AND studentSport.sportCategory.sportCategoryId = ?
+ 		 AND studentSport.year = ?
+		]]>
+	</query>
+
+	<query name="getStudentListforSportsCategory">
+  		<![CDATA[
+		from com.virtusa.akura.api.dto.StudentSport studentSport
+ 		 Where studentSport.sportCategory.sportCategoryId = ?
+ 		 AND studentSport.year = ?
+ 		 AND student.statusId != 2
+		]]>
+	</query>
+	
+	<query name="getStudentListforSportsCategorywithoutYear">
+  		<![CDATA[
+		from com.virtusa.akura.api.dto.StudentSport studentSport
+ 		 Where studentSport.sportCategory.sportCategoryId = ?
+ 		 AND student.statusId != 2
+		]]>
+	</query>
+	
+	<query name="findStudentSportByCategory">
+  		<![CDATA[
+		from com.virtusa.akura.api.dto.StudentSport studentSport
+ 		 Where studentSport.sportCategory.sportCategoryId = ?
+ 		 AND studentSport.year = ?
+		]]>
+	</query>
+
+	<query name="getNonCurrentStudentListforSportsCategory">
+  		<![CDATA[
+  		select studentSport
+		from com.virtusa.akura.api.dto.StudentSport studentSport, 
+			 com.virtusa.akura.api.dto.StudentLeave studentLeave
+ 		 where	 studentSport.sportCategory.sportCategoryId = ?
+ 		 and	 studentSport.year = ? 
+ 		 and	 studentSport.student.studentId = studentLeave.studentId
+ 		 and 	? between studentLeave.fromDate and studentLeave.toDate
+		]]>
+	</query>
+	
+	<sql-query name="viewStudentSports">
+		<![CDATA[
+			SELECT sport.description, position.description, sportSubCategory.description, 
+				CONCAT(CAST(studentSport.Is_school_Colour AS char),'') as color
+			from Student_Sport studentSport,
+			Student student,
+			Sport_Category sportCategory,
+      sport_sub sportSubCategory,
+			Position position,
+            Sport sport
+			Where 	studentSport.student_Id = ?
+ 		 AND 	studentSport.year = ?
+         and sportSubCategory.sport_sub_id = sportCategory.sport_sub_id
+ 		 AND student.student_Id = studentSport.student_Id
+ 		 and studentSport.sport_Category_Id = sportCategory.sport_Category_Id
+ 		 AND studentSport.position_Id = position.position_Id
+         and sport.sport_id = sportCategory.sport_id
+		]]>
+	</sql-query>
+	
+</hibernate-mapping>

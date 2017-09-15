@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+
+<!-- < ÀKURA, This application manages the daily activities of a Teacher 
+	and a Student of a School> Copyright (C) 2012 Virtusa Corporation. This program 
+	is free software: you can redistribute it and/or modify it under the terms 
+	of the GNU General Public License as published by the Free Software Foundation, 
+	either version 3 of the License, or (at your option) any later version. This 
+	program is distributed in the hope that it will be useful, but WITHOUT ANY 
+	WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
+	FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details. -->
+
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.virtusa.akura.api.dto.StudentGradeSubjectRankView" table="STUDENT_GRADE_SUBJECT_RANK_VIEW">
+
+		<id name="studentTermMarkId" type="int" column="STUDENT_TERM_MARKS_ID" />
+		<property name="marks" type="java.lang.Float">
+			<column name="MARKS" precision="12" scale="0" />
+		</property>
+		<property name="absent" type="boolean">
+			<column name="IS_ABSENT" />
+		</property>
+		<property name="subject" type="string">
+			<column name="SUBJECT_NAME" length="45" not-null="true" />
+		</property>
+		<property name="year" type="date">
+			<column name="YEAR" length="10" not-null="true" />
+		</property>
+		<property name="studentId" type="int">
+			<column name="STUDENT_ID" />
+		</property>
+
+		<property name="admissionNo" type="string">
+			<column name="ADMISSION_NO" />
+		</property>
+
+		<property name="nameWithInitials" type="string">
+			<column name="NAME_WT_INITIALS" />
+		</property>
+
+		<property name="classGradeId" type="int">
+			<column name="CLASS_GRADE_ID" />
+		</property>
+
+		<property name="studentClassInfoId" type="int">
+			<column name="STUDENT_CLASS_INFO_ID" />
+		</property>
+
+		<property name="gradeSubjectId" type="int">
+			<column name="GRADE_SUBJECT_ID" />
+		</property>
+
+		<property name="total" type="int" column="TOTAL"
+			update="false" />
+			
+		<property name="average" type="double" column="AVERAGE"
+			update="false" />
+
+		<property name="rank" type="int" column="RANK" update="false" />
+
+	</class>
+
+	<sql-query name="getStudentGradeSubjectRankList" callable="true">
+		<![CDATA[
+			CALL sp_student_grade_subject_prizelist(?,?,?)
+		]]>
+	</sql-query>
+</hibernate-mapping>

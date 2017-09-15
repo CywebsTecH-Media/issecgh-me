@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="StudentAcademicAchievementDetails" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.610510000000001"/>
+	<property name="ireport.x" value="4"/>
+	<property name="ireport.y" value="0"/>
+	<template><![CDATA[$P{STYLE_TEMPLATE}]]></template>
+	<parameter name="STYLE_TEMPLATE" class="java.lang.String"/>
+	<parameter name="achievement_title" class="java.lang.String"/>
+	<parameter name="term_marks_year" class="java.lang.String"/>
+	<parameter name="achievement" class="java.lang.String"/>
+	<parameter name="category" class="java.lang.String"/>
+	<parameter name="club_society" class="java.lang.String"/>
+	<field name="year" class="java.util.Date"/>
+	<field name="achievement" class="java.lang.String"/>
+	<field name="achievementCategory" class="java.lang.String"/>
+	<field name="type" class="java.lang.String"/>
+	<title>
+		<band height="35">
+			<textField>
+				<reportElement style="Frame_color" mode="Opaque" x="74" y="2" width="429" height="23" forecolor="#FFFFFF"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{achievement_title}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="37">
+			<line>
+				<reportElement x="74" y="0" width="429" height="1"/>
+			</line>
+			<line>
+				<reportElement x="74" y="0" width="1" height="36"/>
+			</line>
+			<line>
+				<reportElement x="127" y="1" width="1" height="35"/>
+			</line>
+			<line>
+				<reportElement x="503" y="0" width="1" height="37"/>
+			</line>
+			<line>
+				<reportElement x="285" y="1" width="1" height="35"/>
+			</line>
+			<line>
+				<reportElement x="403" y="0" width="1" height="37"/>
+			</line>
+			<textField>
+				<reportElement style="Text_and_ash_bg" mode="Opaque" x="75" y="1" width="52" height="35"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{term_marks_year}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Text_and_ash_bg" mode="Opaque" x="128" y="1" width="157" height="35"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{achievement}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Text_and_ash_bg" mode="Opaque" x="286" y="1" width="117" height="35"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{category}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Text_and_ash_bg" mode="Opaque" x="404" y="1" width="99" height="35"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{club_society}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="74" y="2" width="1" height="35"/>
+			</line>
+			<line>
+				<reportElement x="127" y="2" width="1" height="35"/>
+			</line>
+			<line>
+				<reportElement x="285" y="0" width="1" height="35"/>
+			</line>
+			<line>
+				<reportElement x="403" y="2" width="1" height="35"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="41" splitType="Stretch">
+			<line>
+				<reportElement positionType="Float" x="75" y="40" width="429" height="1"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="74" y="0" width="1" height="40"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="503" y="0" width="1" height="40"/>
+			</line>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="129" y="0" width="157" height="40" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{achievement}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="285" y="-1" width="1" height="41"/>
+			</line>
+			<textField pattern="yyyy">
+				<reportElement x="75" y="0" width="52" height="40" isPrintWhenDetailOverflows="true"/>
+				<textElement/>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{year}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="74" y="-1" width="429" height="1"/>
+			</line>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="403" y="0" width="1" height="40"/>
+			</line>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="405" y="1" width="98" height="39" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{type}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement x="286" y="0" width="117" height="40" isPrintWhenDetailOverflows="true"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{achievementCategory}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement stretchType="RelativeToBandHeight" x="127" y="-1" width="1" height="41"/>
+			</line>
+		</band>
+	</detail>
+</jasperReport>

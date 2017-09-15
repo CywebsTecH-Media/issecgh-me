@@ -1,0 +1,88 @@
+<!--
+    < ÀKURA, This application manages the daily activities of a Teacher and a Student of a School>
+    
+    Copyright (C) 2012 Virtusa Corporation.
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+ -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Help</title>
+<link href="../../../css/css_reset.css" rel="stylesheet" type="text/css">
+<link href="../../../css/theme.css" rel="stylesheet" type="text/css">
+<link href="../../../css/main_style.css" rel="stylesheet"
+	type="text/css">
+</head>
+<body>
+	<div id="help_container">
+		<div id="topbar">
+			<div id="topbar_wraper">
+				<h2>Help</h2>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+		<div id="page_container">
+			<div class="help_content">
+				<h2>Activate Suspended Student Service</h2>
+				<div class="clearfix"></div>
+				<p>Welcome to the ABM School Management System. Using this page you can view the 'Suspended History Details' of the Suspended Student and allows activating the Suspended Student for a particular date.</p>
+				
+				<br> <br>
+				<h5>Suspended Student History Details</h5>
+				<ul>
+					<li>In this view, if the selected student suspended before, displays the 'Suspended Student History Details' in detail as Suspended Period, Disciplinary Action, Description, Activated Date and Curtailed/Extended Reason.</li>
+					<li>Recent Suspended Period, Disciplinary Action, Description will be displayed when suspended student is going to activate </li>
+					<li>The date of Activation & Curtailed/Extended Reason concurrently update with the successfully activation on this view.</li>
+				</ul>
+				<br><br>
+				<h5>Activate the Suspended Student  </h5>
+				<ul>
+					<li>Click on 'Activate Stuspended Student' button. <input type="button" class="button" value="Activate Stuspended Student"/></li>
+					<li>Then 'Activate Suspended Student' panel loads with his latest 'Suspended From Date' (read only field).</li>
+					<li>Select the Date of Activation (Mandatory field with red (<span class="required_sign">*</span>) asterisk) by using calendar picker.<img
+						src="../../../images/calendar.jpg"></li>
+						<li>Curtailed/Extended Reason field is mandatory to fill, if the suspended period of student curtailed/extended.</li>
+						<li>Click on 'Activate' button <input type="button" class="button" value="Rejoin"/></li>
+						<li>Pops up a confirmation dialogue box with the message as 'Are you sure, you want to activate this student on this selected date?' </li>
+						<li>Click on 'Ok' button, concurrently email is sending to the parent and update the Suspended Student History Details table.</li>
+						<ul><li>If  activate & send email successfully, the success message appears at the top of the page as "Suspended student has been successfully activated & Email has been sent to the parent" </li>
+						<li>If activate successfully & email not sending, the success messages which appears at the top of the page as </li>
+						<ul><li>"Suspended student has been successfully activated & unable to send the email due to parent email address cannot be found." </li>
+						<li>"Suspended student has been successfully activated & unable to send the email due to parent details are not exists." </li>
+						<li>"Suspended student has been successfully activated & unable to send the email due to server error."
+						</li></ul>
+						</ul>
+					
+					<li>If Click on 'Cancel' button, the student activation process is going to stop. <input type="button" class="button" value="Cancel"/> button to stop the rejoin process.</li>
+				</ul>
+				<br><br>
+				<h5>Close  'Activate Stuspended Student Service' Pop Up window <input type="button" class="button" value="Close"/></h5>
+				<ul>
+					<li>If clicking on 'Close' button before activating the suspended student, will close the 'Suspended Student Service' pop up window and redirects to student search results list which previously selected.</li>
+					<li>If clicking on 'Close' button after successfully activating the suspended student, will close 'Suspended Student Service' pop up window and redirects to the Search Student page by only viewing the activated student with the 'Terminate Student', 'Edit Student' and 'Delete' buttons.</li>         		
+						
+				</ul>
+				
+				<div class="clearfix"></div>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+	<div id="footer">
+		<p>
+			Copyright © 2017 CywebstecH Media Corporation, ABM SMS contributors and others.
+			<b>ABM SMS</b> is School Management System Release under <b>CMC
+				License</b>.
+		</p>
+	</div>
+</body>
+</html>

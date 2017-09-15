@@ -1,0 +1,111 @@
+<?xml version="1.0"?>
+
+<!-- < ÀKURA, This application manages the daily activities of a Teacher 
+	and a Student of a School> Copyright (C) 2012 Virtusa Corporation. This program 
+	is free software: you can redistribute it and/or modify it under the terms 
+	of the GNU General Public License as published by the Free Software Foundation, 
+	either version 3 of the License, or (at your option) any later version. This 
+	program is distributed in the hope that it will be useful, but WITHOUT ANY 
+	WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
+	FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details. -->
+
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.virtusa.akura.api.dto.DailyTeacherAttendance"
+		table="DAILY_TEACHER_ATTENDANCE">
+		<id name="dailyTeacherAttendanceId" type="integer"
+			column="DAILY_TEACHER_ATTENDANCE_ID">
+			<generator class="increment" />
+		</id>
+		<property name="staffId" type="integer">
+			<column name="STAFF_ID" not-null="true" />
+		</property>
+		<property name="timeIn" type="string">
+			<column name="TIME_IN" not-null="false" sql-type="time" />
+		</property>
+		<property name="timeOut" type="string">
+			<column name="TIME_OUT" not-null="false" sql-type="time" />
+		</property>
+		<property name="date" type="date" column="DATE" not-null="true" />
+
+		<property name="modifiedTime" type="timestamp" generated="always">
+			<column name="MODIFIED_TIME" length="19" not-null="true" />
+		</property>
+
+	</class>
+
+	<query name="getStaffListByStaffType">
+		<![CDATA[
+
+			from com.virtusa.akura.api.dto.DailyTeacherAttendance dailyTeacherAttendance
+			where dailyTeacherAttendance.staffId in (select staff.staffId from com.virtusa.akura.api.dto.Staff staff where staff.staffCategory.catogaryID in (select staffCategory.catogaryID from com.virtusa.akura.api.dto.StaffCategory staffCategory where staffCategory.academic = ?))
+			and dailyTeacherAttendance.date = ?
+
+		]]>
+	</query>
+	
+	<query name="getStaffListByStaffCategoryId">
+		<![CDATA[
+
+			from com.virtusa.akura.api.dto.DailyTeacherAttendance dailyTeacherAttendance
+			where dailyTeacherAttendance.staffId in (select staff.staffId from com.virtusa.akura.api.dto.Staff staff where staff.staffCategory.catogaryID = ?)
+			and dailyTeacherAttendance.date = ?
+
+		]]>
+	</query>
+	
+	<query name="getStaffListByStaffCategoryIdAtTime">
+		<![CDATA[
+
+			from com.virtusa.akura.api.dto.DailyTeacherAttendance dailyTeacherAttendance
+			where dailyTeacherAttendance.staffId in (select staff.staffId from com.virtusa.akura.api.dto.Staff staff where staff.staffCategory.catogaryID = ?)
+			and dailyTeacherAttendance.date = ? and dailyTeacherAttendance.timeIn<= ?
+
+		]]>
+	</query>
+
+	<query name="getStaffListByDate">
+		<![CDATA[
+
+			from com.virtusa.akura.api.dto.DailyTeacherAttendance dailyTeacherAttendance
+			where dailyTeacherAttendance.date = ?
+
+		]]>
+	</query>
+	<query name="getStaffListByDateAndTime">
+		<![CDATA[
+
+			from com.virtusa.akura.api.dto.DailyTeacherAttendance dailyTeacherAttendance
+			where dailyTeacherAttendance.date = ? and dailyTeacherAttendance.timeIn<= ?
+
+		]]>
+	</query>
+	<query name="getTeacherByStaffId">
+		<![CDATA[
+
+			from com.virtusa.akura.api.dto.DailyTeacherAttendance dailyTeacherAttendance
+			where dailyTeacherAttendance.staffId = ? and dailyTeacherAttendance.date = ?
+
+		]]>
+	</query>
+	
+	<query name="getHalfDayTeacherListByDateAndStaffType">
+		<![CDATA[
+			
+			from com.virtusa.akura.api.dto.StaffLeave staffLeave 
+			where (staffLeave.dateType = 'Half Day' and staffLeave.fromDate = ? and staffLeave.staffLeaveStatusId = '1' ) 
+			
+			
+		]]>
+	</query>
+	
+	<sql-query name="uploadStaffAttendanceFile" >
+        <![CDATA[
+			CALL sp_upload_daily_attendance(false,?)
+		]]>
+    </sql-query>
+    
+</hibernate-mapping>

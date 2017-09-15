@@ -1,0 +1,153 @@
+<?xml version="1.0"?>
+
+	<!--
+		< ÀKURA, This application manages the daily activities of a Teacher
+		and a Student of a School> Copyright (C) 2012 Virtusa Corporation.
+		This program is free software: you can redistribute it and/or modify
+		it under the terms of the GNU General Public License as published by
+		the Free Software Foundation, either version 3 of the License, or (at
+		your option) any later version. This program is distributed in the
+		hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+		the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+		PURPOSE. See the GNU General Public License for more details.
+	-->
+
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.virtusa.akura.api.dto.StudentTermMarkDTO" table="STUDENT_TERM_MARKS_VIEW">
+
+		<id name="studentTermMarkId" type="int" column="STUDENT_TERM_MARKS_ID" />
+		<property name="marks" type="java.lang.Float">
+			<column name="MARKS" precision="12" scale="0" />
+		</property>
+		<property name="absent" type="boolean">
+			<column name="IS_ABSENT" />
+		</property>
+		<property name="term" column="TERM" type="string" not-null="true" />
+		<property name="subject" type="string">
+			<column name="SUBJECT_NAME" length="45" not-null="true" />
+		</property>
+		<property name="year" type="date">
+			<column name="YEAR" length="10" not-null="true" />
+		</property>
+		<property name="studentId" type="int">
+			<column name="STUDENT_ID" />
+		</property>
+
+		<property name="admissionNo" type="string">
+			<column name="ADMISSION_NO" />
+		</property>
+
+		<property name="nameWithInitials" type="string">
+			<column name="NAME_WT_INITIALS" />
+		</property>
+
+		<property name="classGradeId" type="int">
+			<column name="CLASS_GRADE_ID" />
+		</property>
+
+		<property name="studentClassInfoId" type="int">
+			<column name="STUDENT_CLASS_INFO_ID" />
+		</property>
+
+		<property name="termId" type="int">
+			<column name="TERM_ID" />
+		</property>
+
+		<property name="gradeSubjectId" type="int">
+			<column name="GRADE_SUBJECT_ID" />
+		</property>
+
+		<property name="languageId" type="int">
+			<column name="LANGUAGE_ID" />
+		</property>
+
+		<property name="editMarkState" type="boolean">
+			<column name="EDIT_MARK_STATE" />
+		</property>
+
+	</class>
+
+	<query name="findStudentTermMarksByStudentIdYearSubject">
+		<![CDATA[
+			SELECT	studentTermMarkDTO
+			FROM	com.virtusa.akura.api.dto.StudentTermMarkDTO studentTermMarkDTO
+			WHERE	studentTermMarkDTO.studentId = ?
+					AND studentTermMarkDTO.year = ?
+					AND studentTermMarkDTO.gradeSubjectId = ?
+		]]>
+	</query>
+
+	<query name="findStudentTermMarks">
+			<![CDATA[
+			Select	stm
+			from	com.virtusa.akura.api.dto.StudentTermMarkDTO stm
+			where	stm.studentId = ? and year(stm.year) = ?
+			]]>
+	</query>
+
+	<query name="findStudentAllTermMarks">
+			<![CDATA[
+				SELECT	studentTermMarkDTO
+				FROM	com.virtusa.akura.api.dto.StudentTermMarkDTO studentTermMarkDTO,
+						com.virtusa.akura.api.dto.GradeSubject gs
+				WHERE 	studentTermMarkDTO.gradeSubjectId = gs.gradeSubjectId AND
+				studentTermMarkDTO.studentId = ?
+				ORDER BY studentTermMarkDTO.year desc, gs.gradeSubjectOrder ,studentTermMarkDTO.termId
+			]]>
+	</query>
+
+	<query name="findStudentTermMarksByClassGradeAndTerm">
+			<![CDATA[
+				FROM	com.virtusa.akura.api.dto.StudentTermMarkDTO stm
+				WHERE	stm.termId = ? AND stm.classGradeId = ? AND year(stm.year) = ?
+				ORDER By stm.studentId
+			]]>
+	</query>
+
+	<query name="findStudentTermMarksByClassGradeAndTermOrderByName">
+			<![CDATA[
+				FROM	com.virtusa.akura.api.dto.StudentTermMarkDTO stm
+				WHERE	stm.termId = ? AND stm.classGradeId = ? AND year(stm.year) = ?
+				ORDER By stm.nameWithInitials
+			]]>
+	</query>
+
+	<query name="findAverageTermMarks">
+			<![CDATA[
+				SELECT SUM(marks)/COUNT(DISTINCT subject), term
+				FROM com.virtusa.akura.api.dto.StudentTermMarkDTO studentTermMarkDTO
+				WHERE studentId = ? AND year = ?
+				GROUP BY term
+				ORDER BY term asc
+			]]>
+	</query>
+
+	<query name="findStudentTermMarksByClassInfoIDAndClassgrade">
+			<![CDATA[
+				FROM	com.virtusa.akura.api.dto.StudentTermMarkDTO stm
+				WHERE	stm.gradeSubjectId = ? AND stm.studentClassInfoId = ?
+			]]>
+	</query>
+	
+	
+	<query name="findStudentTermMarksByClassInfoIDAndClassgradeAndTermId">
+			<![CDATA[
+				FROM	com.virtusa.akura.api.dto.StudentTermMarkDTO stm
+				WHERE	stm.gradeSubjectId = ? AND stm.studentClassInfoId = ? AND stm.termId = ? 
+			]]>
+	</query>
+
+	<query name="findStudentTermMarksByStudentIdYearClassGrade">
+		<![CDATA[
+			SELECT	studentTermMarkDTO
+			FROM	com.virtusa.akura.api.dto.StudentTermMarkDTO studentTermMarkDTO
+			WHERE	studentTermMarkDTO.studentId = ?
+					AND studentTermMarkDTO.year = ?
+					AND studentTermMarkDTO.classGradeId = ?
+		]]>
+	</query>
+</hibernate-mapping>

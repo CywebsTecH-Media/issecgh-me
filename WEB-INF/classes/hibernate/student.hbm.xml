@@ -1,0 +1,720 @@
+<?xml version="1.0"?>
+<!--
+     < ÀKURA, This application manages the daily activities of a Teacher 
+	and a Student of a School> Copyright (C) 2012 Virtusa Corporation. This program 
+	is free software: you can redistribute it and/or modify it under the terms 
+	of the GNU General Public License as published by the Free Software Foundation, 
+	either version 3 of the License, or (at your option) any later version. This 
+	program is distributed in the hope that it will be useful, but WITHOUT ANY 
+	WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
+
+	FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+	<class name="com.virtusa.akura.api.dto.Student" table="STUDENT">
+
+		<id name="studentId" column="STUDENT_ID" type="integer">
+
+			<generator class="increment" />
+		</id>
+
+		<property name="travelId" column="TRAVEL_ID" not-null="false"
+			type="java.lang.Integer" />
+
+		<property name="travelId2" column="TRAVEL_ID2" not-null="false"
+			type="java.lang.Integer" />
+
+		<property name="travelId3" column="TRAVEL_ID3" not-null="false"
+			type="java.lang.Integer" />
+
+		<property name="bloodGroupId" column="BLOOD_GROUP_ID"
+			not-null="false" type="java.lang.Integer" />
+
+		<property name="houseId" column="HOUSE_ID" not-null="false"
+			type="java.lang.Integer" />
+
+		<property name="religionId" column="RELIGION_ID" not-null="false"
+			type="java.lang.Integer" />
+
+		<property name="raceId" column="RACE_ID" not-null="false"
+			type="java.lang.Integer" />
+
+		<property name="hosteler" type="java.lang.Boolean">
+
+			<column name="IS_HOSTELER" />
+		</property>
+
+		<property name="hasSibling" type="java.lang.Boolean">
+
+			<column name="IS_SIBLINGS" />
+		</property>
+
+		<property name="siblingAdmitionNo" type="string">
+
+			<column name="BRO_ADMISSION_NO" length="45" not-null="false" />
+		</property>
+
+		<property name="cityId" column="CITY_ID" not-null="false"
+			type="java.lang.Integer" />
+
+		<property name="countryId" column="COUNTRY_ID" not-null="false"
+			type="integer" />
+
+		<property name="nationalityId" column="NATIONALITY_ID"
+			not-null="false" type="java.lang.Integer" />
+
+		<property name="languageId" column="LANGUAGE_ID" not-null="true"
+			type="java.lang.Integer" />
+
+		<property name="temporaryCityId" column="TEMPORARY_CITY_ID"
+			type="java.lang.Integer" />
+
+		<property name="admissionNo" type="string">
+
+			<column name="ADMISSION_NO" length="45" not-null="true"
+				unique="true" />
+		</property>
+
+		<property name="admissionDate" type="date">
+
+			<column name="ADMISSION_DATE" length="10" not-null="false" />
+		</property>
+
+		<property name="firstSchoolDay" type="date">
+
+			<column name="FIRST_SCHOOL_DAY" length="10" not-null="true" />
+		</property>
+
+		<property name="photo" type="binary">
+
+			<column name="PHOTO" sql-type="blob" />
+		</property>
+
+		<property name="fullName" type="string">
+
+			<column name="FULL_NAME" length="150" not-null="true" />
+		</property>
+
+		<property name="nameWtInitials" type="string">
+
+			<column name="NAME_WT_INITIALS" length="45" not-null="true" />
+		</property>
+
+		<property name="lastName" type="string">
+
+			<column name="LAST_NAME" length="45" not-null="true" />
+		</property>
+
+		<property name="dateOfBirth" type="date">
+
+			<column name="DATE_OF_BIRTH" not-null="false" />
+		</property>
+
+		<property name="nationalIdNo" type="string">
+
+			<column name="NATIONAL_ID_NO" length="45" />
+		</property>
+
+		<property name="address" type="string">
+
+			<column name="ADDRESS" not-null="false" />
+		</property>
+
+		<property name="temporaryAddress" type="string">
+
+			<column name="TEMPORARY_ADDRESS" />
+		</property>
+
+		<property name="mobileNo" type="string">
+
+			<column name="MOBILE_NO" sql-type="varchar" />
+		</property>
+
+		<property name="residenceNo" type="string">
+
+			<column name="RESIDENCE_NO" />
+		</property>
+
+		<property name="email" type="string">
+
+			<column name="EMAIL" />
+		</property>
+
+		<property name="gender" type="char">
+
+			<column name="GENDER" length="1" not-null="true" sql-type="char" />
+		</property>
+
+		<property name="isOldBoy" type="java.lang.Boolean">
+
+			<column name="IS_OLD_BOY" />
+		</property>
+
+		<property name="previousSchoolName" type="string">
+
+			<column name="PREVIOUS_SCHOOL_NAME" />
+		</property>
+
+		<property name="previousSchoolPassedGrade" type="string">
+
+			<column name="PREVIOUS_SCHOOL_PASSED_GRADE" />
+		</property>
+
+		<property name="previousSchoolStudiedGrade" type="string">
+
+			<column name="PREVIOUS_SCHOOL_STUDIED_GRADE" />
+		</property>
+
+		<property name="previousSchoolStudyMediumId" type="integer">
+
+			<column name="PREVIOUS_SCHOOL_STUDY_MEDIUM_ID" />
+		</property>
+
+		<property name="previousSchoolFromDate" type="date">
+
+			<column name="PREVIOUS_SCHOOL_STUDIED_FROM_DATE" />
+		</property>
+
+		<property name="previousSchoolToDate" type="date">
+
+			<column name="PREVIOUS_SCHOOL_STUDIED_TO_DATE" />
+		</property>
+
+		<property name="previousSchoolReasonForLeave" type="string">
+
+			<column name="PREVIOUS_SCHOOL_REASON_FOR_LEAVE" />
+		</property>
+
+		<property name="emergencyContactFullName" type="string">
+
+			<column name="EMERGENCY_CONTACT_FULL_NAME" />
+		</property>
+
+		<property name="emergencyContactNameWtInitials" type="string">
+
+			<column name="EMERGENCY_CONTACT_NAME_WITH_INITIALS" />
+		</property>
+
+		<property name="emergencyContactLastName" type="string">
+
+			<column name="EMERGENCY_CONTACT_LAST_NAME" />
+		</property>
+
+		<property name="emergencyContactRelationship" type="string">
+
+			<column name="EMERGENCY_CONTACT_RELATIONSHIP" />
+		</property>
+
+		<property name="emergencyContactResidenceNo" type="string">
+
+			<column name="EMERGENCY_CONTACT_RESIDENCE_NO" />
+		</property>
+
+		<property name="emergencyContactMobileNo" type="string">
+
+			<column name="EMERGENCY_CONTACT_MOBILE_NO" />
+		</property>
+
+		<property name="emergencyContactOfficeNo" type="string">
+
+			<column name="EMERGENCY_CONTACT_OFFICE_NO" />
+		</property>
+
+		<property name="emergencyContactEmailAddress" type="string">
+
+			<column name="EMERGENCY_CONTACT_EMAIL_ADDRESS" />
+		</property>
+
+		<property name="modifiedTime" generated="always" type="timestamp">
+
+			<column name="MODIFIED_TIME" length="19" not-null="true" />
+		</property>
+
+		<property name="dateOfDeparture" type="date">
+
+			<column name="DEPARTURE_DATE" not-null="false" />
+		</property>
+
+		<property name="statusId" column="STUDENT_STATUS_ID"
+			not-null="false" type="java.lang.Integer" />
+
+		<set name="housesForCaptain" inverse="true">
+
+			<key column="CAPTAIN" />
+
+			<one-to-many class="com.virtusa.akura.api.dto.House" />
+		</set>
+
+		<set name="studentDisciplines" inverse="true">
+
+			<key column="STUDENT_ID" not-null="true" />
+
+			<one-to-many class="com.virtusa.akura.api.dto.StudentDiscipline" />
+		</set>
+
+		<set name="studentSports" inverse="true">
+
+			<key column="STUDENT_ID" not-null="true" />
+
+			<one-to-many class="com.virtusa.akura.api.dto.StudentSport" />
+		</set>
+
+		<set name="studentPrefects" inverse="true">
+
+			<key column="STUDENT_ID" not-null="true" />
+
+			<one-to-many class="com.virtusa.akura.api.dto.StudentPrefect" />
+		</set>
+
+		<set name="studentParents" inverse="true" lazy="false">
+
+			<key column="STUDENT_ID" not-null="true" />
+
+			<one-to-many class="com.virtusa.akura.api.dto.StudentParent" />
+		</set>
+
+		<set name="studentDisabilities" inverse="true" lazy="false">
+
+			<key column="STUDENT_ID" not-null="true" unique="true" />
+
+			<one-to-many class="com.virtusa.akura.api.dto.StudentDisability" />
+		</set>
+
+		<set name="achievements" inverse="true">
+
+			<key column="STUDENT_ID" not-null="true" />
+
+			<one-to-many class="com.virtusa.akura.api.dto.Achievement" />
+		</set>
+
+		<set name="housesForViceCaptain" inverse="true">
+
+			<key column="VICE_CAPTAIN" />
+
+			<one-to-many class="com.virtusa.akura.api.dto.House" />
+		</set>
+
+		<set name="studentScholarships" inverse="true">
+
+			<key column="STUDENT_ID" not-null="true" />
+
+			<one-to-many class="com.virtusa.akura.api.dto.StudentScholarship" />
+		</set>
+
+		<set name="studentClassInfos" inverse="true" lazy="false">
+
+			<key column="STUDENT_ID" not-null="true" />
+
+			<one-to-many class="com.virtusa.akura.api.dto.StudentClassInfo" />
+		</set>
+
+		<set name="studentClubSocieties" inverse="true">
+
+			<key column="STUDENT_ID" not-null="true" />
+
+			<one-to-many class="com.virtusa.akura.api.dto.StudentClubSociety" />
+		</set>
+
+		<set name="faithLifeRating" inverse="true" lazy="false">
+
+			<key column="FAITH_LIFE_RATING_ID" not-null="true" />
+
+			<one-to-many class="com.virtusa.akura.api.dto.FaithLifeRating" />
+		</set>
+	</class>
+
+
+	<sql-query name="studentSearch">
+		<![CDATA[
+
+   SELECT  
+		t.STUDENT_ID,
+        t.NAME_WT_INITIALS,
+        t.ADMISSION_NO,
+        t.DESCRIPTION,
+        t.MaXYear,
+        t.STUDENT_STATUS_ID,
+        t.FIRST_SCHOOL_DAY, 
+        t.stTem,
+        t.stTemFr, 
+        t.stSu, 
+        t.stSuFr,
+        t.YEAR,
+        t.DEPARTURE_DATE
+        
+        
+	FROM ( 
+	
+	SELECT
+			
+		st.STUDENT_ID,
+        st.NAME_WT_INITIALS,
+        st.ADMISSION_NO,
+        cg.DESCRIPTION,
+        year(sci.YEAR) as MaXYear,
+        st.STUDENT_STATUS_ID,
+        st.FIRST_SCHOOL_DAY, 
+        sttemp.TO_DATE as stTem,
+        sttemp.FROM_DATE as stTemFr, 
+        stsus.TO_DATE as stSu, 
+        stsus.FROM_DATE as stSuFr,
+        sci.YEAR,
+        cg.CLASS_GRADE_ID,
+        st.DEPARTURE_DATE
+        
+      FROM 
+      
+      STUDENT st 
+        LEFT JOIN STUDENT_CLASS_INFO sci ON st.STUDENT_ID = sci.STUDENT_ID  
+        LEFT JOIN CLASS_GRADE cg ON cg.CLASS_GRADE_ID = sci.CLASS_GRADE_ID
+        LEFT JOIN STUDENT_TEMPORARY_LEAVE sttemp ON st.STUDENT_ID = sttemp.STUDENT_ID
+        LEFT JOIN STUDENT_SUSPEND_DETAILS stsus ON st.STUDENT_ID = stsus.STUDENT_ID
+        LEFT JOIN GRADE grd ON cg.GRADE_ID = grd.GRADE_ID
+        WHERE year(sci.YEAR) = ?
+        AND (? = '' OR st.LAST_NAME like ?)
+        AND (? = '' OR st.ADMISSION_NO = ?) 
+        AND (? = 0 OR st.STUDENT_STATUS_ID = ?)
+        AND (? = '' OR grd.DESCRIPTION = ?)
+        AND (? = '' OR grd.GRADE_ID IS NULL)
+        
+       	UNION ALL
+        
+        SELECT 
+        
+        st.STUDENT_ID,
+        st.NAME_WT_INITIALS,
+        st.ADMISSION_NO,
+        cg.DESCRIPTION,
+        year(sci.YEAR) as MaXYear,
+        st.STUDENT_STATUS_ID,
+        st.FIRST_SCHOOL_DAY, 
+        sttemp.TO_DATE as stTem,
+        sttemp.FROM_DATE as stTemFr, 
+        stsus.TO_DATE as stSu, 
+        stsus.FROM_DATE as stSuFr,
+        sci.YEAR,
+        cg.CLASS_GRADE_ID,
+        st.DEPARTURE_DATE
+        
+      FROM 
+      
+      STUDENT st 
+        LEFT JOIN STUDENT_CLASS_INFO sci ON st.STUDENT_ID = sci.STUDENT_ID  
+        LEFT JOIN CLASS_GRADE cg ON cg.CLASS_GRADE_ID = sci.CLASS_GRADE_ID
+        LEFT JOIN STUDENT_TEMPORARY_LEAVE sttemp ON st.STUDENT_ID = sttemp.STUDENT_ID
+        LEFT JOIN STUDENT_SUSPEND_DETAILS stsus ON st.STUDENT_ID = stsus.STUDENT_ID
+        LEFT JOIN GRADE grd ON cg.GRADE_ID = grd.GRADE_ID
+        WHERE (? = '' OR st.LAST_NAME like ?)
+        AND (? = '' OR st.ADMISSION_NO = ?) 
+        AND (? = 0 OR st.STUDENT_STATUS_ID = ?)
+        AND (? = '' OR grd.DESCRIPTION = ?)
+        AND (? = '' OR grd.GRADE_ID IS NULL)
+        AND (year(sci.YEAR) != ? 
+        OR year(sci.YEAR) IS NULL)
+        
+        ) t
+        
+        GROUP BY STUDENT_ID
+        ORDER BY CLASS_GRADE_ID,
+        ABS(ADMISSION_NO) DESC
+        LIMIT ?,10
+        ]]>
+	</sql-query>
+
+
+<sql-query name="getNoOfStudents">
+		<![CDATA[
+		
+		SELECT  COUNT(t.STUDENT_ID) 
+		
+		FROM ( 
+	
+		SELECT
+			
+		st.STUDENT_ID,
+        st.NAME_WT_INITIALS,
+        st.ADMISSION_NO,
+        cg.DESCRIPTION,
+        year(sci.YEAR) as MaXYear,
+        st.STUDENT_STATUS_ID,
+        st.FIRST_SCHOOL_DAY, 
+        sttemp.TO_DATE as stTem,
+        sttemp.FROM_DATE as stTemFr, 
+        stsus.TO_DATE as stSu, 
+        stsus.FROM_DATE as stSuFr,
+        sci.YEAR,
+        cg.CLASS_GRADE_ID,
+        st.DEPARTURE_DATE
+        
+      FROM 
+      
+      STUDENT st 
+        LEFT JOIN STUDENT_CLASS_INFO sci ON st.STUDENT_ID = sci.STUDENT_ID  
+        LEFT JOIN CLASS_GRADE cg ON cg.CLASS_GRADE_ID = sci.CLASS_GRADE_ID
+        LEFT JOIN STUDENT_TEMPORARY_LEAVE sttemp ON st.STUDENT_ID = sttemp.STUDENT_ID
+        LEFT JOIN STUDENT_SUSPEND_DETAILS stsus ON st.STUDENT_ID = stsus.STUDENT_ID
+        LEFT JOIN GRADE grd ON cg.GRADE_ID = grd.GRADE_ID
+        WHERE year(sci.YEAR) = ?
+        AND (? = '' OR st.LAST_NAME like ?)
+        AND (? = '' OR st.ADMISSION_NO = ?) 
+        AND (? = 0 OR st.STUDENT_STATUS_ID = ?)
+        AND (? = '' OR grd.DESCRIPTION = ?)
+        AND (? = '' OR grd.GRADE_ID IS NULL)
+        
+       	UNION ALL
+        
+        SELECT 
+        
+        st.STUDENT_ID,
+        st.NAME_WT_INITIALS,
+        st.ADMISSION_NO,
+        cg.DESCRIPTION,
+        year(sci.YEAR) as MaXYear,
+        st.STUDENT_STATUS_ID,
+        st.FIRST_SCHOOL_DAY, 
+        sttemp.TO_DATE as stTem,
+        sttemp.FROM_DATE as stTemFr, 
+        stsus.TO_DATE as stSu, 
+        stsus.FROM_DATE as stSuFr,
+        sci.YEAR,
+        cg.CLASS_GRADE_ID,
+        st.DEPARTURE_DATE
+        
+      FROM 
+      
+      STUDENT st 
+        LEFT JOIN STUDENT_CLASS_INFO sci ON st.STUDENT_ID = sci.STUDENT_ID  
+        LEFT JOIN CLASS_GRADE cg ON cg.CLASS_GRADE_ID = sci.CLASS_GRADE_ID
+        LEFT JOIN STUDENT_TEMPORARY_LEAVE sttemp ON st.STUDENT_ID = sttemp.STUDENT_ID
+        LEFT JOIN STUDENT_SUSPEND_DETAILS stsus ON st.STUDENT_ID = stsus.STUDENT_ID
+        LEFT JOIN GRADE grd ON cg.GRADE_ID = grd.GRADE_ID
+        WHERE (? = '' OR st.LAST_NAME like ?)
+        AND (? = '' OR st.ADMISSION_NO = ?) 
+        AND (? = 0 OR st.STUDENT_STATUS_ID = ?)
+        AND (? = '' OR grd.DESCRIPTION = ?)
+        AND (? = '' OR grd.GRADE_ID IS NULL)
+        AND (year(sci.YEAR) != ? 
+        OR year(sci.YEAR) IS NULL)
+        
+        ) t
+        
+        ]]>
+</sql-query>
+	
+	<query name="checkAdmissionNoIsExist">
+
+<![CDATA[
+			Select	stu.studentId
+			from	com.virtusa.akura.api.dto.Student stu
+			where	(stu.admissionNo = ?)
+			]]>
+	</query>
+
+	<query name="findNewStudents">
+
+<![CDATA[
+			Select	stu.studentId, stu.nameWtInitials, stu.admissionNo
+			from	com.virtusa.akura.api.dto.Student stu	
+			where	year(stu.firstSchoolDay)=? 	
+					and stu.statusId = 1	
+					and stu.studentId not in (Select sci.student.studentId
+												from com.virtusa.akura.api.dto.StudentClassInfo sci)
+												  
+			order by stu.admissionNo
+			]]>
+	</query>
+
+
+	<sql-query name="callStudentAdvancedSearch">
+
+<![CDATA[
+			CALL sp_student_advance_search(?,?,?,?,?,?,?,?,?)
+		]]>
+	</sql-query>
+
+
+	<sql-query name="callStudentAdvancedSearchCount">
+
+<![CDATA[
+			CALL sp_student_advance_search_count(?,?,?,?,?,?,?,?,?)
+		]]>
+	</sql-query>
+
+
+
+	<sql-query name="callStudentSmsSearch">
+
+<![CDATA[
+			CALL sp_student_sms_search(?,?,?,?,?,?,?,?,?,?)
+		]]>
+	</sql-query>
+
+	<query name="getStudentPersonalDetailsByAdmissionNo">
+
+<![CDATA[
+				FROM com.virtusa.akura.api.dto.Student student
+				WHERE student.admissionNo = ?
+			]]>
+	</query>
+
+	<query name="getStudentIdByAdmissionNo">
+
+<![CDATA[
+				SELECT student.studentId
+				FROM com.virtusa.akura.api.dto.Student student
+				WHERE student.admissionNo = ? 
+			]]>
+	</query>
+
+	<query name="getStudentIdByName">
+
+<![CDATA[
+				SELECT student.studentId
+				FROM com.virtusa.akura.api.dto.Student student
+				WHERE student.fullName = ? 
+			]]>
+	</query>
+	<sql-query name="getStudentByNIC" cacheable="false" callable="false">
+		<return alias="parent" class="com.virtusa.akura.api.dto.Student"
+			lock-mode="read" />
+   		<![CDATA[
+			SELECT * FROM STUDENT
+  			WHERE NATIONAL_ID_NO = ?
+		]]>
+	</sql-query>
+
+	<query name="findStudentAdmissionNosByClassGradeId">
+
+<![CDATA[
+					SELECT student.admissionNo
+					FROM com.virtusa.akura.api.dto.StudentClassInfo studentClassInfo,
+						com.virtusa.akura.api.dto.Student student
+					WHERE studentClassInfo.student.studentId = student.studentId
+						AND studentClassInfo.classGrade.classGradeId = ?
+						AND studentClassInfo.year = ?
+			]]>
+	</query>
+
+	<query name="deleteStudentAttendanceByDepartureDate">
+
+<![CDATA[
+			DELETE com.virtusa.akura.api.dto.DailyStudentAttendance dailyStudentAttendance 
+			WHERE dailyStudentAttendance.studentId = ? AND dailyStudentAttendance.date > ?
+		]]>
+	</query>
+
+	<query name="getStudentStartedDate">
+
+<![CDATA[
+				SELECT student.firstSchoolDay
+				FROM com.virtusa.akura.api.dto.Student student
+				WHERE student.studentId = ? 
+			]]>
+	</query>
+
+	<query name="getStudentStatusByStudentIdsList">
+
+<![CDATA[
+				SELECT student.statusId
+				FROM com.virtusa.akura.api.dto.Student student
+				WHERE student.studentId IN (:studentIdsList)
+				ORDER BY student.nameWtInitials
+			]]>
+	</query>
+
+	<query name="getStudentStatusId">
+
+<![CDATA[
+				SELECT student.statusId
+				FROM com.virtusa.akura.api.dto.Student student
+				WHERE student.studentId = ?
+			]]>
+	</query>
+
+	<query name="getStudentCount">
+
+<![CDATA[
+        	SELECT count(student.studentId)
+        	FROM com.virtusa.akura.api.dto.Student student
+        	WHERE student.statusId != 2
+        ]]>
+	</query>
+
+	<sql-query name="studentClass">
+
+<![CDATA[
+        
+         select DESCRIPTION from CLASS_GRADE where CLASS_GRADE_ID = 
+        ( select CLASS_GRADE_ID from STUDENT_CLASS_INFO sci where STUDENT_ID = ? and YEAR(YEAR) = ? limit 1 )       
+        ]]>
+	</sql-query>
+
+	<sql-query name="getCurrentChildrenByParnetId">
+
+<![CDATA[		
+		
+		select s.STUDENT_ID, s.ADMISSION_NO, s.NAME_WT_INITIALS 
+		from STUDENT s join STUDENT_PARENT sp on s.STUDENT_ID = sp.STUDENT_ID 
+		where sp.PARENT_ID = ? and s.STUDENT_STATUS_ID != 2
+     
+        ]]>
+	</sql-query>
+
+	<sql-query name="getChildrenClassByParnetId">
+
+<![CDATA[
+        
+		select s.STUDENT_ID, cg.DESCRIPTION
+		from STUDENT s 
+		join STUDENT_PARENT sp on s.STUDENT_ID = sp.STUDENT_ID	
+		left outer join STUDENT_CLASS_INFO sci on s.STUDENT_ID = sci.STUDENT_ID
+		left outer join CLASS_GRADE cg on sci.CLASS_GRADE_ID = cg.CLASS_GRADE_ID
+		where sp.PARENT_ID = ? 
+		and s.STUDENT_STATUS_ID != 2 
+		and year(sci.YEAR) = ?            
+       
+        ]]>
+	</sql-query>
+
+	<sql-query name="getChildrenAttendanceByParnetId">
+
+		<![CDATA[
+        
+		select s.STUDENT_ID, dsa.DATE
+		from STUDENT s 
+		join STUDENT_PARENT sp on s.STUDENT_ID = sp.STUDENT_ID			
+		left outer join DAILY_STUDENT_ATTENDANCE dsa on dsa.STUDENT_ID = s.STUDENT_ID
+		where sp.PARENT_ID = ? 
+		and s.STUDENT_STATUS_ID != 2 
+		and dsa.DATE = ?            
+       
+        ]]>
+	</sql-query>
+	
+	<query name="StudentExportSearch">
+		<![CDATA[		
+			SELECT  classinfo.student
+        	FROM	com.virtusa.akura.api.dto.StudentClassInfo classinfo
+            WHERE 	classinfo.classGrade.grade.gradeId = ? AND (? = 0 OR classinfo.classGrade.classGradeId = ?)
+            		AND year(classinfo.year) = ? AND (? = 0 OR classinfo.student.languageId = ?)
+		]]>
+	</query>
+	
+	<query name="StudentExportSearchForNewStudents">
+		<![CDATA[		
+			SELECT  student
+        	FROM	com.virtusa.akura.api.dto.Student student
+            WHERE 	year(student.firstSchoolDay) = ? AND (? = 0 OR student.languageId = ?)
+            		AND student.studentId NOT IN (
+            			SELECT	sci.student.studentId
+						FROM	com.virtusa.akura.api.dto.StudentClassInfo sci
+						)
+		]]>
+	</query>
+
+</hibernate-mapping>

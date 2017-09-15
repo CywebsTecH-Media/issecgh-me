@@ -1,0 +1,120 @@
+/* CSS Document */
+
+
+#add_remove_list .row{
+	margin: 3px;
+	padding: 0px;
+	display:list-item;
+	list-style: none;
+	line-height:20px;
+	line-space:20px;
+}
+
+
+#add_remove_list .row input{
+	width:18px;
+	margin:0;
+	padding:0;
+
+	
+}
+
+
+#add_remove_list .label_div{
+	float:left;
+	width:270px;
+
+}
+
+#add_remove_list .controller{
+	float:left;
+	text-align:center;
+	width:83px;
+	padding-top:95px;
+}
+
+#add_remove_list .controller input{
+	width:30px;
+	cursor:pointer;
+}
+
+#add_remove_list .button{
+	margin:0;
+	*padding:0;
+}
+
+#add_remove_list .text_red{
+ color:#E61A1F;
+}
+
+#add_remove_list .list_containers{
+	float:left;
+	width:400px;
+	
+}
+
+#add_remove_list #FromList{
+	width:400px;
+	float:left;
+	margin-top:0px;	
+	height:274px;
+	
+}
+
+#add_remove_list #ToList{
+	float: left; 
+	width: 400px; 
+	margin-top:0px;	
+	overflow-y:scroll; 
+	border:1px solid #4596C9; 
+	height:272px; 
+	background-color:#FFFFFF;		
+}
+
+#add_remove_list #ToList li {
+
+	border-bottom: 1px solid #D6DFEE;
+	height: 30px;
+	*height: 25px;
+	*line-height: 30px;
+	cursor:pointer;
+}
+
+#add_remove_list #ToList li.item_selected {
+
+	background-color:#356BA7;
+	color:#FFFFFF;
+}
+
+#add_remove_list #ToList li input {
+    float:left;
+	border: none;
+    height: 18px;
+    width: 18px;
+	margin:0px;
+	margin-top: 4px;
+	*margin:0px;
+	padding:0px;
+}
+
+#add_remove_list #ToList li div {
+    float: left;
+    line-height: 15px;
+	*line-height: 12px;
+    padding: 0 0 0 5px;
+    width: 290px;
+}
+#add_remove_list .ccontroller{
+	float:left;
+	text-align:center;
+	width:83px;
+	padding-top:170px;
+}
+#add_remove_list .chcontroller{
+	float:left;
+	text-align:center;
+	width:83px;
+	padding-top:150px;
+}
+
+

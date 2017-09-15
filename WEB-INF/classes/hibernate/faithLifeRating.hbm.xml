@@ -1,0 +1,133 @@
+<?xml version="1.0"?>
+<!--
+    < ÀKURA, This application manages the daily activities of a Teacher and a Student of a School>
+
+    Copyright (C) 2012 Virtusa Corporation.
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class
+        name="com.virtusa.akura.api.dto.FaithLifeRating"
+        lazy="false"
+        table="FAITH_LIFE_RATING" >
+
+        <id
+            name="faithLifeRatingId"
+            column="FAITH_LIFE_RATING_ID"
+            type="integer" >
+
+            <generator class="increment" />
+        </id>
+
+        <many-to-one
+            name="student"
+            class="com.virtusa.akura.api.dto.Student"
+            column="STUDENT_ID"
+            not-null="true" />
+
+        <many-to-one
+            name="faithLifeComment"
+            class="com.virtusa.akura.api.dto.FaithLifeComment"
+            column="FAITH_LIFE_COMMENT_ID"
+            not-null="false" />
+
+        <many-to-one
+            name="faithLifeGrading"
+            class="com.virtusa.akura.api.dto.FaithLifeGrading"
+            column="GRADING_ID"
+            not-null="false" />
+
+        <property
+            name="year"
+            type="date" >
+
+            <column
+                name="YEAR"
+                length="10"
+                not-null="true"
+                unique="true" />
+        </property>
+
+        <property
+            name="faithLifeDescription"
+            type="string" >
+
+            <column
+                name="FAITH_LIFE_DESCRIPTION"
+                not-null="false" />
+        </property>
+
+        <property
+            name="modifiedTime"
+            column="MODIFIED_TIME"
+            generated="always"
+            not-null="true"
+            type="timestamp" />
+    </class>
+
+    <query name="getFaithLifeRateForStudentById" >
+
+<![CDATA[
+		 from com.virtusa.akura.api.dto.FaithLifeRating faithLifeRating
+ 		 Where faithLifeRating.student.studentId = ?
+ 		 AND faithLifeRating.year = ?
+		]]>
+    </query>
+
+    <query name="getFaithLifeRateForStudentByStudentIdOnly" >
+
+<![CDATA[
+		 FROM com.virtusa.akura.api.dto.FaithLifeRating faithLifeRating
+ 		 WHERE faithLifeRating.student.studentId = ?
+		]]>
+    </query>
+
+    <query name="getFaithLifeRateingForStudentById" >
+
+<![CDATA[
+	 
+ 			 SELECT category.description,grading.description,comment.description
+  		        
+		 FROM com.virtusa.akura.api.dto.FaithLifeRating rating,
+		      com.virtusa.akura.api.dto.FaithLifeComment comment,
+		      com.virtusa.akura.api.dto.FaithLifeGrading grading,
+           	  com.virtusa.akura.api.dto.FaithLifeCategory category,
+              com.virtusa.akura.api.dto.Student student
+ 		WHERE rating.student.studentId = student.studentId
+ 		AND comment.faithLifeCommentId = rating.faithLifeComment.faithLifeCommentId
+              AND comment.faithLifeCategory.faithLifeCategoryId=category.faithLifeCategoryId
+              AND grading.gradingId=rating.faithLifeGrading.gradingId
+ 		 	  AND rating.student.studentId = ? and rating.year=? 
+ 		
+		]]>
+    </query>
+
+    <sql-query name="getFaithLifeRateFoeOtherCatagory" >
+
+<![CDATA[
+	 
+ 			 SELECT 'Other' as CATEGORY_DESCRIPTION,flg.DESCRIPTION,flr.FAITH_LIFE_DESCRIPTION
+  		        
+			 FROM FAITH_LIFE_RATING flr 
+			 JOIN FAITH_LIFE_GRADING flg 
+			 ON  flr.GRADING_ID = flg.FAITH_LIFE_GRADING_ID 
+	 		 WHERE flr.STUDENT_ID = ? and flr.YEAR=? 
+	 		 AND flr.FAITH_LIFE_COMMENT_ID IS NULL
+
+		]]>
+    </sql-query>
+
+</hibernate-mapping>

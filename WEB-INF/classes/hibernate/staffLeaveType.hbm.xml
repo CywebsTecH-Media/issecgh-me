@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+
+<!--
+    < ÀKURA, This application manages the daily activities of a Teacher and a Student of a School>
+
+    Copyright (C) 2012 Virtusa Corporation.
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 20, 2012 3:38:03 PM by Hibernate Tools 3.3.0.GA -->
+<hibernate-mapping>
+    <class name="com.virtusa.akura.api.dto.StaffLeaveType"  table="STAFF_LEAVE_TYPE">
+        <id name="staffLeaveTypeId" type="int" column="STAFF_LEAVE_TYPE_ID">
+			<generator class="increment" />
+		</id>
+		<property name="description" type="string" >
+			<column name="DESCRIPTION" length="45"  not-null="true" />
+		</property>
+		<property name="maxStaffLeaves" type="int">
+            <column name="MAX_NO_OF_LEAVES" />
+        </property>
+        <property name="gender" type="char" >
+			<column name="GENDER" length="1"  not-null="true" />
+		</property>
+		<property name="withHolidays" type="java.lang.Boolean">
+			<column name="WITH_HOLIDAYS" />
+		</property>
+        <property name="modifiedTime" type="timestamp" generated="always">
+			<column name="MODIFIED_TIME" length="19" not-null="true" />
+		</property>
+         </class>
+         
+         <query name="getStaffLeaveTypeByDescription">
+            <![CDATA[
+               from com.virtusa.akura.api.dto.StaffLeaveType as staffLeaveType
+               where (staffLeaveType.description=?)
+            ]]>
+      </query>
+      
+      <sql-query name="getStaffLeaveByStaffLeaveTypeId">
+        <![CDATA[
+        	SELECT sl.STAFF_LEAVE_ID
+			FROM STAFF_LEAVE_TYPE st inner join STAFF_LEAVE sl 
+			ON st.STAFF_LEAVE_TYPE_ID=sl.STAFF_LEAVE_TYPE_ID 
+			WHERE st.STAFF_LEAVE_TYPE_ID= ? 
+			
+        ]]>
+	</sql-query>
+</hibernate-mapping>

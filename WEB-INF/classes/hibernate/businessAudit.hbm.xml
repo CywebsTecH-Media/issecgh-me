@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+
+<!-- < ÀKURA, This application manages the daily activities of a Teacher 
+	and a Student of a School> Copyright (C) 2012 Virtusa Corporation. This program 
+	is free software: you can redistribute it and/or modify it under the terms 
+	of the GNU General Public License as published by the Free Software Foundation, 
+	either version 3 of the License, or (at your option) any later version. This 
+	program is distributed in the hope that it will be useful, but WITHOUT ANY 
+	WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
+	FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details. -->
+
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.virtusa.akura.api.dto.BusinessAudit" table="BUSINESS_AUDIT">
+		<id name="businessAuditId" type="integer" column="BUSINESS_AUDIT_ID">
+			<generator class="increment" />
+		</id>
+		<many-to-one name="userLogin"
+			class="com.virtusa.akura.api.dto.UserLogin" lazy="false">
+			<column name="USER_LOGIN_ID" not-null="true" />
+		</many-to-one>
+		<property name="date" type="timestamp" column="DATE" not-null="true" />
+		<property name="businessFunction" type="string" column="BUSINESS_FUNCTION"
+			not-null="true" />
+		<property name="module" type="string" column="MODULE"
+			not-null="true" />
+		<many-to-one name="eventType" class="com.virtusa.akura.api.dto.AuditEventType" not-null="true"  lazy="false">
+            <column name="EVENT_TYPE" />
+        </many-to-one>
+		<property name="modifiedTime" column="MODIFIED_TIME" type="timestamp"
+			not-null="true" generated="always" />
+	
+	</class>
+	
+	 
+	<query name="businessAuditSearch">
+		<![CDATA[
+			
+			from com.virtusa.akura.api.dto.BusinessAudit businessAudit
+			where (? = '' OR businessAudit.userLogin.username = ?)
+			AND (? = '' OR businessAudit.businessFunction like ?)
+			AND (? = '' OR businessAudit.eventType.description = ?)
+			AND (? = '' OR businessAudit.module like ?)
+			AND (Date(businessAudit.date) >= ? AND Date(businessAudit.date) <= ? )
+		
+		]]>
+    </query>
+    
+    <query name="businessAuditSearchWithNoDate">
+		<![CDATA[
+			
+			from com.virtusa.akura.api.dto.BusinessAudit businessAudit
+			where (? = '' OR businessAudit.userLogin.username = ?)
+			AND (? = '' OR businessAudit.businessFunction like ?)
+			AND (? = '' OR businessAudit.eventType.description = ?)
+			AND (? = '' OR businessAudit.module like ?)
+			
+		]]>
+    </query>
+    
+    <!-- 
+    <sql-query name="businessAuditSearch">
+    <return alias="businessAudit" class="com.virtusa.akura.api.dto.BusinessAudit"
+			lock-mode="read" />
+		<![CDATA[
+			CALL sp_business_audit_search(?,?,?,?,?,?)
+		]]>
+    </sql-query>
+	-->
+	
+</hibernate-mapping>

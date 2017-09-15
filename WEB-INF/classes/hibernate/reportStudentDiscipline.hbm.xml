@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+
+<!--
+    < ÀKURA, This application manages the daily activities of a Teacher and a Student of a School>
+
+    Copyright (C) 2012 Virtusa Corporation.
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.virtusa.akura.api.dto.ReportStudentDiscipline"
+		table="STUDENT_DISCIPLINE_VIEW">
+
+		<composite-id>
+			<key-property name="studentDisciplineId" column="STUDENT_DISCIPLINE_ID"
+				type="integer" />
+			<key-property name="studentId" column="STUDENT_ID" type="integer" />
+			<key-property name="classDescription" column="CLASS_DESCRIPTION" type="string" />
+		</composite-id>
+
+		<property name="admissionNo" column="ADMISSION_NO" type="string" />
+		<property name="fullName" column="FULL_NAME" type="string" />
+		<property name="nameWithInitials" column="NAME_WITH_INITIALS" type="string" />
+		<property name="warning" column="WARNING"
+			type="string" />
+		<property name="warningLevel" column="WARNING_LEVEL"
+			type="string" />
+		<property name="teacherName" column="TEACHER_NAME"
+			type="string" />
+		<property name="warnDate" column="WARN_DATE" type="date" />
+		<property name="informedToParent" column="INFORMED_TO_PARENT" type="boolean" />
+
+	</class>
+</hibernate-mapping>

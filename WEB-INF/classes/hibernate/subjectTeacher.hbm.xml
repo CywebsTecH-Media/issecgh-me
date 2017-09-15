@@ -1,0 +1,179 @@
+<?xml version="1.0"?>
+
+<!--
+    < ÀKURA, This application manages the daily activities of a Teacher and a Student of a School>
+
+    Copyright (C) 2012 Virtusa Corporation.
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.virtusa.akura.api.dto.SubjectTeacher" table="SUBJECT_TEACHER">
+		<id name="subjectTeacherId" type="int" column="SUBJECT_TEACHER_ID">
+			<generator class="increment" />
+		</id>
+		<property name="modifiedTime" type="timestamp" column="MODIFIED_TIME"
+			not-null="true" generated="always" />
+		<property name="year" type="string">
+			<column name="YEAR" length="45" not-null="true" />
+		</property>
+		<property name="deleted" type="boolean" not-null="false">
+			<column name="DELETED" />
+		</property>
+		<many-to-one name="gradeSubject" class="com.virtusa.akura.api.dto.GradeSubject"
+			lazy="false" update="false" fetch="select">
+			<column name="GRADE_SUBJECT_ID" not-null="true" unique="true" />
+		</many-to-one>
+		<many-to-one name="schoolClass" class="com.virtusa.akura.api.dto.SchoolClass"
+			lazy="false" update="false" fetch="select">
+			<column name="CLASS_ID" not-null="true" unique="true" />
+		</many-to-one>
+		<many-to-one name="staff" class="com.virtusa.akura.api.dto.Staff"
+			lazy="false" update="false" fetch="select">
+			<column name="STAFF_ID" not-null="true" unique="true" />
+		</many-to-one>
+	</class>
+
+
+	<query name="getSubjectTeacherList">
+			<![CDATA[
+			from	com.virtusa.akura.api.dto.SubjectTeacher teacher
+
+			where((? = '' OR teacher.staff.lastName like ?)
+            		and (? = '' OR teacher.staff.registrationNo = ?))
+			Group By teacher.staff.staffId, teacher.gradeSubject.gradeSubjectId, teacher.year
+			]]>
+	</query>
+
+	<query name="subjectTeacherList">
+			<![CDATA[
+			from	com.virtusa.akura.api.dto.SubjectTeacher teacher
+
+			where( teacher.staff.staffId = ?
+            		and teacher.gradeSubject.gradeSubjectId = ? and teacher.year = ?)
+
+			]]>
+	</query>
+
+	<query name="schoolclassList">
+			<![CDATA[
+			select teacher.schoolClass.classId
+			from	com.virtusa.akura.api.dto.SubjectTeacher teacher
+
+			where( teacher.staff.staffId = ?
+            		and teacher.gradeSubject.gradeSubjectId = ?
+            		and teacher.year = ?)
+
+			]]>
+	</query>
+
+	<query name="schoolclassObjectList">
+			<![CDATA[
+			select teacher.schoolClass
+			from	com.virtusa.akura.api.dto.SubjectTeacher teacher
+
+			where( teacher.staff.staffId = ?
+					and teacher.gradeSubject.gradeSubjectId = ?
+            		and teacher.year = ?)
+
+			]]>
+	</query>
+
+	<query name="findsubjectTeachers">
+			<![CDATA[
+			from	com.virtusa.akura.api.dto.SubjectTeacher teacher
+
+			where( teacher.staff = ?
+            		and teacher.gradeSubject = ?
+            		and teacher.schoolClass = ?)
+
+			]]>
+	</query>
+
+	<query name="getSubjectTeachersByClass">
+			<![CDATA[
+			from	com.virtusa.akura.api.dto.SubjectTeacher subTeacher
+			where( subTeacher.schoolClass = ?
+				and subTeacher.gradeSubject.grade = ?
+				and subTeacher.year = ? 
+				)
+
+			]]>
+	</query>
+
+	<query name="getSubjectTeacherListByStaffId">
+			<![CDATA[
+			select distinct teacher.gradeSubject.subject.description
+			from	com.virtusa.akura.api.dto.SubjectTeacher teacher
+			where (teacher.staff.staffId = ? and teacher.year = ?)
+			]]>
+	</query>
+
+	<query name="markAsDeleteAllSubjectTeacherByStaffId">
+			<![CDATA[
+			update com.virtusa.akura.api.dto.SubjectTeacher subTeacher
+			set subTeacher.deleted = 1
+			where( subTeacher.staff.staffId = ? )
+			]]>
+	</query>
+	
+	<query name="removeAsDeleteAllSubjectTeacherByStaffId">
+			<![CDATA[
+			update com.virtusa.akura.api.dto.SubjectTeacher subTeacher
+			set subTeacher.deleted = 0
+			where( subTeacher.staff.staffId = ? )
+			]]>
+	</query>
+	
+	<query name="deletedSubjectTeacherRecordsByDepartureDate">
+		<![CDATA[
+			delete com.virtusa.akura.api.dto.SubjectTeacher subTeacher
+ 		 	Where (subTeacher.staff.staffId = ? AND STR_TO_DATE(subTeacher.year, '%Y-%b-%d') > ?)
+		]]>
+	</query>
+	
+
+	
+	
+	<sql-query name="getSubjectListByGradeForTeacher">
+
+	<![CDATA[
+			SELECT gradeSubject.GRADE_SUBJECT_CONFIG_CODE 
+			FROM 
+				SUBJECT_TEACHER subjectTeacher,
+				GRADE_SUBJECT gradeSubject,
+				CLASS_GRADE classGrade   
+			where classGrade.CLASS_GRADE_ID=?
+			and subjectTeacher.CLASS_ID=classGrade.CLASS_ID
+			and classGrade.GRADE_ID =gradeSubject.GRADE_ID
+			and gradeSubject.GRADE_SUBJECT_ID=subjectTeacher.GRADE_SUBJECT_ID
+			and subjectTeacher.YEAR=?
+			and subjectTeacher.STAFF_ID=? 
+		]]>
+	</sql-query>
+	
+	<query name="getSubjectTeachersBySubject">
+			<![CDATA[
+			select	subjectTeacher.staff
+			from	com.virtusa.akura.api.dto.SubjectTeacher subjectTeacher
+			where  	subjectTeacher.gradeSubject.subject.subjectId = ?
+					and subjectTeacher.year = ?
+					and subjectTeacher.staff.dateOfDepature = null
+			group by subjectTeacher.staff.staffId
+
+			]]>
+	</query>
+	
+</hibernate-mapping>

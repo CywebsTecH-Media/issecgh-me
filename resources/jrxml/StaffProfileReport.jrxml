@@ -1,0 +1,991 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="StaffProfileReport" language="groovy" pageWidth="595" pageHeight="1000" whenNoDataType="NoDataSection" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryWithPageHeaderAndFooter="true" isFloatColumnFooter="true">
+	<property name="ireport.zoom" value="1.1"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<template><![CDATA[$P{styleTemplate}]]></template>
+	<style name="Column header" forecolor="#666666" fontName="SansSerif" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
+	<parameter name="title" class="java.lang.String"/>
+	<parameter name="logoPath" class="java.lang.String"/>
+	<parameter name="styleTemplate" class="java.lang.String"/>
+	<parameter name="reportGeneratedOn" class="java.lang.String"/>
+	<parameter name="generatedDate" class="java.lang.String"/>
+	<parameter name="page" class="java.lang.String"/>
+	<parameter name="GPLComment" class="java.lang.String"/>
+	<parameter name="noOfDays" class="java.lang.String"/>
+	<parameter name="photo" class="java.lang.String"/>
+	<parameter name="nicNo" class="java.lang.String"/>
+	<parameter name="fullName" class="java.lang.String"/>
+	<parameter name="nameInitials" class="java.lang.String"/>
+	<parameter name="section" class="java.lang.String"/>
+	<parameter name="address" class="java.lang.String"/>
+	<parameter name="contactDeails" class="java.lang.String"/>
+	<parameter name="race" class="java.lang.String"/>
+	<parameter name="home" class="java.lang.String"/>
+	<parameter name="mobile" class="java.lang.String"/>
+	<parameter name="email" class="java.lang.String"/>
+	<parameter name="religion" class="java.lang.String"/>
+	<parameter name="civilStatus" class="java.lang.String"/>
+	<parameter name="dateOfBirth" class="java.lang.String"/>
+	<parameter name="gender" class="java.lang.String"/>
+	<parameter name="appointmentDate" class="java.lang.String"/>
+	<parameter name="hireDate" class="java.lang.String"/>
+	<parameter name="appointmentNature" class="java.lang.String"/>
+	<parameter name="appointmentClassification" class="java.lang.String"/>
+	<parameter name="subjectsList" class="java.util.List"/>
+	<parameter name="subjects" class="java.lang.String"/>
+	<parameter name="medium" class="java.lang.String"/>
+	<parameter name="staffCategory" class="java.lang.String"/>
+	<parameter name="educational" class="java.lang.String"/>
+	<parameter name="educationalList" class="java.util.List"/>
+	<parameter name="professional" class="java.lang.String"/>
+	<parameter name="professionalList" class="java.util.List"/>
+	<parameter name="service" class="java.lang.String"/>
+	<parameter name="class" class="java.lang.String"/>
+	<parameter name="grade" class="java.lang.String"/>
+	<parameter name="leave" class="java.lang.String"/>
+	<parameter name="salary" class="java.lang.String"/>
+	<parameter name="extraCurricular" class="java.lang.String"/>
+	<parameter name="sports" class="java.lang.String"/>
+	<parameter name="sportsList" class="java.util.List"/>
+	<parameter name="clubSociety" class="java.lang.String"/>
+	<parameter name="clubSocietyList" class="java.util.List"/>
+	<parameter name="externalActivity" class="java.lang.String"/>
+	<parameter name="externalActivityList" class="java.util.List"/>
+	<parameter name="seminar" class="java.lang.String"/>
+	<parameter name="seminarList" class="java.util.List"/>
+	<parameter name="dateDeparture" class="java.lang.String"/>
+	<parameter name="departureDate" class="java.lang.String"/>
+	<parameter name="dobFlag" class="java.lang.String"/>
+	<parameter name="appointmentDateFlag" class="java.lang.String"/>
+	<field name="nationalID" class="java.lang.String"/>
+	<field name="fullName" class="java.lang.String"/>
+	<field name="nameWithIntials" class="java.lang.String"/>
+	<field name="section" class="java.lang.String"/>
+	<field name="address" class="java.lang.String"/>
+	<field name="city" class="java.lang.String"/>
+	<field name="country" class="java.lang.String"/>
+	<field name="residenceNo" class="java.lang.String"/>
+	<field name="mobileNo" class="java.lang.String"/>
+	<field name="email" class="java.lang.String"/>
+	<field name="race" class="java.lang.String"/>
+	<field name="religion" class="java.lang.String"/>
+	<field name="civilStatus" class="java.lang.String"/>
+	<field name="dateOfBirth" class="java.util.Date"/>
+	<field name="gender" class="java.lang.String"/>
+	<field name="firstAppointmetDate" class="java.lang.String"/>
+	<field name="dateOfHire" class="java.lang.String"/>
+	<field name="appointmentNature" class="java.lang.String"/>
+	<field name="appointmentClassification" class="java.lang.String"/>
+	<field name="studyMedium" class="java.lang.String"/>
+	<field name="staffCategory" class="java.lang.String"/>
+	<field name="staffServiceCategory" class="java.lang.String"/>
+	<field name="staffGrade" class="java.lang.String"/>
+	<field name="staffClass" class="java.lang.String"/>
+	<field name="basicSalary" class="java.lang.Float"/>
+	<field name="departureDate" class="java.lang.String"/>
+	<title>
+		<band height="104" splitType="Stretch">
+			<frame>
+				<reportElement style="Frame_color" positionType="Float" mode="Opaque" x="84" y="1" width="366" height="79"/>
+				<textField>
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="36" y="0" width="299" height="29" forecolor="#FFFFFF"/>
+					<textElement>
+						<font size="18" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{title}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="36" y="58" width="148" height="20" forecolor="#FFFFFF"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{reportGeneratedOn}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="185" y="58" width="171" height="20" forecolor="#FFFFFF"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{generatedDate}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement x="36" y="37" width="148" height="20" forecolor="#FFFFFF"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{dateDeparture}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="184" y="38" width="94" height="20" forecolor="#FFFFFF"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{departureDate}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<line>
+				<reportElement x="0" y="79" width="555" height="1"/>
+			</line>
+			<frame>
+				<reportElement x="0" y="80" width="555" height="23"/>
+			</frame>
+			<frame>
+				<reportElement style="Text_and_ash_bg" mode="Opaque" x="0" y="80" width="555" height="23"/>
+			</frame>
+			<image hAlign="Right">
+				<reportElement positionType="Float" x="448" y="1" width="106" height="77"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{photo}]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="0" y="0" width="82" height="78"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{logoPath}]]></imageExpression>
+			</image>
+			<line>
+				<reportElement x="82" y="58" width="366" height="1" forecolor="#FFFFFF"/>
+			</line>
+			<line>
+				<reportElement x="0" y="79" width="1" height="24"/>
+			</line>
+			<line>
+				<reportElement x="554" y="80" width="1" height="24"/>
+			</line>
+		</band>
+	</title>
+	<pageFooter>
+		<band height="51">
+			<frame>
+				<reportElement style="Frame_color" mode="Opaque" x="0" y="0" width="554" height="24"/>
+				<textField>
+					<reportElement x="18" y="2" width="171" height="20" forecolor="#FFFFFF"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{generatedDate}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Column header" x="471" y="1" width="82" height="21" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{page}+$V{PAGE_NUMBER}+""]]></textFieldExpression>
+				</textField>
+			</frame>
+			<textField>
+				<reportElement x="0" y="27" width="553" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{GPLComment}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="736">
+			<frame>
+				<reportElement positionType="Float" x="0" y="0" width="555" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField isBlankWhenNull="true">
+					<reportElement x="191" y="0" width="364" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{nationalID}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="18" y="0" width="159" height="20" isPrintWhenDetailOverflows="true"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{nicNo}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="177" y="0" width="14" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<text><![CDATA[  :-]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="0" y="20" width="555" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="191" y="0" width="364" height="20" isPrintWhenDetailOverflows="true"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{fullName}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="18" y="0" width="159" height="20" isPrintWhenDetailOverflows="true"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{fullName}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="177" y="0" width="14" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<text><![CDATA[  :-]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="0" y="40" width="555" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="191" y="0" width="364" height="20" isPrintWhenDetailOverflows="true"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{nameWithIntials}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="18" y="0" width="159" height="20" isPrintWhenDetailOverflows="true"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{nameInitials}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="177" y="0" width="14" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<text><![CDATA[  :-]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="0" y="60" width="555" height="20" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[($F{section}.equals("null"))? new Boolean(true): $F{section}]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField isBlankWhenNull="true">
+					<reportElement x="191" y="0" width="364" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{section}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="18" y="0" width="159" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{section}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="177" y="0" width="14" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<text><![CDATA[  :-]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="0" y="80" width="555" height="65" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[($F{address}.equals("null") && $F{city}.equals("null") && $F{country}.equals("null"))? new Boolean(true): $F{address}+$F{city}+$F{country}]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" x="191" y="0" width="364" height="20" isPrintWhenDetailOverflows="true"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{address}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement positionType="Float" x="191" y="24" width="364" height="20" isPrintWhenDetailOverflows="true"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{city}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement positionType="Float" x="191" y="44" width="364" height="20" isPrintWhenDetailOverflows="true"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{country}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="18" y="0" width="159" height="20" isPrintWhenDetailOverflows="true"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{address}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="177" y="0" width="14" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<text><![CDATA[  :-]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="0" y="145" width="555" height="60" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[($F{residenceNo}.equals("null") || $F{mobileNo}.equals("null") || $F{email}.equals("null"))? new Boolean(true): $P{contactDeails}]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField isBlankWhenNull="true">
+					<reportElement x="293" y="0" width="262" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{residenceNo}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="293" y="20" width="262" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{mobileNo}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="293" y="40" width="262" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{email}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="18" y="0" width="159" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{contactDeails}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="277" y="0" width="14" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<text><![CDATA[  :-]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="277" y="20" width="14" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<text><![CDATA[  :-]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="277" y="40" width="14" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<text><![CDATA[  :-]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="177" y="0" width="14" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<text><![CDATA[  :-]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="193" y="0" width="86" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{home}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="193" y="20" width="86" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{mobile}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="193" y="40" width="86" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{email}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="0" y="205" width="555" height="20" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[($F{race}.equals("null"))? new Boolean(true): $F{race}]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="191" y="0" width="364" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{race}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="18" y="0" width="159" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{race}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="177" y="0" width="14" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<text><![CDATA[  :-]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="0" y="225" width="555" height="20" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[($F{religion}.equals("null"))? new Boolean(true): $F{religion}]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="191" y="0" width="364" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{religion}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="18" y="0" width="159" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{religion}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="177" y="0" width="14" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<text><![CDATA[  :-]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="0" y="245" width="555" height="20" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[($F{civilStatus}.equals("null"))? new Boolean(true): $F{civilStatus}]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="191" y="0" width="364" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{civilStatus}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="18" y="0" width="159" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{civilStatus}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="177" y="0" width="14" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<text><![CDATA[  :-]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="0" y="265" width="555" height="20" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[( $P{dobFlag}.equals("Flag")) ? "ASAASasasasas" : ($F{dateOfBirth}.equals("null")) ? new Boolean(true) : $F{dateOfBirth}]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField isStretchWithOverflow="true" pattern="dd MMMMM yyyy" isBlankWhenNull="true">
+					<reportElement x="191" y="0" width="364" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.util.Date"><![CDATA[$F{dateOfBirth}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="18" y="0" width="159" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{dateOfBirth}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="177" y="0" width="14" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<text><![CDATA[  :-]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="0" y="285" width="555" height="20" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[($F{gender}.equals("null"))? new Boolean(true): $F{gender}]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="191" y="0" width="364" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{gender}.equals( "M" ) ? "Male" : "Female"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="18" y="0" width="159" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{gender}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="177" y="0" width="14" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<text><![CDATA[  :-]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="0" y="305" width="555" height="20" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[( $P{appointmentDateFlag}.equals("Flag")) ? " " : ($F{firstAppointmetDate}.equals("null")) ? new Boolean(true) : $F{firstAppointmetDate}]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField isStretchWithOverflow="true" pattern="dd MMMMM yyyy" isBlankWhenNull="true">
+					<reportElement x="191" y="0" width="364" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{firstAppointmetDate}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="18" y="0" width="159" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{appointmentDate}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="177" y="0" width="14" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<text><![CDATA[  :-]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="0" y="325" width="555" height="20" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[($F{dateOfHire}.equals("null"))? new Boolean(true): $F{dateOfHire}]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField isStretchWithOverflow="true" pattern="dd MMMMM yyyy" isBlankWhenNull="true">
+					<reportElement x="191" y="0" width="364" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{dateOfHire}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="18" y="0" width="159" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{hireDate}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="177" y="0" width="14" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<text><![CDATA[  :-]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="0" y="345" width="555" height="20" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[($F{appointmentNature}.equals("null"))? new Boolean(true): $F{appointmentNature}]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="191" y="0" width="364" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{appointmentNature}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="18" y="0" width="159" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{appointmentNature}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="177" y="0" width="14" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<text><![CDATA[  :-]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="0" y="365" width="555" height="20" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[($F{appointmentClassification}.equals("null"))? new Boolean(true): $F{appointmentClassification}]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="191" y="0" width="364" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{appointmentClassification}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="18" y="0" width="159" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{appointmentClassification}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="177" y="0" width="14" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<text><![CDATA[  :-]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="0" y="385" width="555" height="20" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[($P{subjectsList}.isEmpty())? new Boolean(true): $P{subjectsList}]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField>
+					<reportElement x="18" y="0" width="159" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{subjects}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="191" y="0" width="364" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{subjectsList}.isEmpty() ? "" : (($P{subjectsList}.toString()).replace('[','')).replace(']','')]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="177" y="0" width="14" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<text><![CDATA[  :-]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="0" y="405" width="555" height="20" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[($F{studyMedium}.equals("null"))? new Boolean(true): $F{studyMedium}]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="191" y="0" width="364" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{studyMedium}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="18" y="0" width="159" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{medium}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="177" y="0" width="14" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<text><![CDATA[  :-]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="0" y="425" width="555" height="20" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[($F{staffCategory}.equals("null"))? new Boolean(true): $F{staffCategory}]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="191" y="0" width="364" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{staffCategory}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="18" y="0" width="159" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{staffCategory}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="177" y="0" width="14" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<text><![CDATA[  :-]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="0" y="445" width="555" height="25" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[($P{educationalList}.isEmpty())? new Boolean(true): $P{educationalList}]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField>
+					<reportElement x="18" y="0" width="159" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{educational}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="191" y="0" width="364" height="20" isPrintWhenDetailOverflows="true"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{educationalList}.isEmpty() ? "" : (($P{educationalList}.toString()).replace('[','')).replace(']','')]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="177" y="0" width="14" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<text><![CDATA[  :-]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="0" y="470" width="555" height="25" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[($P{professionalList}.isEmpty())? new Boolean(true): $P{professionalList}]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField>
+					<reportElement x="18" y="0" width="159" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{professional}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="191" y="0" width="364" height="20" isPrintWhenDetailOverflows="true"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{professionalList}.isEmpty() ? "" : (($P{professionalList}.toString()).replace('[','')).replace(']','')]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="177" y="0" width="14" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<text><![CDATA[  :-]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="0" y="495" width="555" height="20" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[($F{staffServiceCategory}.equals("null"))? new Boolean(true): $F{staffServiceCategory}]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="191" y="0" width="364" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{staffServiceCategory}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="18" y="0" width="159" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{service}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="177" y="0" width="14" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<text><![CDATA[  :-]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="0" y="515" width="555" height="20" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[($F{staffClass}.equals("null"))? new Boolean(true): $F{staffClass}]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="191" y="0" width="364" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[($F{staffClass} != "0") ? $F{staffClass} : ""]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="18" y="0" width="159" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{class}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="177" y="0" width="14" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<text><![CDATA[  :-]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="0" y="535" width="555" height="20" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[($F{staffGrade}.equals("null"))? new Boolean(true): $F{staffGrade}]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="191" y="0" width="364" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[($F{staffGrade} != "0") ? $F{staffGrade} : ""]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="18" y="0" width="159" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{grade}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="177" y="0" width="14" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<text><![CDATA[  :-]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="0" y="555" width="555" height="20" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[($P{noOfDays}.equals(""))? new Boolean(false): $P{noOfDays}]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="191" y="0" width="364" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{noOfDays}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="18" y="0" width="159" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{leave}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="177" y="0" width="14" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<text><![CDATA[  :-]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="0" y="595" width="555" height="119" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[($P{sportsList}.isEmpty() || $P{clubSocietyList}.isEmpty() || $P{externalActivityList}.isEmpty())? new Boolean(true): $P{extraCurricular}]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField>
+					<reportElement x="18" y="0" width="159" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{extraCurricular}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" x="191" y="0" width="364" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font isUnderline="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{sports}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" x="191" y="15" width="364" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{sportsList}.isEmpty() ? "" : (($P{sportsList}.toString()).replace('[','')).replace(']','')]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" x="191" y="40" width="364" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font isUnderline="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{clubSociety}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" x="191" y="55" width="364" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{clubSocietyList}.isEmpty() ? "" : (($P{clubSocietyList}.toString()).replace('[','')).replace(']','')]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" x="191" y="79" width="364" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font isUnderline="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{externalActivity}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" x="191" y="98" width="364" height="20"/>
+					<textElement verticalAlignment="Middle" markup="html"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{externalActivityList}.isEmpty() ? "" : (($P{externalActivityList}.toString()).replace('[','')).replace(']','')]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="177" y="0" width="14" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<text><![CDATA[  :-]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="0" y="714" width="555" height="20" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[($P{seminarList}.isEmpty())? new Boolean(true): $P{seminarList}]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField>
+					<reportElement x="18" y="0" width="159" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{seminar}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="193" y="0" width="362" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{seminarList}.isEmpty() ? "" : (($P{seminarList}.toString()).replace('[','')).replace(']','')]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="177" y="0" width="14" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<text><![CDATA[  :-]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="0" y="575" width="555" height="20" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[($F{basicSalary}.equals(-0.0F))? new Boolean(false): new Boolean(true)]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField>
+					<reportElement x="191" y="0" width="364" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[($F{basicSalary} != 0.0) ? $F{basicSalary} : "        "]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="18" y="0" width="159" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{salary}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="177" y="0" width="14" height="20"/>
+					<textElement verticalAlignment="Middle"/>
+					<text><![CDATA[  :-]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</summary>
+</jasperReport>

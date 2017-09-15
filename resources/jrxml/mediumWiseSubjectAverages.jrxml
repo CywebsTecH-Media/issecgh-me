@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="mediumWiseSubjectAverages" language="groovy" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="4.177248169415657"/>
+	<property name="ireport.x" value="1983"/>
+	<property name="ireport.y" value="0"/>
+	<template><![CDATA[$P{STYLE_TEMPLATE}]]></template>
+	<style name="ROW">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F0EFEF"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="STYLE_TEMPLATE" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="studyMedium" class="java.lang.String"/>
+	<field name="subjectAverageList" class="java.util.List"/>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<frame>
+				<reportElement style="ROW" mode="Opaque" x="-20" y="0" width="714" height="20"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement x="7" y="0" width="140" height="20" isPrintWhenDetailOverflows="true"/>
+					<textElement verticalAlignment="Middle">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{studyMedium}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="155" y="0" width="26" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{subjectAverageList}.get(0)]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="184" y="0" width="26" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{subjectAverageList}.get(1)]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="211" y="0" width="26" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{subjectAverageList}.get(2)]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="239" y="0" width="26" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{subjectAverageList}.get(3)]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="267" y="0" width="26" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{subjectAverageList}.get(4)]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="295" y="0" width="26" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{subjectAverageList}.get(5)]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="323" y="0" width="26" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{subjectAverageList}.get(6)]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="351" y="0" width="26" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{subjectAverageList}.get(7)]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="379" y="0" width="26" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{subjectAverageList}.get(8)]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="407" y="0" width="26" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{subjectAverageList}.get(9)]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="435" y="0" width="26" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{subjectAverageList}.get(10)]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="463" y="0" width="26" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{subjectAverageList}.get(11)]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="491" y="0" width="26" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{subjectAverageList}.get(12)]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="519" y="0" width="26" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{subjectAverageList}.get(13)]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="547" y="0" width="26" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{subjectAverageList}.get(14)]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="575" y="0" width="26" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{subjectAverageList}.get(15)]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="603" y="0" width="26" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{subjectAverageList}.get(16)]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="631" y="0" width="26" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{subjectAverageList}.get(17)]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="659" y="0" width="26" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{subjectAverageList}.get(18)]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="687" y="0" width="26" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{subjectAverageList}.get(19)]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="154" y="0" width="1" height="20"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="182" y="0" width="1" height="20"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="210" y="0" width="1" height="20"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="238" y="0" width="1" height="20"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="266" y="0" width="1" height="20"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="294" y="0" width="1" height="20"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="322" y="0" width="1" height="20"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="350" y="0" width="1" height="20"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="378" y="0" width="1" height="20"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="406" y="0" width="1" height="20"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="434" y="0" width="1" height="20"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="462" y="0" width="1" height="20"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="490" y="0" width="1" height="20"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="518" y="0" width="1" height="20"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="546" y="0" width="1" height="20"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="574" y="0" width="1" height="20"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="602" y="0" width="1" height="20"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="630" y="0" width="1" height="20"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="658" y="0" width="1" height="20"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="686" y="0" width="1" height="20"/>
+				</line>
+				<line>
+					<reportElement stretchType="RelativeToBandHeight" x="712" y="0" width="1" height="20"/>
+				</line>
+			</frame>
+		</band>
+	</detail>
+</jasperReport>

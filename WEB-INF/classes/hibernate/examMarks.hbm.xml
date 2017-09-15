@@ -1,0 +1,126 @@
+
+	<!--
+		< ÀKURA, This application manages the daily activities of a Teacher
+		and a Student of a School> Copyright (C) 2012 Virtusa Corporation.
+		This program is free software: you can redistribute it and/or modify
+		it under the terms of the GNU General Public License as published by
+		the Free Software Foundation, either version 3 of the License, or (at
+		your option) any later version. This program is distributed in the
+		hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+		the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+		PURPOSE. See the GNU General Public License for more details.
+	-->
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.virtusa.akura.api.dto.ExamMark" table="EXAM_MARKS">
+		<id name="examMarksId" type="int" column="EXAM_MARKS_ID">
+			<generator class="increment" />
+		</id>
+		<property name="student">
+			<column name="STUDENT_ID" not-null="true" />
+		</property>
+		<property name="examSubject">
+			<column name="EXAM_SUBJECT_ID" not-null="true" />
+		</property>
+		<property name="grading" type="java.lang.Integer">
+			<column name="GRADING_ID" />
+		</property>
+		<property name="year" type="date" column="YEAR" />
+		<property name="absent" type="boolean" column="IS_ABSENT" />
+		<property name="optional" type="boolean" column="IS_OPTIONAL" />
+		<property name="marks" type="java.lang.Float" column="MARKS" />
+		<property name="status" type="int" column="STATUS" />
+		<property name="examAdmission" type="int" column="EXAM_ADMISSION_ID" />
+
+		<property name="modifiedTime" type="timestamp" generated="always">
+			<column name="MODIFIED_TIME" length="19" not-null="true" />
+		</property>
+	</class>
+	<sql-query name="findExamMarksSize">
+        <![CDATA[
+        	SELECT COUNT(examMarks.exam_Marks_Id) AS count
+        	FROM EXAM_MARKS examMarks
+        		INNER JOIN EXAM_SUBJECT es
+        			ON es.exam_Subject_Id = examMarks.exam_Subject_id
+        		INNER JOIN EXAM exam
+        			ON es.exam_Id = exam.exam_Id
+        	WHERE examMarks.year = ? AND exam.exam_Id = ?
+        ]]>
+	</sql-query>
+	<sql-query name="callExamMarks">
+		<![CDATA[
+			CALL sp_student_exam_mark(?,?,?,?)
+		]]>
+	</sql-query>
+	<sql-query name="newExamMarksForNewSubjects">
+        <![CDATA[
+        	SELECT student.NAME_WT_INITIALS as student,
+               student.student_id as studentId,
+               subject.description as subject,
+               grade.grade_id as gradeId ,
+               es.exam_id as examId,
+               sci.year,
+               subject.subject_id as subjectId,
+               exam.mark_type AS markType,
+               es.exam_subject_id,
+               ea.admission_no,
+               ea.exam_admission_id
+        FROM STUDENT student
+        INNER join STUDENT_CLASS_INFO sci
+            ON sci.student_id = student.student_id
+        INNER join CLASS_GRADE class_grade
+            ON sci.class_grade_id = class_grade.class_grade_id
+        INNER join GRADE grade
+            ON grade.grade_id = class_grade.grade_id
+        INNER JOIN EXAM exam
+            ON exam.grade_id = grade.grade_id
+        INNER JOIN EXAM_SUBJECT es
+            ON es.exam_id = exam.exam_id
+        INNER JOIN SUBJECT subject
+            ON subject.subject_id = es.subject_id
+        LEFT JOIN EXAM_ADMISSIONS ea
+            ON ea.student_id = student.student_id
+            and ea.exam_id = exam.exam_id
+            left join EXAM_MARKS em
+            on em.student_id = student.student_id
+        WHERE class_grade.class_grade_id = ? and sci.year= ?
+        AND es.exam_id = ? and
+        es.exam_subject_id in (?)
+        AND student.STUDENT_STATUS_ID = 1 OR student.STUDENT_STATUS_ID = 3
+        GROUP by examId, gradeId, subject, studentId;
+        ]]>
+	</sql-query>
+	
+	 <query name="getSelectedSubjectMarksList">
+        <![CDATA[
+        	Select	exammark
+			FROM	com.virtusa.akura.api.dto.ExamMark exammark,
+					com.virtusa.akura.api.dto.StudentClassInfo classinfo,
+					com.virtusa.akura.api.dto.ExamAdmission examadmission
+
+			WHERE	classinfo.student.studentId = examadmission.studentId
+            		AND examadmission.examAdmissionId = exammark.examAdmission
+            		AND examadmission.examId = ?
+            		AND classinfo.classGrade.classGradeId = ?          		
+            		AND year(classinfo.year) = ?
+        
+        ]]>
+	</query>
+	
+	 <query name="findStudentMarkList">
+        <![CDATA[
+        	FROM com.virtusa.akura.api.dto.ExamMark exammark
+        	WHERE exammark.examMarksId IN (:editedExamMarkIdList)
+        
+        ]]>
+	</query>
+	<sql-query name="callExamMarksRangeStudentCounts" callable="true">
+		<![CDATA[
+			CALL sp_student_marks_in_range(?,?,?,?,?)
+		 ]]>
+	</sql-query>
+	
+</hibernate-mapping>

@@ -1,0 +1,111 @@
+<!--
+    < ÀKURA, This application manages the daily activities of a Teacher and a Student of a School>
+    
+    Copyright (C) 2012 Virtusa Corporation.
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+ -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Help</title>
+<link href="../../../css/css_reset.css" rel="stylesheet" type="text/css">
+<link href="../../../css/theme.css" rel="stylesheet" type="text/css">
+<link href="../../../css/main_style.css" rel="stylesheet"
+	type="text/css">
+</head>
+<body>
+	<div id="help_container">
+		<div id="topbar">
+			<div id="topbar_wraper">
+				<h2>Help</h2>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+		<div id="page_container">
+			<div class="help_content">
+				<h2>Add/Update System User</h2>
+				<div class="clearfix"></div>
+				<p>Welcome to the Akura Management System. The objective of this
+					function is to enable a administrative user to be added or updated
+					system user details.</p>
+				<br>
+				<p>The user should enter the following details</p>
+				<br>
+				<ul>
+					<li>User Role - Admin, Student, Teacher, Clerical Staff and Parent</li>
+					<li>Username - The username should be unique. If the username
+						already exists then an error message will be displayed stating
+						'Sorry, this username already exists'</li>
+					<li>Password - Password must be at least 8 characters and Password cannot 
+					be Username or email address. </br>
+					Strength of the password will be shown in a color bar. Color of the color bar will depend on the strength of the Password. </br>	
+					To secure your password:
+						<ul>
+							<li>Use both letters and numbers</li>
+							<li>Add special characters (such as $, &, ?)</li>
+							<li>Mix capital and lowercase letters</li>
+						</ul>
+					</li>	
+					
+					<li>Confirm Password</li>
+					<li>Admission No/Registration No - Admission Number should be
+						filled when create a user with student role. Registration Number
+						should be filled when create a user with teacher role. It is not
+						necessary to filled when create an administrator user.</li>
+					<li>First Name</li>
+					<li>Last Name</li>
+					<li>Email Address - The email address should be in the correct
+						format. If an incorrect format is provided then the error message
+						will be displayed as 'Incorrect email format! Please enter a valid
+						email address', next to the email address field</li>
+					<li>Note: When updating an User detail, user can not update 'User Role' and 'User Name'. 
+						If user role is Teacher, Clarical Staff, Student or Parent they can not update their identification Numbers
+						 such as For student Admission No. etc.
+					
+					</li>
+				</ul>
+				<br>
+				<h2>Save</h2>
+				<p>
+					Enter the mandatory field which is marked by <strong><font
+						color="red">*</font>
+					</strong>, Then click on Save button. On successful user creation, The Add
+					New System User page will be displayed with the message 'System
+					User Created Successfully!' And an email notification will be sent
+					to the newly created user, containing user's newly created username
+					and password
+				</p>
+				<br>
+				<h2>Reset</h2>
+				<p>Enter all required information and then click the 'Reset'
+					button. All the information entered previously will be reset to
+					empty values.</p>
+				<br>
+				<h2>Cancel</h2>
+				<p>Enter all required information and click on the 'Cancel'
+					button. This will be re-directed to the previous page</p>
+
+				<p>&nbsp;</p>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+	<div id="footer">
+		<p>
+			Copyright © 2012 Virtusa Corporation, AKURA contributors and others.
+			<b>AKURA</b> is Free Software released under the <b>GNU/GPL
+				License</b>.
+		</p>
+	</div>
+</body>
+</html>

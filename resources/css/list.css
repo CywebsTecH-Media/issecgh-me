@@ -1,0 +1,115 @@
+/*
+ * < �KURA, This application manages the daily activities of a Teacher and a Student of a School>
+ *
+ * Copyright (C) 2012 Virtusa Corporation.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ */
+
+#add_remove_list .row{
+	margin: 3px;
+	padding: 0px;
+	display:list-item;
+	list-style: none;
+	line-height:20px;
+}
+
+#add_remove_list select{
+       width:340px;
+	   float:left;
+}
+
+#add_remove_list .from {
+       width : 330px;
+       height : 263px
+}
+
+#add_remove_list .row input{
+	width:18px;
+	margin:0;
+	padding:0;
+
+
+}
+
+
+#add_remove_list .label_div{
+	float:left;
+	width:270px;
+
+}
+
+#add_remove_list .controller{
+	float:left;
+	text-align:center;
+	width:50px;
+	padding-top:95px;
+}
+
+#add_remove_list .controller input{
+	width:30px;
+	cursor:pointer;
+}
+
+#add_remove_list .button{
+	margin:0;
+	*padding:0;
+}
+
+#add_remove_list .text_red{
+ color:#E61A1F;
+}
+
+#add_remove_list .extra_box{
+	float:right;
+	width:170px;
+}
+
+#add_remove_list  .padd{
+    margin-right: -25px;
+}
+
+#add_remove_list .extra_box select{
+	width:150px;
+}
+/*--List student notification--*/
+.studentNotification{
+	width:400px;
+	float:left
+	}
+.newcontroller{
+	float:left;
+		width:108px;
+}
+#add_remove_list .ccontroller{
+	float:left;
+	text-align:center;
+	width:50px;
+	padding-top:130px;
+}
+
+
+/* changing the select width for studentSummaryReport.jsp*/
+
+#add_remove_student .ccontroller {
+    float: left;
+    text-align: center;
+    width: 60px;
+    padding-top: 130px;
+    padding-left: 40px;
+}
+
+#add_remove_student select {
+    width: 390px;
+    float: left;
+}
+
+
+

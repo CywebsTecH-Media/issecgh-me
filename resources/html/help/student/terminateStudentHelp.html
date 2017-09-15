@@ -1,0 +1,200 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Help</title>
+<link href="../../../css/css_reset.css" rel="stylesheet" type="text/css">
+<link href="../../../css/theme.css" rel="stylesheet" type="text/css">
+<link href="../../../css/main_style.css" rel="stylesheet"
+	type="text/css">
+</head>
+<body>
+<div id="help_container">
+<div id="topbar">
+<div id="topbar_wraper">
+<h2>Help</h2>
+<div class="clearfix"></div>
+</div>
+</div>
+<div id="page_container">
+<div class="help_content">
+<h2>Terminate Student</h2>
+<div class="clearfix"></div>
+<p>Welcome to the ABM School Management System. Using this page you
+terminate current students.</p>
+
+<br>
+<br>
+
+<h5>Past Student</h5>
+<ul>
+	<li>All of the fields noted with an asterisk (<span
+		class="required_sign">*</span>) are required.</li>
+	<ul type="disc">
+		<li>Departure Date – Select the departure date of the student
+		from calendar button.<img src="../../../images/calendar.jpg">Calendar
+		picker does not allow future dates.</li>
+		<li>Reason - It should be less than 251 characters.</li>
+	</ul>
+</ul>
+<ul type="disc">
+	<li>Then tick the check box if the departure is complete
+	clearance.</li>
+
+
+	<li>Click on “Save” button, then system asks "Are you sure you
+	want to terminate this Student?".Click "OK" button. Then “Past Student”
+	panel will close and send the email to the parent simultaneously by
+	displaying the success message in green color at the top of the page as<font
+		color="green"> “Student has been successfully terminated &
+	email has been sent to the parent”</font></li>
+	<li>If student successfully terminated but email is not sending
+	because of server error/not giving parent email address: error should
+	be displayed depend on the reason as <font color="green">“Student
+	has been successfully terminated & unable to send the email due to
+	server error or parent email address cannot be found”</font></li>
+
+	<li>Click the &lt;Reset&gt; button to reset the departure details
+	form.</li>
+	<li>Clicking the “Cancel” button, the student terminated process
+	going to stop and the “Past Student” panel closes.</li>
+</ul>
+
+
+
+
+</ul>
+
+
+<br>
+<br>
+<h5>Suspend Student</h5>
+<ul>
+	<li>All of the fields noted with an asterisk (<span
+		class="required_sign">*</span>) are required.</li>
+	<ul type="disc">
+		<li>Disciplinary Actions Drop Down – Which will loads the student
+		disciplinary actions of the current year.</li>
+		<li>From Date & To Date - Use calendar button <img
+			src="../../../images/calendar.jpg"> to select a date.</li>
+		<ul type="circle">
+			<li><b>‘From Date’</b> Calendar picker loads only the current
+			date of current year.</li>
+			<li><b>‘To Date’</b> Calendar picker loads from current date of
+			current year to days of one future year.</li>
+		</ul>
+		<li>Click on “Save” button, the “Student Suspend” panel is
+		closing and sending the email to the parent simultaneously by
+		displaying the success message in green color at the top of the page
+		as<font color="green"> “Student has been successfully suspended
+		& email has been sent to the parent”</font>.</li>
+		<ul>
+			<li>If student successfully suspended but email is not sending
+			because of server error,
+			<ul>
+				<li><font color="green">“Student has been successfully
+				suspended </font></li>
+				<li><font color="red"> unable to send the email due to
+				server error ”</font></li>
+			</ul>
+			<li>If student successfully suspended but email is not sending
+			because of parent email address is not exists,
+			<ul>
+				<li><font color="green">“Student has been successfully
+				suspended </font></li>
+				<li><font color="red"> unable to send the email due to
+				parent email address cannot be found ”</font></li>
+			</ul>
+			<li>If student successfully suspended but email is not sending
+			because of parent details are not exists,
+			<ul>
+				<li><font color="green">“Student has been successfully
+				suspended </font></li>
+				<li><font color="red"> unable to send the email due to
+				parent details are not exists ”</font></li>
+			</ul>
+		</ul>
+		<li>Clicking the “Cancel” button, the student suspended process
+		going to stop and the “Student Suspend” panel closes.</li>
+	</ul>
+</ul>
+<br>
+<br>
+<h5>Temporary Leave</h5>
+<ul>
+	<li>All of the fields noted with an asterisk (<span
+		class="required_sign">*</span>) are required.</li>
+	<ul type="disc">
+
+		<li>From Date & To Date - Use calendar button <img
+			src="../../../images/calendar.jpg"> to select a date.</li>
+		<ul type="circle">
+			<li><b>‘From Date’</b> Calendar picker loads only the current
+			date of current year.</li>
+			<li><b>‘To Date’</b> Calendar picker loads from current date of
+			current year to days of 10 future years.</li>
+			<li>Reason - It should be less than 251 characters.</li>
+		</ul>
+	</ul>
+</ul>
+<ul type="disc">
+	<li>Then tick the check box if the termination is with complete
+	clearance.</li>
+
+
+	<li>Click on “Save” button, then system asks "Are you sure you
+	want to terminate this Student?".Click "OK" button.
+	<ul type="disc">
+		<li>If there are any incompete term marks, then system asks
+		"Incomplete term marks will be deleted, are sure you want to remove
+		this student?"
+		<ul type="disc">
+			<li>If user wants to proceed, click "OK" button and incomplete
+			term records of the particular student will be deleted.</li>
+			<li>If user wants to manually complete the incomplete term
+			marks, click "Cancel".
+		</ul>
+	</ul>
+
+	<li>Then “Temporary Leave” panel will close and send the email to
+	the parent simultaneously by displaying the success message in green
+	color at the top of the page as<font color="green"> “Student has
+	been successfully terminated & email has been sent to the parent”</font></li>
+	<li>If student successfully terminated but email is not sending
+	because of server error/not giving parent email address: error should
+	be displayed depend on the reason as <font color="green">“Student
+	has been successfully terminated & unable to send the email due to
+	server error or parent email address cannot be found”</font></li>
+
+	<li>Clicking the “Cancel” button, the student terminated process
+	going to stop and the “Temporary Leave” panel closes.</li>
+</ul>
+<br>
+<br>
+
+<br>
+<br>
+
+<h5>Close ‘Terminate Student’ Pop Up window</h5>
+<ul type="circle">
+	<li>Clicking on ‘Close’ button before terminating the student ,
+	will close the 'Terminate Student' pop up window by redirecting to the
+	‘Search Student’ page.</li>
+	<li>Clicking on ‘Close’ button after successfully terminating the
+	student will close the 'Terminate Student' pop up window and redirects
+	to ‘Search Student’ page by viewing only terminated student link with
+	the corresponding icon.</li>
+</ul>
+
+</div>
+<div class="clearfix"></div>
+</div>
+<div id="footer">
+<p>
+			Copyright © 2017 CywebstecH Media Corporation, ABM SMS contributors and others.
+			<b>ABM SMS</b> is School Management System Release under <b>CMC
+				License</b>.
+		</p>
+</div>
+</body>
+</html>

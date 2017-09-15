@@ -1,0 +1,131 @@
+<?xml version="1.0"?>
+
+	<!--
+		< ÀKURA, This application manages the daily activities of a Teacher
+		and a Student of a School> Copyright (C) 2012 Virtusa Corporation.
+		This program is free software: you can redistribute it and/or modify
+		it under the terms of the GNU General Public License as published by
+		the Free Software Foundation, either version 3 of the License, or (at
+		your option) any later version. This program is distributed in the
+		hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+		the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+		PURPOSE. See the GNU General Public License for more details.
+	-->
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.virtusa.akura.api.dto.Assignment" table="ASSIGNMENT">
+		<id name="assignmentId" type="int" column="ASSIGNMENT_ID">
+			<generator class="increment" />
+		</id>
+		<many-to-one name="gradeSubject" class="com.virtusa.akura.api.dto.GradeSubject"
+			lazy="false">
+			<column name="GRADE_SUBJECT_ID" not-null="true" />
+		</many-to-one>
+
+		<property name="name" type="string">
+			<column name="NAME" length="45" not-null="true" />
+		</property>
+
+		<property name="date" type="date" column="DATE" not-null="true">
+		</property>
+
+		<property name="isMarks" type="boolean" column="IS_MARKS"
+			not-null="true">
+		</property>
+
+		<property name="description" type="string">
+			<column name="DESCRIPTION" length="45" not-null="true" />
+		</property>
+
+		<property name="modifiedTime" type="timestamp" generated="always">
+			<column name="MODIFIED_TIME" length="19" not-null="true" />
+		</property>
+	</class>
+
+	<query name="existAssignmentGradeSubject">
+        <![CDATA[
+        	FROM com.virtusa.akura.api.dto.Assignment assignment
+            WHERE assignment.gradeSubject.gradeSubjectId = ? AND assignment.name = ?
+        ]]>
+	</query>
+
+	<query name="findAssignmentsByGrade">
+        <![CDATA[
+        	SELECT assignment, subject.description
+        	FROM com.virtusa.akura.api.dto.Assignment assignment,
+        		com.virtusa.akura.api.dto.GradeSubject gradeSubject,
+        		com.virtusa.akura.api.dto.ClassGrade classGrade,
+        		com.virtusa.akura.api.dto.Subject subject
+            WHERE assignment.gradeSubject.gradeSubjectId = gradeSubject.gradeSubjectId
+            	AND gradeSubject.grade.gradeId = classGrade.grade.gradeId
+            	AND subject.subjectId = gradeSubject.subject.subjectId
+            	AND classGrade.classGradeId = ?
+            	AND year(assignment.date) = ?
+        ]]>
+	</query>
+	
+	
+		<query name="findAssignmentsByGradeForTeacher">
+        <![CDATA[
+   
+
+          
+    SELECT assignment, subject.description
+        	FROM com.virtusa.akura.api.dto.Assignment assignment,
+        		com.virtusa.akura.api.dto.GradeSubject gradeSubject,
+				com.virtusa.akura.api.dto.SubjectTeacher subjectTeacher,
+        		com.virtusa.akura.api.dto.ClassGrade classGrade,
+        		com.virtusa.akura.api.dto.Subject subject
+            WHERE assignment.gradeSubject.gradeSubjectId = gradeSubject.gradeSubjectId
+            	AND gradeSubject.grade.gradeId = classGrade.grade.gradeId
+            	AND gradeSubject.gradeSubjectId = subjectTeacher.gradeSubject.gradeSubjectId
+            	AND subject.subjectId = gradeSubject.subject.subjectId
+            	AND subjectTeacher.schoolClass.classId = classGrade.schoolClass.classId
+            	AND classGrade.classGradeId = ?
+            	AND year(assignment.date) = ?
+				AND subjectTeacher.staff.staffId = ?
+				GROUP BY assignment.assignmentId
+
+
+        ]]>
+	</query>
+
+<query name="findAssignmentsByGradeForClassTeacher">
+        <![CDATA[
+        
+    SELECT assignment, subject.description
+        	FROM com.virtusa.akura.api.dto.Assignment assignment,
+        		com.virtusa.akura.api.dto.GradeSubject gradeSubject,
+				com.virtusa.akura.api.dto.ClassTeacher classTeacher,
+        		com.virtusa.akura.api.dto.ClassGrade classGrade,
+        		com.virtusa.akura.api.dto.Subject subject
+        		
+            WHERE assignment.gradeSubject.gradeSubjectId = gradeSubject.gradeSubjectId
+            	AND gradeSubject.grade.gradeId = classGrade.grade.gradeId            	
+            	AND subject.subjectId = gradeSubject.subject.subjectId
+            	AND classTeacher.classGrade.classGradeId = classGrade.classGradeId
+            	AND classGrade.classGradeId = ?
+            	AND year(assignment.date) = ?
+            	AND year(classTeacher.year) = ?
+				AND classTeacher.staff.staffId = ?
+				GROUP BY assignment.assignmentId
+
+
+        ]]>
+	</query>
+
+
+
+
+
+
+
+
+
+
+	
+	
+</hibernate-mapping>

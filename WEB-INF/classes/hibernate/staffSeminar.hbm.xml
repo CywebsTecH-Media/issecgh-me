@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+
+<!--
+    < ÀKURA, This application manages the daily activities of a Teacher and a Student of a School>
+
+    Copyright (C) 2012 Virtusa Corporation.
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.virtusa.akura.api.dto.StaffSeminar" table="STAFF_SEMINAR">
+        <id name="staffSeminarId" type="int" column="STAFF_SEMINAR_ID">
+            <generator class="increment" />
+        </id>
+        <property name="staffId" type="int">
+            <column name="STAFF_ID" not-null="true" />
+        </property>
+        <property name="seminarId" type="int">
+            <column name="SEMINAR_ID" not-null="true" />
+        </property>
+        <property name="description" type="string">
+            <column name="DESCRIPTION" not-null="false" />
+        </property>
+        <property name="year" type="date">
+            <column name="YEAR" length="10" not-null="true" />
+        </property>
+        <property name="status" type="byte">
+            <column name="STATUS" not-null="true" />
+        </property>
+        <property name="modifiedTime" type="timestamp" generated="always">
+            <column name="MODIFIED_TIME" length="19" not-null="true" />
+        </property>
+    </class>
+
+    <query name="getStaffSeminarByYear">
+			<![CDATA[
+				SELECT staffSeminar.staffSeminarId, seminar.seminarId, seminar.description, staffSeminar.description
+				FROM
+					com.virtusa.akura.api.dto.StaffSeminar staffSeminar,
+					com.virtusa.akura.api.dto.Seminar seminar
+				WHERE
+					staffSeminar.seminarId = seminar.seminarId
+					AND staffSeminar.staffId = ?
+					AND staffSeminar.year = ?
+			]]>
+	</query>
+	
+	<query name="getStaffSeminarByStaffId">
+			<![CDATA[
+				SELECT seminar.description
+				FROM
+					com.virtusa.akura.api.dto.StaffSeminar staffSeminar,
+					com.virtusa.akura.api.dto.Seminar seminar
+				WHERE
+					staffSeminar.seminarId = seminar.seminarId
+					AND staffSeminar.staffId = ?
+			]]>
+	</query>
+</hibernate-mapping>

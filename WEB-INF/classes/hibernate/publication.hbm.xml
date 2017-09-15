@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.virtusa.akura.api.dto.Publication" table="PUBLICATION">
+		<id name="publicationId" type="int">
+			<column name="PUBLICATION_ID" />
+			<generator class="increment" />
+		</id>
+		<property name="header" type="string">
+			<column name="HEADER" length="45" not-null="true" />
+		</property>
+		<property name="message" type="string">
+			<column name="MESSAGE" length="45" not-null="true" />
+		</property>
+		<property name="expiryDate" type="date">
+			<column name="EXPIRY_DATE" length="45" not-null="true" />
+		</property>		
+		<many-to-one name="pType"
+			class="com.virtusa.akura.api.dto.PublicationType" fetch="select" lazy="false">
+			<column name="Publication_TYPE_ID" not-null="true" />
+		</many-to-one>
+		 <property name="notify" type="java.lang.Boolean" >
+            <column name="NOTIFY" />
+        </property>
+		<property name="modifiedTime" type="timestamp" generated="always">
+			<column name="MODIFIED_TIME" length="19" not-null="true" />
+		</property>
+	</class>
+	<query name="getCountOfPublications">
+			<![CDATA[
+			SELECT	COUNT(publicationId)
+			FROM	com.virtusa.akura.api.dto.Publication
+			WHERE expiryDate = ? OR expiryDate > ?
+
+			]]>
+	</query>
+	<query name="getLatestPublications">
+			<![CDATA[
+			FROM com.virtusa.akura.api.dto.Publication
+  			WHERE expiryDate = ? OR expiryDate > ?
+			]]>
+	</query>
+	<query name="isExistPublication">
+			<![CDATA[
+			FROM com.virtusa.akura.api.dto.Publication
+  			WHERE header = ? AND message = ? AND expiryDate = ? AND pType = ? AND notify = ?
+			]]>
+	</query>
+</hibernate-mapping>

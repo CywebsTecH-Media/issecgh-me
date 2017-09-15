@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="StudentAssignmentMarks" language="groovy" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.9487171000000016"/>
+	<property name="ireport.x" value="263"/>
+	<property name="ireport.y" value="0"/>
+	<template><![CDATA[$P{STYLE_TEMPLATE}]]></template>
+	<parameter name="STYLE_TEMPLATE" class="java.lang.String"/>
+	<parameter name="assignment_title" class="java.lang.String"/>
+	<parameter name="assignment_year" class="java.lang.String"/>
+	<parameter name="assignment_subject" class="java.lang.String"/>
+	<parameter name="assignment_name" class="java.lang.String"/>
+	<parameter name="assignment_marks" class="java.lang.String"/>
+	<field name="year" class="java.util.Date"/>
+	<field name="subject" class="java.lang.String"/>
+	<field name="assignment" class="java.lang.String"/>
+	<field name="marks" class="java.lang.Float"/>
+	<field name="gradingAcronym" class="java.lang.String"/>
+	<title>
+		<band height="33">
+			<textField>
+				<reportElement style="Frame_color" mode="Opaque" x="74" y="2" width="475" height="21" forecolor="#FFFFFF"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{assignment_title}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="26">
+			<line>
+				<reportElement x="73" y="0" width="476" height="1"/>
+			</line>
+			<textField>
+				<reportElement style="Text_and_ash_bg" mode="Opaque" x="74" y="1" width="64" height="24"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{assignment_year}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Text_and_ash_bg" mode="Opaque" x="139" y="1" width="149" height="24"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{assignment_subject}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Text_and_ash_bg" mode="Opaque" x="288" y="1" width="136" height="24"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{assignment_name}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="424" y="1" width="1" height="25"/>
+			</line>
+			<textField>
+				<reportElement style="Text_and_ash_bg" mode="Opaque" x="425" y="1" width="124" height="24"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{assignment_marks}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="73" y="0" width="1" height="25"/>
+			</line>
+			<line>
+				<reportElement x="138" y="1" width="1" height="25"/>
+			</line>
+			<line>
+				<reportElement x="73" y="25" width="476" height="1"/>
+			</line>
+			<line>
+				<reportElement x="287" y="1" width="1" height="25"/>
+			</line>
+			<line>
+				<reportElement x="549" y="1" width="1" height="25"/>
+			</line>
+			<line>
+				<reportElement x="549" y="0" width="1" height="25"/>
+			</line>
+			<line>
+				<reportElement x="425" y="1" width="1" height="25"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="25">
+			<line>
+				<reportElement x="287" y="0" width="1" height="25"/>
+			</line>
+			<line>
+				<reportElement x="138" y="0" width="1" height="25"/>
+			</line>
+			<line>
+				<reportElement x="73" y="24" width="476" height="1"/>
+			</line>
+			<line>
+				<reportElement x="549" y="0" width="1" height="25"/>
+			</line>
+			<line>
+				<reportElement x="424" y="0" width="1" height="25"/>
+			</line>
+			<line>
+				<reportElement x="73" y="0" width="1" height="25"/>
+			</line>
+			<textField pattern="yyyy">
+				<reportElement isPrintRepeatedValues="false" x="74" y="0" width="64" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{year}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement isPrintRepeatedValues="false" x="139" y="0" width="148" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{subject}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="288" y="0" width="136" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{assignment}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="425" y="0" width="124" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[($F{gradingAcronym}.equals( "" )) ? $F{marks} : $F{gradingAcronym}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

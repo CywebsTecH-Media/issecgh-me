@@ -1,0 +1,147 @@
+<?xml version="1.0"?>
+
+	<!--
+		< ÀKURA, This application manages the daily activities of a Teacher
+		and a Student of a School> Copyright (C) 2012 Virtusa Corporation.
+		This program is free software: you can redistribute it and/or modify
+		it under the terms of the GNU General Public License as published by
+		the Free Software Foundation, either version 3 of the License, or (at
+		your option) any later version. This program is distributed in the
+		hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+		the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+		PURPOSE. See the GNU General Public License for more details.
+	-->
+
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.virtusa.akura.api.dto.StudentTermMarksSummery"
+		table="STUDENT_TERM_MARKS_SUMMERY">
+
+		<id name="studentTermMarksSummeryId" type="int"
+			column="STUDENT_TERM_MARKS_SUMMERY_ID">
+			<generator class="increment" />
+		</id>
+		<many-to-one name="studentClassInfo"
+			class="com.virtusa.akura.api.dto.StudentClassInfo" column="STUDENT_CLASS_INFO_ID"
+			lazy="false" />
+		<many-to-one name="term" class="com.virtusa.akura.api.dto.Term"
+			column="TERM_ID" lazy="false" />
+		<property name="average" type="double">
+			<column name="AVERAGE" />
+		</property>
+		<property name="total" type="float">
+			<column name="TOTAL" />
+		</property>
+		<property name="rank" type="int">
+			<column name="RANK" />
+		</property>
+
+	</class>
+
+
+	<sql-query name="getStudentTermMarkSummery">
+        <![CDATA[
+SELECT
+sci.STUDENT_ID AS STUDENT_ID,
+	stu.ADMISSION_NO AS ADMISSION_NO,
+	stu.NAME_WT_INITIALS AS NAME_WT_INITIALS,
+	gs.GRADE_SUBJECT_ID AS GRADE_SUBJECT_ID,
+	sm.STUDY_MEDIUM_NAME AS STUDY_MEDIUM,
+    stm.IS_ABSENT AS IS_ABSENT,
+	stm.MARKS AS MARKS,
+    stms.TOTAL AS TOLTAL,
+    stms.AVERAGE AS AVERAGE,
+    stms.RANK AS RANK
+FROM STUDENT_TERM_MARK stm, STUDENT_CLASS_INFO sci,
+	TERM t, GRADE_SUBJECT gs, SUBJECT as s, STUDENT stu, STUDENT_TERM_MARKS_SUMMERY stms, STUDY_MEDIUM sm
+
+WHERE stm.STUDENT_CLASS_INFO_ID=sci.STUDENT_CLASS_INFO_ID
+	AND t.TERM_ID=stm.TERM_ID
+	AND gs.GRADE_SUBJECT_ID=stm.GRADE_SUBJECT_ID
+	AND s.SUBJECT_ID=gs.SUBJECT_ID
+	AND stu.STUDENT_ID=sci.STUDENT_ID
+  AND stms.STUDENT_CLASS_INFO_ID = sci.STUDENT_CLASS_INFO_ID
+  AND t.TERM_ID= stms.TERM_ID
+  AND stu.LANGUAGE_ID=sm.STUDY_MEDIUM_ID
+  AND year(sci.YEAR) = ?
+  AND stm.TERM_ID= ?
+  AND sci.CLASS_GRADE_ID= ?
+  ORDER BY STUDENT_ID
+         ]]>
+
+	</sql-query>
+
+	<query name="getStudentTermMarkSummeryList">
+			<![CDATA[
+			FROM	com.virtusa.akura.api.dto.StudentTermMarksSummery stms
+			WHERE	year(studentClassInfo.year) = ? AND term.termId = ? AND studentClassInfo.classGrade.classGradeId =?
+			ORDER BY studentClassInfo.studentClassInfoId
+			]]>
+	</query>
+
+	<query name="getStudentTermMarkSummeryByStudent">
+			<![CDATA[
+			FROM	com.virtusa.akura.api.dto.StudentTermMarksSummery stms
+			WHERE	studentClassInfo.student.studentId = ? AND
+				year(studentClassInfo.year) = ?
+			]]>
+	</query>
+
+	<query name="getBestStudentAverage">
+			<![CDATA[
+			SELECT stms.average
+			FROM	com.virtusa.akura.api.dto.StudentTermMarksSummery stms
+			WHERE	stms.studentClassInfo.classGrade.classGradeId = ? AND
+					stms.term.termId = ? AND
+				stms.studentClassInfo.year = ? AND
+				stms.rank = 1
+			]]>
+	</query>
+
+	<query name="getBestStudentAverageForAllTerms">
+			<![CDATA[
+			SELECT stms.term.termId,stms.average
+			FROM	com.virtusa.akura.api.dto.StudentTermMarksSummery stms
+			WHERE	stms.studentClassInfo.classGrade.classGradeId = ? AND
+				stms.studentClassInfo.year = ? AND
+				stms.rank = 1
+			]]>
+	</query>
+	<query name="getStudentTermMarkSummeryForCompletedClass">
+			<![CDATA[
+			 
+			from com.virtusa.akura.api.dto.StudentTermMarksSummery studentTermMarksSummery
+			where	studentTermMarksSummery.studentClassInfo.studentClassInfoId in (:studentClassInfoIds) and
+					studentTermMarksSummery.term.termId = :termId
+			]]>
+	</query>
+	<query name="getStudentTermMarkSummeryofStudentForCompletedClass">
+			<![CDATA[
+			 
+			from com.virtusa.akura.api.dto.StudentTermMarksSummery studentTermMarksSummery
+			where	studentTermMarksSummery.studentClassInfo.studentClassInfoId = ? and
+					studentTermMarksSummery.term.termId = ?
+								]]>
+	</query>
+
+
+		<query name="getStudentTermMarkSummeryListByClassGradeId">
+			<![CDATA[
+			 
+			SELECT studentTermMarksSummery
+			from com.virtusa.akura.api.dto.StudentTermMarksSummery studentTermMarksSummery,
+			       com.virtusa.akura.api.dto.StudentClassInfo classinfo
+			where	studentTermMarksSummery.studentClassInfo.studentClassInfoId =  classinfo.studentClassInfoId
+					and classinfo.classGrade.classGradeId = ?
+					and year(classinfo.year) = ?
+					and studentTermMarksSummery.term.termId = ?
+			order by classinfo.student.lastName		
+					
+					
+								]]>
+	</query>
+
+</hibernate-mapping>

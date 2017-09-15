@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+
+	<!--
+		< ÀKURA, This application manages the daily activities of a Teacher
+		and a Student of a School> Copyright (C) 2012 Virtusa Corporation.
+		This program is free software: you can redistribute it and/or modify
+		it under the terms of the GNU General Public License as published by
+		the Free Software Foundation, either version 3 of the License, or (at
+		your option) any later version. This program is distributed in the
+		hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+		the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+		PURPOSE. See the GNU General Public License for more details.
+	-->
+
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.virtusa.akura.api.dto.ExamResults" table="EXAM_RESULTS_VIEW">
+		<composite-id>
+			<key-property name="studentID" column="STUDENT_ID" type="int" />
+			<key-property name="examAdmissionNo" column="ADMISSION_NO"
+				type="string" />
+			<key-property name="subjectDescription" column="SUB_DESCRIPTION"
+				type="string" />
+			<key-property name="examId" column="EXAM_ID" type="int" />
+		</composite-id>
+
+		<property name="fullName" column="FULL_NAME" type="string" />
+		<property name="nameWithInitials" column="NAME_WITH_INITIALS" type="string" />
+		<property name="examDescription" column="EXAM_DESCRIPTION"
+			type="string" />
+		<property name="year" column="YEAR" type="date" />
+		<property name="gradingAcronym" column="GRADE_ACRONYM" type="string" />
+		<property name="gradingDescription" column="GRADING_DESCRIPTION"
+			type="string" />
+		<property name="marks" column="MARKS" type="java.lang.Float" />
+		<property name="markType" column="MARK_TYPE" type="boolean" />
+		<property name="isOptionalSubject" column="IS_OPTIONAL_SUBJECT"
+			type="boolean" />
+		<property name="absent" type="boolean" column="ABSENT" />
+		<property name="optional" type="boolean" column="OPTIONAL" />
+	</class>
+
+	<query name="getExamResultsByExamAdmissionNo">
+        <![CDATA[
+        	FROM com.virtusa.akura.api.dto.ExamResults examResults
+        	WHERE examResults.examAdmissionNo = ? AND examResults.examId = ?
+        ]]>
+	</query>
+
+	<query name="getExamResultsByStudentId">
+        <![CDATA[
+        	FROM com.virtusa.akura.api.dto.ExamResults examResults
+        	WHERE examResults.studentID = ?
+        ]]>
+	</query>
+	<query name="findExamResults">
+        <![CDATA[
+        	FROM com.virtusa.akura.api.dto.ExamResults examResults
+        	WHERE examResults.studentID = ?
+        	AND year = ?
+        ]]>
+	</query>
+	<sql-query name="findExamResultsByAdmissionNo">
+		<![CDATA[
+			SELECT e.SUB_DESCRIPTION, e.MARKS,
+ 			e.GRADE_ACRONYM, e.ABSENT FROM 
+			EXAM_RESULTS_VIEW e WHERE e.STUDENT_ID= ? AND e.ADMISSION_NO= ? AND e.YEAR= ? AND e.EXAM_ID= ?
+			ORDER BY e.SUB_DESCRIPTION
+		]]>
+	</sql-query>
+	
+	<query name="getExamResultsCountByExamId">
+	    <![CDATA[
+        	SELECT COUNT(examResults.examId) FROM com.virtusa.akura.api.dto.ExamResults examResults
+        	WHERE examResults.examId = ?
+        ]]>
+	</query>
+	
+</hibernate-mapping>

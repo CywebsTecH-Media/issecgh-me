@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="NewDesignTest" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="62"/>
+	<property name="ireport.y" value="0"/>
+	<template><![CDATA[$P{styleTemplate}]]></template>
+	<style name="Column header" forecolor="#666666" fontName="SansSerif" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
+	<style name="Detail" mode="Transparent" fontName="SansSerif" pdfFontName="Times-Roman"/>
+	<style name="Row" mode="Transparent" fontName="SansSerif" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F0EFEF"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="StudentDisciplinaryActionTrendsTitleText" class="java.lang.String"/>
+	<parameter name="logoPath" class="java.lang.String"/>
+	<parameter name="classLableText" class="java.lang.String"/>
+	<parameter name="yearLableText" class="java.lang.String"/>
+	<parameter name="admissionNoLableText" class="java.lang.String"/>
+	<parameter name="fullNameLabelText" class="java.lang.String"/>
+	<parameter name="warnDateLabelText" class="java.lang.String"/>
+	<parameter name="warningLabelText" class="java.lang.String"/>
+	<parameter name="parentInformedStatusLabelText" class="java.lang.String"/>
+	<parameter name="warningCommentLabelText" class="java.lang.String"/>
+	<parameter name="teacherNameLableText" class="java.lang.String"/>
+	<parameter name="year" class="java.lang.String"/>
+	<parameter name="styleTemplate" class="java.lang.String"/>
+	<parameter name="reportGeneratedOn" class="java.lang.String"/>
+	<parameter name="generatedDate" class="java.lang.String"/>
+	<parameter name="page" class="java.lang.String"/>
+	<parameter name="GPLComment" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[Select * From StudentAttendence]]>
+	</queryString>
+	<field name="admissionNo" class="java.lang.String"/>
+	<field name="nameWithInitials" class="java.lang.String"/>
+	<field name="warningLevel" class="java.lang.String"/>
+	<field name="classDescription" class="java.lang.String"/>
+	<field name="warnDate" class="java.sql.Date"/>
+	<field name="informedToParent" class="java.lang.String"/>
+	<field name="warning" class="java.lang.String"/>
+	<field name="teacherName" class="java.lang.String"/>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="79">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="-20" width="87" height="99" backcolor="#E6E6E6"/>
+				<image>
+					<reportElement x="0" y="0" width="87" height="99"/>
+					<imageExpression class="java.lang.String"><![CDATA[$P{logoPath}]]></imageExpression>
+				</image>
+			</frame>
+			<frame>
+				<reportElement style="Frame_color" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="66" y="-20" width="509" height="70"/>
+				<textField>
+					<reportElement x="36" y="12" width="472" height="32" forecolor="#FFFFFF"/>
+					<textElement>
+						<font size="18" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{StudentDisciplinaryActionTrendsTitleText}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="104" y="50" width="107" height="18" forecolor="#FFFFFF"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{classDescription}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="271" y="50" width="40" height="18" forecolor="#FFFFFF"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{yearLableText} + " :"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="62" y="50" width="43" height="18" forecolor="#FFFFFF"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{classLableText} + " :"]]></textFieldExpression>
+				</textField>
+				<textField pattern="yyyy">
+					<reportElement x="308" y="50" width="100" height="18" forecolor="#FFFFFF"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement style="Frame_color" positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="66" y="52" width="509" height="24" forecolor="#000000"/>
+				<textField>
+					<reportElement x="189" y="4" width="171" height="20" forecolor="#FFFFFF"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{generatedDate}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="62" y="4" width="148" height="20" forecolor="#FFFFFF"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{reportGeneratedOn}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band/>
+	</pageHeader>
+	<columnHeader>
+		<band height="31">
+			<textField isStretchWithOverflow="true" pattern="">
+				<reportElement style="Text_and_ash_bg" stretchType="RelativeToTallestObject" mode="Opaque" x="-17" y="0" width="76" height="20" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{admissionNoLableText}+"."]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Text_and_ash_bg" stretchType="RelativeToTallestObject" mode="Opaque" x="59" y="0" width="97" height="20" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{fullNameLabelText}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Text_and_ash_bg" stretchType="RelativeToTallestObject" mode="Opaque" x="347" y="0" width="66" height="20" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{warningLabelText}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Text_and_ash_bg" stretchType="RelativeToTallestObject" mode="Opaque" x="156" y="0" width="53" height="20" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{warnDateLabelText}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Text_and_ash_bg" stretchType="RelativeToTallestObject" mode="Opaque" x="499" y="0" width="76" height="20" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{parentInformedStatusLabelText}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="Text_and_ash_bg" stretchType="RelativeToTallestObject" mode="Opaque" x="209" y="0" width="138" height="20" isPrintWhenDetailOverflows="true"/>
+				<textElement>
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{warningCommentLabelText}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Text_and_ash_bg" stretchType="RelativeToTallestObject" mode="Opaque" x="413" y="0" width="86" height="20" isPrintWhenDetailOverflows="true"/>
+				<textElement>
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{teacherNameLableText}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="27" splitType="Stretch">
+			<frame>
+				<reportElement style="Row" mode="Opaque" x="0" y="0" width="555" height="18"/>
+				<textField>
+					<reportElement style="Row" stretchType="RelativeToTallestObject" isPrintRepeatedValues="false" x="0" y="0" width="56" height="18" isPrintWhenDetailOverflows="true"/>
+					<textElement>
+						<font fontName="SansSerif"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{admissionNo}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement stretchType="RelativeToTallestObject" isPrintRepeatedValues="false" x="59" y="0" width="97" height="18" isPrintWhenDetailOverflows="true"/>
+					<textElement/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{nameWithInitials}]]></textFieldExpression>
+				</textField>
+				<textField pattern="dd-MMM">
+					<reportElement style="Row" stretchType="RelativeToTallestObject" x="156" y="0" width="53" height="18" isPrintWhenDetailOverflows="true"/>
+					<textElement>
+						<font fontName="SansSerif"/>
+					</textElement>
+					<textFieldExpression class="java.util.Date"><![CDATA[$F{warnDate}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement stretchType="RelativeToTallestObject" x="350" y="0" width="62" height="18" isPrintWhenDetailOverflows="true"/>
+					<textElement/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{warningLevel}]]></textFieldExpression>
+				</textField>
+				<textField pattern="">
+					<reportElement style="Row" stretchType="RelativeToTallestObject" x="499" y="0" width="56" height="18" isPrintWhenDetailOverflows="true">
+						<printWhenExpression><![CDATA[( $F{informedToParent}.equalsIgnoreCase( "true" ))? "YES" : "NO"]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Left">
+						<font fontName="SansSerif"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[( $F{informedToParent}.equalsIgnoreCase( "true" ))? "YES" : "NO"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement stretchType="RelativeToTallestObject" x="209" y="0" width="138" height="18" isPrintWhenDetailOverflows="true"/>
+					<textElement/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{warning}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement stretchType="RelativeToTallestObject" x="413" y="0" width="86" height="18" isPrintWhenDetailOverflows="true"/>
+					<textElement/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{teacherName}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="26" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<frame>
+				<reportElement style="Frame_color" mode="Opaque" x="0" y="0" width="555" height="24" forecolor="#000000"/>
+				<textField>
+					<reportElement x="0" y="1" width="171" height="20" forecolor="#FFFFFF"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$P{generatedDate}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<textField>
+				<reportElement style="Column header" x="473" y="0" width="82" height="21" forecolor="#FFFFFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{page}+$V{PAGE_NUMBER}+""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="34" width="575" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{GPLComment}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

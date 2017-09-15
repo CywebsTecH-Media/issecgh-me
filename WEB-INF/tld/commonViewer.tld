@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!--
+    < ÀKURA, This application manages the daily activities of a Teacher and a Student of a School>
+
+    Copyright (C) 2012 Virtusa Corporation.
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+ -->
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+        version="2.0">
+    <tlib-version>1.0</tlib-version>
+    <jsp-version>1.0</jsp-version>
+    <uri>/WEB-INF/tags/</uri>
+    <function>
+        <name>getDate</name>
+        <function-class>com.virtusa.akura.util.HeaderTabConfigurator</function-class>
+        <function-signature>
+            java.lang.String getDate()
+        </function-signature>
+    </function>
+
+    <function>
+    	<name>getTabContent</name>
+    	<function-class>com.virtusa.akura.util.HeaderTabConfigurator</function-class>
+    	<function-signature>
+    	java.lang.String getTabContent(java.util.PropertyResourceBundle,java.lang.String)
+    	</function-signature>
+    </function>
+
+    <function>
+    	<name>getTabs</name>
+    	<function-class>com.virtusa.akura.util.HeaderTabConfigurator</function-class>
+    	<function-signature>
+    	java.util.List getTabs(java.util.Map,java.lang.String)
+    	</function-signature>
+    </function>
+</taglib>

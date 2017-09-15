@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+
+<!--
+    < ÀKURA, This application manages the daily activities of a Teacher and a Student of a School>
+
+    Copyright (C) 2012 Virtusa Corporation.
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.virtusa.akura.api.dto.StudentDisability" table="STUDENT_DISABILITY">
+        <id name="studentId" type="int" column="STUDENT_ID">
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="student" class="com.virtusa.akura.api.dto.Student" update="false" insert="false" fetch="select">
+            <column name="STUDENT_ID" not-null="true" unique="true" />
+        </many-to-one>
+        <property name="allergiesMedicalNotes" type="string">
+            <column name="ALLERGIES_MEDICAL_NOTES" length="300" />
+        </property>
+        <property name="disabilityInfo" type="string">
+            <column name="DISABILITY_INFO" length="300" />
+        </property>
+        <property name="hearingImpairment" type="string">
+            <column name="HEARING_IMPAIRMENT" length="300" />
+        </property>
+        <property name="visualImpairment" type="string">
+            <column name="VISUAL_IMPAIRMENT" length="300" />
+        </property>
+        <property name="speechDifficulties" type="string">
+            <column name="SPEECH_DIFFICULTIES" length="300" />
+        </property>
+        <property name="dyslexia" type="string">
+            <column name="DYSLEXIA" length="300" />
+        </property>
+        <property name="physicalDisabilities" type="string">
+            <column name="PHYSICAL_DISABILITIES" length="300" />
+        </property>
+        <property name="fits" type="string">
+            <column name="FITS" length="300" />
+        </property>
+        <property name="behaviourDifficulties" type="string">
+            <column name="BEHAVIOUR_DIFFICULTIES" length="300" />
+        </property>
+        <property name="otherInfo" type="string">
+            <column name="OTHER_INFO" length="400" />
+        </property>
+        <property name="modifiedTime" type="timestamp" generated="always">
+            <column name="MODIFIED_TIME" length="19" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

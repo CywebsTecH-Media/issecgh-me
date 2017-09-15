@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- < ÀKURA, This application manages the daily activities of a Teacher 
+	and a Student of a School> Copyright (C) 2012 Virtusa Corporation. This program 
+	is free software: you can redistribute it and/or modify it under the terms 
+	of the GNU General Public License as published by the Free Software Foundation, 
+	either version 3 of the License, or (at your option) any later version. This 
+	program is distributed in the hope that it will be useful, but WITHOUT ANY 
+	WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
+	FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details. -->
+
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.springframework.org/schema/beans" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+                           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd
+                           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+                           http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+                           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<import resource="akura-common-beans-main.xml" />
+	<import resource="akura-school-beans-main.xml" />
+	<import resource="akura-staff-beans-main.xml" />
+	<import resource="akura-student-beans-main.xml" />
+	<import resource="akura-reporting-beans-main.xml" />
+	<import resource="akura-attendance-beans-main.xml" />
+	<import resource="akura-auditing-beans-main.xml" />
+	<import resource="akura-attendance-scheduler-beans.xml" />
+	<import resource="akura-sms-service-beans-main.xml" />
+
+	<context:annotation-config />
+
+	<context:component-scan base-package="com.virtusa.akura.common.controller" />
+
+	<mvc:annotation-driven />
+
+	<bean id="AkuraFilter" class="com.virtusa.akura.common.filter.AkuraFilter" />
+
+	<bean id="staffLoginDelegate" class="com.virtusa.akura.staff.delegate.StaffLoginDelegate">
+		<property name="staffService" ref="staffService" />
+	</bean>
+
+	<bean id="studentLoginDelegate" class="com.virtusa.akura.student.delegate.StudentLoginDelegate">
+		<property name="studentService" ref="studentService" />
+		<property name="studentProgressBarService" ref="studentProgressBarService" />
+		<property name="commonService" ref="commonService" />
+		<property name="dailyAttendanceService" ref="dailyAttendanceService" />
+
+	</bean>
+
+	<bean id="userDefinedRoleLoginDelegate"
+		class="com.virtusa.akura.common.delegate.UserDefinedRoleLoginDelegate">
+	</bean>
+
+	<bean id="parentLoginDelegate" class="com.virtusa.akura.student.delegate.ParentLoginDelegate">
+		<property name="parentService" ref="parentService" />
+	</bean>
+
+	<bean id="studentSystemUserDelegate"
+		class="com.virtusa.akura.student.delegate.StudentSystemUserDelegate">
+		<property name="studentService" ref="studentService" />
+	</bean>
+
+	<bean id="staffSystemUserDelegate"
+		class="com.virtusa.akura.staff.delegate.StaffSystemUserDelegate">
+		<property name="staffService" ref="staffService" />
+	</bean>
+
+	<bean id="parentSystemUserDelegate"
+		class="com.virtusa.akura.student.delegate.ParentSystemUserDelegate">
+		<property name="parentService" ref="parentService" />
+	</bean>
+
+<!-- Exception Handling -->
+
+	<bean id="akuraLogger" class="org.springframework.beans.factory.config.CommonsLogFactoryBean">
+	    <property name="logName" value="akuraLog"/>
+	</bean>
+
+	<bean id="simpleMappingExceptionResolver"
+          class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="exceptionMappings">
+            <map>
+                <entry key="DataAccessException" value="databaseError"/>
+                <entry key="org.springframework.dao.DataIntegrityViolationException" value="databaseError"/>
+                <entry key="AkuraAppException" value="exception"/>
+                <entry key="IOException" value="exception"/>
+                <entry key="NumberFormatException" value="exception"/>
+                <entry key="InvalidFormatException" value="exception"/>
+                <entry key="ParseException" value="exception"/>
+            </map>
+        </property>
+        <!-- See note below on how this interacts with Spring Boot -->
+        <property name="defaultErrorView" value="exception"/>
+        <property name="exceptionAttribute" value="ex"/>
+
+        <!-- Name of logger to use to log exceptions. Unset by default, so logging disabled -->
+        <property name="warnLogCategory" value="akuraLogger"/>
+    </bean>
+
+	<!-- Validator Declarations -->
+	<bean id="appointmentClassificationValidator"
+		class="com.virtusa.akura.common.validator.AppointmentClassificationValidator" />
+	<bean id="staffServiceCategoryValidator"
+		class="com.virtusa.akura.common.validator.StaffServiceCategoryValidator" />
+	<bean id="publicationValidator" class="com.virtusa.akura.common.validator.PublicationValidator" />
+	<bean id="provinceValidator" class="com.virtusa.akura.common.validator.ProvinceValidator" />
+	<bean id="cityValidator" class="com.virtusa.akura.common.validator.CityValidator" />
+	<bean id="countryValidator" class="com.virtusa.akura.common.validator.CountryValidator" />
+	<bean id="districtValidator" class="com.virtusa.akura.common.validator.DistrictValidator" />
+	<bean id="subjectValidator" class="com.virtusa.akura.common.validator.SubjectValidator" />
+	<bean id="streamValidator" class="com.virtusa.akura.common.validator.StreamValidator" />
+	<bean id="bloodGroupValidator" class="com.virtusa.akura.common.validator.BloodGroupValidator" />
+	<bean id="prefectTypeValidator"
+		class="com.virtusa.akura.student.validator.PrefectTypeValidator" />
+	<bean id="warningLevelValidator"
+		class="com.virtusa.akura.student.validator.WarningLevelValidator" />
+	<bean id="schoolClassValidator" class="com.virtusa.akura.common.validator.SchoolClassValidator" />
+	<bean id="nationalityValidator" class="com.virtusa.akura.common.validator.NationalityValidator" />
+	<bean id="raceValidator" class="com.virtusa.akura.common.validator.RaceValidator" />
+	<bean id="titleValidator" class="com.virtusa.akura.common.validator.TitleValidator" />
+	<bean id="religionValidator" class="com.virtusa.akura.common.validator.ReligionValidator" />
+	<bean id="appointmentNatureValidator"
+		class="com.virtusa.akura.common.validator.AppointmentNatureValidator" />
+	<bean id="houseValidator" class="com.virtusa.akura.common.validator.HouseValidator" />
+	<bean id="positionValidator" class="com.virtusa.akura.common.validator.PositionValidator" />
+	<bean id="scholarshipValidator" class="com.virtusa.akura.common.validator.ScholarshipValidator" />
+	<bean id="staffCategoryValidator"
+		class="com.virtusa.akura.staff.validator.StaffCategoryValidator" />
+	<bean id="educationalQualificationValidator"
+		class="com.virtusa.akura.common.validator.EducationalQualificationValidator" />
+	<bean id="professionalQualificationValidator"
+		class="com.virtusa.akura.common.validator.ProfessionalQualificationValidator" />
+	<bean id="instituteValidator"
+		class="com.virtusa.akura.common.validator.InstituteValidator" />
+	<bean id="workingSegmentValidator"
+		class="com.virtusa.akura.common.validator.WorkingSegmentValidator" />
+	<bean id="methodOfTravelValidator"
+		class="com.virtusa.akura.common.validator.MethodOfTravelValidator" />
+	<bean id="termValidator" class="com.virtusa.akura.common.validator.TermValidator" />
+	<bean id="gradingValidator" class="com.virtusa.akura.common.validator.GradingValidator" />
+	<bean id="subTermValidator" class="com.virtusa.akura.common.validator.SubTermValidator" />
+	<bean id="gradeValidator" class="com.virtusa.akura.common.validator.GradeValidator" />
+	<bean id="schoolValidator" class="com.virtusa.akura.school.validator.SchoolValidator" />
+	<bean id="studentDetailValidator"
+		class="com.virtusa.akura.student.validator.StudentDetailValidator" />
+	<bean id="parentValidator"
+		class="com.virtusa.akura.student.validator.StudentParentValidator" />
+	<bean id="studentDisciplineValidator"
+		class="com.virtusa.akura.student.validator.StudentDisciplineValidator" />
+	<bean id="donationValidator"
+		class="com.virtusa.akura.student.validator.StudentDonationValidator" />
+	<bean id="gradeSubjectValidator"
+		class="com.virtusa.akura.common.validator.GradeSubjectValidator" />
+	<bean id="securityQuestionsValidator"
+		class="com.virtusa.akura.common.validator.SecurityQuestionsValidator" />
+	<bean id="studentLeaveValidator"
+		class="com.virtusa.akura.student.validator.StudentLeaveValidator" />
+	<bean id="systemUserValidator" class="com.virtusa.akura.user.validator.SystemUserValidator" />
+	<bean id="sportValidator" class="com.virtusa.akura.common.validator.SportValidator" />
+	<bean id="sportSubValidator" class="com.virtusa.akura.common.validator.SportSubValidator" />
+	<bean id="clubSocietyValidator" class="com.virtusa.akura.common.validator.ClubSocietyValidator" />
+	<bean id="staffEducationValidator"
+		class="com.virtusa.akura.staff.validator.StaffEducationValidator" />
+	<bean id="staffProfessionalValidator"
+		class="com.virtusa.akura.staff.validator.StaffProfessionalValidator" />
+	<bean id="donationTypeValidator"
+		class="com.virtusa.akura.common.validator.DonationTypeValidator" />
+	<bean id="civilStatusValidator" class="com.virtusa.akura.common.validator.CivilStatusValidator" />
+	<bean id="sportCategoryValidator"
+		class="com.virtusa.akura.common.validator.SportCategoryValidator" />
+	<bean id="holidayValidator" class="com.virtusa.akura.common.validator.HolidayValidator" />
+	<bean id="faithLifeRatingValidator"
+		class="com.virtusa.akura.student.validator.FaithLifeRatingValidator" />
+	<bean id="forgotPasswordValidate"
+		class="com.virtusa.akura.common.validator.ForgotPasswordValidator" />
+	<bean id="userSecurityQuestionsValidator"
+		class="com.virtusa.akura.common.validator.UserSecurityQuestionsValidator" />
+	<bean id="userPasswordValidator"
+		class="com.virtusa.akura.common.validator.UserPasswordValidator" />
+	<bean id="staffLeaveValidator" class="com.virtusa.akura.staff.validator.StaffLeaveValidator" />
+	<bean id="studyMediumValidator" class="com.virtusa.akura.common.validator.StudyMediumValidator" />
+	<bean id="specialEventsValidator"
+		class="com.virtusa.akura.common.validator.SpecialEventsValidator" />
+	<bean id="examValidator" class="com.virtusa.akura.common.validator.ExamValidator" />
+	<bean id="assignmentValidator" class="com.virtusa.akura.common.validator.AssignmentValidator" />
+	<bean id="examSubjectValidator" class="com.virtusa.akura.common.validator.ExamSubjectValidator" />
+	<bean id="sectionValidator" class="com.virtusa.akura.common.validator.SectionValidator" />
+	<!-- Validator Declarations for Reports -->
+	<bean id="staffDetailsValidator" class="com.virtusa.akura.staff.validator.StaffDetailsValidator" />
+
+	<bean id="disciplineTrendValidator"
+		class="com.virtusa.akura.reporting.validator.CRStudentDisciplinaryActionValidator" />
+	<bean id="sectionHeadValidator" class="com.virtusa.akura.staff.validator.SectionHeadValidator" />
+	<bean id="seminarValidator" class="com.virtusa.akura.common.validator.SeminarValidator" />
+	<bean id="cRStudentPerformanceValidator"
+		class="com.virtusa.akura.reporting.validator.CRStudentPerformanceValidator" />
+	<bean id="cRStudentPerformanceGreaterValidator"
+		class="com.virtusa.akura.reporting.validator.CRStudentPerformanceGreaterValidator" />
+	<bean id="cRStudentPerformanceBetweenValidator"
+		class="com.virtusa.akura.reporting.validator.CRStudentPerformanceBetweenValidator" />
+	<bean id="cRExamAbsentListValidator"
+		class="com.virtusa.akura.reporting.validator.CRExamAbsentListValidator" />
+	<bean id="cRAverageTermMarkClassWiseValidator"
+		class="com.virtusa.akura.reporting.validator.CRAverageTermMarkClassWiseValidator" />
+	<bean id="schoolTeacherListSectionHeadListValidator"
+		class="com.virtusa.akura.reporting.validator.CustomStaffReportControllerValidator" />
+	<bean id="disciplinaryActionClassWiseValidator"
+		class="com.virtusa.akura.reporting.validator.DisciplinaryActionClassWiseValidator" />
+	<bean id="staffLeaveTypeValidator"
+		class="com.virtusa.akura.common.validator.StaffLeaveTypeValidator" />
+
+	<!-- Validator Declarations for StudentSummaryTemplateValidator -->
+	<bean id="studentSummaryReportTemplateValidator"
+		class="com.virtusa.akura.reporting.validator.StudentSummaryReportTemplateValidator" />
+	<bean id="perDayClassWiseAttendanceValidator"
+		class="com.virtusa.akura.reporting.validator.PerDayClassWiseAttendanceValidator" />
+
+	<bean id="teacherWiseAttendanceValidator"
+		class="com.virtusa.akura.reporting.validator.TeacherWiseAttendanceValidator" />
+
+	<bean id="lateComersValidator"
+		class="com.virtusa.akura.reporting.validator.LateComersValidator" />
+
+	<bean id="studentWiseAttendanceValidator"
+		class="com.virtusa.akura.reporting.validator.StudentWiseAttendanceValidator" />
+	
+	<bean id="bestStudentWiseAttendanceValidator"
+		class="com.virtusa.akura.reporting.validator.BestStudentWiseAttendanceValidator" />
+
+	<bean id="presentAndAbsentDaysValidator"
+		class="com.virtusa.akura.reporting.validator.TeacherWisePresentAndAbsentDaysValidator" />
+
+	<bean id="studentWiseSwipeInOutAttendanceValidator"
+		class="com.virtusa.akura.reporting.validator.StudentWiseSwipeInOutAttendanceValidator" />
+
+	<!-- Validator Declarations for ClassWiseStudentReportTemplateValidator -->
+	<bean id="classWiseStudentReportTemplateValidator"
+		class="com.virtusa.akura.reporting.validator.ClassWiseStudentReportTemplateValidator" />
+
+	<!-- Validator Declarations for PerDayStaffCategoryWiseAttendanceValidator -->
+	<bean id="perDayStaffCategoryWiseAttendanceValidator"
+		class="com.virtusa.akura.reporting.validator.PerDayStaffCategoryWiseAttendanceValidator" />
+
+	<!-- Validator Declarations for Student Special Event Attendance Report 
+		Validator -->
+	<bean id="studentSpecialEventAttendanceReportValidator"
+		class="com.virtusa.akura.reporting.validator.StudentSpecialEventAttendanceReportValidator" />
+
+	<!-- Validator Declarations for ClassWiseStudentMarksSheetController Validator -->
+	<bean id="classWiseStudentMarksSheetValidator"
+		class="com.virtusa.akura.reporting.validator.ClassWiseStudentMarksSheetValidator" />
+
+	<!-- Validator Declarations for GradeWiseStudentRankValidator -->
+	<bean id="gradeWiseStudentRankValidator"
+		class="com.virtusa.akura.reporting.validator.GradeWiseStudentRankValidator" />
+
+	<!-- Validator Declarations for SubjectPrizeTopListValidator -->
+	<bean id="prizeTopListValidator"
+		class="com.virtusa.akura.reporting.validator.PrizeTopListValidator" />
+
+	<!-- Validator Declarations for UserRoleValidator -->
+	<bean id="userRoleValidator" class="com.virtusa.akura.user.validator.UserRoleValidator" />
+
+	<!-- Validator Declarations for ViewAuditDetailsValidator -->
+	<bean id="viewAuditDetailsValidator"
+		class="com.virtusa.akura.common.validator.ViewAuditDetailsValidator" />
+
+	<!-- Validator Declarations for ExamResultsValidator -->
+	<bean id="examResultsReportValidator"
+		class="com.virtusa.akura.reporting.validator.ExamResultsReportValidator" />
+
+	<!-- Validator Declarations for StaffProfileReportValidator -->
+	<bean id="staffProfileReportValidator"
+		class="com.virtusa.akura.reporting.validator.StaffProfileReportValidator" />
+
+	<bean id="studentAttendanceValidator"
+		class="com.virtusa.akura.student.validator.StudentAttendanceValidator" />
+
+	<!-- Validator Declarations for employmentStatusValidator -->
+	<bean id="employmentStatusValidator"
+		class="com.virtusa.akura.common.validator.EmploymentStatusValidator" />
+
+	<bean id="forgotUsernameValidate"
+		class="com.virtusa.akura.common.validator.ForgotUserNameValidator" />
+
+	<bean id="staffDepartureDetailsValidator"
+		class="com.virtusa.akura.staff.validator.StaffDepartureDetailsValidator" />
+
+	<bean id="staffPastServiceValidator"
+		class="com.virtusa.akura.staff.validator.StaffPastServiceValidator" />
+
+	<bean id="studentSuspendValidator"
+		class="com.virtusa.akura.student.validator.StudentSuspendValidator" />
+
+	<bean id="temporaryLeaveValidator"
+		class="com.virtusa.akura.student.validator.StudentTemporaryLeaveValidator"></bean>
+
+	<bean id="studentTemporaryLeaveTerminateValidator"
+		class="com.virtusa.akura.student.validator.StudentTemporaryLeaveTerminateValidator" />
+
+	<bean id="studentTerminateValidator"
+		class="com.virtusa.akura.student.validator.StudentTerminateValidator" />
+	<bean id="rejoinSuspendedStudentValidator"
+		class="com.virtusa.akura.student.validator.RejoinSuspendedStudentValidator" />
+
+	<bean id="leaveApprovalProcessValidator"
+		class="com.virtusa.akura.staff.validator.LeaveApprovalProcessValidator" />
+
+	<bean id="annualStudentAttendanceTemplateValidator"
+		class="com.virtusa.akura.reporting.validator.AnnualStudentAttendanceTemplateValidator" />
+
+	<bean id="gradeWiseBestStudentAttendanceValidator"
+		class="com.virtusa.akura.reporting.validator.GradeWiseBestStudentAttendanceValidator" />
+
+	<bean id="attendanceDashboardValidator"
+		class="com.virtusa.akura.attendance.validator.AttendanceDashboardValidator" />
+
+
+	<bean id="studentScholarshipReportValidator"
+		class="com.virtusa.akura.reporting.validator.StudentScholarshipReportValidator" />
+
+	<bean id="userVerificationValidator"
+		class="com.virtusa.akura.user.validator.UserVerificationValidator" />
+	
+	<bean id="monthlySmsSubscribtionValidator"
+		class="com.virtusa.akura.reporting.validator.MonthlySmsSubscribtionValidator" />
+
+	<bean id="fileValidator" class="com.virtusa.akura.attendance.validator.FileValidator"> </bean>
+	
+	<bean id="bulkFileValidator" class="com.virtusa.akura.upload.validator.BulkFileValidator"> </bean>
+	
+	<bean id="importExportValidator" class="com.virtusa.akura.student.validator.ImportExportValidator"> </bean>
+		
+</beans>

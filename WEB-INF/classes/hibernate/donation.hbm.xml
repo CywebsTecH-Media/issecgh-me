@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+
+<!--
+    < ÀKURA, This application manages the daily activities of a Teacher and a Student of a School>
+
+    Copyright (C) 2012 Virtusa Corporation.
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.virtusa.akura.api.dto.Donation" table="DONATION" lazy="false">
+		<id name="donationId" column="DONATION_ID" type="integer">
+			<generator class="increment" />
+		</id>
+		<property name="purpose" column="PURPOSE" type="string"
+			not-null="true" />
+		<property name="amount" column="AMOUNT" type="string"
+			not-null="true" />
+		<property name="date" column="DATE" type="date" />
+		<many-to-one name="donationType" class="com.virtusa.akura.api.dto.DonationType"
+			column="DONATION_TYPE_ID" not-null="true" />
+		<property name="modifiedTime" column="MODIFIED_TIME" type="timestamp"
+			not-null="true" generated="always" />
+	</class>
+	<sql-query name="getDonationsByStudentId" cacheable="false"
+		callable="false">
+		<return alias="donation" class="com.virtusa.akura.api.dto.Donation"
+			lock-mode="read" />
+   		<![CDATA[
+  			SELECT d.donation_id,purpose,date,amount,donation_type_id, d.modified_time
+			FROM DONATION d
+			JOIN PARENT_DONATION pd
+			ON (d.donation_id = pd.donation_id)
+			JOIN STUDENT_PARENT sp
+			ON (pd.parent_id = sp.parent_id)
+			WHERE student_id=?
+		]]>
+	</sql-query>
+	<query name="getDonations">
+	    <![CDATA[
+				FROM com.virtusa.akura.api.dto.Donation donation
+				WHERE donation.purpose = ? AND donation.amount = ?
+				AND donation.date = ? AND donation.donationType.donationTypeId = ?
+			]]>
+	</query>
+</hibernate-mapping>

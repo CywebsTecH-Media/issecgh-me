@@ -1,0 +1,238 @@
+<?xml version="1.0"?>
+
+<!-- < ÀKURA, This application manages the daily activities of a Teacher
+	and a Student of a School> Copyright (C) 2012 Virtusa Corporation. This program
+	is free software: you can redistribute it and/or modify it under the terms
+	of the GNU General Public License as published by the Free Software Foundation,
+	either version 3 of the License, or (at your option) any later version. This
+	program is distributed in the hope that it will be useful, but WITHOUT ANY
+	WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+	FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details. -->
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.virtusa.akura.api.dto.StudentClassInfo" table="STUDENT_CLASS_INFO">
+		<id name="studentClassInfoId" type="int" column="STUDENT_CLASS_INFO_ID">
+			<generator class="increment" />
+		</id>
+		<many-to-one name="classGrade" class="com.virtusa.akura.api.dto.ClassGrade"
+			lazy="false" fetch="select">
+			<column name="CLASS_GRADE_ID" not-null="true" />
+		</many-to-one>
+		<many-to-one name="student" class="com.virtusa.akura.api.dto.Student"
+			lazy="false" column="STUDENT_ID" not-null="true" />
+		<property name="year" type="date">
+			<column name="YEAR" length="10" not-null="true" />
+		</property>
+		<property name="checkMonitor" type="boolean">
+			<column name="IS_MONITOR" not-null="true" />
+		</property>
+		<property name="modifiedTime" type="timestamp" generated="always">
+			<column name="MODIFIED_TIME" length="19" not-null="true" />
+		</property>
+		<set name="studentTermMarks" inverse="true" lazy="false">
+			<key column="STUDENT_CLASS_INFO_ID" />
+			<one-to-many class="com.virtusa.akura.api.dto.StudentTermMark" />
+		</set>
+	</class>
+	<query name="classstudentlist">
+        <![CDATA[
+        	from	com.virtusa.akura.api.dto.StudentClassInfo classinfo
+            where 	classinfo.classGrade.classGradeId = ?
+			and year(classinfo.year) = ?
+			order by classinfo.student.nameWtInitials asc
+        ]]>
+	</query>
+	<query name="classCurrentstudentlist">
+	     <![CDATA[
+        	from	com.virtusa.akura.api.dto.StudentClassInfo classinfo
+            where 	classinfo.classGrade.classGradeId = ?
+			and year(classinfo.year) = ? and classinfo.student.statusId = 1
+			order by classinfo.student.lastName
+        ]]>
+	    
+	</query>
+	<query name="presentclassstudentlist">
+        <![CDATA[
+        	from	com.virtusa.akura.api.dto.StudentClassInfo classinfo
+            where 	classinfo.classGrade.classGradeId = ?
+			and 	year(classinfo.year) = ? and classinfo.student.isOldBoy = 0
+			and 	classinfo.student.statusId != 2
+			order by classinfo.student.lastName
+        ]]>
+	</query>
+	<query name="nonCurrentClassStudentList">
+        <![CDATA[
+        	select classinfo
+        	from	com.virtusa.akura.api.dto.StudentClassInfo classinfo, com.virtusa.akura.api.dto.StudentLeave studentLeave
+            where 	classinfo.classGrade.classGradeId = ?
+            and 	classinfo.student.studentId = studentLeave.studentId
+			and 	year(classinfo.year) = ?
+            and 	? between studentLeave.fromDate and studentLeave.toDate
+        ]]>
+	</query>
+	<query name="studentSearchByGradeYear">
+        <![CDATA[
+        	Select  classinfo
+        	from	com.virtusa.akura.api.dto.StudentClassInfo classinfo,
+        			com.virtusa.akura.api.dto.ClassGrade classgrade
+            where 	classgrade.grade.gradeId = ? and year(classinfo.year) = ?
+            		and classgrade.classGradeId = classinfo.classGrade.classGradeId
+            		and classinfo.student.statusId = 1
+            order by classinfo.student.nameWtInitials asc
+        ]]>
+	</query>
+	<query name="getStudentClassInfoByStudentId">
+        <![CDATA[
+        	from	com.virtusa.akura.api.dto.StudentClassInfo classinfo
+            where 	classinfo.student.studentId = ? and year(classinfo.year) = ?
+        ]]>
+	</query>
+	<query name="getStudentClassInfoByStudentId2">
+        <![CDATA[
+        	from	com.virtusa.akura.api.dto.StudentClassInfo classinfo
+            where 	classinfo.student.studentId = ? 
+            order by classinfo.year
+        ]]>
+	</query>
+	<query name="getStudentClassInfoByClassGradeId">
+        <![CDATA[
+        	from	com.virtusa.akura.api.dto.StudentClassInfo studentClassInfo
+            where 	studentClassInfo.classGrade.classGradeId in (:classGradeIds)
+        ]]>
+	</query>
+
+	<query name="getStudentClassInfoOfClassByYear">
+  		<![CDATA[
+		 from com.virtusa.akura.api.dto.StudentClassInfo studentClassInfo
+ 		 Where studentClassInfo.classGrade.classGradeId = ?
+ 		 AND studentClassInfo.year = ?
+		]]>
+	</query>
+	
+	<query name="getStudentClassInfoOfStudentClassByYear">
+  		<![CDATA[
+		 from com.virtusa.akura.api.dto.StudentClassInfo studentClassInfo
+ 		 Where studentClassInfo.student.studentId = ? AND
+ 		       studentClassInfo.classGrade.classGradeId = ?
+ 		       AND studentClassInfo.year = ?
+		]]>
+	</query>
+	
+	<query name="StudentIdByClasslist">
+        <![CDATA[
+        	from	com.virtusa.akura.api.dto.StudentClassInfo classinfo
+            where 	classinfo.student.studentId = ? AND classinfo.classGrade.classGradeId = ?
+        ]]>
+	</query>
+	
+	<query name="getStudentClassInfoIdByYear">
+  		<![CDATA[
+  		 SELECT studentClassInfo.studentClassInfoId
+		 FROM com.virtusa.akura.api.dto.StudentClassInfo studentClassInfo
+ 		 WHERE studentClassInfo.classGrade.classGradeId = ?
+ 		 AND studentClassInfo.year = ?
+		]]>
+	</query>
+
+<query name="presentClassStudentForDate">
+  		<![CDATA[
+  		 from	com.virtusa.akura.api.dto.StudentClassInfo classinfo
+            where 	classinfo.classGrade.classGradeId = ?
+			and 	year(classinfo.year) = ? and classinfo.student.isOldBoy = 0
+			and 	classinfo.student.statusId != 2
+			and classinfo.student.firstSchoolDay <= ?
+			order by classinfo.student.lastName
+		]]>
+	</query>
+	
+	<query name="suspendedClassStudentList">
+        <![CDATA[
+        	select 	classinfo
+        	from	com.virtusa.akura.api.dto.StudentClassInfo classinfo, 
+        			com.virtusa.akura.api.dto.SuspendStudent studentSuspend
+            where 	classinfo.classGrade.classGradeId = ?
+            and 	classinfo.student.studentId = studentSuspend.student.studentId
+            and 	classinfo.student.statusId = 3
+			and 	year(classinfo.year) = ?
+            and 	studentSuspend.toDate < ?
+        ]]>
+	</query>
+	
+	<query name="temporaryLeavedClassStudentList">
+        <![CDATA[
+        	select 	classinfo
+        	from	com.virtusa.akura.api.dto.StudentClassInfo classinfo, 
+        			com.virtusa.akura.api.dto.StudentTemporaryLeave studentTempLeave
+            where 	classinfo.classGrade.classGradeId = ?
+            and 	classinfo.student.studentId = studentTempLeave.student.studentId
+            and 	classinfo.student.statusId = 4
+			and 	year(classinfo.year) = ?
+            and 	studentTempLeave.toDate < ?
+        ]]>
+	</query>
+	
+	<query name="studentListExceptTempLeaveStudents">
+	     <![CDATA[
+	     	select 	distinct classinfo
+			from	com.virtusa.akura.api.dto.StudentClassInfo classinfo,
+	       			com.virtusa.akura.api.dto.StudentTemporaryLeave studentTempLeave	
+            where 	classinfo.classGrade.classGradeId = ?
+            and 	classinfo.student.studentId != studentTempLeave.student.studentId		
+			and 	classinfo.student.statusId != 4
+			and 	classinfo.student.statusId != 2
+			and 	year(classinfo.year) = ?
+            and 	? between studentTempLeave.fromDate and studentTempLeave.toDate
+			
+        ]]>
+	</query>
+	
+	<query name="findMarkingNotCompletedStudentListbyGradeDesc">
+		<![CDATA[
+		
+		select classinfo
+		from com.virtusa.akura.api.dto.Grade grade,
+			 com.virtusa.akura.api.dto.ClassGrade classgrade,
+			 com.virtusa.akura.api.dto.MarkingFlag markinflag,
+			 com.virtusa.akura.api.dto.StudentClassInfo classinfo
+		where grade.description = ?
+		and grade.gradeId = classgrade.grade.gradeId 
+		and markinflag.classGradeId = classgrade.classGradeId 
+		and classinfo.classGrade.classGradeId = classgrade.classGradeId
+		and markinflag.year = classinfo.year
+		and markinflag.markingCompleted != 1
+		and markinflag.termId = ?
+	
+		]]>
+	</query>
+	
+	
+	<query name="findStudentListbyGradeDesc">
+		<![CDATA[
+		
+		select classinfo
+		from com.virtusa.akura.api.dto.Grade grade,
+			 com.virtusa.akura.api.dto.ClassGrade classgrade,
+			 com.virtusa.akura.api.dto.StudentClassInfo classinfo
+		where grade.description = ?
+		and grade.gradeId = classgrade.grade.gradeId 
+		and classinfo.classGrade.classGradeId = classgrade.classGradeId
+	
+		]]>
+	</query>
+	
+	<query name="getExamStudentList">
+		<![CDATA[
+		Select	studentclassinfo
+			FROM com.virtusa.akura.api.dto.ExamAdmission examadmission,
+			com.virtusa.akura.api.dto.StudentClassInfo studentclassinfo
+			WHERE examadmission.studentId = studentclassinfo.student.studentId
+			AND examadmission.examId = ? AND studentclassinfo.classGrade.classGradeId = ?
+			AND year(studentclassinfo.year) = ?
+			order by studentclassinfo.student.nameWtInitials asc
+		]]>
+	</query>
+	
+</hibernate-mapping>

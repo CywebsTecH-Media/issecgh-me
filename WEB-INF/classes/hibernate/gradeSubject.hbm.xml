@@ -1,0 +1,130 @@
+<?xml version="1.0"?>
+
+<!--
+    < ÀKURA, This application manages the daily activities of a Teacher and a Student of a School>
+
+    Copyright (C) 2012 Virtusa Corporation.
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.virtusa.akura.api.dto.GradeSubject" table="GRADE_SUBJECT">
+        <id name="gradeSubjectId" type="int" column="GRADE_SUBJECT_ID">
+            <generator class="increment" />
+        </id>
+        <many-to-one name="subject" class="com.virtusa.akura.api.dto.Subject" lazy="false">
+            <column name="SUBJECT_ID" not-null="true" />
+        </many-to-one>
+        <many-to-one name="grade" class="com.virtusa.akura.api.dto.Grade" lazy="false">
+            <column name="GRADE_ID" not-null="true" />
+        </many-to-one>
+        <property name="subjectCode" type="string">
+            <column name="SUBJECT_CODE" length="45" not-null="true" />
+        </property>
+        <property name="isOptionalSubject" type="boolean" column="IS_OPTIONAL_SUBJECT" />
+		<property name="modifiedTime" type="timestamp" generated="always">
+            <column name="MODIFIED_TIME" length="19" not-null="true"/>
+        </property>
+        <property name="maximumMark" type="int" >
+        <column name="MAXIMUM_MARKS" not-null="true"/></property>
+         <property name="gradeSubjectOrder" type="int" >
+        <column name="GRADE_SUBJECT_ORDER" not-null="false"/></property>
+        <property name="gradeSubjectConfigCode" type="string" >
+        <column name="GRADE_SUBJECT_CONFIG_CODE" length="30" not-null="true"/></property>
+    </class>
+
+     <query name="gradesubjectlist">
+        <![CDATA[
+        	from	com.virtusa.akura.api.dto.GradeSubject gradeSubject
+            where 	gradeSubject.grade.gradeId =:GradeId
+            ORDER BY gradeSubject.gradeSubjectOrder
+        ]]>
+    </query>
+    <query name="findSubjectsByGrade">
+        <![CDATA[
+        	FROM com.virtusa.akura.api.dto.GradeSubject gradeSubject
+            WHERE gradeSubject.grade.description = ? ORDER BY gradeSubject.gradeSubjectOrder
+        ]]>
+	</query>
+	<query name="findGradeSubjectByDes">
+        <![CDATA[
+        	FROM com.virtusa.akura.api.dto.GradeSubject gradeSubject
+            WHERE gradeSubject.grade.description = ? AND gradeSubject.subject.description = ?
+        ]]>
+	</query>
+	<query name="getGradeSubjectIdListByGrade">
+        <![CDATA[
+        	FROM com.virtusa.akura.api.dto.GradeSubject gradeSubject
+            WHERE gradeSubject.grade.gradeId = ?
+        ]]>
+	</query>
+	
+	<query name="getGradeCoreSubjectIdListByGrade">
+        <![CDATA[
+        	FROM com.virtusa.akura.api.dto.GradeSubject gradeSubject
+            WHERE gradeSubject.grade.gradeId = ? and gradeSubject.isOptionalSubject = ?
+        ]]>
+	</query>
+	
+<query name="findGradeSubjectListByClassGradeId">
+        <![CDATA[
+        	SELECT gradeSubject
+			FROM com.virtusa.akura.api.dto.GradeSubject gradeSubject,
+				com.virtusa.akura.api.dto.ClassGrade classGrade
+			WHERE gradeSubject.grade.gradeId = classGrade.grade.gradeId
+				AND classGrade.classGradeId = ?
+				ORDER BY gradeSubject.gradeSubjectOrder
+        ]]>
+	</query>
+
+    <query name="findSubjectsByGradeAndSubjectId">
+        <![CDATA[
+        	FROM com.virtusa.akura.api.dto.GradeSubject gradeSubject
+            WHERE gradeSubject.grade.gradeId = ? AND gradeSubject.subject.subjectId = ?
+        ]]>
+	</query>
+
+	<query name="findGradeSubjectMaxMarkById">
+        <![CDATA[
+        	SELECT gradeSubject.maximumMark
+        	FROM com.virtusa.akura.api.dto.GradeSubject gradeSubject
+            WHERE gradeSubject.gradeSubjectId = ?
+        ]]>
+	</query>
+	
+	<query name="findGradeSubjectByGradeAndSubjectId">
+        <![CDATA[
+        	
+        	FROM com.virtusa.akura.api.dto.GradeSubject gradeSubject
+            WHERE gradeSubject.subject.subjectId = ? AND gradeSubject.grade.description = ? 
+            
+        ]]>
+	</query>
+
+
+	   <query name="getCoreGradeSubject">
+		<![CDATA[
+			SELECT 
+				gradeSubject
+			FROM 
+				com.virtusa.akura.api.dto.GradeSubject gradeSubject
+			WHERE 
+				
+				gradeSubject.subjectCode IN (:subjectCode)
+		]]>
+     </query>
+	
+	
+	
+</hibernate-mapping>

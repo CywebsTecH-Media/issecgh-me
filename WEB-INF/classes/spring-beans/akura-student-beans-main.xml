@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+	<!--
+		< ÀKURA, This application manages the daily activities of a Teacher
+		and a Student of a School> Copyright (C) 2012 Virtusa Corporation.
+		This program is free software: you can redistribute it and/or modify
+		it under the terms of the GNU General Public License as published by
+		the Free Software Foundation, either version 3 of the License, or (at
+		your option) any later version. This program is distributed in the
+		hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+		the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+		PURPOSE. See the GNU General Public License for more details.
+	-->
+
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.springframework.org/schema/beans" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+                           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd
+                           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+
+	<import resource="akura-student-bean-dao-sessionfactory.xml" />
+	<import resource="akura-common-bean-dao-sessionfactory.xml" />
+
+	<bean id="studentService" class="com.virtusa.akura.student.service.StudentServiceImpl">
+		<property name="studentDao" ref="studentDao" />
+		<property name="studentDisciplineDaoTarget" ref="studentDisciplineDaoTarget" />
+		<property name="studentSportDaoTarget" ref="studentSportDaoTarget" />
+		<property name="studentClubSocietyDaoTarget" ref="studentClubSocietyDaoTarget" />
+		<property name="studentClassInfoDAO" ref="studentClassInfoDAO" />
+		<property name="studentTermMarkDao" ref="studentTermMarkDaoTarget" />
+		<property name="studentSubTermMarkDao" ref="studentSubTermMarkDao" />
+		<property name="studentDisabilityDao" ref="studentDisabilityDao" />
+		<property name="achievementDaoTarget" ref="achievementDaoTarget" />
+		<property name="studentLeaveDao" ref="studentLeaveDao" />
+		<property name="studentPrefectDao" ref="studentPrefectDao" />
+		<property name="studentScholarshipDao" ref="studentScholarshipDao" />
+		<property name="faithLifeRatingDaoTarget" ref="faithLifeRatingDaoTarget" />
+		<property name="studentTermMarkViewDao" ref="studentMarksViewDao" />
+		<property name="studentSeminarDao" ref="studentSeminarDao" />
+		<property name="seminarDao" ref="seminarDao" />
+		<property name="studentSubjectAverageViewDao" ref="studentSubjectAverageViewDao" />
+		<property name="studentSpecialEventParticipationViewDao" ref="studentSpecialEventParticipationViewDao" />
+		<property name="studentSubTermMarkViewDao" ref="studentSubTermMarkViewDao" />
+		<property name="studentTermMarkRankViewDao" ref="studentTermMarkRankViewDao" />
+		<property name="subjectAverageTermMarksDao" ref="subjectAverageTermMarksDao" />
+		<property name="studentGradeRankViewDao" ref="studentGradeRankViewDao" />
+		<property name="studentGradeSubjectRankViewDao" ref="studentGradeSubjectRankViewDao" />
+		<property name="classWiseStudentsSubjectsViewDao" ref="classWiseStudentsSubjectsViewDao" />
+		<property name="studentAnnualGradeRankDao" ref="studentAnnualGradeRankDao" />
+		<property name="examMarksDao" ref="examMarksDao" />
+		<property name="studentAssignmentMarkDao" ref="studentAssignmentMarkDao" />
+		<property name="examAdmissionDao" ref="examAdmissionDao" />
+		<property name="assignmentMarkViewDao" ref="assignmentMarkViewDao" />
+		<property name="holidayDao" ref="holidayDao" />
+
+
+		<!-- Bean definition for the ExamResultsDao -->
+		<property name="examResultsDao" ref="examResultsDao" />
+		<property name="markingFlagDao" ref="markingFlagDao" />
+		<property name="termDao" ref="termDao" />
+		<property name="classGradeDao" ref="classGradeDao" />
+		<property name="pastStudentDao" ref="pastStudentDao" />
+		<property name="studentTermMarkPerformanceDao" ref="studentTermMarkPerformanceDao"></property>
+		<property name="mediumWiseClassSubjectAverageViewDao" ref="mediumWiseClassSubjectAverageViewDao" />
+
+
+		<property name="studentSuspendDao" ref="studentSuspendDao" />
+		<property name="userLoginDao" ref="userLoginDao"></property>
+		<property name="studentTempLeaveDao" ref="studentTempLeaveDao"></property>
+
+
+		<property name="studentParentDao" ref="studentParentDaoTarget" />
+
+		<property name="subjectAverageDao" ref="subjectAverageDao" />
+		<property name="studentTermMarksSummeryDao" ref="studentTermMarksSummeryDao" />
+	</bean>
+
+	<bean id="studentProgressBarService"
+		class="com.virtusa.akura.student.service.StudentProgressBarServiceImpl">
+		<property name="faithLifeRatingDaoTarget" ref="faithLifeRatingDaoTarget" />
+		<property name="studentTermMarksSummeryDao" ref="studentTermMarksSummeryDao" />
+	</bean>
+
+	<bean id="parentService" class="com.virtusa.akura.student.service.ParentServiceImpl">
+		<property name="parentDao" ref="parentDaoTarget" />
+		<property name="donationDao" ref="donationDaoTarget" />
+		<property name="parentDonationDao" ref="parentDonationDaoTarget" />
+		<property name="studentParentDao" ref="studentParentDaoTarget" />
+	</bean>
+	
+	<bean id="fileService" class="com.virtusa.akura.student.service.FileServiceImpl">
+		<property name="importExportFileDao" ref="importExportFileDao" />	
+		<property name="studentTermMarkDao" ref="studentTermMarkDaoTarget" />	
+		<property name="gradeSubjectDao" ref="gradeSubjectDao" />	
+		<property name="studentTermMarksSummeryDao" ref="studentTermMarksSummeryDao" />	
+		<property name="classGradeDao" ref="classGradeDao" />	
+		<property name="studentClassInfoDAO" ref="studentClassInfoDAO" />
+		<property name="termDao" ref="termDao" />
+		<property name="markingFlagDao" ref="markingFlagDao" />	
+	</bean>
+	
+	
+</beans>

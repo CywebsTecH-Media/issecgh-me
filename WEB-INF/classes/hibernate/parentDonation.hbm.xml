@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+
+<!--
+    < ÀKURA, This application manages the daily activities of a Teacher and a Student of a School>
+
+    Copyright (C) 2012 Virtusa Corporation.
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.virtusa.akura.api.dto.ParentDonation" table="PARENT_DONATION">
+		<id name="parentDonationId" type="int" column="PARENT_DONATION_ID">
+			<generator class="increment" />
+		</id>
+		<many-to-one name="donation" class="com.virtusa.akura.api.dto.Donation"
+			fetch="select">
+			<column name="DONATION_ID" not-null="true" unique="true" />
+		</many-to-one>
+		<many-to-one name="parent" class="com.virtusa.akura.api.dto.Parent"
+			fetch="select">
+			<column name="PARENT_ID" not-null="true" unique="true" />
+		</many-to-one>
+		<property name="modifiedTime" column="MODIFIED_TIME" type="timestamp"
+			not-null="true" generated="always" />
+	</class>
+	
+	<query name="getParentDonationsByDonationId">
+			<![CDATA[
+				FROM com.virtusa.akura.api.dto.ParentDonation parentDonation
+				WHERE parentDonation.donation.donationId = ?
+			]]>
+	</query>
+	
+</hibernate-mapping>

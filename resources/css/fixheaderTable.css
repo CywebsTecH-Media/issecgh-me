@@ -1,0 +1,65 @@
+/* CSS Document */
+
+.fixedColumn .fixedTable td {
+	color: #000000;
+	background-color: #98b5d7;
+	font-size: 12px;
+	font-weight: normal;
+}
+.fixedHead td, .fixedFoot td {
+	font-weight:bold;
+	background-color:#7AB6DA;
+	color:#FFFFFF;
+	text-align:left;
+	border-bottom:2px solid #395A6D;
+	padding: 0 0 1px 2px;
+	height:38px;
+}
+.fixedTable td {
+	font-size: 12px;
+
+	padding:  0 0 1px 4px;
+	text-align: left;
+	border-bottom: 1px solid #CDCDCD;
+	
+	
+}
+.fixedTable td input {
+	padding: 0 0 1px 2px;
+	width: 25px;
+	text-align:center;
+}
+
+.fixedTable tr.odd {
+		background-color:#EEEEEE;
+}
+.fixedTable tr.even {
+	background-color:#FFFFFF;
+}
+
+.fixedTable td.center {
+	text-align:center;
+}
+.fixedContainer .fixedTable td {
+	text-align:center;
+	padding: 0 0 1px 2px;
+}
+.FixedTables .fixedTable td {
+	text-align:left;
+	padding: 0 0 1px 2px;
+}
+.fixedColumn.fixedHead td{
+	padding:  0 0px 1px 10px;
+	padding-right : 6px\0/; /* IE8 hack, this hack must go after the rules for all another browser */
+}
+
+/* 2 col div css */
+	#col1 {
+    display: inline-block;    
+    width:70%;
+	}
+	#col2 {
+    display: inline-block;   
+    width:25%;
+	float:"right";	
+	}

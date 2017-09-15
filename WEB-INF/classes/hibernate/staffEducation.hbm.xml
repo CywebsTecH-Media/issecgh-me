@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+
+<!--
+    < ÀKURA, This application manages the daily activities of a Teacher and a Student of a School>
+
+    Copyright (C) 2012 Virtusa Corporation.
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.virtusa.akura.api.dto.StaffEducation" table="STAFF_EDUCATIONAL">
+		<id name="staffEducationId" type="int" column="STAFF_EDUCATIONAL_ID" >
+            <generator class="increment" />
+        </id>
+		<property name="description" type="string" column="DESCRIPTION" />
+		<property name="year" type="date" column="YEAR" />
+		<property name="status" type="byte" column="STATUS" />
+		<property name="experience" type="string" column="EXPERIENCE" />
+		<property name="modifiedTime" type="timestamp" column="MODIFIED_TIME"
+			not-null="true" generated="always"/>
+		<property name="instituteId" type="java.lang.Integer" column="INSTITUTE_ID" not-null = "false"/> 
+
+	    <many-to-one name="staff" class="com.virtusa.akura.api.dto.Staff" fetch="select">
+            <column name="STAFF_ID" not-null="true" unique="true"/>
+        </many-to-one>
+        <many-to-one name="educationalQualification" class="com.virtusa.akura.api.dto.EducationalQualification" fetch="select" lazy="false" >
+            <column name="EDUCATIONAL_QUAL_ID" not-null="true" unique="true"/>
+        </many-to-one>  
+        
+    
+        
+        
+	</class>
+
+	<query name="staffEducationSearchWithStaffId">
+			<![CDATA[
+			from	com.virtusa.akura.api.dto.StaffEducation
+			where	(staff.staffId = ?)
+			]]>
+	</query>
+
+	<query name="getSubjectTeachersByQualificaion">
+			<![CDATA[
+			select 	staffEdu.staff
+			from	com.virtusa.akura.api.dto.StaffEducation staffEdu
+			where	staffEdu.educationalQualification.titleId = ?
+					AND (? = '0' OR staffEdu.educationalQualification.studyArea = ?)
+					AND staffEdu.educationalQualification.isSpecial = ?
+					AND staffEdu.staff.dateOfDepature = null
+			]]>
+	</query>
+
+<sql-query name = "getStaffEducationListWithIntitute">
+	<![CDATA[
+		SELECT CONCAT(EDU_QUAL.DESCRIPTION, IF(INSTITUTE.INSTITUTE_ID IS NULL , "", CONCAT(" - ", INSTITUTE.INSTITUTE_NAME)))
+		FROM STAFF_EDUCATIONAL STAFF_EDU 
+		LEFT JOIN EDUCATIONAL_QUALIFICATION EDU_QUAL ON STAFF_EDU.EDUCATIONAL_QUAL_ID = EDU_QUAL.EDUCATIONAL_QUAL_ID
+		LEFT JOIN INSTITUTE ON STAFF_EDU.INSTITUTE_ID = INSTITUTE.INSTITUTE_ID
+		WHERE STAFF_EDU.STAFF_ID = ?
+	]]>
+</sql-query>
+
+</hibernate-mapping>

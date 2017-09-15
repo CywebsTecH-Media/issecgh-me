@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CommonEmptyReport" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="message" class="java.lang.String"/>
+	<field name="message" class="java.lang.String"/>
+	<title>
+		<band height="176" splitType="Stretch">
+			<staticText>
+				<reportElement x="50" y="34" width="465" height="38" forecolor="#666666"/>
+				<textElement>
+					<font fontName="SansSerif" size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[No Matching Data To Generate The Report]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="50" y="92" width="358" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{message}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+</jasperReport>

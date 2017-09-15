@@ -1,0 +1,167 @@
+<?xml version="1.0"?>
+
+<!--
+    < ÀKURA, This application manages the daily activities of a Teacher and a Student of a School>
+
+    Copyright (C) 2012 Virtusa Corporation.
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.virtusa.akura.api.dto.StudentTermMark" table="STUDENT_TERM_MARK">
+		<id name="studentTermMarkId" type="int" column="STUDENT_TERM_MARKS_ID">
+			<generator class="increment" />
+		</id>
+		<property name="gradeSubjectId" type="int">
+			<column name="GRADE_SUBJECT_ID" not-null="true" />
+		</property>
+		<property name="studentClassInfoId" type="int">
+			<column name="STUDENT_CLASS_INFO_ID" not-null="true" />
+		</property>
+		<many-to-one name="meritAward" class="com.virtusa.akura.api.dto.MeritAward"
+			fetch="select">
+			<column name="MERIT_AWARDS_ID" />
+		</many-to-one>
+		<property name="termId" type="int">
+			<column name="TERM_ID" not-null="true" />
+		</property>
+		<property name="marks" type="java.lang.Float">
+			<column name="MARKS" precision="12" scale="0" />
+		</property>
+		<property name="comments" type="string">
+			<column name="COMMENTS" length="45" />
+		</property>
+		<property name="modifiedTime" type="timestamp" generated="always">
+			<column name="MODIFIED_TIME" length="19" not-null="true" />
+		</property>
+		<property name="absent" type="boolean">
+			<column name="IS_ABSENT" />
+		</property>
+		<property name="editMarkState" type="boolean">
+			<column name="EDIT_MARK_STATE"/>
+		</property>
+	</class>
+	<sql-query name="getSelectedSubjectMarks" cacheable="false"
+		callable="false">
+		<return alias="result" class="com.virtusa.akura.api.dto.StudentTermMark"
+			lock-mode="read" />
+   	<![CDATA[
+			Select * from STUDENT_TERM_MARK
+  			Where TERM_ID = ? and STUDENT_CLASS_INFO_ID = ?
+	]]>
+	</sql-query>
+	<query name="studenttermmarksofclasssubjects">
+			<![CDATA[
+			Select	termmark
+			from	com.virtusa.akura.api.dto.GradeSubject gradeSubject,
+					com.virtusa.akura.api.dto.StudentClassInfo classinfo,
+					com.virtusa.akura.api.dto.StudentTermMark termmark
+
+			where	((gradeSubject.grade.gradeId = ?)
+            		and (classinfo.classGrade.classGradeId = ?)
+            		and termmark.gradeSubjectId = gradeSubject.gradeSubjectId
+            		and termmark.studentClassInfoId = classinfo.studentClassInfoId)
+			]]>
+	</query>
+
+	<query name="getSelectedSubjectMarksByClass">
+			<![CDATA[
+			Select	termmark
+			from	com.virtusa.akura.api.dto.StudentClassInfo classinfo,
+					com.virtusa.akura.api.dto.StudentTermMark termmark
+
+
+			where	((classinfo.classGrade.classGradeId = ?)
+            		and (termmark.termId = ?)
+            		and (year(classinfo.year) = ?)
+            		and termmark.studentClassInfoId = classinfo.studentClassInfoId)
+			]]>
+	</query>
+
+	<query name="getTermMarksListByTermMarkID">
+			<![CDATA[
+			Select	termmark
+			from com.virtusa.akura.api.dto.StudentTermMark termmark
+
+				where	termmark.studentTermMarkId in (:termMarkIdList)
+			]]>
+	</query>
+
+	<query name="studenttermmarksofSavedStudents">
+			<![CDATA[
+			Select	termmark
+			from com.virtusa.akura.api.dto.StudentTermMark termmark
+
+			where	(termmark.gradeSubjectId = ?
+            		and termmark.studentClassInfoId = ?)
+			]]>
+	</query>
+
+	<query name="viewStudentTermMarkByStudentIdYear">
+			<![CDATA[
+			Select	stm
+			from	com.virtusa.akura.api.dto.StudentClassInfo sci,
+					com.virtusa.akura.api.dto.StudentTermMark stm
+			where	sci.student.studentId = ? and year(sci.year) = ?
+					and stm.studentClassInfoId = sci.studentClassInfoId
+			]]>
+	</query>
+	<query name="findStuTermMarks">
+			<![CDATA[
+			SELECT	stm.marks
+			FROM	com.virtusa.akura.api.dto.StudentTermMark stm
+			WHERE	stm.studentClassInfoId =? AND
+					stm.gradeSubjectId = ? AND
+					stm.termId = ?
+			]]>
+	</query>
+	<query name="isExistMark">
+			<![CDATA[
+			SELECT stm.studentTermMarkId
+			FROM com.virtusa.akura.api.dto.StudentTermMark stm
+			WHERE stm.studentClassInfoId = ? AND
+			stm.gradeSubjectId = ? AND stm.termId = ? 
+			]]>
+	</query>
+	
+	<query name="viewStudentTermMarkByStudentIdYearAndTermId">
+			<![CDATA[
+			Select	stm
+			from	com.virtusa.akura.api.dto.StudentClassInfo sci,
+					com.virtusa.akura.api.dto.StudentTermMark stm
+			where	sci.student.studentId = ? and year(sci.year) = ? and stm.termId= ?
+					and stm.studentClassInfoId = sci.studentClassInfoId
+			]]>
+	</query>
+	
+	<query name="getSelectedSubjectTermByClass">
+			<![CDATA[
+			SELECT stm
+			FROM com.virtusa.akura.api.dto.StudentTermMark stm
+			WHERE stm.studentClassInfoId = ? AND
+			stm.gradeSubjectId = ? AND stm.termId = ? 
+			]]>
+	</query>
+
+	<query name="viewStudentTermMarkObj">
+			<![CDATA[
+			FROM	com.virtusa.akura.api.dto.StudentTermMark stm
+			WHERE	stm.studentClassInfoId =? AND
+					stm.gradeSubjectId = ? AND
+					stm.termId = ?
+			]]>
+	</query>
+	
+</hibernate-mapping>

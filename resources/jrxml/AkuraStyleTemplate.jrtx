@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE jasperTemplate PUBLIC "-//JasperReports//DTD Template//EN" "http://jasperreports.sourceforge.net/dtds/jaspertemplate.dtd">
+
+<jasperTemplate>
+	<style name="Frame_color" mode="Opaque" backcolor="#356BA7"/>
+	<style name="Text_header" forecolor="#356BA7"/>
+	<style name="Text_sub_title" forecolor="#0066FF"/>
+	<style name="Column_header_bg" mode="Opaque" backcolor="#99CCFF"/>
+	<style name="Column_bg_ash" mode="Opaque" backcolor="#CCCCCC"/>
+	<style name="Text_subReport_header" forecolor="#0033CC"/>
+	<style name="Text_and_ash_bg" mode="Opaque" forecolor="#006699" backcolor="#E6E6E6"/>
+	<style name="Page_footer_bg"  backcolor="#006699" mode="Opaque"/>
+</jasperTemplate>

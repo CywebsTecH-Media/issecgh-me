@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    < ÀKURA, This application manages the daily activities of a Teacher and a Student of a School>
+
+    Copyright (C) 2012 Virtusa Corporation.
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+<class name="com.virtusa.akura.api.dto.BulkUploadHistory" table="BULK_UPLOAD_HISTORY">
+	<id name="bulkUplopadHistoryId" type="int" column="BULK_UPLOAD_HISTORY_ID">
+            <generator class="increment" />
+    </id>
+    <property name="bulkUplopadCategoryId" type="int">
+			<column name="BULK_UPLOAD_CATEGORY_ID" not-null="true" />
+			
+	</property>
+	<property name="userLoginId" type="int">
+			<column name="USER_LOGIN_ID" not-null="true" />
+			
+	</property>
+	<property name="fileName" type="string">
+            <column name="FILE_NAME" length="45" not-null="true" />
+    </property>
+    <property name="isDeleted" type="string">
+            <column name="IS_DELETED" length="6" not-null="true" />
+    </property>
+</class>
+
+<sql-query name="bulkFileSearch">
+
+<![CDATA[
+	SELECT
+	buh.FILE_NAME
+	
+	FROM 
+	
+	BULK_UPLOAD_HISTORY buh
+	WHERE 
+	MODIFIED_TIME < DATE_SUB(NOW(), INTERVAL 5 DAY) and IS_DELETED = ? 
+        	
+        ]]>
+	</sql-query>
+	
+<sql-query name="updateIsDelete">
+
+<![CDATA[
+	
+	UPDATE BULK_UPLOAD_HISTORY
+	SET IS_DELETED = 'true'
+	WHERE FILE_NAME = ?;
+		        	
+        ]]>
+	</sql-query>
+	
+<sql-query name="disableSafeUpdate">
+
+<![CDATA[
+	
+	SET SQL_SAFE_UPDATES= 0;
+		        	
+        ]]>
+	</sql-query>
+	
+<sql-query name="enableSafeUpdate">
+
+<![CDATA[
+	
+	SET SQL_SAFE_UPDATES= 1;
+		        	
+        ]]>
+	</sql-query>
+	
+<query name="getBulkFile">
+<![CDATA[
+								
+	FROM com.virtusa.akura.api.dto.BulkUploadHistory bulkUploadHistory
+	WHERE bulkUploadHistory.isDeleted = ?
+			]]>
+</query>
+
+</hibernate-mapping>

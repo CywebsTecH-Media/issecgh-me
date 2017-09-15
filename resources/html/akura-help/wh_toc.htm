@@ -1,0 +1,207 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+  <meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+	<link rel="StyleSheet" href="css/dtree.css" type="text/css" />
+	<script type="text/javascript" src="js/dtree.js"></script>
+
+  <style type="text/css">
+    * html body{ /*IE6 hack*/
+    padding: 0 0 0 0;
+    }
+
+    body{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    overflow: hidden;
+    height: 100%;
+    max-height: 100%;
+    }
+
+    #framecontent{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    #width:100%;
+    height: 100%;
+    overflow: auto;
+    border-right:1px dashed #d8d8d8;
+    }
+  </style>
+</head>
+<body>
+  <div id="framecontent">
+    <div class="dtree" style="margin:0px;padding:0px;padding-left:6px;padding-top:6px;">
+    	<script type="text/javascript">
+    		<!--
+    		d = new dTree('d');
+    		d.config.target="right";
+        d.config.useCookies=false;
+        
+d.add(0,-1,'ABM SMS Help','topics/other/AboutAkura.htm');
+  d.add('1','0',"ABM SMS Help",'topics/other/AboutAkura.htm');
+    d.add('1.1','1',"Licensing Information",'topics/other/LicensingInformation.htm');
+    d.add('1.2','1',"ABM SMS Support",'topics/other/AKURASupport.htm');
+  d.add('2','0',"Logging in to ABM SMS",'topics/other/LoggingToAKURA.htm');
+    d.add('2.1','2',"Manage Security Questions",'topics/admin/manageSecurityQuestionsHelp.html');
+    d.add('2.2','2',"Change Password",'topics/admin/changePasswordHelp.html');
+    d.add('2.3','2',"Answer Security Questions",'topics/admin/answerSecurityQuestions.html');
+    d.add('2.4','2',"Forgot Username",'topics/admin/forgotUsernameHelp.html');
+    d.add('2.5','2',"Forgot Password",'topics/admin/forgotPasswordHelp.html');
+    d.add('2.6','2',"Enter Verification Code",'topics/student/enterverificationcode.html');
+  d.add('3','0',"Staff Module",'topics/staff/StaffModule.htm');
+    d.add('3.1','3',"Search Staff Member",'topics/staff/searchStaffMemberHelp.html');
+      d.add('3.1.1','3.1',"Search Staff Member",'topics/staff/searchStaffMemberHelp.html');
+        d.add('3.1.1.1','3.1.1',"Edit Staff Member",'topics/staff/staffMemberDetailsHelp.html');
+          d.add('3.1.1.1.1','3.1.1.1',"Staff Member Details",'topics/staff/staffMemberDetailsHelp.html');
+          d.add('3.1.1.1.2','3.1.1.1',"Staff Member Qualifications ",'topics/staff/staffMemberQualificationsHelp.html');
+          d.add('3.1.1.1.3','3.1.1.1',"Extra Curricular Activities",'topics/staff/staffExtraCurricularHelp.html');
+          d.add('3.1.1.1.4','3.1.1.1',"Staff Leave",'topics/staff/staffLeaveHelp.html');
+        d.add('3.1.1.2','3.1.1',"Delete Staff Member",'topics/staff/DeleteStaffHelp.html');
+        d.add('3.1.1.3','3.1.1',"Staff Departure",'topics/staff/TerminateStaffHelp.html');
+        d.add('3.1.1.4','3.1.1',"Rejoin Staff Member",'topics/staff/RejoinStaffHelp.html');
+      d.add('3.1.2','3.1',"Add New Staff Members",'topics/staff/AddNewStaffHelp.html');
+    d.add('3.2','3',"Teacher Subject Allocation",'topics/staff/teacherSubjectAllocationHelp.html');
+    d.add('3.3','3',"Class Teacher Allocation",'topics/staff/classTeacherAllocationHelp.html');
+    d.add('3.4','3',"Section Head Allocation",'topics/staff/sectionHeadAllocationHelp.html');
+    d.add('3.5','3',"Staff Leave Approval",'topics/staff/staffLeaveApprovalHelp.html');
+  d.add('4','0',"Student Module",'topics/student/studentModule.htm');
+    d.add('4.1','4',"Student Search",'topics/student/searchStudentHelp.html');
+      d.add('4.1.1','4.1',"Student Search",'topics/student/editstudents.htm');
+        d.add('4.1.1.1','4.1.1',"Edit Student",'topics/student/editstudents.htm');
+          d.add('4.1.1.1.1','4.1.1.1',"Student Details",'topics/student/studentDetailsHelp.html');
+          d.add('4.1.1.1.2','4.1.1.1',"Academic Life",'topics/student/academicLifeHelp.html');
+          d.add('4.1.1.1.3','4.1.1.1',"Religious Activities",'topics/student/faithLifeHelp.html');
+          d.add('4.1.1.1.4','4.1.1.1',"Co-Curriculars",'topics/student/coCurricularHelp.html');
+          d.add('4.1.1.1.5','4.1.1.1',"Student Discipline",'topics/student/studentDisciplineHelp.html');
+          d.add('4.1.1.1.6','4.1.1.1',"Student Leave",'topics/student/studentLeaveHelp.html');
+          d.add('4.1.1.1.7','4.1.1.1',"Parent Details",'topics/student/parentDetailsHelp.html');
+          d.add('4.1.1.1.8','4.1.1.1',"Attendance Reporting System",'topics/student/studentWiseAttendanceReportHelp.html');
+          d.add('4.1.1.1.9','4.1.1.1',"Student Progress Summary",'topics/student/studentProgressHelp.html');
+          d.add('4.1.1.1.10','4.1.1.1',"Inform the Teacher",'topics/student/informTheTeacher.html');
+        d.add('4.1.1.2','4.1.1',"Delete Student",'topics/student/deleteStudentHelp.html');
+        d.add('4.1.1.3','4.1.1',"Terminate Student",'topics/student/terminateStudentHelp.html');
+        d.add('4.1.1.4','4.1.1',"Activate Temporary Student Leave",'topics/student/activateTempLeaveHelp.html');
+        d.add('4.1.1.5','4.1.1',"Activate Suspended Student",'topics/student/activateSuspendedHelp.html');
+      d.add('4.1.2','4.1',"Add New Student",'topics/student/addNewStudentHelp.html');
+    d.add('4.2','4',"Student Class",'topics/student/studentClassHelp.html');
+    d.add('4.3','4',"Student Subjects",'topics/student/studentSubjectHelp.html');
+    d.add('4.4','4',"Student Marks Entry",'topics/student/studentMarksHelp.html');
+    d.add('4.5','4',"Student Exam Marks Entry",'topics/student/studentExamMarksHelp.html');
+    d.add('4.6','4',"Student Assignment Marks",'topics/student/studentAssignmentMarksHelp.html');
+  d.add('5','0',"School Module",'topics/admin/schoolModule.htm');
+    d.add('5.1','5',"Add/Update School Details",'topics/admin/schoolDetailsHelp.html');
+  d.add('6','0',"Reference Module",'topics/admin/referenceModule.htm');
+    d.add('6.1','6',"Common",'topics/admin/categoryCommon.htm');
+      d.add('6.1.1','6.1',"Manage Classes",'topics/admin/manageSchoolClassHelp.html');
+      d.add('6.1.2','6.1',"Manage Grade",'topics/admin/manageGradeHelp.html');
+      d.add('6.1.3','6.1',"Manage Study Streams",'topics/admin/manageStudyStreamHelp.html');
+      d.add('6.1.4','6.1',"Manage Subjects",'topics/admin/manageSubjectHelp.html');
+      d.add('6.1.5','6.1',"Manage Grade Subjects",'topics/admin/manageGradeSubjectsHelp.html');
+      d.add('6.1.6','6.1',"Manage Race",'topics/admin/manageRaceHelp.html');
+      d.add('6.1.7','6.1',"Manage Seminars",'topics/admin/manageSeminarHelp.html');
+      d.add('6.1.8','6.1',"Manage Clubs & Societies",'topics/admin/manageClubSocietyHelp.html');
+      d.add('6.1.9','6.1',"Manage Membership Positions",'topics/admin/managePositionHelp.html');
+      d.add('6.1.10','6.1',"Manage Sports",'topics/admin/createSportHelp.html');
+      d.add('6.1.11','6.1',"Manage Sports Age Groups",'topics/admin/manageSportageGroupsHelp.html');
+      d.add('6.1.12','6.1',"Manage Sports Categories",'topics/admin/createSportCategoryHelp.html');
+      d.add('6.1.13','6.1',"Manage Cities",'topics/admin/manageCityHelp.html');
+      d.add('6.1.14','6.1',"Manage Religion",'topics/admin/manageReligionHelp.html');
+    d.add('6.2','6',"Student",'topics/admin/categoryStudent.htm');
+      d.add('6.2.1','6.2',"Manage Study Medium",'topics/admin/manageStudyMediumHelp.html');
+      d.add('6.2.2','6.2',"Manage Nationality",'topics/admin/manageNationalityHelp.html');
+      d.add('6.2.3','6.2',"Manage House",'topics/admin/createHouseHelp.html');
+      d.add('6.2.4','6.2',"Manage Method of Travel",'topics/admin/manageMethodOfTravelHelp.html');
+      d.add('6.2.5','6.2',"Manage Prefect Types",'topics/admin/managePrefectTypeHelp.html');
+      d.add('6.2.6','6.2',"Manage Scholarship",'topics/admin/manageScholarshipHelp.html');
+      d.add('6.2.7','6.2',"Manage Warning Levels",'topics/admin/manageWarningLevelHelp.html');
+      d.add('6.2.8','6.2',"Manage Special Event",'topics/admin/manageSpecialEventsHelp.html');
+      d.add('6.2.9','6.2',"Manage Grading Information",'topics/admin/manageGradingInformationHelp.html');
+      d.add('6.2.10','6.2',"Manage Exams",'topics/admin/manageExamHelp.html');
+      d.add('6.2.11','6.2',"Manage Exam Subjects",'topics/admin/manageExamSubjectsHelp.html');
+      d.add('6.2.12','6.2',"Manage Assignments",'topics/admin/manageAssignmentHelp.html');
+    d.add('6.3','6',"Staff",'topics/admin/categoryStaff.htm');
+      d.add('6.3.1','6.3',"Manage Sections",'topics/admin/manageSectionHelp.html');
+      d.add('6.3.2','6.3',"Manage Civil Status",'topics/admin/manageCivilStatusHelp.html');
+      d.add('6.3.3','6.3',"Manage Staff Category Information",'topics/admin/manageStaffCategoryHelp.html');
+      d.add('6.3.4','6.3',"Manage Appointment Nature",'topics/admin/manageAppointmentNatureHelp.html');
+      d.add('6.3.5','6.3',"Manage Appointment Classification",'topics/admin/manageAppointmentClassificationHelp.html');
+      d.add('6.3.6','6.3',"Manage Staff Service Category",'topics/admin/manageStaffServiceCategoryHelp.html');
+      d.add('6.3.7','6.3',"Manage Academic Title",'topics/admin/manageTitleHelp.html');
+      d.add('6.3.8','6.3',"Manage Educational Qualifications",'topics/admin/educationalQualificationHelp.html');
+      d.add('6.3.9','6.3',"Manage Professional Qualifications",'topics/admin/professionalQualificationHelp.html');
+      d.add('6.3.10','6.3',"Manage Institute",'topics/admin/instituteHelp.html');
+      d.add('6.3.11','6.3',"Manage Staff Leave Types",'topics/admin/manageStaffLeaveTypeHelp.html');
+    d.add('6.4','6',"School",'topics/admin/categorySchool.htm');
+      d.add('6.4.1','6.4',"Manage Provinces",'topics/admin/manageProvinceHelp.html');
+      d.add('6.4.2','6.4',"Manage Districts",'topics/admin/manageDistrictHelp.html');
+    d.add('6.5','6',"Parent",'topics/admin/categoryParent.htm');
+      d.add('6.5.1','6.5',"Manage Employment Status",'topics/admin/manageEmploymentStatusHelp.html');
+      d.add('6.5.2','6.5',"Manage Working Segment",'topics/admin/manageWorkingSegmentHelp.html');
+      d.add('6.5.3','6.5',"Manage Donation Type",'topics/admin/manageDonationTypeHelp.html');
+    d.add('6.6','6',"Other",'topics/admin/categoryOther.htm');
+      d.add('6.6.1','6.6',"Manage Holidays",'topics/admin/manageCalendarHelp.html');
+      d.add('6.6.2','6.6',"Manage News and Events",'topics/admin/managePublicationHelp.html');
+      d.add('6.6.3','6.6',"View Audit Details",'topics/admin/AuditDetailsHelp.html');
+  d.add('7','0',"Reporting Module",'topics/reporting/reportingModule.htm');
+    d.add('7.1','7',"Student General Reports",'topics/reporting/generalReportsHelp.html');
+      d.add('7.1.1','7.1',"Student Summary Report",'topics/reporting/studentSummaryReportsHelp.html');
+      d.add('7.1.2','7.1',"Student Report Card",'topics/reporting/studentReportCard.html');
+      d.add('7.1.3','7.1',"Average Term Test Marks Evaluation",'topics/reporting/avgTermTestMarksClassWiseReportsHelp.html');
+      d.add('7.1.4','7.1',"Grade Wise Student Term Marks Evaluation",'topics/reporting/studentPerformanceReportsHelp.html');
+      d.add('7.1.5','7.1',"Class Wise Term Exam Absentees",'topics/reporting/examAbsentClassWiseReportsHelp.html');
+      d.add('7.1.6','7.1',"Class Wise Students Report",'topics/reporting/classWiseStudentReportsHelp.html');
+      d.add('7.1.7','7.1',"Class Wise Student Disciplinary Action Report",'topics/reporting/studentDisciplinaryReportsHelp.html');
+      d.add('7.1.8','7.1',"Class Wise Student Marks Sheet",'topics/reporting/generateClassWiseStudentMarksSheetReportHelp.html');
+      d.add('7.1.9','7.1',"Exam Results Report",'topics/reporting/examResultsReportHelp.html');
+      d.add('7.1.10','7.1',"Prize List",'topics/reporting/prizeTopListReportHelp.html');
+      d.add('7.1.11','7.1',"Student Scholarship Report",'topics/reporting/studentScholarshipReport.html');
+    d.add('7.2','7',"Student Attendance Reports",'topics/reporting/attendanceReportsHelp.html');
+      d.add('7.2.1','7.2',"Student Wise Attendance Report",'topics/reporting/generateStudentWiseAttendanceReportHelp.html');
+      d.add('7.2.2','7.2',"Students Attendance On Special Events ",'topics/reporting/generateSpecialEventAttendanceReportHelp.html');
+      d.add('7.2.3','7.2',"Student Late Comers Attendees Report",'topics/reporting/generateStudentEarlyLateAttendiesReportHelp.html');
+      d.add('7.2.4','7.2',"Per Day Class Wise Attendance Report ",'topics/reporting/perDayClassWiseAttendanceReportHelp.html');
+      d.add('7.2.5','7.2',"Annual Student Attendance Report",'topics/reporting/annualStudentAttendanceReportHelp.html');
+      d.add('7.2.6','7.2',"Grade-Wise Best Student Attendance",'topics/reporting/gradeWiseBestStudentAttendanceReportHelp.html');
+    d.add('7.3','7',"Staff General Reports",'topics/reporting/staffGeneralReportHelp.html');
+      d.add('7.3.1','7.3',"Staff Profile Report",'topics/reporting/staffProfileReportsHelp.html');
+      d.add('7.3.2','7.3',"Customized Staff Related Reports",'topics/reporting/customizedStaffGeneralReportHelp.html');
+    d.add('7.4','7',"Staff Attendance Reports",'topics/reporting/attendanceStaffReportsHelp.html');
+      d.add('7.4.1','7.4',"Staff Wise Attendance Report",'topics/reporting/generateTeacherWiseAttendanceReportHelp.html');
+      d.add('7.4.2','7.4',"Staff Wise Present and Absent Days Report",'topics/reporting/generateTeacherWiseAbsentDaysHelp.html');
+      d.add('7.4.3','7.4',"Staff Late Comers Attendees Report",'topics/reporting/generateTeacherEarlyLateAttendiesReportHelp.html');
+      d.add('7.4.4','7.4',"Per Day Staff Category Wise Attendance Report",'topics/reporting/perDayStaffCategoryWiseAttendanceReportHelp.html');
+ //   d.add('7.5','7',"SMS Summary Reports",'topics/reporting/SMSSummaryreport.html');
+ //    d.add('7.5.1','7.5',"User Wise Subscription Report",'topics/reporting/userWiseSMSSubscriptionReportHelp.html');
+ //     d.add('7.5.2','7.5',"Monthly Wise Subscription Report",'topics/reporting/monthWiseSMSSubscriptionReportHelp.html');
+  d.add('8','0',"Attendance Module",'topics/attendance/attendanceModule.htm');
+    d.add('8.1','8',"Student Attendance",'topics/attendance/manualAttendanceHelp.html');
+    d.add('8.2','8',"Staff Attendance",'topics/attendance/teacherAttendanceHelp.html');
+    d.add('8.3','8',"Self Staff Attendance",'topics/attendance/selfStaffAttendanceHelp.html');
+    d.add('8.4','8',"Special Events Attendance",'topics/attendance/specialEventsAttendanceHelp.html');
+    d.add('8.5','8',"Attendance Dashboard",'topics/attendance/attendanceDashboard.htm');
+    d.add('8.6','8',"Attendance File Upload",'topics/attendance/attendanceFileUpload.htm');
+  d.add('9','0',"User Management Module",'topics/admin/usermanagementlModule.htm');
+    d.add('9.1','9',"Manage User Roles ",'topics/admin/manageUserRoleHelp.html');
+      d.add('9.1.1','9.1',"Add/Update User Role Details",'topics/admin/userRoleDetailsHelp.html');
+    d.add('9.2','9',"Manage System Users",'topics/admin/manageSystemSystemUsersHelp.html');
+      d.add('9.2.1','9.2',"Add/Update System User Details",'topics/admin/createSystemUserHelp.html');
+  d.add('10','0',"SMS Module",'topics/other/SMS_Module.htm');
+    d.add('10.1','10',"Student SMS",'topics/other/StudentSMS.htm');
+   // d.add('10.2','10',"Staff SMS",'topics/other/StaffSMS.htm');
+  d.add('11','0',"Bulk Upload Module",'topics/bulk/BulkUploadModule.htm'); 
+    d.add('11.1','11',"Staff Uploads",'topics/bulk/BulkStaffUpload.htm');  
+    d.add('11.2','11',"Student Uploads",'topics/bulk/BulkStudentAddNewStudentsParents.htm');
+    d.add('11.3','11',"Reference Uploads",'topics/bulk/BulkReferenceAddClassGradeSubject.htm');
+    d.add('11.4','11',"User Login Uploads",'topics/bulk/BulkParenLoginUpload.htm');
+    d.add('11.5','11',"Templates",'topics/bulk/BulkTemplates.htm');    
+          document.write(d);
+    		//-->
+    	</script>
+    </div>
+  </div>
+</body>
+</html>

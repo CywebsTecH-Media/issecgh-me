@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<!--
+		< ÀKURA, This application manages the daily activities of a Teacher
+		and a Student of a School> Copyright (C) 2012 Virtusa Corporation.
+		This program is free software: you can redistribute it and/or modify
+		it under the terms of the GNU General Public License as published by
+		the Free Software Foundation, either version 3 of the License, or (at
+		your option) any later version. This program is distributed in the
+		hope that it will be useful, but WITHOUT ANY WARRANTY; without even
+		the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+		PURPOSE. See the GNU General Public License for more details.
+	-->
+
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.virtusa.akura.api.dto.StudentSubjectAverageViewDTO"
+		table="CLASS_GRADE_AVERAGE">
+		<composite-id>
+			<key-property name="studentId" column="STUDENT_ID" type="int" />
+			<key-property name="term" column="TERM" type="string" />
+			<key-property name="year" column="YEAR" type="date" />
+			<key-property name="subject" column="SUBJECT" type="string" />
+			<key-property name="termId" column="TERM_ID" type="int" />
+		</composite-id>
+		<property name="marks" column="MARKS" type="double" insert="false"
+			update="false" />
+		<property name="absent" type="boolean">
+			<column name="IS_ABSENT" />
+		</property>
+		<property name="classDescription" column="CLASS" type="string" />
+		<property name="gradeDescription" column="GRADE" type="string" />
+		<property name="classAverage" column="CLASS_AVERAGE" type="double" />
+		<property name="gradeAverage" column="GRADE_AVERAGE" type="double" />
+	</class>
+
+	<query name="studentSubjectTermMarks">
+			<![CDATA[
+			FROM com.virtusa.akura.api.dto.StudentSubjectAverageViewDTO
+			WHERE studentId = ?
+			AND year = ?
+			]]>
+	</query>
+	
+	<query name="studentSubjectTermMarksForMobile">
+			<![CDATA[
+			SELECT sv.subject, sv.absent, sv.marks, sv.gradeAverage, sv.classAverage, sv.term, sv.termId
+			FROM com.virtusa.akura.api.dto.StudentSubjectAverageViewDTO sv
+			WHERE studentId = ?
+			AND year = ?
+			ORDER BY subject, term
+			]]>
+	</query>
+</hibernate-mapping>

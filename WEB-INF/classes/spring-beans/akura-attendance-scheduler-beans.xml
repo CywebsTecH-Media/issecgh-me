@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<!--
+		< CYBERSCHOOL, This application manages the daily activities of a Teacher
+		and a Student of a School> Copyright (C) 2017 a CywebsTech Media Coperation.
+		Author = Eric Brown Appiah
+		Contact = 0205212015 >
+	-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	   		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	   		http://www.springframework.org/schema/task
+			http://www.springframework.org/schema/task/spring-task-3.0.xsd">
+
+	<!--
+		XML way of adding Spring's scheduling support. This is managed by a
+		given TaskScheduler.
+	-->
+	
+	<task:scheduled-tasks scheduler="bulkTaskScheduler">
+		<!--		 A cron-based trigger.  -->
+		<task:scheduled ref="bulkFixedDelayTask" method="deleteBulkFile" cron="0 59 23 * * ?" />
+					
+	</task:scheduled-tasks>
+
+	<!-- The bean that does the actual work -->
+	<bean id="bulkFixedDelayTask"
+		class="com.virtusa.akura.common.service.BulkUploadSchduler">
+		<property name="commonService" ref="commonService" />
+		<property name="bulkUploadHistoryDao" ref="bulkUploadHistoryDao" />
+		<property name="bulkExcelPath" value="${bulkupload.excel.folder}" />
+	</bean>
+	
+	
+	<task:scheduled-tasks scheduler="taskScheduler">
+		<!--		 A cron-based trigger.  -->
+		<task:scheduled ref="fixedDelayTask" method="extract"
+			cron="0 0 0 * * ?" />
+		<task:scheduled ref="fixedDelayTask" method="transform"
+			cron="0 0 0 * * ?" />
+		<task:scheduled ref="fixedDelayTask" method="load"
+			cron="0 0 0 * * ?" />
+		<task:scheduled ref="fixedDelayTask" method="clean"
+			cron="0 0 0 * * ?" />
+	</task:scheduled-tasks>
+
+	<!-- The bean that does the actual work -->
+	<bean id="fixedDelayTask"
+		class="com.virtusa.akura.attendance.service.AttendanceSyncupSchedulerStudentImpl">
+		<property name="dailyStudentAttendaceDao" ref="dailyStudentAttendanceDao" />
+		<property name="studentDao" ref="studentDao" />
+		<property name="studentExcelPath" value="${schedular.excel.student.folder}" />
+	</bean>
+
+	<task:scheduled-tasks scheduler="taskSchedulerStaff">
+		<!--		 A cron-based trigger.  -->
+		<task:scheduled ref="fixedDelayStaffTask" method="extract"
+			cron="0 0 1 * * ?" />
+		<task:scheduled ref="fixedDelayStaffTask" method="transform"
+			cron="0 0 1 * * ?" />
+		<task:scheduled ref="fixedDelayStaffTask" method="load"
+			cron="0 0 1 * * ?" />
+		<task:scheduled ref="fixedDelayStaffTask" method="clean"
+			cron="0 0 1 * * ?" />
+	</task:scheduled-tasks>
+
+	<!-- The bean that does the actual work -->
+	<bean id="fixedDelayStaffTask"
+		class="com.virtusa.akura.attendance.service.AttendanceSyncupSchedulerTeacherImpl">
+		<property name="dailyTeacherAttendanceDao" ref="dailyTeacherAttendanceDao" />
+		<property name="staffDao" ref="staffDaoTarget" />
+		<property name="teacherExcelPath" value="${schedular.excel.staff.folder}" />
+	</bean>
+	
+	<!-- bulk upload scheduler -->
+	
+	
+	<!-- bulk upload scheduler end -->
+
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="classpath:systemConfig.properties" />
+	</bean>
+
+
+	<bean id="appProperties"
+		class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+		<property name="singleton" value="true" />
+
+		<property name="properties">
+			<props>
+				<prop key="studentExcelPath">${schedular.excel.student.folder}</prop>
+				<prop key="teacherExcelPath">${schedular.excel.staff.folder}</prop>
+<!-- 				<prop key="bulkExcelPath">${bulkupload.excel.folder}</prop> -->
+			</props>
+		</property>
+	</bean>
+
+	<!--
+		Defines a ThreadPoolTaskScheduler instance with configurable pool
+		size.
+	-->
+	<task:scheduler id="taskScheduler" pool-size="1" />
+	<task:scheduler id="taskSchedulerStaff" pool-size="1" />
+	<task:scheduler id="bulkTaskScheduler" pool-size="1" />
+</beans>

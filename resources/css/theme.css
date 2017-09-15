@@ -1,0 +1,423 @@
+
+#topbar{
+
+	height:20px;
+	background-color:#07AC36;  /*0a7cbd*/
+	text-align:center;
+	padding-top:5px;
+	border-bottom:3px solid #F0F401;
+	
+}
+
+.school_name{	
+	font-size:22px;
+	color:#07AC36;
+	font-weight:bold;
+	float:left;
+	margin: 30px 0 0 15px;
+}
+
+#login_pane .school_name{	
+	font-size:22px;
+	color:#0a7cbd;
+	font-weight:bold;
+	margin: 5px 0 5px; 0;
+	text-align:center;
+	width:100%;
+}
+
+.school_name span{
+  font-size:15px;
+	color:#07AC36;
+	font-weight:bold;
+	display:block;
+	padding-top:5px;
+}
+
+#menubar{
+	 width:100%;
+	 border-bottom:5px solid #F0F401;
+}
+
+#menubar ul li.selected{
+	background-color:#1884C1;
+	color:#FFFFFF;
+	padding-bottom:7px;
+}
+
+#menubar ul li a{
+	text-decoration:none;
+	font-weight:bold;
+	color:#356BA7;
+}
+
+ h3{
+	font-size:1em;
+	color:#356BA7;
+	margin-bottom:0;
+	padding:5px 0 2px 0;
+
+}
+
+ h1{
+ 	margin:1px 5px 1px 5px;
+	padding: 4px 4px 4px 10px;
+	font-size:18px;
+	color:#356BA7;
+	font-weight:bold;
+ }
+ 
+ table.basic_grid_freezed th{
+	font-weight:bold;
+	background-color:#7AB6DA;
+	color:#FFFFFF;
+	height:35px;
+	text-align:left;
+	border-bottom:2px solid #395A6D;
+	padding: 0 0 0 5px;
+}
+
+table.basic_grid th{
+	font-weight:bold;
+	background-color:#7AB6DA;
+	color:#FFFFFF;
+	text-align:left;
+	border-bottom:2px solid #395A6D;
+	padding: 0 5px 0 5px;
+}
+
+.frmvalue input, select, textarea{	
+	border:1px solid #4596C9;
+	background-color:#FFFFFF;
+	color:black;
+	margin-top:5px;
+	width:290px;
+	padding:2px;
+}
+
+input.button{
+	padding:2px 5px 2px 5px;
+	border-top:1px solid #cccccc;
+	border-left:1px solid #cccccc;
+	border-bottom:2px solid #cccccc;
+	border-right:1px solid #cccccc;
+	border-radius: 5px 5px 5px 5px;
+	font-weight:bold;
+	font-size:13px;
+	color:#FFFFFF;
+	background-color:#1884C1;
+	width:auto;
+	cursor:pointer;
+	margin-left:10px;
+	
+}
+
+div.button_row{
+	border-top:1px solid #4596C9;
+	margin:0px;
+	padding:0px;
+	margin-bottom:10px;
+}
+.box_border{
+	border:1px solid #4596C9;
+	padding:10px;
+	margin:0;
+	border-radius:10px 10px 10px 10px;
+}
+
+#login_pane .box_border{
+	border:1px solid #4596C9;
+	padding:10px;
+	margin:0;
+	text-align:center;
+	background-image: url(../images/student.gif);
+	background-repeat: no-repeat;
+	background-position: right bottom;
+}
+
+.section_full_summary .box_border{
+	
+	border:1px solid #4596C9;
+	padding:10px;
+	margin:0;
+	background-color:#FFFEE8;
+}
+
+#content_main .section_box{
+	width:inherit;
+	*width: 97.5%;
+	margin:10px 10px 25px 10px;
+	border:1px solid #DBE4F3;
+	background-image: url(../images/section_bk.jpg);
+	background-repeat: repeat-x;
+	background-position: left bottom;
+	border-radius:10px 10px 10px 10px;
+}
+
+/* following css classes are only fro STC site- starts here */
+#content_main .section_box_mainpage{
+	width:inherit;
+	*width: 97.5%;
+	margin:10px 10px 25px 10px;
+	border:1px solid #DBE4F3;
+	/*background-image: url(../images/section_bk.jpg);
+	background-repeat: repeat-x;
+	background-position: left bottom;*/
+	border-radius:10px 10px 10px 10px;	
+	min-height:200px;
+}
+
+#content_main .section_box_mainpage .section_box_header {
+	width: 100%;
+	/*background-image: url(../images/section_h_bk.jpg);
+	background-repeat: repeat-x;
+	background-position: left top;*/
+	background-color:#07AC36;
+	border-radius:10px 10px 0px 0px;
+}
+
+#content_main .section_box_mainpage .section_box_header h2, .section_box_white h2 {
+	margin:0;
+	padding: 4px 4px 4px 7px;
+	font-size:13px;
+	color:#FFFFFF;
+	font-weight:bold;
+}
+/* above css classes are only fro STC site- ends here */
+
+#add_remove_list ul{
+	
+	border: 1px solid #4596C9 !important;
+}
+
+
+/*New Reference Module*/
+.refBox {
+	text-align: center !important;
+	margin: 2px !important;
+	padding-top:6px;
+	background-color: #00C04E; 
+	border: solid 1px #00C0A0;
+	display: inline;
+	float: left;
+	clear: none;
+	text-align:center !important;
+	
+	-moz-border-radius: 8px;
+	border-radius: 10px;
+
+    height:588px; 
+	width:296px;
+	position:relative;
+	vertical-align:bottom;
+	margin:2px !important;
+}
+
+.refInside{
+	text-align: left !important;
+	margin: 2px !important;
+	padding-top:10px;
+	background-color: #fff;
+	float: left;
+	clear: none;
+	
+	margin:0 auto !important;
+
+	-moz-border-radius: 8px;
+	border-radius: 10px;
+	z-index:1000;
+	height:523px;
+	width:296px;
+	font-size:12px;
+	
+}
+
+.reftopGap{
+	height:10px;
+	}
+
+.refSmallbox {
+	text-align: center !important;
+	margin: 2px !important;
+	padding-top:6px;
+	background-color: #00C04E; 
+	border: solid 1px #00C0A0;
+	display: inline;
+	float: left;
+	clear: none;
+	text-align:center !important;
+	-moz-border-radius: 8px;
+	border-radius: 10px;
+
+    height:198px;
+	width:296px;
+	position:relative;
+	vertical-align:bottom;
+	margin:2px !important;
+
+}
+
+.refSmallboxInside{
+	text-align: left !important;
+	margin: 2px !important;
+	padding-top:10px;
+	background-color: #fff; 
+	float: left;
+	clear: none;
+	margin:0 auto !important;
+	
+	-moz-border-radius: 8px;
+	border-radius: 10px;
+	z-index:1000;
+	height:143px;
+	width:296px;
+	font-size:12px;
+}
+
+.topicbar{
+	background-color:#00C04E;
+	color:#fff;
+	border-bottom:dashed 1px #8fa0b9;
+	border-top:dashed 1px #8fa0b9;
+	text-align:left;
+	padding-left:2px;
+	font-weight:bold;
+	font-size:12px;
+			}
+.imgborder{
+	border: solid 3px #8fa0b9;
+	-moz-border-radius: 8px;
+	border-radius: 10px;
+	}
+	
+span.headingtxt{
+	font-weight:bold;
+	font-size:14px;	
+	text-align:left;
+	color:#fff;
+	text-transform:uppercase;
+	}
+	
+.imgWrapper{ text-align:center !important;}
+.refsubtopic{color:#356BA7; font-size:12px; font-weight:bold;}
+
+#middleContent {
+	width: 100%
+	border-right: 1px solid #000;
+	padding: 0 0 0 0 !important;
+	margin-bottom: 0px;
+	
+	background-color: #fff; 
+	color: #356BA7;
+	
+	}
+#middleContent ul {
+		list-style:none;
+		margin: 0 !important;
+		padding: 0 !important;
+		border: none;
+		font-weight:none !important;
+		margin-top:12px !important;
+		margin-left:4px !important;
+		
+		}
+		
+#middleContent li {
+		margin: 0;
+		padding: 0 !important;
+		list-style: square;
+		list-style-position: inside;
+		padding-left:10px !important;
+		
+		}
+#middleContent li a {
+				
+		/*border-left: 10px solid #508fc4;
+		border-right: 10px solid #508fc4;
+		background-color: #c4d3e8;*/
+		padding: 3px 3px 3px 3px !important;
+		color: #000;
+		text-decoration: none;
+		width: 100%;
+		font-weight:none !important;	
+		
+			}
+
+html>body #middleContent li a {
+		width: auto;
+		}
+
+#middleContent li a:hover {
+		/*border-left: 10px solid #1c64d1;
+		border-right: 10px solid #5ba3e0;
+		background-color: #2586d7;*/
+		color: #508fc4;
+		text-decoration:underline;
+		font-weight:none !important;
+		}
+/*Forum Home */
+
+
+.forumBox {
+	text-align: center !important;
+	padding-top:6px;
+	background-color: #17518a; 
+	display: inline;
+	float: left;
+	clear: none;
+	text-align:center !important;
+	
+	-moz-border-radius: 8px;
+	border-radius: 10px;
+
+    height:180px; 
+	width:235px;
+	position:relative;
+	vertical-align:bottom;
+	
+}
+
+.gradeBox {
+	text-align: left !important;
+	padding-top:6px;
+	border: solid 1px #d0dbed;
+	display: inline;
+	float: left;
+	clear: none;
+
+	padding-left:40px;
+	-moz-border-radius: 8px;
+	border-radius: 10px;
+
+    height:387px; 
+	width:88%;
+	position:relative;
+	vertical-align:bottom;
+	
+}
+.discussionBox {
+	text-align: left !important;
+
+	border: solid 1px #d0dbed;
+	display: inline;
+	float: left;
+	clear: none;
+padding:6px 10px 0px;
+
+	-moz-border-radius: 8px;
+	border-radius: 10px;
+
+    height:387px; 
+	width:88%;
+	position:relative;
+	vertical-align:bottom;
+	
+}
+.group_border{
+	border:1px solid #4596C9;
+	padding:15px;
+	margin:0;
+	border-radius: 10px 10px 10px 10px;
+	margin:5px;
+	background-color:#D0DBED;
+}
